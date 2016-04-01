@@ -1,0 +1,58 @@
+<html>
+
+<head>
+	<title>Sciter 2.0.2.0 发布了TIScript的一些新特性</title>
+</head>
+
+<body>
+<div class="post" id="post-41756">
+	 
+  <h1 class="storytitle">Sciter 2.0.2.0 发布了TIScript的一些新特性</h1>
+
+  </div>
+	
+	
+    <div class="storycontent">
+		
+	  <p>2.0.2.0添加的特性之一是支持在类中声明成员变量。</p>
+
+	  <p>通过使用<code>this var name = value</code>构造器，你可以定义成员(实例)变量:</p>
+	  
+<p>这段代码:</p>
+
+	  <pre class="brush: js;">class Foo {
+  this var one = 1, // 成员变量
+           two = 2; // 成员变量
+
+  function sum() { return this.one + this.two; }
+}
+
+var foo = new Foo();
+stdout &lt;&lt; foo.sum() &lt;&lt; &quot;\n&quot;;
+</pre>
+
+<p>即使该类没有定义构造器，上面这段代码也会输出&#8216;3&#8217;。<br/>
+每个Foo类的实例都会拥有<code>this.one</code>和<code>this.two</code>变量，并且拥有它们的初始值。</p>
+
+<p>如果有其他类继承了这个Foo类，它也将拥有父类声明的成员变量。 </p>
+
+<p>这段代码:</p>
+
+<pre class="brush: js;">class Bar: Foo {
+  this var three = 3; // 成员变量
+
+  function sum() { return this.three + super.sum(); }
+}
+
+var bar = new Bar();
+stdout &lt;&lt; bar.sum() &lt;&lt; &quot;\n&quot;;
+</pre>
+
+<p>将会输出&#8216;6&#8217;。<em>bar</em>实例将会拥有this.one、this.two、this.three成员变量。</p>
+</div>
+	
+    </div>
+
+</body>
+
+</html>

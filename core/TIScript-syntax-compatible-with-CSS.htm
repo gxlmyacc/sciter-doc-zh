@@ -1,0 +1,64 @@
+﻿<html>
+
+<head>
+	<title>使TIScript语法兼容CSS</title>
+</head>
+
+<body>
+<div class="post" id="post-41748">
+	 <h1 class="storytitle">使TIScript语法兼容CSS</h1>
+</div>
+	
+	<div class="storycontent">
+		<p>一次又一次地当我需要在脚本中定义一些CSS时，我感觉到我自己不是很舒服的。 &#8211; CSS和JavaScript/TIScript使用不同的语法。 </p>
+<p>考虑下JavaScript中的这样的代码:</p>
+<pre class="brush: js;">
+  function switchState() 
+  {
+    element.style.backgroundColor = "rgb(126,0,0)";
+    element.style.transform = "rotate(45deg) translate(10px,10px)";
+  }
+</pre>
+<p>这样的代码不是很美观，而且解析起来也不是很有效。</p>
+<p>而且，如果你想从样式中获取当前的旋转角度, 然后对它增加一些值，然后再回写它，则你需要先解析这个样式值中的CSS规则，计算后又转换成字符串设置回去。</p>
+<p>我已经研究过许多JS框架是如何与CSS协同工作 &#8211; 在它们的代码里大部分是在解析CSS代码。</p>
+<p>然而浏览器已经解析过CSS，并且已经创建好了内部数据结构用于展示CSS值。 这样的代码以及在这里了，为什么我们不复用它们? </p>
+<p>处理这个问题的方法之一是将CSS内部数据使用所谓的<a href="http://dev.w3.org/csswg/cssom/" title="CSSOM spec" target="_blank">CSSOM</a>模型暴露出来。但是这是需要很多工作量，而且结果依然不是很简洁。</p>
+<p>理想的方式应该是这样的:</p>
+<pre class="brush: js;">
+  function switchState() 
+  {
+    element.style.set {
+      background-color: rgb(126,0,0),
+      transform: rotate(45deg) translate(10px,10px) 
+    }
+  }
+</pre>
+<p>而且原则上，JS语法可以扩展支持这样的创建方式，而且不会与已存在的代码冲突:</p>
+<ol>
+<li>允许在对象的名称中使用-符号，比如<code>background-color</code>。</li>
+<li>允许数值可以有类似<code>45deg</code>、<code>10px</code>这样的单位。这需要在JS中添加新的数据类型，不过这对他们来说是得心应手的。</li>
+<li>为语言添加所谓的"标签元组"。在CSS中，<code>rotate(45deg)</code>不是一个函数调用，而是一个元组(有名称的数据结构)。在TIScript中它可以写成<code>[rotate:45deg]</code> &#8211; 一个包含&#8216;rotate&#8217;标签的元素元组。</li>
+<li>使空白符成为一个有效的列表分隔符，最起码在对象声明中, 所以下面的代码：
+<pre class="brush: js;">
+   { transform: rotate(45deg) translate(10px,10px) }
+</pre>
+<p>将等价于:  </p>
+<pre class="brush: js;">
+   { transform:[rotate(45deg), translate(10px,10px)] }
+</pre>
+<p>这样写是不是非常棒？</li>
+</ol>
+<p>实际上，CSS语法(有时候看起来可能非常乱)确实是使用两种类型的列表和一个tuple<2> (优先顺序):</p>
+<ol>
+<li>逗号分隔的列表: <code>background: url(1.png),url(2.png);</code></li>
+<li>空白符分隔的类别: <code>background: no-repeat url(1.png);</code></li>
+<li>对-元组: <code>font: 12pt 10pt/14pt "arial";</code></li>
+</ol>
+<p>不过，这些都是下一阶段要做的事，目前我将尝试为值添加单位，以及空白符分隔的列表...</p>
+	</div>
+	
+  
+</div>
+</body>
+</html>

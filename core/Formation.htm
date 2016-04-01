@@ -1,0 +1,59 @@
+<html>
+ <head> 
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+  <meta name="generator" content="h-smile:richtext" /> 
+  <title>MVC or not MVC? The Formation Engine for jQuery</title> 
+ </head> 
+ <body> 
+  <h1 class="storytitle">MVC 或 非MVC? jQuery的Formation引擎</h1> 
+  <div class="storycontent"> 
+   <p>现在，有很多JavaScript框架提供了数据绑定工具(如Knockout、AngularJS等)。</p> 
+   <p>它们基于一种MVC概念: 你有一些数据(M)(结构、模型), 视图(V)展示html中的数据，在模型和视图间还有一些名为控制器(C)的代码来控制它们间的交互。</p> 
+   <p>基于上面所说的概念设计的那些框架确实是挺成功/方便的，不过，对我来说它们又是太侵入性了。在一些视图/页面上使用MVC是可以理解的，但是在一些其他的解决方案里MVC看起来太丑陋了。</p> 
+   <p>不管怎样，这里给出了另一种可选方案…</p> 
+   <p>我们不是将数据结构和它的视图分离，而是创建一个新的东西，它既是数据模型也是它的视图。</p> 
+   <p>我将这个东西名称成Formation。Formation本质上是一个DOM元素的树形容器，这个容器可以复制数据的结构 (你也可以称它为模型)。Formation的值是JSON数据结构。</p> 
+   <p>考虑这个<a href="http://terrainformatica.com/formation/demo1.htm">示例</a></p> 
+   <p>这里你可以看到input和子项的集合(顶部)。<br />
+   在右下脚，你可以看到&lt;section#inputs&gt;创建的Formation树。</p> 
+   <p>左边，你可以看到Formation的动态数据(可编辑的textarea)。这个这些数据会将它们反应到对应的DOM元素的状态上。同样，修改这些DOM元素也会反应到这些动态数据上。</p> 
+   <p>Formation的实现主要做了两件事情: </p> 
+   <ul> 
+    <li>1. 创建formation树;</li> 
+    <li>2. 初始化自定义DOM元素(定义在HTML源码中)。</li> 
+   </ul> 
+   <p>formations支持两组自定义元素的关键字:</p> 
+   <p>当formation看到自定义DOM元素(Tag标签中包含‘-‘的任何DOM元素)，它尝试从jQuery插件的注册表中找到该元素的初始化器(著名的$.fn集合)，如果找到了则调用它。你可以检查js/jquery.list-input.js - 这是一个正常的jQuery插件，该插件匹配名称为“INPUT-LIST”的自定义元素。</p> 
+   <p>为了创建/获取一些容器的formation，你可以调用：</p> 
+   <ol> 
+    <li>global <code>[window.] formation( domel_or_$_wrapper )</code> 函数， 或</li> 
+    <li><code>$(selector).formation()</code> 插件。</li> 
+   </ol> 
+   <p>你可以将创建的formation存储到一些变量中，并且通过它来访问DOM元素，这是一个非常有效的手段:</p> 
+   <pre>var inputs = $(&quot;section#inputs&quot;).formation();
+$(inputs.firstName).on(&quot;change&quot;, function(){...});
+</pre> 
+   <p>直接访问formation的成员比通过jQuery选择器访问它们的速度更快，因为formation的成员直接是该元素的一个引用。</p> 
+   <p>你可以从<a href="http://terrainformatica.com/formation/formation.0.1.0.zip">这里</a>下载完整示例来演示看看。</p> 
+   <p>Formation的未来计划: 实现所谓的repeatable formations, 这时，如果你有下面的标记代码:</p> 
+   <div> 
+    <pre>&lt;ul repeatable name=&quot;stockItems&quot;&gt;
+  &lt;li&gt;&lt;output name=&quot;name&quot;&gt;&nbsp; &lt;output name=&quot;price&quot; type=&quot;price&quot;&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</pre> 
+    <p>则你可以通过下面的数据来反馈它(通过formation):</p> 
+    <pre>[
+  {name:&quot;Apple&quot;, price: 1.05 },
+  {name:&quot;Orange&quot;, price: 0.52 }
+]
+</pre> 
+    <p>它将会在ul列表中生成两个&lt;li&gt;元素。</p> 
+    <p>有另一种不鼓励的想法：将有class开关的作为一个Formation元素，请看下面的class声明:</p> 
+    <pre>&lt;div class=&quot;{someSwitch:collapsed|expanded}&quot; &gt;...&lt;/div&gt;
+</pre> 
+    <p>将会是对应的formation有一个名称为“someSwitch”元素，该元素的值可以被设置false/true或0/1来改变class为&lt;div class=”collapsed”&gt;或&lt;div class=”expanded”&gt;。</p> 
+    <p>更新: 请看jQuery论坛的相关讨论: <a href="http://forum.jquery.com/topic/mvc-or-not-mvc-the-formation-engine">forum.jquery.com/topic/mvc-or-not-mvc-the-formation-engine</a> </p> 
+   </div> 
+  </div>  
+ </body>
+</html>

@@ -1,0 +1,28 @@
+﻿<html>
+ <head> 
+  <title>TIScript中的task/await特性</title> 
+ </head> 
+ <body> 
+  <h1 class="article-title">TIScript中的task/await特性</h1>
+  <div class="article-content"> 
+   <p>现在我正在给TIScript添加await特性。</p> 
+   <p>Await是一种类似JavaScript语言中的“回调/诺言”式代码的解决方案，考虑下面这样的代码:</p> 
+   <p><img class="size-full wp-image-44072" src="images/images.jpg" alt="Callback hell" width="305" height="165" /></p> 
+   <p>上面的代码如果使用Await的话，可以简化成:</p> 
+   <pre style="background-color: #ccc;">function setupUsersMottoTask(userName)
+{
+  try {
+     var user = await request(#get, <span style="color:blue;">&quot;http://example.com/user/&quot;</span> + userName);
+     var userMotto = await request(#get, <span style="color:blue;">&quot;http://example.com/user/&quot;</span> + userName + &quot;/avatar&quot;);
+     self.$(#user &gt; .motto).text = userMotto;
+  } catch (e) {
+     self.$(#user &gt; .motto).text = &quot;motto unavailable&quot;;
+  }
+}
+setupUsersMottoTask(<span style="color:blue;">&quot;monster&quot;</span>); <span style="color:green;">// runs asynchronously as it is a Task function.</span></pre> 
+   <p>如果没有<code>await</code>，则上面的代码就会变成上面那样的梯形调用方式。</p> 
+   <p>基本上，<code>await</code>使异步代码线性化成正常顺序的代码执行。</p> 
+   <p>在Sciter的脚本中，任何内部使用了`await`的换上都会自动声明成一个task函数。调用这样的函数将会立即启动一个task并且立即返回。这个函数返回一个诺言(promise),所以它的调用也可以用在其他的await中。</p> 
+  </div>  
+ </body>
+</html>

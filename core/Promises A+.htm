@@ -1,0 +1,169 @@
+<html>
+<head>
+	<title>Sciter2中的Promises/A+ 实现</title>
+</head>
+
+<body>
+  <div class="post" id="post-41779">
+	 
+    <h1 class="storytitle">Sciter2中的Promises/A+ 实现</h1>
+  
+</div>
+	
+	
+  <div class="storycontent">
+		
+    <p>Promises(诺言), 作为一个概念，它是一种通用的回调机制。现在，这种模式是非常流行的，所以Sciter2的SDK中也包含(sdk/samples/+promise/)了一个非常简单(60行代码)的Promises实现。</p>
+	
+<p>promise是一个对象:</p>
+	
+<ol>
+
+	  <li>通过<code>.then(onsuccess, onfailure)</code>方法维持了一对[onsuccess:function, onfailure:function]回调函数列/链表;</li>
+	  
+<li>promise提供了一种方式来&quot;execute&quot(执行)这个链表 - 或者是succes，或者是failure回调(如果发生错误);</li>
+	  
+<li>链表中的每个回调函数会将上一个回调函数的输出((return [values]))作为一个输入参数(parameters)。</li>
+	
+</ol>
+
+	<p>在Sciter中，要创建一个promise，只需:</p>
+
+	<pre class="brush: js;">var oath = promise();</pre>
+
+	<h3>promise()函数 与 promise 对象</h3>
+	
+<p>在我的实现中，promise()函数返回一个函数/对象，它拥有一个<code>.then()</code>方法。所以要为promise附加回调函数，你可以:</p>
+	
+<pre class="brush: js;">oath.then( function( data ) { return [data+1] } ) // #1
+    .then( function( data ) { return [data+2] } ) // #2
+    .then( function( data ) { stdout.println(&quot;success:&quot;, data)}, // #3 
+           function( reason ) { stderr.println(&quot;error:&quot;, reason)} );
+</pre>
+    
+<p>现在，我们有一个名称为<em>oath</em>的promise变量，它有三个<em>onsuccess</em>函数。</p>
+
+	<p>要履行promise(承诺)时, 我们只需调用promise(将它作为一个函数)，将它的第一个参数设置<em>true</em>，其他参数将会传递到链中的第一个回调函数:</p>
+
+	<pre class="brush: js;">oath(true, 1);</pre>
+
+	<p>将会调用第一个回调函数，且<em>data</em>参数值为1，并且该回调函数返回<code>1 + 1 -&gt; 2</code>。<br />
+	值<code>2</code>将会传递到第二个回调函数上，并且返回<code>2 + 2 -&gt; 4</code>。<br />
+	最终的回调函数返回:</p>
+	
+<pre>success:4</pre>
+	
+<p>要拒绝promise(承诺)时，我们只需调用promise(将它作为一个函数)，将它的第一个参数设置<em>false</em>:</p>
+
+	<pre class="brush: js;">oath(false, &quot;something went wrong!&quot;);</pre>
+    
+<p>这样讲调用我们的onerror回调函数，结果为:</p>
+
+	<pre>error: something went wrong!</pre>
+
+	<h3>promise.when()函数, 并行执行</h3>
+
+	<p>promise也定义了一个<code>promise.when(...)</code>静态函数，它接受一个promise列表，并且返回另一个promise，当所有输入promise将完成时，该promise将被履行/拒绝。</p>
+	
+<pre class="brush: js;">function printBandC(b,c) { stdout.println(b,c) }
+
+var BandC = 
+    promise.when( self.request(#get-json, urlB),
+                  self.request(#get-json, urlC)).then(printBandC);
+</pre>
+    
+<p>关于这个内容有很多文章, 只需要在谷歌中搜索&#8220;Promises JavaScript&#8221;</p>
+
+	<p>这里是promise.tis模块的全部源代码:</p>
+
+	<p><span id="more-41779"></span></p>
+
+	<pre class="brush: js;">//|   
+//| Promises/A+ 规范的实现: http://promises-aplus.github.io/promises-spec/
+//| 
+
+function promise() 
+{
+  var state = null;    // null = pending, true = fulfilled, false = rejected
+  var deferred = [];   // functions to call when _promise() is invoked
+  var values = [];     // an array of values as arguments for the then() handlers
+
+  function _promise(newState, newValues) 
+  {
+    if (state === null) {
+      state = newState;
+      values = newValues;
+      self.post( function() { for (var d in deferred) d() } );
+    }
+  }
+  _promise.then = function(onFulfilled, onRejected = null) 
+  {
+    var newPromise = promise();
+    function notify() 
+    {
+      try {
+        var f = state ? onFulfilled : onRejected;
+        if (typeof f == #function) {
+          var r = f.apply(null, values);
+          if (r &amp;&amp; typeof r.then == #function) // looks like it is a promise to, chain them
+            r.then( function(args..){ newPromise(true,args) }, 
+                    function(args..){ newPromise(false,args) } );
+          else
+            newPromise(true, [r]);
+        }
+        else
+          newPromise(state, values);
+      }
+      catch (e) {
+        newPromise(false, [e]);
+      }
+    }
+    if (state !== null) 
+      self.post(notify); // already fullfilled/failed
+    else
+      deferred.push(notify);      
+    return newPromise;
+  };
+  return _promise;
+}
+
+promise.when = function (args..) 
+{
+  if(args.length == 1) return args[0];
+
+  var oath = promise();
+  var n = args.length;
+  var res = [];
+  function done(i) { return function(v) { res[i] = v; if(--n == 0) oath(true,res); } }
+  function fail(v) { oath(false,v) }
+  for(var (i,ip) in args) 
+      ip.then(done(i), fail);
+  return oath;
+};
+
+// This makes first parameter of Element.request optional: 
+// Element.request( [callback: function | integer,] 
+//                  #get | #post | #post-data | #put-data | #post-json | #put-json | #delete, 
+//                  url: string 
+//                  [, params: object [, headers: object] ] ) : Object | Stream | Bytes | Error
+// If callback is omitted the method returns promise: 
+
+(function(){
+  var ElementRequest = Element.request;
+  // redefining Element.request function
+  Element.request = function(args..) {
+    if(typeof args[0] == #function || typeof args[0] == #integer)
+      return ElementRequest.apply(this,args); // standard call
+    // call without callback, send request and return the promise
+    var oath = promise();
+    ElementRequest.apply(this, function(data,status) 
+                              { oath(status == 200, [data,status]); }, args );
+    return oath;
+  }
+})();  
+</pre>
+	
+</div>
+</div>
+</body>
+</html>

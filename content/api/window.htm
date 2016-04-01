@@ -1,0 +1,357 @@
+<html>
+  <head>
+  </head>
+<body>
+  <h3>窗口和Sciter引擎初始化相关函数</h3>
+  <h4>SciterClassName</h4>
+  <p>初始化库，并且返回子窗口类。</p>
+  <table>
+    <tr>
+      <td>parameters:</td>
+      <td></td>
+      <td>(none)</td>
+      <td></td></tr>
+    <tr>
+      <td colspan="2" rowspan="2">returns:</td>
+      <td>LPCWSTR</td>
+      <td>Sciter子窗口类的名称。</td></tr>
+    <tr>
+      <td>NULL</td>
+      <td>如果引擎初始化失败，则返回NULL。</td></tr></table>
+  <p>当你希望将Sciter作为一个子窗口时使用该函数。该函数的返回值可以用于Windows中的CreateWindow(Ex)W函数。</p>
+  <h4><a name="SciterVersion">SciterVersion</a></h4>
+  <div>返回Sciter引擎的主要和次要版本号。</div>
+  <table>
+    <tr>
+      <td>参数:</td>
+      <td><strong>major</strong></td>
+      <td>BOOL</td>
+      <td>TRUE - 版本中的主版本号部分, FALSE - 版本中的次要版本号部分。</td></tr>
+    <tr>
+      <td colspan="2">返回值:</td>
+      <td>UINT</td>
+      <td>UINT的高位和低位字(word)分别存放着版本和子版本号。</td></tr></table>
+  <p>示例:</p>
+  <pre>UINT version = SciterVersion(true);
+// version -&gt; 0x0301 意味着Sciter的版本号为 3.1.0.4
+</pre>
+  <h4>SciterProc</h4>
+  <p>[仅Windows] Sciter窗口函数，可以用在::RegisterClass()函数中。</p>
+  <table>
+    <tr>
+      <td rowspan="4">参数:</td>
+      <td><strong>hwnd</strong></td>
+      <td><a href="#HWINDOW">HWINDOW</a></td>
+      <td>窗口句柄</td></tr>
+    <tr>
+      <td><strong>msg</strong></td>
+      <td>UINT</td>
+      <td>窗口消息号</td></tr>
+    <tr>
+      <td><strong>wParam</strong></td>
+      <td>WPARAM</td>
+      <td>wparam</td></tr>
+    <tr>
+      <td><strong>lParam</strong></td>
+      <td>LPARAM</td>
+      <td>lparam</td></tr>
+    <tr>
+      <td colspan="2">返回值:</td>
+      <td>LRESULT</td>
+      <td>标准lresult值</td></tr></table>
+  <p>这个函数会为Sciter未处理的窗口消息调用::DefWindowProc()函数。</p>
+  <h4>SciterProcND</h4>
+  <p>[仅Windows] Sciter窗口函数的部分实现，该函数可以用在需要将一个普通窗口与Sciter"混合"集成的时候。</p>
+  <table>
+    <tr>
+      <td rowspan="5">参数:</td>
+      <td>hwnd</td>
+      <td><a href="#HWINDOW">HWINDOW</a></td>
+      <td>窗口句柄</td></tr>
+    <tr>
+      <td>msg</td>
+      <td>UINT</td>
+      <td>Window消息号</td></tr>
+    <tr>
+      <td>wParam</td>
+      <td>WPARAM</td>
+      <td>wparam</td></tr>
+    <tr>
+      <td>lParam</td>
+      <td>LPARAM</td>
+      <td>lparam</td></tr>
+    <tr>
+      <td>pbHandled</td>
+      <td>BOOL*</td>
+      <td>handled标志的地址, Sciter当遇到 a) 需要处理的消息 且 b) 该需要不应该传递给::DefWindowProc()时返回TRUE。</td></tr>
+    <tr>
+      <td colspan="2">返回值:</td>
+      <td>LRESULT</td>
+      <td>标准lresult值</td></tr></table>
+  <p>该函数不会调用::DefWindowProc()。</p>
+  <h4>SciterDataReady</h4>
+  <p>该函数用于响应SCN_LOAD_DATA中Sciter引擎请求的数据。</p>
+  <table>
+    <tr>
+      <td rowspan="4">参数:</td>
+      <td><strong>hwnd</strong></td>
+      <td><a href="#HWINDOW">HWINDOW</a></td>
+      <td>窗口句柄</td></tr>
+    <tr>
+      <td><strong>uri</strong></td>
+      <td>LPCWSTR</td>
+      <td>请求数据的url。</td></tr>
+    <tr>
+      <td><strong>data</strong></td>
+      <td>LPCBYTE</td>
+      <td>包含数据的缓冲区指针。</td></tr>
+    <tr>
+      <td><strong>dataLength</strong></td>
+      <td>UINT</td>
+      <td>缓冲区的长度 - 字节数。</td></tr>
+    <tr>
+      <td colspan="2">返回值:</td>
+      <td>BOOL</td>
+      <td>如果引擎接受该数据则返回TRUE, 否则返回FALSE。</td></tr></table>
+  <p>数据在调用该函数后即可销毁，引擎会对缓冲中的数据进行拷贝。</p>
+  <div>警告: 该函数仅能在处理SCN_LOAD_DATA请求时使用，且必须是相同线程。若需要异步处理资源的加载，请使用<a href="#SciterDataReadyAsync">SciterDataReadyAsync</a>函数。</div>
+  <h4>SciterDataReadyAsync</h4>
+  <p>该函数用于异步响应SCN_LOAD_DATA中Sciter引擎请求的数据。</p>
+  <table>
+    <tr>
+      <td rowspan="5">parameters:</td>
+      <td><strong>hwnd</strong></td>
+      <td><a href="#HWINDOW">HWINDOW</a></td>
+      <td>窗口句柄</td></tr>
+    <tr>
+      <td><strong>uri</strong></td>
+      <td>LPCWSTR</td>
+      <td>请求数据的url</td></tr>
+    <tr>
+      <td><strong>data</strong></td>
+      <td>LPCBYTE</td>
+      <td>包含数据的缓冲区指针。</td></tr>
+    <tr>
+      <td><strong>dataLength</strong></td>
+      <td>UINT</td>
+      <td>缓冲区的长度 - 字节数。</td></tr>
+    <tr>
+      <td><strong>requestId</strong></td>
+      <td>LPVOID</td>
+      <td>SCN_LOAD_DATA中给的requestId</td></tr>
+    <tr>
+      <td colspan="2">返回值:</td>
+      <td>BOOL</td>
+      <td>T如果引擎接受该数据则返回TRUE, 否则返回FALSE。</td></tr></table>
+  <p>数据在调用该函数后即可销毁，引擎会对缓冲中的数据进行拷贝。</p>
+  <div>警告: 该函数仅能用于处理SCN_LOAD_DATA请求，且必须是相同线程。</div>
+  <h4>SciterLoadFile</h4>
+  <p>从本地驱动器或远程加载HTML文件。</p>
+  <table>
+    <tr>
+      <td rowspan="2">参数:</td>
+      <td>hwnd</td>
+      <td><a href="#HWINDOW">HWINDOW</a></td>
+      <td>sciter窗口句柄</td></tr>
+    <tr>
+      <td>uri</td>
+      <td>LPCWSTR</td>
+      <td>要加载的文档的url</td></tr>
+    <tr>
+      <td colspan="2">返回值:</td>
+      <td>BOOL</td>
+      <td>如果文档被引擎解析完毕则返回TRUE, 否则返回FALSE。</td></tr></table>
+  <p>该函数可以使app从指定位置将HTML加载到Sciter窗口，解析过程中会生成<a href="#SC_LOAD_DATA">SC_LOAD_DATA</a>回调事件。</p>
+  <h4>SciterLoadHtml</h4>
+  <p>从内存中加载HTML。</p>
+  <table>
+    <tr>
+      <td rowspan="4">参数:</td>
+      <td><strong>hwnd</strong></td>
+      <td><a href="#HWINDOW">HWINDOW</a></td>
+      <td>sciter窗口句柄</td></tr>
+    <tr>
+      <td><strong>html</strong></td>
+      <td>LPCBYTE</td>
+      <td>HTML缓冲区的地址</td></tr>
+    <tr>
+      <td><strong>htmlSize</strong></td>
+      <td>UINT</td>
+      <td>缓冲区中HTML文件的长度</td></tr>
+    <tr>
+      <td><strong>baseUri</strong></td>
+      <td>LPCWSTR</td>
+      <td>基URL，用于解决加载相对路径的文档。</td></tr>
+    <tr>
+      <td colspan="2">returns:</td>
+      <td>BOOL</td>
+      <td>如果文档被引擎解析完毕则返回TRUE, 否则返回FALSE。</td></tr></table>
+  <h4>SciterSetCallback</h4>
+  <p>设置Sciter的回调事件处理函数。</p>
+  <table>
+    <tr>
+      <td rowspan="3">参数:</td>
+      <td><strong>hwnd</strong></td>
+      <td><a href="#HWINDOW">HWINDOW</a></td>
+      <td>sciter窗口句柄</td></tr>
+    <tr>
+      <td><strong>callback</strong></td>
+      <td>SciterHostCallback*</td>
+      <td>a回调处理函数的地址</td></tr>
+    <tr>
+      <td><strong>callbackParam</strong></td>
+      <td>LPVOID</td>
+      <td>传递给回调处理函数的参数。</td></tr>
+    <tr>
+      <td colspan="2">返回值:</td>
+      <td>VOID</td>
+      <td></td></tr></table>
+  <p>该函数用于将一个回调函数注册到Sciter实例中，该回调函数用于处理Sciter实例产生的各种回调和通知，参见: <a href="#SC_LOAD_DATA">SC_LOAD_DATA</a> 、 <a href="#SC_DATA_LOADED">SC_DATA_LOADED</a>等.</p>
+  <p>SciterHostCallback是一个回调函数，它的声明格式如下:</p>
+  <p>UINT SC_CALLBACK SciterHostCallback( LPSCITER_CALLBACK_NOTIFICATION pns, LPVOID callbackParam );</p>
+  <p>其中，LPSCITER_CALLBACK_NOTIFICATION是<a href="#SC_LOAD_DATA">SCN_LOAD_DATA</a>、<a href="#SC_DATA_LOADED">SCN_DATA_LOADED</a>等数据结构的地址。</p>
+  <h4>SciterSetMasterCSS</h4>
+  <p>设置Sciter中所有的HTML元素的标准样式，所以它被称作 &quot;主样式表&quot;。这个函数允许为应用程序提供所有HTML元素的指定默认样式。</p>
+  <table>
+    <tr>
+      <td rowspan="2">参数:</td>
+      <td><b>utf8</b></td>
+      <td>LPCBYTE</td>
+      <td>utf8编码的CSS数据</td></tr>
+    <tr>
+      <td><b>numBytes</b></td>
+      <td>UINT</td>
+      <td>CSS数据的长度</td></tr>
+    <tr>
+      <td colspan="2">返回值:</td>
+      <td>BOOL</td>
+      <td>如果解析成功，则返回TRUE。</td></tr>
+  </table>
+  <p>请在你的应用程序开始位置(在创建Sciter窗口之前)调用这个函数。</p>
+  <h4>SciterAppendMasterCSS</h4>
+  <p>设置Sciter中所有的HTML元素的标准样式，所以它被称作 &quot;主样式表&quot;。这个函数允许为应用程序提供所有HTML元素的指定默认样式。</p>
+  <table>
+    <tr>
+      <td rowspan="2">参数:</td>
+      <td>utf8</td>
+      <td>LPCBYTE</td>
+      <td>utf8编码的CSS数据</td></tr>
+    <tr>
+      <td>numBytes</td>
+      <td>UINT</td>
+      <td>CSS数据的长度</td></tr>
+    <tr>
+      <td colspan="2">returns:</td>
+      <td>BOOL</td>
+      <td>如果解析成功，则返回TRUE。</td></tr>
+  </table>
+  <p>请在你的应用程序开始位置(在创建Sciter窗口之前)调用这个函数。</p>
+  <h3>类型定义</h3>
+  <h4>HWINDOW</h4>
+  <p>窗口句柄, 在Windows中，它是HWND，代表一个窗口的客户区域。在其他操作系统中，它是根子插件，代表窗口客户区部分。</p>
+  <table>
+    <tr>
+      <td>Windows</td>
+      <td>HWND</td>
+      <td>窗口句柄</td></tr>
+    <tr>
+      <td>OS X</td>
+      <td>NSView*</td>
+      <td>OS X窗口的根NSView</td></tr>
+    <tr>
+      <td>Linux/GTK</td>
+      <td>GtkWidget*</td>
+      <td>GTK窗口的根widget。</td></tr>
+  </table>
+  <h3>常量和枚举</h3>
+  <h4>回调/通知 代码</h4>
+  <p>由设置给SciterSetCallback的回调函数接收到的通知代码。</p>
+  <table>
+    <tr>
+      <td><a name="SC_LOAD_DATA"><strong>SC_LOAD_DATA</strong></a></td>
+      <td>1</td>
+      <td>请求加载数据, 参见<a href="#SCN_LOAD_DATA">SCN_LOAD_DATA</a></td></tr>
+    <tr>
+      <td><a name="SC_DATA_LOADED"><strong>SC_DATA_LOADED</strong></a></td>
+      <td>2</td>
+      <td>通知, 数据已经到达, 参见 SCN_DATA_LOADED</td></tr>
+    <tr>
+      <td><a name="SC_ATTACH_BEHAVIOR"><strong>SC_ATTACH_BEHAVIOR</strong></a></td>
+      <td>4</td>
+      <td>请求附加指定"行为"到DOM元素上。这里的"行为"是指在CSS定义的，但是本地代码实现的"行为"。</td></tr>
+    <tr>
+      <td><a name="SC_ENGINE_DESTROYED"><strong>SC_ENGINE_DESTROYED</strong></a></td>
+      <td>5</td>
+      <td>当引擎实例被销毁时发送该通知。它总是最后一个通知。</td></tr></table>
+  <h4>枚举 SciterResourceType</h4>
+  <p>定义引擎请求的数据类型。</p>
+  <div>values:</div>
+  <table>
+    <tr>
+      <td><strong>RT_DATA_HTML</strong></td>
+      <td>0</td>
+      <td>HTML数据请求</td></tr>
+    <tr>
+      <td><strong>RT_DATA_IMAGE</strong></td>
+      <td>1</td>
+      <td>图像数据请求</td></tr>
+    <tr>
+      <td><strong>RT_DATA_STYLE</strong></td>
+      <td>2</td>
+      <td>CSS数据请求</td></tr>
+    <tr>
+      <td><strong>RT_DATA_CURSOR</strong></td>
+      <td>3</td>
+      <td>光标数据请求</td></tr>
+    <tr>
+      <td><strong>RT_DATA_SCRIPT</strong></td>
+      <td>4</td>
+      <td>脚本数据请求</td></tr>
+    <tr>
+      <td><strong>RT_DATA_RAW</strong></td>
+      <td>5</td>
+      <td>二进制数据请求 - 任意位置类型的数据</td></tr></table>
+  <h3>结构体</h3>
+  <h4>结构体 SCN_LOAD_DATA</h4>
+  <p>在SC_LOAD_DATA回调通知中传递的结构体。</p>
+  <div>字段:</div>
+  <table>
+    <tr>
+      <td><strong>code</strong></td>
+      <td>UINT</td>
+      <td>SC_LOAD_DATA值</td></tr>
+    <tr>
+      <td><strong>hwnd</strong></td>
+      <td><a href="#HWINDOW">HWINDOW</a></td>
+      <td>窗口句柄</td></tr>
+    <tr>
+      <td><strong>uri</strong></td>
+      <td>LPCWSTR</td>
+      <td>请求数据的Url</td></tr>
+    <tr>
+      <td><strong>outData</strong></td>
+      <td>LPCBYTE</td>
+      <td>保护数据的缓冲区指针</td></tr>
+    <tr>
+      <td><strong>outDataLength</strong></td>
+      <td>UINT</td>
+      <td>缓冲区的长度 - 字节数</td></tr>
+    <tr>
+      <td><strong>dataType</strong></td>
+      <td>UINT</td>
+      <td><a href="#SciterResourceType">SciterResourceType</a>枚举值之一</td></tr>
+    <tr>
+      <td><strong>requestId</strong></td>
+      <td>LPVOID</td>
+      <td>请求ID - 用于标识特定请求的识别符。</td></tr>
+    <tr>
+      <td><strong>principal</strong></td>
+      <td>HELEMENT</td>
+      <td>DOM元素句柄 - 数据的接收者</td></tr>
+    <tr>
+      <td><strong>initiator</strong></td>
+      <td>HELEMENT</td>
+      <td>DOM元素句柄 - 请求发起者, 通常它与principal相同</td></tr></table>
+  <div></div>
+</body>
+</html>

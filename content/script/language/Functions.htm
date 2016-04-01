@@ -1,0 +1,111 @@
+<html>
+  <head>
+    <title>TIScript 3.2操作指南——函数</title>
+    <link rel="stylesheet" href="for-screen.css"/>
+    <meta name="generator" content="h-smile:richtext"/>
+  </head>
+<body>
+  <h1>函数</h1>
+  <p>TIScript支持命名和匿名(lambda)第一类函数。函数是Function类的对象。</p>
+  <h2><a name="named-functions" id="named-functions">命名函数</a></h2>
+  <p>命名函数使用下面的语句来声明:</p>
+  <pre class="code tiscript">function &lt;函数名&gt; ( &lt;参数&gt; )
+{
+  //...函数体
+}
+</pre>
+  <dl>
+    <dt>其中:</dt>
+    <dd><em>&lt;函数名&gt;</em>是一个函数的名称, 或者是: <br/>
+	简单的<em>&lt;nmtoken&gt;</em> , 或<br/>组合名称: <em>&lt;nmtoken1&gt;</em> [ <code>.</code> <em>&lt;nmtoken2&gt;</em> [ <code>.</code> <em>&lt;nmtoken3&gt;</em> [ <code>.</code> <em>&lt;nmtokenN&gt;</em> ]]] <sup><a href="#fn__1" name="fnt__1" id="fnt__1" class="fn_top">1)</a></sup><br/><em>&lt;参数&gt;</em>是一个函数参数列表:<br/>
+	[<code> </code><em>&lt;参数名1&gt;</em> [ <code>,</code> <em>&lt;参数名2&gt;</em> [ <code>,</code> ... <em>&lt;参数名N&gt;</em> ]]]</dd></dl>
+  <h2><a name="anonymous-functions" id="anonymous-functions">匿名函数</a></h2>
+  <p>匿名函数可以使用以下语句来声明:</p>
+  <p>经典的JavaScript格式:</p>
+  <pre class="code tiscript"><code>function</code> <code>(</code> &lt;parameters&gt; <code>)</code> <code>{</code> &lt;statements&gt; <code>}</code>
+</pre>
+  <p>单表达式lambda格式:</p>
+  <pre><code>:</code> &lt;parameters&gt; <code>:</code> &lt;statement&gt;
+</pre>
+  <p>块表达式lambda函数格式:</p>
+  <pre><code>:</code> &lt;parameters&gt; <code>{</code> &lt;statements&gt; <code>}</code>
+</pre>
+  <p>嵌套函数(其他函数内部的函数)是允许的。</p>
+  <h2><a name="optional-parameters" id="optional-parameters">可选参数</a></h2>
+  <p>TIScript在函数声明中支持可选参数:</p>
+  <h3><a name="parameters-with-default-values" id="parameters-with-default-values">有默认值的参数</a></h3>
+  <p>在函数中的一些参数可以定义它的默认值，如:</p>
+  <pre class="code tiscript">function Foo(a, b, c = 12)
+{
+  return a + b + c;
+}
+</pre>
+  <p>这个函数可以使用两个参数来调用:</p>
+  <pre class="code tiscript">var r1 = Foo(1, 2);    // r1 = 15
+</pre>
+  <p>也可以使用三个参数来调用:</p>
+  <pre class="code tiscript">var r2 = Foo(1, 2, 3); // r2 = 6
+</pre>
+  <p>在参数列表中，有默认值的参数右边不能有非可选参数，即只有最后面(或所有)的参数才可以有默认值。</p>
+  <h3><a name="varargs" id="varargs">变长参数</a></h3>
+  <p>又名 参数向量</p>
+  <p>有些情况下，当定义函数时，你并不知道参数的数量，这时你可以使用下面的声明:</p>
+  <pre class="code tiscript"><code>function</code> Bar(a, b, rest..)
+{
+  <code>var</code> total = a + b;
+  <code>f</code>or (<code>var</code> n <code>in</code> rest) total += n;
+  <code>return</code> total;
+}
+</pre>
+  <p>在运行期，<code>rest</code>变量将包含一个确定数量参数的数组。所以在</p>
+  <pre class="code tiscript"><code>var</code> r1 = Bar(1, 2, 3, 4);
+</pre>
+  <p>语句执行后，<code>r1</code>的值将为<code>10</code>, 在</p>
+  <pre class="code tiscript"><code>var</code> r2 = Bar(1, 2);
+</pre>
+  <p>语句后，<code>r2</code>的值将为<code>3</code>。</p>
+  <h2>字符串器函数</h2>
+  <p>字符串器函数是一个名称以'<code>$</code>'开头的正常函数或方法。</p>
+  <p>当解析调用这个函数时，tiscript将会将'<code>(</code>'和'<code>)</code>'内部的任何字符都当做字符串。示例:</p>
+  <pre><code>var</code> bodyDiv = self.$( div#body );
+</pre>
+  <p>这个调用等价于:</p>
+  <pre><code>var</code> bodyDiv = self.$( &quot;div#body&quot; );
+</pre>
+  <p>如果'<code>(</code>'和'<code>)</code>'中的文本包含如'<code>)</code>'或'<code>}</code>'等标识符时，需要转义成<code>\)</code>或<code>\}</code>.</p>
+  <h3>字符串器参数</h3>
+  <p>'<code>(</code>'和'<code>)</code>'中的文本可以包含所谓的tiscript内嵌代码 - 需要被执行的tiscript序列并且字符串执行结果会被插入到文本中。若要在字符串中包含这样的代码，需要使用'<code>{</code>' 和'<code>}</code>'将它括起来。示例:</p>
+  <pre>var n = 3;
+<code>var</code> nthDiv = self.$( div:nth-child(<code>{ n }</code>) );
+</pre>
+  <p>上面的$()调用将会被解析成下面的语句:</p>
+  <pre><code>var</code> nthDiv = self.$( <code>&quot;div:nth-child(&quot; </code>, n , <code>&quot;)&quot;</code> );
+</pre>
+  <h3>自定义字符串器函数</h3>
+  <p>这是一个在Sciter中真实使用的一个字符串器函数，它被用于插入HTML片段:</p>
+  <pre>function Element.$append( params.. ) // 接受HTML判断，作为参数向量
+{
+  for( var i = 1; i &lt; params.length; i += 2 ) // each odd parameter is an inclusion - result of the correspondent { ... } expression.
+    params[i] = params[i].toHtmlString();     // convert our inclusion into escaped HTML string for safety.
+  this.insert( params.join(&quot;&quot;) );             // 合并所有参数到一个字符串并且调用Element.insert(html)
+                                              // Sciter中的DOM元素的方法
+}
+</pre>
+  <p>有了这个函数，我们可以这样使用它:</p>
+  <pre>var arr = [1,2,3];
+var table = self.$( table#some );
+for( var n in arr ) 
+  table.$append ( &lt;tr&gt;&lt;td&gt;Cell #{n}&lt;/td&gt;&lt;/td&gt; );
+</pre>
+  <p>上面的代码将会向表中插入包含&quot;Cell #1&quot;, &quot;Cell #2&quot; and &quot;Cell #3&quot;文本的 三行/单元格。是不是很方便?</p>
+  <h2>使用对象声明的函数调用</h2>
+  <p>如果一些函数接受一个对象参数，则它调用时可以省略'(' 和 ')'，如:</p>
+  <pre>  foo { one:1, two:2 } 
+</pre>
+  <p>它等价于 JavaScript调用:</p>
+  <pre>  foo ({ one:1, two:2 })
+</pre>
+  <hr/>
+  <p><sup><a href="#fnt__1" id="fn__1" name="fn__1">1)</a></sup> 使用复合名称的函数声明是下面的格式的简写形式:<br/><code>name1.name2.name3. ... .nameN = function( &lt;参数&gt; ) { &lt;语句&gt; }</code></p>
+</body>
+</html>

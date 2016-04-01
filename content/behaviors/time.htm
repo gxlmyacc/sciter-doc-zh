@@ -1,0 +1,48 @@
+﻿<html>
+  <head>
+    <meta name="source" content="http://www.terrainformatica.com/wiki/doku.php?id=h-smile:built-in-behaviors:edit"/>
+    <meta name="generator" content="h-smile:richtext"/>
+  </head>
+<body>
+  <h1>behavior: time</h1>
+  <p>时间输入元素。</p>
+  <h2>元素</h2>
+  <p>默认情况下，应用了该行为的元素有:</p>
+  <ul>
+    <li><code>&lt;input type=&quot;time&quot; /&gt;</code> - 行内时间输入元素</li></ul>
+  <h2>示例</h2>
+  <div>
+    <input type="time" />
+    <input type="time" />
+  </div>
+  <h2>模型</h2>
+  <p>初始化该行为时会创建下面的DOM结构:</p>
+  <pre>&lt;input&gt;
+ <code> &lt;caption&gt;
+    &lt;span.hour&gt;
+    &lt;span.minute&gt;
+    &lt;span.second&gt;
+    &lt;span.ampm&gt;
+  &lt;/caption&gt;
+  &lt;button.plus&gt;
+  &lt;button.minus&gt;
+</code>&lt;/input&gt;
+</pre>
+  <p><code>&lt;span.ampm&gt;</code>是可选的 - 它只出现在当前区域(语言)需要它时。</p>
+  <p><code>&lt;caption&gt;</code>拥有<code>behavior:masked</code>行为。
+  <code>&lt;button.plus&gt;</code>和<code>&lt;button.minus&gt;</code>触发对当前的子字段的递增/减。</p>
+  <h2>属性</h2>
+  <p>该行为需要知道的属性:</p>
+  <ul>
+    <li><code>value=&quot;HH:MM:SS&quot;</code> - time, 输入元素的初始化值。ISO 8601格式的时间部分。</li></ul>
+  <h2>事件</h2>
+  <p>除了标准事件集(鼠标、按键、聚焦)外，该行为还生成:</p>
+  <ul>
+    <li>EDIT_VALUE_CHANGED 事件 - 当元素(time)的value值由于用户操作被修改时生成该事件。该事件为异步事件。</li></ul>
+  <h2>value</h2>
+  <p>Date 或 undefined, 反应内部编辑缓存区的当前状态。Date只有时间部分是有效的。</p>
+  <h2>方法</h2>
+  <p>N/A - 该行为没有引入任何特有的方法，不过&lt;caption&gt;子元素有<code>behavior:masked</code>行为的特有方法。</p>
+  <dl></dl>
+</body>
+</html>

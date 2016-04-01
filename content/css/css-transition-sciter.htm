@@ -1,0 +1,57 @@
+<html>
+  <head>
+    <title>CSS属性 - transition</title>
+  </head>
+<body>
+  <h1>CSS属性 - <code>transition</code></h1>
+  <p>transition属性接受一个值或一个值列表 - 每个值是一个CSS属性的变换函数的描述，它描述了从初始状态到transition定义的规则描述的状态的变换方式。例如:</p>
+  <pre>div
+{
+  width:100px;
+  height:100px;
+}
+div:hover
+{
+  width:200px;
+  height:200px;
+  transition: width(linear,400ms)
+              height(linear,400ms);
+}
+</pre>
+  <p>上面第二个规则定义了元素从正常状态到:hover状态时width和height属性的过渡效果。transition属性定义了双向的过渡 - 从正常状态到:hover状态 以及 从:hover状态到正常状态。</p>
+  <h2>Transition定义语法</h2>
+  <p>Transition的值是一个函数，或者以空格分隔的函数列表，可以是以下函数之一:</p>
+  <ol>
+    <li>Cannonic定义(使用命名参数):<br/>
+    <code><em>attribute</em> <strong>(</strong> <strong>easing-function:</strong><em>name</em><strong> ,</strong> duration: <em>duration</em> <strong>,</strong> delay: <em>duration</em> <strong>)</strong></code> 或<br/>
+    <code><em>attribute</em> <strong>(</strong> <strong>easing-function-in:</strong><em>name</em><strong> ,</strong> duration-in: <em>duration</em> <strong>,</strong> delay-in: <em>duration</em>, <strong><br/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;easing-function-out:</strong><em>name</em><strong> ,</strong> duration-out: <em>duration</em> <strong>,</strong> delay-out: <em>duration</em> &nbsp;<strong>)</strong></code> </li>
+    <blockquote>声明当元素获得或失去transition定义处的样式时的属性的(双向)动画。 当元素失去有transition属性的样式时，引擎自动初始化回滚动画 - 属性的值以相反方向改变，就好像时间倒退了一样。命名参数的顺序没有相关性。</blockquote>
+    <li><code><em>attribute</em> <strong>(</strong> <em>easing-function</em><strong> ,</strong> <em>duration</em> [<strong>,</strong> <em>delay</em> ] <strong>)</strong></code></li>
+    <blockquote>声明当元素获得或失去transition定义处的样式时的属性的(双向)动画。 当元素失去有transition属性的样式时，引擎自动初始化回滚动画 - 属性的值以相反方向改变，就好像时间倒退了一样。</blockquote>
+    <li><code><em>attribute</em> <strong>(</strong> <em>easing-function</em><strong> ,</strong> <em>duration</em> <strong>,</strong> <em>delay</em> , <em>rollback-easing-function</em>, [<em>rollback-duration</em> [<strong>,</strong> <em>rollback-delay</em> ]] <strong>)</strong></code></li>
+    <blockquote>声明当元素获得或失去transition定义处的样式时的属性的(双向)动画，并显示的声明回滚动画的函数。</blockquote>
+    <li><code><em>attribute</em> <strong>(</strong> <em>easing-function</em><strong> ,</strong> <em>duration</em> [<strong>,</strong> <em>delay</em> ], <strong>none</strong> <strong>)</strong></code></li>
+    <blockquote>声明当元素获得transition定义处的样式时的属性的动画，注意：仅是从初始到当前方向的动画，没有回滚动画。当元素失去该样式时，不会触发动画 - 元素立即获取新的样式值。</blockquote>
+    <li><code><em>attribute</em> <strong>(</strong> <strong>none</strong> , <em>rollback-easing-function</em>, <em>rollback-duration</em> [<strong>,</strong> <em>rollback-delay</em> ] <strong>)</strong></code></li>
+    <blockquote>声明当元素失去transition定义处的样式时的属性的动画，注意：仅是从当前到初始方向的动画。当元素获得该样式时，不会触发动画 - 元素立即获取新的样式值。</blockquote>
+    <li><code><strong>sound</strong> ( <strong>in</strong>: url(sound1.wav) [,<strong>out</strong>: url(sound2.wav)] )</code></li>
+    <blockquote>定义动画过渡时播放的声音。</blockquote></ol>
+  <p>其中:</p>
+  <ul>
+    <li><em><code>attribute</code></em> - 可动画化的CSS属性名称, 比如<code>width(linear,0.4s)</code>函数定义了<em>width</em>属性的动画过渡规则;</li>
+    <li><code><em>easing-function</em></code> - easing-functions.htm文件中陈列的擦除函数之一;</li>
+    <li><code><em>duration</em></code> - 动画持续时间, 秒或毫秒数, 比如<code>0.4s</code> 和 <code>400ms</code>; </li>
+    <li><code><em>delay</em></code> - 启动属性动画的延迟时间。</li></ul>
+  <h2>过渡(Transition)触发时</h2>
+  <p>当元素修改它的状态时(比如变成:hover状态 或 一些属性值改变)，有一个新的样式应用到它上(首先这样的样式已经定义)。可以说这时元素有两个样式集: <em>p-style</em> - 旧样式 和 <em>n-style</em> - 将应用的新样式。 这两个样式集如果其中一个或两个都定义了transition属性，则会发生以下动作:</p>
+  <dl>
+    <dt><strong>p-style</strong>.transition - <strong>null</strong>, &nbsp;<strong>n-style</strong>.transition - <strong>defined</strong> :</dt>
+    <dd>transition值为正方向过渡时的初始化状态, 使用<strong>n-style</strong>.transition的定义。</dd>
+    <dt><strong>p-style</strong>.transition - <strong>defined</strong>, &nbsp;<strong>n-style</strong>.transition - <strong>null</strong> :</dt>
+    <dd>transition值为反方向(回滚)过渡时的初始化状态，使用<strong>p-style</strong>.transition的定义。</dd>
+    <dt><strong>p-style</strong>.transition - <strong>defined</strong>, &nbsp;<strong>n-style</strong>.transition - <strong>defined</strong> 并且两个transition不相同 - 过渡(transition)使用新的规则:</dt>
+    <dd>transition值为正方向过渡时的初始化状态, 使用<strong>n-style</strong>.transition的定义</dd></dl>
+  <h2>中断过渡(Transition)</h2>
+  <p>当过渡时，如果元素的transition属性获取的新的值，则transition使用上面的规则切换方向。唯一的不同是所有的过渡持续时间等于当时的transition定义的时间。比如，未完成的回滚过渡将比完全的回滚消耗更少的时间。同样的，当重新应用某些transition属性时也会比全方向的过渡消耗更少的时间。</p>
+</body>
+</html>

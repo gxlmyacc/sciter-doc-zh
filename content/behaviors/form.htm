@@ -1,0 +1,111 @@
+﻿<html>
+  <head>
+    <meta name="generator" content="h-smile:richtext"/>
+  </head>
+<body>
+  <h1>behavior:form</h1>
+  <p>该元素处理&lt;form&gt;元素的扩展功能。该行为适用于任何容器元素，该元素需要&quot;复合值&quot;。</p>
+  <p>behavior:form的主要应用场景: </p>
+  <ul>
+    <li>经典的web from应用场景 - 当<em>action</em>属性被定义，该行为会表单中的数据向该表单的URL发送HTTP/POST请求。</li>
+    <li>复合值容器的应用场景 - form表单的值为表单中一个name/value的命名元素(有name属性的元素)的映射表。</li></ul>
+  <h2>元素</h2>
+  <p>默认情况下，应用了该行为的元素有:</p>
+  <ul>
+    <li><code>&lt;form&gt;</code></li></ul>
+  <h2>示例</h2>
+  <div>
+    <form action="form_action.asp" method="get" style="border: 1px solid;padding: 2px;">
+     <p>姓: <input type="text" name="fname" /></p>
+     <p>名: <input type="text" name="lname" /></p>
+     <input type="submit" value="提交" />
+	 <input type="reset" value="重置" />
+    </form>
+  </div>
+  <h2>模型</h2>
+  <p>在form中的任何一个拥有<em>name</em>属性的DOM元素都会被认为是可提交的(submittable), 并且参与到from的值中。</p>
+  <p>form的值总是一个复合(聚合、映射)的JSON值。</p>
+  <p>示例, 下面是一个form:</p>
+  <pre>&lt;form&gt;
+   First name: &lt;input}text name=&quot;first&quot; value=&quot;Foo&quot;&gt; 
+   Last name: &lt;input}text name=&quot;last&quot; value=&quot;Bar&quot;&gt;
+&lt;/form&gt;
+</pre>
+  <p>的值是:</p>
+  <pre>{
+  first: &quot;Foo&quot;,
+  last: &quot;Bar&quot; 
+}
+</pre>
+  <h3>Radio组 和 check盒</h3>
+  <p>一组radio元素有相同的名称(name)，一个组有一个值 - 该组中:checked状态的radio元素的value值。 </p>
+  <p>check元素的值是它们的value属性的内容。如果checkbox未选中则它的值为undefined。</p>
+  <p>因此form:</p>
+  <pre>&lt;form&gt;
+   Name: &lt;input|text name=&quot;firstName&quot; value=&quot;Ivan&quot;&gt;<br/>
+   Male: &lt;input|radio name=&quot;sex&quot; value=&quot;male&quot; checked&gt;
+   Female: &lt;input|radio name=&quot;sex&quot; value=&quot;female&quot;&gt;
+   Adult: &lt;input|checkbox name=&quot;adult&quot; value=&quot;mature&quot; checked&gt;
+   Owns Cadillac: &lt;input|checkbox name=&quot;ownsCadddilac&quot; value=&quot;yes&quot;&gt;
+&lt;/form&gt;
+</pre>
+  <p>的值为:</p>
+  <pre>{
+  firstName:&quot;Ivan&quot;,
+  sex: &quot;male&quot;,
+  adult: &quot;mature&quot;,
+  ownsCadddilac: undefined
+}
+</pre>
+  <h3>字段组(Field groups)</h3>
+  <p>一些字段可以打包到一个表单命名容器中，在表单的值映射表中，它们打包成一个子对象:</p>
+  <pre>&lt;form&gt;
+   &lt;div name=&quot;credentials&quot;&gt;
+     User name: &lt;input|text name=&quot;un&quot; value=&quot;Ivan&quot;&gt;
+     Password: &lt;input|password name=&quot;pwd&quot; value=&quot;12345&quot;&gt;
+   &lt;/div&gt;<br/>   Save login: &lt;input|checkbox name=&quot;parsistLogin&quot; value=&quot;true&quot; checked&gt;
+&lt;/form&gt;
+</pre>
+  <p>生成的值为: </p>
+  <pre>{  
+   credentials: { 
+     un: &quot;Ivan&quot;, 
+     pwd: &quot;12345&quot; },
+   persistLogin: true; 
+}
+</pre>
+  <h2>属性</h2>
+  <p>下面的这些属性用于web form的情况:</p>
+  <ul>
+    <li><code>action</code> - URL, 提交网页表单的URL，表单数据的接收者;</li>
+    <li><code>target</code> - 可选参数, 目标框架(frame)的名称(name)或id，即action URL的响应者;</li>
+    <li><code>method</code> - 浏览器提交表单使用的HTTP方法。可能的值有: &quot;post&quot;和&quot;get&quot;. 默认值: &quot;post&quot;</li>
+    <li><code>enctype</code> - 当<code>method=&quot;post&quot;</code>时，定义提交的MIME格式，值可以为:</li>
+    <ul>
+      <li><code>&quot;application/x-www-form-urlencoded&quot;</code> - 如果该属性未指定时的默认值;</li>
+      <li><code>&quot;multipart/form-data&quot;</code> - 用于当表单包含<code>&lt;input name=&quot;...&quot; type=&quot;file&quot;&gt;</code>元素时。</li></ul></ul>
+  <h2>事件</h2>
+  <ul>
+    <li>FORM_RESET 事件 - 当点击表单中的&lt;button|reset&gt;按钮时生成该事件。如果该事件未被脚本处理，则表单将清空所有input元素的值，并将它们设置为它们定义的默认值; </li>
+    <li>FORM_SUBMIT 事件 - 当点击表单中的&lt;button|submit&gt;按钮时生成该事件。如果该事件未被脚本处理，则该行为将会发生表单的值到<em>action</em>指定的URL; </li>
+    <li>FORM_VALUE_CHANGED 事件 - 当表单中某个input发生&quot;change&quot;事件时生成。该事件被翻译成表单元素的&quot;change&quot;事件。</li></ul>
+  <h2>方法</h2>
+  <dl>
+    <dt>submit</dt>
+    <dd>() - 提交表单的内容，需要定义表单的<em>action</em>属性。</dd>
+    <dt>reset</dt>
+    <dd>() - 重置表单中的所有输入内容为它们的初始值。</dd></dl>
+  <h2>value</h2>
+  <p>name/value map - TIScript中的对象，该对象中每个属性的名称对应表单中DOM元素的name属性。</p>
+  <h2>脚本中的表单改变事件处理</h2>
+  <h3><code>on()</code>订阅</h3>
+  <pre>var frm = $(form#some);
+frm.on(&quot;change&quot;, function() { var formValue = this.value; ... });
+self.on(&quot;change&quot;, &quot;form#some&quot;, function() { var formValue = this.value; ... });
+</pre>
+  <h3>decorators.tis 装饰器</h3>
+  <pre>include &quot;decorators.tis&quot;;
+@change @on &quot;form#some&quot; :: ... 事件处理代码 ...;
+</pre>
+</body>
+</html>

@@ -1,0 +1,55 @@
+﻿<html>
+  <head>
+    <meta name="generator" content="h-smile:richtext"/>
+  </head>
+<body>
+  <h1>behavior:frame-set</h1>
+  <p>该行为处理&lt;frameset&gt;元素的扩展功能 - 由所谓的&quot;分隔线(splitters)&quot;分隔的&quot;块面板&quot;容器，它允许调整容器中面板的尺寸。</p>
+  <p>该行为可以应用到任何块级容器上，如&lt;div&gt;、&lt;section&gt;等。</p>
+  <h2>元素</h2>
+  <p>默认情况下，应用了该行为的元素有:</p>
+  <ul>
+    <li><code>&lt;frameset&gt;</code> - 面板容器。</li></ul>
+  <h2>示例</h2>
+  <div>
+    <frameset style="height:100px; padding:2px;border: 1px solid;" cols="120px,*">
+      <div id="help-index">
+        <a href="first-topic.htm" target="help-content">主题1</a> 
+      </div>
+      <splitter/>
+      <frame id="help-content">主题1的内容</frame>
+    </frameset>
+  </div>
+  <h2>模型</h2>
+  <p>在Sciter中，&lt;frameset&gt;元素可以包含&lt;frame&gt;元素，也可以包含其他块级元素(如 &lt;div&gt;、&lt;section&gt;等)来作为一个面板。</p>
+  <p>面板可以被&lt;splitter&gt;元素(可以指定splitter的特有样式)分隔。</p>
+  <p>示例, 一个典型的帮助窗口布局:</p>
+  <pre>&lt;frameset cols=&quot;120px,*&quot;&gt;
+   &lt;div id=&quot;help-index&quot;&gt;
+      &lt;a href=&quot;first-topic.htm&quot; target=&quot;help-content&quot;&gt;主题1&lt;/a&gt; 
+   &lt;/div&gt;
+   &lt;splitter/&gt;
+   &lt;frame id=&quot;help-content&quot;&gt;主题1的内容&lt;/frame&gt;
+&lt;/frameset&gt;
+</pre>
+  <p>第一个面板是一个&lt;div&gt;元素，它用于静态的内容。&lt;frame&gt;是选择的主题元素的容器。&lt;splitter&gt;用于交互式的调整面板的尺寸。</p>
+  <h2>属性</h2>
+  <p>该行为需要知道的属性:</p>
+  <ul>
+    <li><code>cols=&quot;宽度列表&quot;</code> - 声明列布局，指定&lt;frameset&gt;中的列的初始宽度;</li>
+    <li><code>rows=&quot;高度列表&quot;</code> - 声明行布局，指定&lt;frameset&gt;中的行的初始高度;</li></ul>
+  <p>cols或rows属性必须定义其中一个，宽度/高度列表是一个以逗号分隔的Sciter长度单位: dips、px、mm等, 包括弹力单位(<code>*</code>)。</p>
+  <h2>事件</h2>
+  <p>N/A - 该行为没有特有事件。</p>
+  <ul/>
+  <h2>方法</h2>
+  <dl>
+    <dt>uiState</dt>
+    <dd>() : array - 返回一个长度(lengths)数组 - 当前frameset中面板宽度/高度数组;</dd>
+    <dt>uiState</dt>
+    <dd>(lengths: array) - 应用列/行的长度到frameset中。</dd></dl>
+  <p>uiState方法用于持久化frameset的UI状态。</p>
+  <h2>value</h2>
+  <p>N/A</p>
+</body>
+</html>

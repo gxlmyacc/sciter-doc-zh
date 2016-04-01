@@ -1,0 +1,63 @@
+<html>
+  <head>
+    <title>CSSS!事件</title> 
+    <meta name="source"/>
+    <meta name="generator" content="h-smile:richtext"/>
+  </head>
+<body>
+  <h1>CSSS!中DOM元素的事件</h1>
+  <p>CSSS!扩展了经典CSS，通过下面的这些事件属性，可以定义事件处理器:</p>
+  <dl>
+    <dt><code>hover-on!</code></dt>
+    <dd>若代码包含这个属性，则当元素获取<em>:hover</em>状态时调用这个属性，相当于MOUSE_ENTER事件;</dd>
+    <dt><code>hover-off!</code></dt>
+    <dd>相当于MOUSE_LEAVE事件;</dd>
+    <dt><code>active-on!</code></dt>
+    <dd>当元素获得<em>:active</em>状态时(如MOUSE_DOWN事件)时触发。<br/>
+	<code>is-on-icon()</code>指示器函数可以在该事件处理器中使用。</dd>
+    <dt><code>active-off!</code></dt>
+    <dd>当元素失去<em>:active</em>状态时(如MOUSE_UP事件)时触发。<br/>
+	<code>is-on-icon()</code>指示器函数可以在该事件处理器中使用。</dd>
+    <dt><code>focus-on!</code></dt>
+    <dd>当元素获取输入焦点时触发。</dd>
+    <dt><code>focus-off!</code></dt>
+    <dd>当元素失去输入焦点时触发。</dd>
+    <dt><code>key-on!</code></dt>
+    <dd>当元素接收到key-down事件时触发, key-code()函数获取按键信息。<br/>
+	<code>key-code()</code>函数可以用于获取按键的值。如果需要可以使用按键代码常量来定义按键代码<br/>
+	示例: <code>key-code() == 'RETURN' ? self.ok = true;</code></dd>
+    <dt><code>key-off!</code></dt>
+    <dd>当元素接收到key-up事件时触发。使用key-code()函数可以获取按键的值;</dd>
+    <dt><code>click!</code></dt>
+    <dd>当元素接收到 BUTTON_CLICK、HYPERLINK_CLICK等事件时触发。注意: 只有拥有<em>button</em>、<em>hyperlink</em>、<em>clickable</em>行为的元素才可以接收到这个事件。</dd>
+    <dt><code>assigned!</code></dt>
+    <dd>当元素设置这个样式时被触发，或者说当<code>assigned!</code>属性值改变时触发。</dd>
+    <dt><code>value-changed!</code></dt>
+    <dd>当[input]的值被改变时触发，例如：EDIT_VALUE_CHANGED、BUTTON_STATE_CHANGED、SELECT_SELECTION_CHANGED将引起这个事件。</dd>
+    <dt><code>validate!</code></dt>
+    <dd>按常识来说这不是一个事件，而是<em>behavior:form</em>的一个辅助方法，用于在提交前校验输入元素。</dd>
+    <dt><code>timer!</code></dt>
+    <dd>用于定义在计时器事件中执行的代码。计时器的创建和销毁使用start-timer(ms)和stop-timer()方法。</dd>
+    <dt><code>animation-start!</code></dt>
+    <dd>在调用<code>element.start-animation()</code>方法后触发。</dd>
+    <dt><code>animation-end!</code></dt>
+    <dd>当动画结束时触发。</dd>
+    <dt><code>animation-step!</code></dt>
+    <dd>当每个动画步骤时触发。这个事件处理器应该返回一个整数——毫秒数——如果element.start-animation()调用没有指定动画时间时的下一步的延时时间。在<code>animation-step!</code>事件处理函数中可以使用<code>morph()</code>全局函数，这个函数可以有3个参数：<br/>
+	<code>res = <strong>morph</strong>(&quot;ease-function-name&quot;, start-value, end-value )</code> ，产生的值取决于ease函数和内部的动画进度状态变量。下面是morph()支持的ease函数名称列表: </dd>
+    <ul>
+      <ul>
+        <li>&quot;quad-in&quot;, &quot;quad-out&quot;, &quot;quad-in-out&quot;, </li>
+        <li>&quot;cubic-in&quot;, &quot;cubic-out&quot;, &quot;cubic-in-out&quot;, </li>
+        <li>&quot;quart-in&quot;, &quot;quart-out&quot;, &quot;quart-in-out&quot;,</li>
+        <li>&quot;quint-in&quot;, &quot;quint-out&quot;, &quot;quint-in-out&quot;, </li>
+        <li>&quot;sine-in&quot;, &quot;sine-out&quot;, &quot;sine-in-out&quot;, </li>
+        <li>&quot;expo-in&quot;, &quot;expo-out&quot;, &quot;expo-in-out&quot;, </li>
+        <li>&quot;circ-in&quot;, &quot;circ-out&quot;, &quot;circ-in-out&quot;, </li>
+        <li>&quot;elastic-in&quot;, &quot;elastic-out&quot;, &quot;elastic-in-out&quot;,</li>
+        <li>&quot;back-in&quot;, &quot;back-out&quot;, &quot;back-in-out&quot;,</li>
+        <li>&quot;bounce-in&quot;, &quot;bounce-out&quot;, &quot;bounce-in-out&quot;, </li></ul></ul>
+    <dt><code>size-changed!</code></dt>
+    <dd>当元素获得新尺寸时触发。</dd></dl>
+</body>
+</html>

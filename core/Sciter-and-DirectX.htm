@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Sciter 与 DirectX</title>
+	</head>
+	<body>
+	<div class="article-header">
+		<h1 class="article-title">Sciter 与 DirectX</h1>
+  </div>
+	<div class="article-content">
+		<p>我在Sciter 3.3.1.4增加了将HTML/CSS直接渲染到DirectX窗口的能力。</p>
+<p>基本概念:</p>
+<ul>
+<li>Sciter engine is attached to the window where DirectX renders its 3D scene. WndProc uses SciterProcND delegation in <a href="/developers/embedding-principles/" target="_blank">Mixin integration mode</a>.  Therefore Sciter sees all UI messages coming to the window and reacts on them. Instance is created by <code>SciterCreateOnDirectXWindow</code> API function.</li>
+<li>Application calls <code>SciterRenderOnDirectXWindow</code> API function to render content when it is appropriate. With the function following rendering modes are supported:
+<ul>
+<li>Document is rendered on background of 3D scene;</li>
+<li>Document is rendered in front of 3D scene (on top of it). In this case document should have transparent background and transparent element through which 3D scene can be seen;</li>
+<li>Document may contain so called layers &#8211; dedicated DOM elements (&lt;section&gt;s, &lt;div&gt;s) representing background and foreground UI layers with 3D scene rendered in between. The screen cast above represents such type of rendering. Below is an illustration of such layers:</li>
+</ul>
+</li>
+</ul>
+<p><img class="aligncenter size-full wp-image-43939" src="images/sciter-directx-schema.jpg" alt="sciter DOM layers on DirectX window" width="529" height="376" /></p>
+<p>Sciter&#8217;s DirectX API also contains <code>SciterRenderOnDirectXTexture</code> API function. It is used to render HTML/CSS content on DirectX 2D textures.</p>
+<p>If your setup requires DOM layers then it makes sense to consider adding native behavior to DOM element on front layer that will establish view on 3D scene. Such a behavior will catch mouse and keyboard events and reroute them to view/model manipulations.</p>
+<p>Scripts can also be used to manipulate 3D view/model variables. Check  <span style="text-decoration: underline;">{sciter-sdk}/demos.win/sciter-directx/</span> demo project &#8211; it demonstrates all this.</p>
+	</div>
+</html>

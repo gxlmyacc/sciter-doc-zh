@@ -1,0 +1,42 @@
+﻿<html>
+  <head>
+    <meta name="generator" content="h-smile:richtext"/>
+  </head>
+<body>
+  <h1>behavior:clickable</h1>
+  <p>可点击但不聚焦的行为。一个轻量的按钮行为(在发生MOUSE_DOWN/UP事件时生成BUTTON_CLICK事件)。 </p>
+  <h2>元素</h2>
+  <p>默认情况下，应用了behavior:clickable行为的元素有:</p>
+  <ul>
+    <li><code>&lt;toolbar&gt;&lt;button&gt;&lt;/button&gt;&lt;/toolbar&gt;</code></li></ul>
+  <h2>示例</h2>
+  <div>
+    <toolbar><button>button1</button></toolbar>
+  </div>
+  <h2>属性</h2>
+  <p>N/A</p>
+  <h2>事件</h2>
+  <p>除了标准事件集(鼠标、按键、聚焦)外，behavior:clickable行为还生成:</p>
+  <ul>
+    <li>BUTTON_CLICK 事件, 当鼠标在按钮上按下/按起或当按钮聚焦时按下<code>空格</code>键时产生该事件。该事件为异步事件。</li>
+    <li>BUTTON_PRESS 事件, 当鼠标在按钮上按下或当按钮聚焦时按下<code>空格</code>键时产生该事件。该事件为异步事件。</li></ul>
+  <h2>方法</h2>
+  <p>N/A - behavior:clickable没有引入任何特有的方法。</p>
+  <h2>value</h2>
+  <p>N/A</p>
+  <h2>脚本中的按钮点击事件处理</h2>
+  <h3><code>onClick</code>事件</h3>
+  <pre>var btn = $(button#some);
+btn.onClick = function() { ... 事件处理代码 ... }
+</pre>
+  <h3><code>on()</code>订阅</h3>
+  <pre>var btn = $(button#some);
+btn.on(&quot;click&quot;, function() { ... 事件处理代码 ... });
+self.on(&quot;click&quot;, &quot;button#some&quot;, function() { ... 事件处理代码 ... });
+</pre>
+  <h3>decorators.tis 装饰器</h3>
+  <pre>include &quot;decorators.tis&quot;;
+@click @on &quot;button#some&quot; :: ... 事件处理代码 ...;
+</pre>
+</body>
+</html>

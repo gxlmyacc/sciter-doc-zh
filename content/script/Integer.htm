@@ -1,0 +1,76 @@
+<html>
+  <head>
+    <title>Integer(整数)值</title>
+    <meta name="generator" content="h-smile:richtext"/>
+  </head>
+<body>
+  <h1>Integer(整数)值</h1>
+  <p>所有的整数值都是这个类的&quot;对象&quot;。</p>
+  
+    <dl>
+      
+        
+          <h2>常量</h2>
+      
+        <dt>MIN</dt>
+        <dd>- <em>integer</em>, 整数类型的最小值。</dd>
+      
+        <dt>MAX</dt>
+        <dd>- <em>integer</em>, 整数类型的最大值。</dd>
+      
+        
+          <h2>方法</h2>
+      
+        <dt>toFloat</dt>
+        <dd>
+          <p>( ) : float</p>
+          <p>架构整个转换成浮点数。</p></dd>
+      
+        <dt>toInteger</dt>
+        <dd>
+          <p>( ) : int</p>
+          <p>简单的返回整数值。</p></dd>
+      
+        <dt>toString</dt>
+        <dd>
+          <div>( [<strong>radix</strong>: int] ) : string</div>
+          <p>返回整数的字符串型，radix参数指定进制，取值10(默认)、8、16。</p></dd>
+      
+        <dt>toHtmlString</dt>
+        <dd>
+          <p><strong>( </strong>[<strong>radix</strong>: int]<strong> )</strong> : string</p>
+          <p>返回转义了html规则的字符串。是toString()方法的别名。</p></dd>
+      
+        <dt>toUrlString</dt>
+        <dd>
+          <p><strong>( </strong>[<strong>radix</strong>: int]<strong> )</strong> : string</p>
+          <p>返回转义了url规则的字符串。是toString()方法的别名。</p></dd>
+      
+        <dt>valueOf</dt>
+        <dd>
+          <div><strong>()</strong> : int</div>
+          <p>简单的返回整数值本身。</p></dd>
+      
+        <dt>min</dt>
+        <dd>
+          <p><strong>( ... )</strong> : int</p>
+          <p>静态方法 - 返回参数中的最小值。如Integer.min(1, 2, 3)将会返回1。</p></dd>
+      
+        <dt>max</dt>
+        <dd>
+          <p><strong>( ... )</strong> : int</p>
+          <p>静态方法 - 返回参数中的最大值。如Integer.min(1, 2, 3)将会返回3。</p></dd>
+      
+        <dt>limit</dt>
+        <dd>
+          <p>( min:int, max:int ) : int</p>
+          <p>该函数的实现代码如下:</p>
+          <pre>function Integer.limit(min, max) 
+{
+   if( this &lt; min ) return min;
+   if( this &gt; max ) return max;
+   return this;
+}
+</pre></dd></dl>
+</body>
+</html>

@@ -1,0 +1,66 @@
+﻿<html>
+  <head>
+    <meta name="source"/>
+    <meta name="source"/>
+    <meta name="generator" content="h-smile:richtext"/>
+  </head>
+<body>
+  <h1>behavior:menu-bar</h1>
+  <p>该行为提供了一个横向菜单栏 —— 弹出菜单的顶层容器。</p>
+  <p>引擎的默认样式系统没有提供菜单栏的默认样式。如果你的应用程序需要菜单栏，请使用{sdk}/samples/menu/std-menu.css作为原型。</p>
+  <h2>元素</h2>
+  <p>默认没有元素应用该行为。<u>{sdk}/samples/menu/std-menu.css</u>是假设<code>&lt;ul id=&quot;menu-bar&quot;&gt;</code>元素定义了顶层菜单。</p>
+  <h2>模型</h2>
+  <p>Sciter中，菜单的声明示例:</p>
+  <pre>&lt;ul id=&quot;menu-bar&quot;&gt;
+  &lt;li&gt;
+    &lt;caption&gt;文件&lt;/caption&gt;
+    &lt;menu&gt;
+      &lt;li id=&quot;file-open&quot;&gt;打开&lt;span.accesskey&gt;Ctrl+O&lt;/span&gt;&lt;/li&gt;
+      &lt;hr&gt;
+      &lt;li id=&quot;file-save&quot;&gt;保存&lt;span.accesskey&gt;Ctrl+S&lt;/span&gt;&lt;/li&gt;
+      &lt;li id=&quot;file-save-as&quot;&gt;另存为...&lt;span.accesskey&gt;Ctrl+Shift+S&lt;/span&gt;&lt;/li&gt;
+    &lt;/menu&gt;
+   &lt;li&gt;
+   ...
+&lt;/ul&gt;
+</pre>
+  <h2>属性</h2>
+  <p>该行为没有引入特有的属性。</p>
+  <dl>
+    <h2>方法</h2>
+    <p>没有特有的方法。</p>
+    <h2>状态</h2>
+    <ul>
+      <li><code>:owns-popup</code> 当菜单显示时，菜单拥有者(上面的<code>menuOwnerElement</code>)会设置该状态标志;</li>
+      <li><code>:popup</code> - 当<code>&lt;menu&gt;</code>显示时，该菜单会设置该状态标志。</li></ul>
+    <h2>事件</h2>
+    <dt>MENU_ITEM_CLICK</dt>
+    <dd>- 当用户点击菜单项时生成该事件，该事件为异步事件。Event.target是点击的菜单项。</dd>
+    <dt>MENU_ITEM_ACTIVE</dt>
+    <dd>- 当用户通过鼠标悬停或导航键激活菜单时生成该事件，该事件为同步事件。Event.target是激活的菜单项。</dd>
+    <p>菜单项事件的传播采用所谓的菜单树顺序，菜单的拥有者元素会接收它拥有的菜单的所有的MENU_ITEM_CLICK事件。</p></dl>
+  <h2>value</h2>
+  <p>N/A</p>
+  <h2>脚本中菜单点击的处理</h2>
+  <h3><code>onControlEvent</code>事件</h3>
+  <pre>var edit = $(input#some);
+edit.onControlEvent = function(evt)
+{
+  switch(evt.type) {
+    case Event.MENU_ITEM_CLICK: /* evt.target是点击的菜单项 */ break;
+  }
+}
+</pre>
+  <h3><code>on()</code>订阅</h3>
+  <pre>var edit = $(input#some);
+edit.on(&quot;click&quot;, &quot;li#file-open&quot;, function(evt) { 
+  // 'this'这里是li#file-open元素 
+});
+</pre>
+  <h3>decorators.tis 装饰器</h3>
+  <pre>include &quot;decorators.tis&quot;;
+@click @on &quot;li#file-open&quot; :: ... 事件处理代码 ...;
+</pre>
+</body>
+</html>

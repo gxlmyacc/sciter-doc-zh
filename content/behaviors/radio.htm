@@ -1,0 +1,34 @@
+﻿<html>
+  <head>
+    <meta name="source" content="http://www.terrainformatica.com/wiki/doku.php?id=h-smile:built-in-behaviors:radio"/>
+    <meta name="generator" content="h-smile:richtext"/>
+  </head>
+<body>
+  <h1>behavior: radio</h1>
+  <p>标准的单选框按钮行为。 可以应用到任何一组具有相同的名称来实现一组选择(checked)功能的元素。</p>
+  <h2>元素</h2>
+  <p>默认情况下，应用了该行为的元素有:</p>
+  <ul>
+    <li><code>&lt;input type=&quot;radio&quot;&gt;</code> - 标准的HTML行内单选按钮;</li>
+    <li><code>&lt;button type=&quot;radio&quot;&gt;</code> - Windows外观的单选按钮, 请这样使用它<code>&lt;button|radio(group)&gt;first&lt;/button&gt;</code> <code>&lt;button|radio(group)&gt;second&lt;/button&gt;</code>.</li></ul>
+  <h2>示例</h2>
+  <div>
+    <button type="radio" name="group1" >单选框1</button> 
+	<button type="radio" name="group1" checked>单选框2</button> 
+  </div>
+  <h2>属性</h2>
+  <p>该行为需要知道的属性:</p>
+  <ul>
+    <li><code>checked</code> - 如果提供了该属性，则将会初始化元素的运行期状态添加<em>checked</em>标志。</li>
+    <li><code>name=&quot;groupname&quot;</code> - 标准的<em>name</em>属性，但它有特殊的含义:拥有相同名称的复选框为一组。</li>
+    <li><code>value=&quot;...&quot;</code> - 标准的value属性(用于<code>behavior:form</code>)。</li></ul>
+  <h2>事件</h2>
+  <p>除了标准事件集(鼠标、按键、聚焦)外，该行为还生成:</p>
+  <ul>
+    <li>BUTTON_STATE_CHANGED 事件 - 当按钮修改了它的选中状态时生成该事件。该事件为异步事件。</li>
+    <li>BUTTON_PRESS 事件 - 当鼠标在该按钮上按下或当按钮聚焦时按下<code>空格</code>键时产生该事件。该事件为异步事件。</li></ul>
+  <h2>value</h2>
+  <p><code>true/false</code>, 反映按钮的当前状态是否包含<code>:checked</code>标志。</p>
+  <p>注意: behavior:form行为将一组中的所有单选框元素认为是一个值。</p>
+</body>
+</html>

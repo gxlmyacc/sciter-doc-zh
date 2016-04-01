@@ -1,0 +1,31 @@
+﻿<html>
+  <head>
+    <title>popup-position属性</title>
+    <meta name="generator" content="h-smile:richtext"/>
+  </head>
+<body>
+  popup-position属性允许显示定义弹出元素在其锚定元素(弹出元素的拥有者)的弹出位置。<p>
+  popup-position属性接受以下值:</p>
+  <ul>
+    <li><code>popup-position: default;</code> - 默认位置(行为指定)。</li>
+    <li><code>popup-position: inherit;</code> - 从它的父元素继承。</li>
+    <li><code>popup-position: &lt;popup-reference-point&gt; &lt;anchor-reference-point&gt;;</code> - 明确指定弹出位置。</li></ul>
+  <p>其中:</p>
+  <p><code>&lt;popup-reference-point&gt;</code>和<code>&lt;anchor-reference-point&gt;</code>可以使用以下枚举值:</p>
+  <ul>
+    <li><code>top-left</code></li>
+    <li><code>top-center</code></li>
+    <li><code>top-right</code></li>
+    <li><code>middle-left</code></li>
+    <li><code>middle-center</code></li>
+    <li><code>middle-right</code></li>
+    <li><code>bottom-left</code></li>
+    <li><code>bottom-center</code></li>
+    <li><code>bottom-right</code></li></ul>
+  <p>示例，下面的声明:</p>
+  <pre>select &gt; popup {<br/>  popup-position: top-right bottom-right;<br/>
+}
+</pre>
+  <p>将弹出元素的右上角放置在锚点元素(这是是select元素本身)的右下角。</p>
+</body>
+</html>

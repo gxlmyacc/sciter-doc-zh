@@ -1,0 +1,62 @@
+﻿<html>
+  <head>
+    <meta name="generator" content="h-smile:richtext"/>
+  </head>
+<body>
+  <h1>behavior:history</h1>
+  <p>这个行为提供了对历史页面导航的支持, 类似于点击浏览器中的"前进"和"后退"按钮。</p>
+  <h2>元素</h2>
+  <p><code>&lt;frame history&gt;</code> - 标准的frame元素，只是多了一个history属性。</p>
+  <h2>模型</h2>
+  <p>这个行为可以被应用到任何包含frame的元素上。比如，如果需要可以应用到&lt;frameset&gt;。</p>
+  <h2>属性</h2>
+  <p>behavior:history没有使用任何特别的属性。</p>
+  <h2>方法</h2>
+  <dl>
+    <dt>canGoBack</dt>
+    <dd><strong>(</strong> <strong>)</strong> : <em>true</em> | <em>false</em>, &nbsp;如果存在"历史页面"，并且goBack()方法将可以成功时，则返回true。</dd>
+    <dt>canGoForward</dt>
+    <dd><strong>(</strong> <strong>)</strong> : <em>true</em> | <em>false</em>, &nbsp;如果"向前"状态可用，并且goForward()方法将可以成功时，则返回true。</dd>
+    <dt>goBack</dt>
+    <dd><strong>(</strong> <strong>)</strong> : <em>true</em> | <em>false</em>, &nbsp;"向后/回退"导航栈，当导航成功时返回<em>true</em>。</dd>
+    <dt>goForward</dt>
+    <dd><strong>(</strong> <strong>)</strong> : <em>true</em> | <em>false</em>, &nbsp;"向前"导航栈，当导航成功时返回<em>true</em>。</dd></dl>
+  <h2>状态</h2>
+  <p>N/A</p>
+  <h2>事件</h2>
+  <p>这个行为会生成以下事件:</p>
+  <dl>
+    <dt>HISTORY_STATE_CHANGED</dt>
+    <dd>- 当内部的导航栈状态被改变时触发。</dd></dl>
+  <p>这个行为反应了以下事件:</p>
+  <dl>
+    <dt>HISTORY_PUSH</dt>
+    <dd>- 发生了超链接导航，并且behavior:frame元素加载了新的内容。</dd>
+    <dt>HISTORY_PRIOR</dt>
+    <dd>- 该行为将会调用goBack()方法来处理该事件。</dd>
+    <dt>HISTORY_NEXT</dt>
+    <dd>- 该行为将会调用goForward()方法来处理该事件。</dd></dl>
+  <h2>值</h2>
+  <p>N/A</p>
+  <h2>在脚本中历史状态改变的处理</h2>
+  <code>onControlEvent</code>处理器：
+  <pre>var edit = $(input#some);
+edit.onControlEvent = function(evt)
+{
+  switch(evt.type) {
+    case Event.HISTORY_STATE_CHANGED: 
+       /* evt.target为该元素 */ 
+       break;
+  }
+}
+</pre>
+  <h3>decorators.tis处理器</h3>
+  <pre>include &quot;decorators.tis&quot;;
+
+@when Event.HISTORY_STATE_CHANGED @on &quot;frame#content&quot; 
+   function() {
+     ... 事件处理代码 ...;
+   }
+</pre>
+</body>
+</html>

@@ -1,0 +1,120 @@
+﻿<html>
+<head>
+	<title>MV*(Model-View-Whatever), Sciter的Plus引擎</title>
+</head>
+
+<body>
+<div class="post" id="post-41821">
+	 
+  <h1 class="storytitle">MV*(Model-View-Whatever), Sciter的Plus引擎</h1>
+ 
+  </div>
+	
+	
+    <div class="storycontent">
+		
+	  <h4>前言</h4>
+
+	  <p>我想说，人类的历史就是一个不断地重复造各种"轮子"的历史。</p>
+
+	  <p>这次，我们将看到<em>数据绑定</em>的概念，它类似于<em>模型-视图-控制器</em>。当然, 许多人为MVC定义了很多含义，但是还没有人为<em>数据绑定</em>定义基础概念 &#8211; 你有一些数据(也叫模型)<em>声明</em>绑定了UI &quot;控件&quot;(视图)。 我相信Microsoft&#8217;的VisualBasic 4 和它的IDE是这个思想的第一个可用的实现。那时还没有&quot;控制器&quot;的概念，所以他们的实现是非常有限制的 &#8211; 虽然你可以通过简单的声明来实现90%的数据编辑，但是你得花90%的设计时间来完成剩余的10%的必须功能。</p>
+
+	  <h4>Sciter的Plus框架</h4>
+	  
+<p>你可以在Sciter SDK中找到Plus框架，它是一个非常紧凑(400 LOC)的库，它是旧的数据绑定概念中的控制器的简单实现。</p>
+	  
+<p>注意, Plus并不想像AngularJS那样试图解决每个html/css/script UI的问题。它只是一个使用@observing函数(控制器)的数据绑定机制。</p>
+	  
+<h4>基本部分</h4>
+	  
+<p>Plus中的模型是一些tiscript的名称空间对象，它包含一些数据(也可以有函数)，该对象绑定到HTML DOM元素中的特定容器上。</p>
+	  
+<p>例如，你可以在脚本中声明: </p>
+	  
+<pre class="brush: js;">namespace Data {
+  var correspondent = &quot;world&quot;; // 待绑定的变量
+}</pre>
+
+      <p>对应的HTML标记代码如下:</p>
+
+	  <pre class="brush: html;">&lt;section model=&quot;Data&quot;&gt;
+   Whom to greet: &lt;input name=&quot;correspondent&quot;&gt; ?
+   &lt;p&gt;The greeting: Hello &lt;output name=&quot;correspondent&quot;&gt;!&lt;/p&gt;
+&lt;/section&gt;
+</pre>
+     
+<p>然后在你的文档中引入&quot;plus.css&quot;文件，这样就可以将<code>Data.correspondent</code>变量与两个DOM元素动态绑定了: input[name=correspondent]是双向绑定，而output[name=correspondent]是单向绑定(仅视图)。所以当你在输入框中输入一些信息后，你将看到你输入的信息在output元素上显示。你可以使用SDK中sciter.exe来参看<u>sdk/samples/+plus/demos/0-basic-variable-binding.htm</u>示例。</p>
+
+	 <h4>model 和 name DOM属性</h4>
+
+	 <p>注意&lt;section&gt;元素的<code>model=&quot;Data&quot;</code>属性。它指示Plus引擎为它的内容元素与<code>namsepace Data {}</code>的成员变量间建立动态绑定关系。绑定的名称空间的名称可以是任意的，不只是"data"。</p>
+	 
+<p>section[model]中任何定义了<em>name</em>属性的DOM元素，在绑定初始化阶段，Plus都会尝试为它们在模型对应的名称空间中找到对应名称的数据变量，如果找到这个变量，将会为该数据变量与DOM元素的.value值间建立双向或单向绑定(为&lt;output&gt;元素)。 name属性的值可以是由&#8216;<code>.</code>&#8216;点号分隔的名称列表，使用这种方式，你可以将某个DOM元素绑定到模型中一个对象字段上: <br/>
+	 </p>
+
+	 <pre class="brush: js;">namespace Contact {
+  var name = { first: &quot;Albert&quot;, last: &quot;Einshtein&quot; };
+  var phone = &quot;....&quot;;
+  ... 
+}
+</pre>
+
+     <p>对应的HTML标记代码:</p>
+
+	 <pre class="brush: html;">&lt;form model=&quot;Contact&quot; id=&quot;contact-details&quot;&gt; 
+  &lt;label for=&quot;name.first&quot;&gt;First name&gt;&lt;/label&gt; &lt;input name=&quot;name.first&quot;&gt;
+  &lt;label for=&quot;name.last&quot;&gt;Last name&gt;&lt;/label&gt; &lt;input name=&quot;name.last&quot;&gt;
+  ...
+&lt;/form&gt;
+</pre>
+    
+<p><img src="images/plus-part-0.png" alt="Celsius to Fahrenheit convertor." width="405" height="318" style="float:right" /></p>
+	
+<h4>控制器,  @observing函数装饰器</h4>
+	
+<p>plus.tis(Plus引擎的实现)文件包含了<em>@observing</em>函数装饰器的声明。使用这个装饰器，你可以定义一个函数，当被观察的变量改变时，该函数将被触发(被引擎调用)。</p>
+
+	<p>这里提供一个简单的摄氏度与华氏度双向转换的示例—— 当你输入一个摄氏度值时，对应的华氏度值会自动计算并显示，反之亦然。界面类似于右边的图片:</p>
+	
+<p style="clear:both">首先，我们定义我们的Data名称空间:</p>
+	
+<pre class="brush: js;">      include &quot;../plus.tis&quot;; // 下面的模型使用了plus.tis中的@observing装饰器
+      namespace Data // 我们的模型
+      {  
+        var celsius = 0; 
+        var fahrenheit = 32;
+        
+        // 这个函数观察'celsius'，并且计算'fahrenheit'
+        @observing &quot;celsius&quot;
+          function toFahrenheit() {
+            fahrenheit = celsius * 9 / 5 + 32;
+          }
+        // 这个函数观察'fahrenheit'，并且计算'celsius'
+        @observing &quot;fahrenheit&quot;
+          function toCelcius() {
+            celsius = (fahrenheit - 32) * 5 / 9;
+          }        
+      }    
+</pre>
+
+    <p>注意上面的两个函数: <code>toFahrenheit()</code>函数观察<code>celcius</code>变量。当<code>celcius</code>变量将改变时，例如作为<code>&lt;input|number(celsius)&gt;</code>的结果，<code>toFahrenheit()</code>函数将被触发，并且设置<code>fahrenheit</code>变量。同样，我们有另一个输入框绑定了<code>fahrenheit</code>变量: </p>
+<pre class="brush: html;">&lt;body model=&quot;Data&quot;&gt;
+  &lt;p&gt;&lt;input|number(celsius)&gt;°C and &lt;input|number(fahrenheit)&gt;°F&lt;/p&gt;
+&lt;/body&gt;
+</pre>
+
+    <p>我们将会看到计算的结果。这个工作流程是双向的 &#8211; '从fahrenheit到celcius' 和 '从celcius到fahrenheit'。</p>
+
+	<p>你可以使用SDK中sciter.exe来参看<u>sdk/samples/+plus/demos/1-basic-function-binding.htm</u>示例。</p>
+
+	<p>下一篇文章，我将会说明如何使用<code>repeatable</code>属性来绑定对象数组，以及一些其他示例。你也可以参看SDK中<u>sdk/samples/+plus/demos</u>/目录下的其他示例，它们都是自描述的。</p>
+	
+  </div>
+	
+  
+
+ </div>
+
+</body>
+
+</html>

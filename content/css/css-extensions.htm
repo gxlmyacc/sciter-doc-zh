@@ -1,0 +1,39 @@
+﻿<HTML>
+  <HEAD>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <META name="GENERATOR" content="BLOCKNOTE.NET">
+    <META name="source" content="http://www.w3.org/TR/CSS21/cascade.html">
+    <BASEFONT face="Verdana" size="2">
+    <TITLE>h-smile对标准CSS的扩展</TITLE><STYLE>BODY { FONT-FAMILY:Verdana; FONT-SIZE:10pt }
+P { FONT-FAMILY:Verdana; FONT-SIZE:10pt }
+DIV { FONT-FAMILY:Verdana; FONT-SIZE:10pt }
+TD { FONT-FAMILY:Verdana; FONT-SIZE:10pt }
+</STYLE>
+  </HEAD>
+<BODY>
+<H1>h-smile对标准CSS的扩展</H1>
+<H2><A name="at-const">@const规则</A></H2>
+<P><EM>@const</EM>规则运行定义一些命名常量，以便在接下来的样式声明中将这些常量作为样式的属性值。<BR />const常量声明示例(CSS+):</P>
+<BLOCKQUOTE>
+<DIV><FONT color=#339900>/* 常量的声明: */</FONT><EM><BR>@const BASE_COLOR</EM>: #00FF00;<BR><FONT color=#339900>/* 在样式声明中使用常量: */</FONT><BR>#myelement { border: 1px solid <EM>@BASE_COLOR</EM>; }</DIV></BLOCKQUOTE>
+
+<P>声明的代码中，第一行定义了一个BASE_COLOR常量，在第二行中使用该常量作为一个样式属性的值。</P>
+<P>@const规则使用下面的语句:</P>
+<BLOCKQUOTE>
+<P><FONT face="Courier New" color=#ff0000>@const</FONT><FONT face="Courier New"> name [</FONT><STRONG><FONT face="Courier New" color=#ff0000>,</FONT></STRONG><FONT face="Courier New"> name1 [</FONT><STRONG><FONT face="Courier New" color=#ff0000>,</FONT></STRONG><FONT face="Courier New"> name2 ... ]] </FONT><STRONG><FONT face="Courier New" color=#ff0000>:</FONT></STRONG><FONT face="Courier New"> values </FONT><STRONG><FONT face="Courier New" color=#ff0000>;</FONT></STRONG></P></BLOCKQUOTE>
+
+<P>':'号后面的值列表将会赋值到':'号左边的常量上。 
+<EM>values</EM>是一个CSS可接受的属性值序列。它可以是单个值(如上面的#00FF00)，也可以是一个定义复合属性(短格式)的值集合。例如，下面定义了一个常量，它是background属性的一个值集。 </P>
+<BLOCKQUOTE>
+<P><EM>@const MY_BACKGROUND</EM>: yelllow repeat url(hatch.png);<BR> <BR>#myelement { background: <EM>@MY_BACKGROUND</EM>; }</P></BLOCKQUOTE>
+
+<P>常量的插入点的标记方法：在'@'字符后边跟着用@const声明的对应常量名称。</P>
+<P>@const的作用域:</P>
+<OL>
+<LI>@const声明是全局的。常量声明后，在一个文件中是可见的，并且可以在所有后续css文件和文档中声明使用。</LI>
+<LI>@const声明使用先来先服务规则。一旦定义了常量就不能被覆盖。</LI>
+<LI>多次定义相同的常量不是一个错误，只是只有第一个声明的常量才能被使用。</LI></OL>
+
+<DIV>@const定义的示例请参考htmlayout和Sciter SDK中的.../css-plus/constants.htm文件。</DIV>
+</BODY>
+</HTML>

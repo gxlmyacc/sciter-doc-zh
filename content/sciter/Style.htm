@@ -1,0 +1,99 @@
+﻿<html>
+  <head>
+    <meta name="generator" content="h-smile:richtext"/>
+  </head>
+<body>
+  <h1>样式(Style)对象</h1>
+  <p>代表DOM <a href="Element.htm">元素</a> 的CSS样式属性。</p>
+  <p>为了访问元素的样式对象，请使用它的<em>style</em>属性：element.style。</p>
+  <p>注意：TIScript支持扩展的get-by-symbol标记法，所以：</p>
+  <p><code>el.style[&quot;background-color&quot;] = &quot;red&quot;; // 等价于</code></p>
+  <p><code>el.style#background-color = &quot;red&quot;; // 扩展的&quot;标识符&quot;语法</code></p>
+  <p>为了清除特定的CSS属性值，可以在运行期简单地设置<em>undefined</em>值：</p>
+  <p><font face="Courier New"><code>el.style#background-color = undefined; // </code></font>清除运行期样式属性——它的计算值将由正常的CSS层叠处理决定。</p>
+  <dl>
+    <h2>属性</h2>
+    <dt>[attname]</dt>
+    <dd>
+      <div><em>string</em>, 读写。样式属性<em>attname </em>(CSS)的值。<em>attname</em>参数是一个字符串或标识符。</div>
+      <p>见 <a href="http://www.terrainformatica.com/htmlayout/cssmap.whtm">支持的CSS属性列表</a>。</p>
+      <p>若要清除一个样式属性的值，请将<em>undefined</em>赋值给它：</p>
+      <p><font face="Courier New">el.style#background-color = undefined;</font></p></dd>
+    <dt>backgroundImageWidth</dt>
+    <dd>
+      <div><em>integer</em> | <em>undefined</em>, 如果背景图片存在，则返回背景图片的像素宽度，否则返回<em>undefined</em>。</div></dd>
+    <dt>backgroundImageHeight</dt>
+    <dd>
+      <div><em>integer</em> | <em>undefined</em>, 如果背景图片存在，则返回背景图片的像素高度，否则返回<em>undefined</em>。</div></dd>
+    <dt>foregroundImageWidth</dt>
+    <dd>
+      <div><em>integer</em> | <em>undefined</em>, 如果前景图片存在，则返回前景图片的像素宽度，否则返回<em>undefined</em>。</div></dd>
+    <dt>foregroundImageHeight</dt>
+    <dd>
+      <div><em>integer</em> | <em>undefined</em>, 如果前景图片存在，则返回前景图片的像素高度，否则返回<em>undefined</em>。</div></dd>
+    <h2>方法</h2>
+    <dt>clear</dt>
+    <dd>
+      <div><strong>() </strong>returns: Style</div>
+      <p>清除所有之前使用[attname]访问器或set()方法设置的属性。</p>
+      <p>返回样式对象本身，以便可以链式调用set()方法。</p></dd>
+    <dt>set</dt>
+    <dd>
+      <div><strong>(</strong> attributes: Object <strong>)</strong> returns: Style</div>
+      <p>设置或清除元素上的多个样式属性。作为一个方法，它只接受一个对象参数，这样它可以使用&quot;object-call&quot;语法：</p>
+      <pre>
+el.style.set {
+   display: &quot;block&quot;,
+   width: px(40),
+   height: px(20)
+};
+</pre></dd>
+    <dt>cursor</dt>
+    <dd><strong>(</strong> img: Image | null [, hotspotX:integer, hotspotY:integer ] &nbsp;<strong>)</strong> returns: Style
+      <p>使用<em>img</em>图像在 hotspotX/Y坐标位置上创建并且设置光标。要重置光标为默认值，可以使用<code>el.style.cursor(null)</code>;</p></dd>
+    <dt>rules</dt>
+    <dd>
+      <div><strong>( ) </strong>returns: Array</div>
+      <p>返回一个应用到元素上的样式规则数组。数组中的每个元素是下面类型的对象之一：</p>
+      <ul>
+        <li>{ <em>type</em>: <strong>#style-rule</strong>, <em>selector</em>: &lt;string&gt;, <em>file</em>: &lt;string&gt;, <em>lineNo</em>: integer; } - CSS中定义的样式规则;</li>
+        <li>{ <em>type</em>: <strong>#inline-style</strong>, <em>text</em>: &lt;string&gt; } - 在DOM中使用style=&quot;...&quot;属性定义的样式规则;</li>
+        <li>{ <em>type</em>: <strong>#runtime-style</strong> } - 运行期在脚本中设置的样式规则。</li></ul></dd>
+    <dt>all</dt>
+    <dd>
+      <div><strong>(</strong> <strong>)</strong> returns: Object</div>
+      <p>收集所有在style属性中定义的样式，将它们作为一个对象返回。</p></dd>
+    <dt>constant</dt>
+    <dd>
+      <div><strong>( </strong><em>name</em>: string | symbol<strong> ) </strong>returns: value | array</div>
+      <p>返回在CSS中定义的CSS常量的值。它的值可能是一个值：</p>
+      <p><font face="Courier New">@const SINGLE: #ff007f;</font></p>
+      <p>或者一个数组：</p>
+      <p><font face="Courier New">@const MULTY: 12px 14px;</font></p></dd>
+    <dt>dimension</dt>
+    <dd>
+      <div>(<em>width</em>: length | int | undefined, <em>height</em>: length | int | undefined [, <em>delayed</em>: false | true] )</div>
+      <p>该方法等价于设置这两个样式属性：</p>
+      <pre>
+elem.style.width = ... ;
+elem.style.height = ... ;
+</pre>
+      <p>唯一的不同是当<em>delayed</em>为<code>true</code>时，该方法会立即改变元素的尺寸，但是该元素的子元素们的重新计算会推迟一段时间。这个方法在你需要频繁响应(如在MOUSE_MOVE中自定义splitter实现时)更新拥有大量子元素<em>overflow:auto | scroll</em>元素尺寸会比较有用。在这种情况下，多个MOUSE_MOVE处理只会重新计算一次元素的内容。</p></dd>
+    <dt>documentRules</dt>
+    <dd>
+      <div>(<em> </em>[<em>callback</em>: function] [, <em>filter</em>: object ] ) 返回处理的规则数量 (integer)</div>
+      <p>枚举定义的CSS规则和被使用的文档。</p>
+      <p>其中:</p>
+      <ul>
+        <li><em>callback</em>是一个<code>function( selector, file, lineNo, usageCounter )</code>函数，它接收CSS选择器、文件URL、被应用的html文档中的行号和在documentRules()被调用时html文档中规则的被使用次数。</li>
+        <li><em>filter</em> 是一个对象，它定义枚举过滤器和CSS访问callback回调。这个过滤器接受以下几个可选字段:</li>
+        <ul>
+          <li><em>selector</em> - string, 如果定义了，则callback值接受满足selector选择器的CSS规则;</li>
+          <li><em>file</em> - string, 规则被定义的CSS文件的url;</li>
+          <li><em>lineNo</em> - integer, 规则在CSS文件中的行号;</li>
+          <li><em>properties</em> - <code>function(props:object) : null | object</code> , 属性访问器函数, 这个函数将接受到规则中定义的CSS属性。如果该函数返回一个对象，则属性中的CSS规则将会被更新到对应的CSS规则对象中。</li></ul></ul>
+      <p>因此，<em>documentRules</em>函数可以对文档关联的CSS规则表进行检查和应对突变。</p>
+	</dd>
+   </dl>
+</body>
+</html>

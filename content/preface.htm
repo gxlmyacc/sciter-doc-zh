@@ -1,0 +1,58 @@
+<html>
+  <head>
+    <meta name="generator" content="h-smile:richtext"/>
+  </head>
+<body>
+  <h1 #test>Sciter 架构</h1>
+  <p>Sciter没有使用<a href="http://www.w3.org/DOM">W3C DOM</a>的DOM模型，因为我们发现它太复杂了(<a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/ecma-script-language-binding.html">76个不同的类</a>，真的！)。</p>
+  <h2>DOM 和 Window 相关类</h2>
+  <p>Sciter在脚本中提供了下面的DOM和Window相关的8个特定类：</p>
+  <ul>
+    <li><em>Element</em> - DOM元素对象。所有的HTML元素，包括document(root)、frame、inputs等Sciter中的元素。</li>
+    <ul>
+      <li><em>Attributes</em> - HTML元素的所有命名属性的集合。</li>
+      <li><em>Style</em>      - HTML元素的所有被应用的样式属性的集合。</li>
+	</ul>
+    <li><em>Image</em> - 图像对象，代表位图图像。你可以使用Graphics的方法在该图像上进行绘图。</li>
+    <li><em>Graphics</em> - 绘图操作的封装对象。你可以在Sciter中任何元素和图像的表面上进行绘制。</li>
+    <li><em>View</em> - 代表Sciter窗口，如主Sciter窗口和对话框。</li>
+    <li><em>Event</em> - 代表当前UI事件。</li>
+    <li><em>Sciter</em> - 一个全局对象，它持有一些Sciter应用程序特有的方法。</li></ul>
+  <h2>视图(View)、文档(document)、框架(frame)、根元素</h2>
+  <p>Sciter中View对象代表最顶层窗口。Sciter.exe程序的主窗口或者X-Sciter.dll沙箱窗口的客户区域就是视图(view)。对话框窗口也有视图对象与其关联。</p>
+  <p>每个视图都有一个<em>root </em>属性 - 指被加载的文档的根元素。在Sciter中，根元素是被加载文档的&lt;html&gt;元素，没有专门的文档(Document)类。 整个文档实际是一个元素树——&lt;html&gt;元素和它的子元素。</p>
+  <h3>框架(frame)和框架集(frameset)</h3>
+  <p>框架和框架集也是普通的DOM元素。&lt;frame&gt;只有一个子元素——加载到它里面的文档的&lt;html&gt;元素。加载到frame中的文档的根元素的<em>parent</em>属性指向这个&lt;frame&gt;元素。这看起来很简单吧。</p>
+  <p>在Sciter中，框架(&lt;frame&gt;)可以出现在HTML中的任何部分(不仅是在&lt;frameset&gt;)，所以在Sciter中&lt;frame&gt;和&lt;iframe&gt;没有区别。而且任何块元素(如&lt;div&gt;)都可以被当做&lt;frame&gt;来使用，只需要为它声明style=&quot;behavior:frame&quot;。</p>
+  <p>Element对象有<em>load</em>方法，该方法允许向内容区(重新)加载任何元素和使用&lt;frame&gt;指定的外部源——url或流(包括动态内存流)。所以在Sciter中块元素(如&lt;div&gt;)与框架没有多大区别。当你需要在同一屏幕中隔离不同的样式系统或脚本时可以考虑使用框架。</p>
+  <p>相同的使用方法——&lt;frameset&gt;也是一个纯DOM元素，且可以出现在任何可接受块元素的地方。 &lt;frameset&gt;不仅可以包含&lt;frame&gt;元素，而且也可以任何块元素。因此在Sciter中，&lt;frameset&gt;是定义包含splitters的容器的一个便捷途径。而且任何块元素都可以变换成框架集，只需要在它的样式声明中指定behavior:frameset行为。</p>
+  <h2>脚本简介</h2>
+  <p>Sciter只能解析tiscript脚本片段和文件。若要在文档中包含脚本块，需要使用下面的元素：</p>
+  <pre>&lt;script <em>type=&quot;text/tiscript&quot;</em> src=&quot;脚本文件的url&quot; /&gt;</pre>
+  <p>或者内联的脚本块:</p>
+  <pre>&lt;script <em>type=&quot;text/tiscript&quot;</em>&gt;
+<font color="#339900">  // 脚本语句..
+</font>&lt;/script&gt;
+</pre>
+  <h3>全局名称空间、视图(<em>view</em>)、本身(<em>self</em>)对象</h3>
+  <p>文档会为脚本的执行建立名称空间。所有的类和函数定义方式如下：</p>
+  <pre>&lt;script <em>type=&quot;text/tiscript&quot;</em>&gt;
+  function</font> foo() { ... }
+&lt;/script&gt;
+</pre>
+  <p>这样定义出来的类和函数属于全局文档名称空间。<em>self</em>和<em>view</em>全局变量是这个名称空间的成员。</p>
+  <dl>
+    <dt><em>self</em></dt>
+    <dd>是当前文档(&lt;html&gt;节点)的一个引用。</dd>
+    <dt><em>view</em></dt>
+    <dd>是当前视图对象(通常它是一个Sciter窗口)的一个引用。</dd></dl>
+  <h3>脚本的执行</h3>
+  <p>Sciter将执行脚本作为文档加载的最后一步——在&lt;/html&gt;标签解析完成后。所以当脚本执行时，DOM已经建立好，脚本可以直接引用它。</p>
+  <p>引擎中脚本的执行有三个主要步骤：</p>
+  <ol>
+    <li>执行脚本本身包含的类和行为；</li>
+    <li>执行在CSS中使用<em>prototype:somebehavior</em>;设置了的元素行为；</li>
+    <li>执行<strong>self.ready()</strong>引用的方法(如果它在脚本中声明了的话)。</li></ol>
+  <p>当文档需要从视图中卸载(如Sciter窗口从用户那接收到关闭窗口的请求)时, 引擎会调用<strong>self.closing()</strong>方法(如果它在脚本中声明了的话)。如果该方法返回<code>false</code>，则终止卸载。使用这种方式可以需求文档的卸载。</p>
+</body>
+</html>

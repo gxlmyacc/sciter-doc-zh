@@ -1,0 +1,156 @@
+﻿<html>
+  <head>
+    <meta name="generator" content="h-smile:richtext"/>
+  </head>
+<body>
+  <h1>Sciter中的事件</h1>
+  <h2>DOM元素事件</h2>
+  
+    <dl>
+      
+        <dt>处理器函数名</dt>
+        <td width="210"><em>event.type</em> 字段</td>
+        <dd>注释</dd>
+      
+        <h3>捕获/冒泡(Sinking/Bubbling)事件:</h3>
+      
+        <h4><strong>onMouse</strong>(event) : true|false</h4>
+        <td bgcolor="#ffffe8" valign="top">MOUSE_ENTER</td>
+        <dd>鼠标/指针 进入元素。</dd>
+      
+        <dt>MOUSE_LEAVE</dt>
+        <dd>鼠标/指针 离开元素</dd>
+      
+        <dt>MOUSE_MOVE</dt>
+        <dd>鼠标/指针 在元素上移动。</dd>
+      
+        <dt>MOUSE_DOWN</dt>
+        <dd>鼠标/指针 在元素上按下了某个按钮。由<em>event.mainButton</em>和<em>event.</em>propButton来识别是按下了哪个按钮。</dd>
+      
+        <dt>MOUSE_UP</dt>
+        <dd>
+          <div>鼠标/指针 在元素上按起了某个按钮。由<em>event.mainButton</em>和<em>event.</em>propButton来识别是按起了哪个按钮。为了检测MOUSE CLICK事件，请使用以下条件：</div>
+          <pre><font face="monospace" size="3">
+		  <h2>元素的事件</h2>
+  <dl>
+    <h3>捕获/冒泡 事件:</h3>
+    <h4>onMouse(event) : true|false</h4>
+    <dt>Event.MOUSE_ENTER</dt>
+    <dd>鼠标/指针 进入到该元素</dd>
+    <dt>Event.MOUSE_LEAVE</dt>
+    <dd>鼠标/指针 离开该元素</dd>
+    <dt>Event.MOUSE_MOVE</dt>
+    <dd>鼠标/指针 在该元素上移动</dd>
+    <dt>Event.MOUSE_DOWN</dt>
+    <dd>鼠标按钮之一在该元素上按下。通过<em>event.mainButton</em>和<em>event.</em>propButton来识别是哪个按钮按下。</dd>
+    <dt>Event.MOUSE_UP</dt>
+    <dd>鼠标按钮之一在该元素上按起。通过<em>event.mainButton</em>和<em>event.</em>propButton来识别是哪个按钮按起。<br/>
+	如果只检查MOUSE CLICK事件，则请使用下面的条件：<br/>
+	  <font face="Courier New" size="2">event.type == Event.MOUSE_UP &amp;&amp; this.getState(Element.STATE_PRESSED)</font></dd>
+    <dt>Event.MOUSE_DCLICK</dt>
+    <dd>鼠标在该元素上双击。</dd>
+    <dt>Event.MOUSE_WHEEL</dt>
+    <dd>鼠标滚轮在该元素上转动。<em>event.wheelDelta</em>为鼠标滚轮转动量。</dd>
+    <dt>Event.MOUSE_TICK</dt>
+    <dd>重复事件，当鼠标某个按钮按下时被触发。</dd>
+    <dt>Event.MOUSE_IDLE</dt>
+    <dd>脉冲事件，当鼠标短时间没有移动时会触发。如果该事件没有处理，则引擎会使用它来弹出该元素的气泡提示。</dd>
+    <h4>onKey(event) : true|false</h4>
+    <dt>Event.KEY_DOWN</dt>
+    <dd>键盘按键被按下。<em>event.keyCode</em>为该按键的虚拟键代码。</dd>
+    <dt>Event.KEY_UP</dt>
+    <dd>键盘按键按起。<em>event.keyCode</em>为该按键的虚拟键代码。</dd>
+    <dt>Event.KEY_CHAR</dt>
+    <dd>某个按键字符被按下。<em>event.keyCode</em>是该字符的UNICODE代码。</dd>
+    <h4>onFocus(event) : true|false</h4>
+    <dt>Event.GOT_FOCUS</dt>
+    <dd>元素获取输入焦点事件。</dd>
+    <dt>Event.LOST_FOCUS</dt>
+    <dd>元素失去输入焦点事件。</dd>
+    <h4>onControlEvent(event) :true|false</h4>
+    <p>合成(逻辑)事件 :</p>
+    <dt>Event.BUTTON_CLICK</dt>
+    <dd>按钮点击事件，被<em>button, checkbox, radio</em>这些行为支持。</dd>
+    <dt>Event.BUTTON_PRESS</dt>
+    <dd>鼠标/按键 在按钮上按下事件。被<em>button, checkbox, radio</em>这些行为支持。</dd>
+    <dt>Event.BUTTON_STATE_CHANGED</dt>
+    <dd>按钮的状态(value值)改变事件。被<em>checkbox, radio</em>这些行为支持。</dd>
+    <dt>Event.EDIT_VALUE_CHANGING</dt>
+    <dd>输入框的值将被改变事件。被<em>edit, number, decimal, date, masked</em>这些行为支持。<em>element.value</em>反应旧的值。</dd>
+    <dt>Event.EDIT_VALUE_CHANGED</dt>
+    <dd>输入框的值已被改变事件。被<em>edit, number, decimal, date, masked</em>这些行为支持。<em>element.value</em>反应新的值。</dd>
+    <dt>Event.SELECT_SELECTION_CHANGED</dt>
+    <dd>元素中元素选择器的选择内容被改变事件。被<em>select, dropdown-select, calendar</em>这些行为支持。</dd>
+    <dt>Event.SELECT_STATE_CHANGED</dt>
+    <dd>元素中元素选择器的某项的状态改变事件。当<em>select</em>中的某些&lt;options&gt;被折叠/展开时被触发。<em>event.target</em>是状态被改变的项。当日历改变月份时，<em>behavior: calendar</em>会发送该消息，通过处理该消息你可以更新日历中的DOM。</dd>
+    <dt>Event.HYPERLINK_CLICK</dt>
+    <dd>点击超链接事件。<em>event.target</em>为那个超链接元素。</dd>
+    <dt>Event.ACTIVATE_CHILD</dt>
+    <dd>请求容器激活它的子元素事件。当为元素定义了快捷键且被动触发时，<em>accesskey</em>处理器会发送该消息。例如，Tabs空间中的tab。见extenders.js / type Tabs。</dd>
+    <dt>Event.POPUP_REQUEST</dt>
+    <dd>Secret stuff.</dd>
+    <dt>Event.POPUP_READY</dt>
+	<dd></dd>
+    <dt>Event.POPUP_DISMISSED</dt>
+	<dd></dd>
+    <dt>Event.MENU_ITEM_ACTIVE</dt>
+    <dd>当菜单项高亮时被触发。</dd>
+    <dt>Event.MENU_ITEM_CLICK</dt>
+    <dd>当单击菜单项时。<em>event.target</em>是单击项。<em>event.owner</em>是弹出菜单的拥有元素。</dd>
+    <dt>Event.range 0x1000 .. 0x7FFF</dt>
+    <dd>自定义控件事件。在这个范围内的任何代码都可以使用<em>element.sendEvent(code,...)</em>来发送消息。<br/>
+	例如，如果定义了一个行为类，它看上去像一个按钮，则你可以使用<em>element.postEvent(Event.BUTTON_CLICK,...)</em>来通知其他元素发生了按钮单击事件。</dd>
+    <h4>onGesture(event): true|false</h4>
+    <dd>手势，DOM事件，在触摸屏器件上支持该事件。
+      <p>见 事件(Event)对象定义中的<strong>手势(触摸屏)事件代码</strong>。</p></dd>
+    <h3>无冒泡 事件</h3>
+    <h4>onScroll(event) : true|false</h4>
+    <dt>Event.SCROLL_HOME</dt>
+    <dd>
+      <div>滚动请求，特别是&lt;input type=vscrollbar&gt; or &lt;input type=hscrollbar&gt;。</div>
+      <div>在这种情况下，SCROLL_POS使用<em>event.scrollPos</em>字段来获取请求的滚动位置。</div>
+      <div></div></dd>
+    <dt>Event.SCROLL_END</dt>
+	<dd></dd>
+    <dt>Event.SCROLL_STEP_PLUS</dt>
+	<dd></dd>
+    <dt>Event.SCROLL_STEP_MINUS</dt>
+	<dd></dd>
+    <dt>Event.SCROLL_PAGE_PLUS</dt>
+	<dd></dd>
+    <dt>Event.SCROLL_PAGE_MINUS</dt>
+	<dd></dd>
+    <dt>Event.SCROLL_POS</dt>
+	<dd></dd>
+    <h4>Behavior特有事件</h4>
+    <dt>attached() : void</dt>
+    <dd>behavior类的方法。如果在类型定义中定义了该事件，则它会在该DOM元素附加该行为时被调用。<em>this</em>变量执行该行为附加的元素。 <em>attached</em>()等价于一个构造函数。</dd>
+    <dt>onTimer()</dt>
+    <dd>计时器脉冲事件。使用<em>element.timer(milliseconds)</em>来启动计时器。若返回<em>false</em>则终止计时器。</dd>
+    <dt>onSize()</dt>
+    <dd>元素尺寸改变事件。若想获取元素尺寸，请使用<em>this.box()</em>函数。</dd>
+    <h4>根元素(Root)特有事件</h4>
+    <dt>self.ready()</dt>
+    <dd>文档加载的最后一步生成该事件。</dd>
+    <dt>self.closing()</dt>
+    <dd>文档将被关闭时触发。事件处理器可以通过返回<em>false</em>来阻止文档的卸载。</dd></dl>
+  <h2>视图事件</h2>
+  <dl>
+    <dt>&quot;size&quot;</dt>
+    <dd>当视图(窗口)的尺寸被改变时触发。使用view.box()方法可获取该尺寸。</dd>
+    <dt>&quot;move&quot;</dt>
+    <dd>当视图(窗口)的位置发生改变时触发。使用view.box()方法可获取该尺寸或位置。</dd>
+    <dt>&quot;statechange&quot;</dt>
+    <dd>当视图的状态(最大化、最小化、隐藏、显示)被改变时触发。见View<em>.state</em>属性。</dd>
+    <dt>&quot;resolutionchange&quot;</dt>
+    <dd>当窗口的PPI(每英寸像素比例因子)被改变时触发。若要获取精确的每英尺像素数，请使用：<br/><code>var ppdip = (1dip).toFloat(#px);</code></dd>
+	<dt>&quot;mediachange&quot;</dt>
+    <dd>当媒体被改变(包括resolutionchange)时触发，例如当监视器数量或颜色深度改变时。</dd>
+    <dt>&quot;activate&quot;</dt>
+    <dd>当Sciter窗口激活状态改变时被触发。事件处理函数可以有<em>mode</em>参数，它可以接受以下值：
+      <ul>
+        <li><strong>false</strong> - 窗口处于未激活状态;</li>
+        <li><strong>true</strong> - 窗口处于激活状态，但是鼠标不在该窗口上;</li>
+        <li><strong>#by-mouse</strong> - 窗口是被鼠标点击来激活的。</li></ul></dd></dl>
+</body>
+</html>

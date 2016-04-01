@@ -1,0 +1,51 @@
+﻿<html>
+  <head>
+    <meta name="generator" content="h-smile:richtext"/>
+  </head>
+<body>
+  <p>在基于HTML/CSS的UI中，我们经常需要在运行期隐藏/显示一些元素。</p>
+  <p>最普遍的可能(也是最差的)的解决方法是以编程方式设置CSS属性<code>display:none</code>。</p>
+  <p>这个方法乍一看好像非常简单，但实际上它只解决了一半的问题——隐藏元素——从视图树上移除这个元素。但是，当你需要显示之前隐藏的元素时，你又该怎么做呢? 设置它为<code>display:block</code>不是一个正确的方法。在HTML中不是所有的元素都是display:block模型。&nbsp;&lt;img&gt;、&lt;input&gt;//&lt;select&gt;、&lt;textarea&gt;等是<code>display:inline-block</code>模型。 &lt;table&gt;和它的所有子元素都是特殊的display:table**** 模型。设置它们为<code>display:block</code>将会导致出现非常奇怪的结果。</p>
+  <p>因此，为了在运行期使用<code>display:none</code>，你需要知道这个元素的display原始值，这不是很方便且不易维护。设想当你的web设计器打算通过声明<code>display: table-cell</code>来摆放一些元素时，如果你是通过 display: none &lt;-&gt; block开关来控制元素的隐藏/显示时，这时你会遇到问题。</p>
+  <p>例如，为了克服这样的问题，jQuery通过将display值存储在一个名为&quot;olddisplay&quot;的属性方式实现了它的<code>hide()</code>方法(参见: http://robflaherty.github.io/jquery-annotated-source/docs/13-effects.html#section-6 )，当你需要重新显示这个元素时，jQuery从这个属性恢复display值。因某些很明显的原因，这个方法也不是很理想。</p>
+  <h2>更好的办法</h2>
+  <p>更好的办法是使用&quot;hidden&quot;属性。所以当你需要隐藏元素时，不是设置CSS属性element.style.display，而是为元素添加DOM属性&quot;hidden&quot;，当需要显示元素时，移除&quot;hidden&quot;属性。为了使这个属性有效，你只需在你的样式表中添加一个简单的规则:</p>
+  <pre>[hidden] { display:none !important; }
+</pre>
+  <p>如果某些元素需要默认隐藏，你需要在你的标记代码中添加hidden属性，如:<br/></p>
+  <pre>&lt;button id=&quot;ok-button&quot; hidden&gt;OK&lt;/button&gt;
+</pre>
+  <p>在Sciter中，你可以为所有的DOM元素定义一些虚拟的属性, 如&quot;shown&quot;:</p>
+  <pre>/* 要保证下面的代码有效，CSS中必须有[hidden] { display:none } 规则 */
+property Element.shown(v) 
+{
+  get return this.style#display != &quot;none&quot;;
+  set this.attributes[&quot;hidden&quot;] = v ? undefined : true;
+}
+</pre>
+  <p>并且这样使用它：</p>
+  <pre>var someEl = ...<br/><br/>someEl.shown = true; // 显示<br/>someEl.shown = false; // 隐藏
+</pre>
+  <p>这个解决办法有个不明显的缺点: </p>
+  <ol>
+    <li>你需要在你的CSS中添加特殊的<code>[hidden] { display:none; }</code>规则;</li>
+    <li>在所有场景，当你需要显示/隐藏元素时，你需要使用特殊的&quot;shown&quot;属性或显示地移除元素的&quot;hidden&quot;属性。</li></ol>
+  <h2>visibility:none</h2>
+  <p>从Sciter 3.1.0.15版本开始，你可以在你的CSS中使用<code>visibility:none;</code>来排除某个元素的渲染。它与<code>display:none;</code>有相同的效果。</p>
+  <p>visibility属性可以使你不用使用dsiplay属性，安全地设置&quot;none&quot;和&quot;visible&quot;值来达到显示/隐藏元素的效果。</p>
+  <p>因此, Sciter中，<strong>visibility</strong>属性可以接受以下值:</p>
+  <ul>
+    <li><em>none</em> - 元素从显示树中移除，等同于display:none，Sciter特有值;</li>
+    <li><em>hidden</em> - 元素在显示树中，占据空间，但是不显示;</li>
+    <li><em>collapse</em> - 元素在显示树中，占据空间，但是它的高度和宽度会堆叠成0。如在flow:horizontal容器中，visibility:collapse的子元素将会占据垂直空间，但显示宽度将设置为0。在Sciter中，这个值对所有元素都有效，但是在标准CSS中，它只对表格(table)的行(tr)元素有效。</li>
+    <li><em>visible</em> - 默认值, 元素正常的显示。</li></ul>
+  <p>下面是上面定义的脚本属性shown的修改版本:</p>
+  <pre>property Element.shown(v) 
+{
+  get return this.isVisible;
+  set this.style#visibility = v ? &quot;visible&quot; : &quot;none&quot;;
+} 
+</pre>
+  <p></p>
+</body>
+</html>

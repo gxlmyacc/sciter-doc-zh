@@ -1,0 +1,68 @@
+﻿<html>
+  <head>
+    <meta name="source"/>
+    <meta name="source"/>
+    <meta name="generator" content="h-smile:richtext"/>
+  </head>
+<body>
+  <h1><a name="behaviorradio" id="behaviorradio">behavior:video</a></h1>
+  <p>该行为提供视频播放功能。</p>
+  <h2><a name="elements" id="elements">元素</a></h2>
+  <p>默认情况下，应用了behavior:button行为的元素有:</p>
+  <ul>
+    <li><code>&lt;video&gt;</code> - video元素;</li></ul>
+  <h2><a name="attributes" id="attributes">属性</a></h2>
+  <p>该行为需要知道的属性:</p>
+  <dl>
+    <dt>src</dt>
+    <dd>- string, 视频的url。如果提供了该属性，该行为会在加载完成后立即播放该视频。</dd>
+    <dt>sizing</dt>
+    <dd>- string, 值为&quot;<em>cover</em>&quot;或&quot;<em>contain</em>&quot;(默认)。框架盒尺寸模式: <em>contain</em> - video的frame总是全部可以看到，<em>cover</em> - frame总是遮盖内容区，frame的一些部分可以被裁剪掉。</dd>
+    <h2>方法</h2>
+    <dt>videoIsPlaying</dt>
+    <dd>() : <em>true</em> | <em>false</em><br/>报告播放状态。当前如果视频在播放着返回<em>true</em>。</dd>
+    <dt>videoIsEnded</dt>
+    <dd>() : <em>true</em> | <em>false</em><br/>如果视频播放已经结束，则返回<em>true</em>。</dd>
+    <dt>videoDuration</dt>
+    <dd>() : <em>duration</em> (float)<br/>报告视频持续的时间(秒)。如果duration不可用，它返回0。</dd>
+    <dt>videoPosition</dt>
+    <dd>() : duration (float)<br/>报告当前的播放位置(秒)。</dd>
+    <dt>videoPosition</dt>
+    <dd>( <strong>time</strong> : duration | float ) : duration<br/>设置当前播放位置(秒)。</dd>
+    <dt>videoHeight</dt>
+    <dd>() : integer (pixels) <br/>返回视频的自然高度。</dd>
+    <dt>videoWidth</dt>
+    <dd>() : integer (pixels)<br/>返回视频的自然宽度。</dd>
+    <dt>videoBox</dt>
+    <dd>() : [x,y,width,height]<br/>返回视频相对于元素内容区的矩形(像素)。注意：如果<em>sizing</em>属性是&quot;cover&quot;时<em>x</em>、<em>y</em>可能是负值。</dd>
+    <dt>videoLoad</dt>
+    <dd>(<strong>movieUrl</strong> : string) : <em>true</em> | <em>false</em><br/>
+	  加载视频文件到播放器。该方法不会自动启动播放视频。</dd>
+    <dt>videoUnload</dt>
+    <dd>()<br/>停止视频播放，并且卸载视频。</dd>
+    <dt>videoPlay</dt>
+    <dd>( [<strong>position</strong>:duration] ) : <em>true</em> | <em>false</em><br/>
+	在<em>position</em>位置或当前位置(如果position未指定)启动视频播放。</dd>
+    <dt>videoStop</dt>
+    <dd>()<br/>停止播放。</dd>
+    <dt>audioVolume</dt>
+    <dd>() : float (0.0...1.0)<br/>
+	报告当前音频轨道的音量。1.0对应于0dB，0.0(静音)对应100dB。</dd>
+    <dt>audioVolume</dt>
+    <dd>( <strong>vol</strong> : float )<br/>设置当前音频轨道的音量。1.0对应于0dB，0.0(静音)对应100dB。</dd>
+    <dt>audioBalance</dt>
+    <dd>() : float ( -1.0 ... +1.0 )<br/>报告当前的立体声平衡。</dd>
+    <dt>audioBalance</dt>
+    <dd>( <strong>balance</strong>: float )<br/>为当前的立体声平衡设置新值。</dd>
+    <h2><a name="events" id="events">事件</a></h2>
+    <p>除了标准事件集(鼠标、按键、聚焦)外，该行为还生成以下事件(这些事件会传递到onControlEvent回调函数中):</p>
+    <dt>VIDEO_INITIALIZED</dt>
+    <dd>- 视频加载成功，此时的videoWidth/Height、videoDuration属性是有效的。</dd>
+    <dt>VIDEO_STARTED</dt>
+    <dd>- 视频刚刚开始，第一帧刚刚渲染完成。</dd>
+    <dt>VIDEO_STOPED</dt>
+    <dd>- 视频停止播放。</dd></dl>
+  <h2><a name="value" id="value">值</a></h2>
+  <p>N/A, 该行为没有实现value值。</p>
+</body>
+</html>

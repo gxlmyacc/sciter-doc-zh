@@ -1,0 +1,173 @@
+<html>
+
+<head>
+	<title>Sciter UI, 应用程序框架</title>
+</head>
+
+<body>
+
+  <div class="post" id="post-41661">
+	 
+    <h1 class="storytitle">Sciter UI, 应用程序框架</h1>
+
+  </div>
+	
+	
+  <div class="storycontent">
+		
+    <p>基于Sciter UI的应用程序架构可以虚拟为下面这张图片:</p>
+	
+<p><a href="images/schema.png"><img src="images/schema.png" alt="" title="schema" width="535" height="306" class="aligncenter size-full wp-image-41662" /></a></p>
+	
+<p>通常这样的应用程序包含两个不同的层:</p>
+	
+<ul>
+	  
+<li>UI层 —— 使用Sciter窗口加载HTML/CSS和脚本(UI相关的脚本代码);</li>
+	  
+<li>应用逻辑层 —— 大部分是由应用程序的本地代码实现的业务逻辑。</li>
+
+	</ul>
+	
+<p>理想情况下，这两层应该是相互隔离的 &#8211; 它们使用不同概念的代码模型和代码风格。</p>
+
+	<p>UI层使用事件驱动模型: &quot;在这儿点击，在那儿展开节，然后向逻辑层发送请求，同时传递一些数据过去&quot;。</p>
+
+	<p>应用逻辑层(ALL)通常应该是线性的。它是一个函数的集合，这些函数接受一些参数，然后返回一些数据。即使应用逻辑层都使用线程，线程中的代码也应该是线性的。</p>
+	
+<h2>UI与"应用程序逻辑"的交互原则</h2>
+
+	<p>大多数时间，UI应用程序中事件是由UI本身生成的，不过有时应用程序代码会生成它们自己的事件。对于UI，这些事件与纯UI事件(如鼠标/键盘点击)没有什么不同。在UI与应用逻辑层间的信息流交互都可以归纳为下面三组:</p>
+
+	<ol>
+
+	  <li>&quot;get-request&quot; &#8211; 同步调用，从UI到逻辑层，用于获取一些数据; </li>
+	  
+<li>&quot;post-request&quot; &#8211; 异步调用，有&quot;when-ready&quot;回调函数;</li>
+
+	  <li>&quot;应用程序事件&quot; &#8211; 应用程序检测到一些变化需要通知UI反映它;</li>
+
+	</ol>
+
+	<p>要支持所有这些情况，应用程序可以利用两个&quot;切入点&quot;: </p>
+	
+<ul>
+
+	  <li>UI-到-逻辑层 调用: <code>event_handler::on_script_call(name,args,retval) </code></li>
+	  
+<li>逻辑层-到-UI 调用: <code>sciter::host:call_function(name, args )</code> &#8211; 从本地代码调用脚本函数。其中的<em>name</em>参数应该是一个路径: &quot;namespace.func&quot;。</li>
+
+	</ul>
+	
+<h3>get-requests</h3>
+
+	<p>To handle UI-to-logic calls the application defines <code>sciter::event_handler</code> and attaches its instance to the Sciter window (view). Its <code>on_script_call</code> method will be invoked each time when script executes code like this in scipt:</p>
+
+	<pre class="brush: js">view.getSomeData(param1, param2);</pre>
+
+    <p>that will end up in this C/C++ call:</p>
+
+    <pre class="brush: cpp">event_handler::on_script_call(NULL,
+         &quot;getSomeData&quot;, 
+         2 /*argc*/ , 
+         argv[2], 
+         SCITER_VALUE&amp; retval /* return value */ );</pre>
+    
+<p>Sciter SDK contains convenient macro wrapper/dispatcher for such on_script_call function:</p>
+
+	<pre class="brush: cpp">  class window
+    : public sciter::host&lt;window&gt;
+    , public sciter::event_handler
+  {
+    HWND   _hwnd;
+    ...
+    
+    json::value  debug(unsigned argc, const json::value* arg);      
+    json::value  getSomeData(json::value param1, json::value param2);      
+
+BEGIN_FUNCTION_MAP
+  FUNCTION_V(&quot;debug&quot;, debug);  
+  FUNCTION_2(&quot;getSomeData&quot;, getSomeData); 
+END_FUNCTION_MAP
+  }</pre>
+
+    <p>Declaration <code>FUNCTION_2(&quot;getSomeData&quot;, getSomeData);</code> binds view.getSomeData() in script with native <code>window::getSomeData</code> call. &nbsp;</p>
+    
+<p>Therefore functionality exposed to the UI layer by logic layer can be defined as a content of single BEGIN_FUNCTION_MAP/END_FUNCTION_MAP block.</p>
+
+    <p>If your application contains many modules that are connected dynamically then you can define single <code>view.exec(&quot;path&quot;, params...)</code> function that will do name/call dispatch using some other principles:</p>
+
+    <pre class="brush: js">var newAccount = view.exec(&quot;accounts/new&quot;, initialBalance);
+view.exec(&quot;accounts/delete&quot;, accountId);<br/>
+view.exec(&quot;accounts/update&quot;, {customerName:&quot;new name&quot;} );</pre>
+
+    <h3>application events</h3>
+    
+<p>Application can generate some events by itself. When some condition or state inside application changes it may want to notify the UI about it. To do that application code can simply call function in script namespace with needed parameters.</p>
+
+    <p>Let&#8217;s assume that script has following declaration:</p>
+
+    <pre class="brush: js">namespace Accounts 
+{
+  function created( accountId, accountProps ) {
+     $(#accountList).append(...);
+  }
+  function deleted( accountId, accountProps ) {
+     $(#accountList li[accid={accountId}]).remove();
+  }
+}</pre>
+
+    <p>Then the application code can fire such events by simply calling: </p>
+    
+<pre class="brush: cpp">window* pw = ...
+pw-&gt;call_function(&quot;Accounts.created&quot;, accId, accFields );
+pw-&gt;call_function(&quot;Accounts.deleted&quot;, accId );</pre>
+
+    <h3>post-request</h3>
+	
+<p>Need of post request arises when some of work need to be done inside worker threads. Some task either take too long to complete or data for them needs to be loaded from the Net or other remote sources. UI cannot be blocked for long time &#8211; it still shall be responsive. The same situation happens in Web applications when JavaScript needs to send AJAX request. In this case callback functions are used. Call to native code includes reference to script function that will be executed when the requested data is available. </p>
+
+	<p>Consider this UI script function that asks app-logic to create some account on a remote server:</p>
+	
+<pre class="brush: js">function createAccount( accountProps ) 
+  {
+    function whenCreated( accountId ) // inner callback function
+    { 
+      $(#accountList).append(...);
+    }
+    view.exec(&quot;accounts/create&quot;, accountProps, whenCreated );
+  }</pre>
+      
+<p>It passes <code>accountProps</code> data and callback function reference to the &quot;accounts/create&quot; thread. This thread creates the account (presumably takes some time) and invokes whenCreated at the end.</p>
+
+	  <pre class="brush: cpp">class createAccount: worker_thread 
+  {
+    handle&lt;window&gt; ui;
+    SCITER_VALUE props;
+    SCITER_VALUE callback;
+
+    void run()
+    {  // the thread body
+       // ... do some time consuming stuff ...
+
+       SCITER_VALUE accountId = createAccount(props);
+
+       // done, execute the callback in UI thread:
+       ui-&gt;ui_exec([=]() {
+         callback.call(accountId); 
+       }); 
+    }
+}</pre>
+
+    <p>Note about that <code>ui_exec</code> function above: the UI is single threaded by its nature &#8211; singly display device, single keyboard and mouse, etc. Worker threads shall not access the UI directly &#8211; the UI shall be updated from UI thread only. The ui_exec function does just that &#8211; executes block of code in UI thread. See <a href="http://www.terrainformatica.com/index.php/2011/01/c0x-running-code-in-gui-thread-from-worker-threads" rel="bookmark" style="color: rgb(61, 96, 114); text-decoration: none; ">C++0x: Running code in GUI thread from worker threads</a> article about it.</p>
+	
+<h2>结束语</h2>
+	
+<p>Having just two &quot;ports&quot; &nbsp;(out-bound UI-to-logic and in-bound logic-to-UI) is a good thing in principle. This allows to isolate effectively two different worlds &#8211; asynchronous UI and deterministic application logic world. Easily &quot;debuggable&quot; and manageable.</p>
+	
+<p>HTML, CSS and script (code behind UI) runs in most natural mode and application core is comfortable too &#8211; not tied with the UI and its event and threading model.</p>
+
+  
+</div>
+</body>
+</html>

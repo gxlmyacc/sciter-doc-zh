@@ -1,0 +1,71 @@
+﻿<html>
+  <head>
+    <meta name="generator" content="h-smile:richtext"/>
+  </head>
+<body>
+  <h1>属性(Attributes)对象</h1>
+  <p>代表DOM <a href="Element.htm">元素</a> 的属性。</p>
+  <p>为了访问元素的属性集合，请使用它的<em>attributes</em>属性：element.attributes。</p>
+  <dl>
+    
+      
+        <h2>属性</h2>
+    
+      <dt>length</dt>
+      <dd><em>integer</em>, 只读。元素的属性数量。</dd>
+    
+      <dt>[index]</dt>
+      <dd><em>string</em>, 读写。 在索引<em>index</em>位置上的属性。  <em>Index</em>这里可以是<em>字符串</em> (属性的名称)也可以是<em>整数</em>(基于0的属性索引)。</dd>
+    
+      
+        <h2>枚举/遍历</h2>
+    
+      <dt>for ... in</dt>
+      <dd>
+        <div>for(var<strong> name</strong> in<strong> <em>element</em></strong>.<strong>attributes</strong>)<strong> { </strong>/* 循环体 */<strong> }</strong></div>
+        <p>元素属性的循环执行体。<em>name</em>遍历是属性的名称。</p></dd>
+    
+      
+        <h2>方法</h2>
+    
+      <dt>name</dt>
+      <dd>
+        <div><strong>(index)</strong> returns: <em>string</em></div>
+        <p>返回索引在index位置上的属性名称。Index基于0。</p></dd>
+    
+      <dt>clear</dt>
+      <dd>
+        <div><strong>() </strong>returns: <em>N/A</em></div>
+        <p>清除元素的所有属性。</p></dd>
+    
+      <dt>remove</dt>
+      <dd>
+        <div><strong>(attr)</strong> returns: <em>N/A</em></div>
+        <p>从属性集合中移除attr属性。<em>Attr</em>参数这里可以是<em>字符串</em> (属性的名称)也可以是<em>整数</em>(基于0的属性索引)。</p></dd>
+    
+      <dt>exists</dt>
+      <dd>
+        <div><strong>(attr) </strong>returns: <em>true|false</em></div>
+        <p>在属性集合中如果存在attr则返回true。<em>Attr</em>参数这里可以是<em>字符串</em> (属性的名称)也可以是<em>整数</em>(基于0的属性索引)。</p></dd>
+    
+      <dt>addClass</dt>
+      <dd>
+        <div>(className1: string [, ... classNameN: string ] )</div>
+        <p>为元素的<em>class</em>属性添加className1..classNameN类名称。</p></dd>
+    
+      <dt>removeClass</dt>
+      <dd>
+        <div>(className1: string [, ... classNameN: string ] )</div>
+        <p>从元素的<em>class</em>属性中移除className1..classNameN类名称。</p></dd>
+    
+      <dt>toggleClass</dt>
+      <dd>
+        <div>(className: string [, on: boolean ] )</div>
+        <p>添加或移除class属性。如果<em>on</em>被设置true则是添加class，如果<em>on</em>被设置false则是移除class。如果<em>on</em>参数未提供时，没有className则添加，否则移除。</p></dd>
+    
+      <dt>hasClass</dt>
+      <dd>
+        <div>(className: string ) : boolean</div>
+        <p>如果该元素已经定义了<em>className</em>，则返回<em>true</em>。</p></dd></dl>
+</body>
+</html>

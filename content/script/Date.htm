@@ -1,0 +1,159 @@
+<html>
+  <head>
+    <title>Date对象</title>
+    <meta name="generator" content="h-smile:richtext"/>
+  </head>
+<body>
+  <h1>Date(日期)对象</h1>
+  <p>代表日期和时间。支持本地事件和UTC时区。</p>
+  
+    <dl>
+      
+        
+        <h2>属性</h2>
+        
+        <h4>本地时间</h4>
+      
+        <dt>day</dt>
+        <dd bgcolor="#fffff0" valign="middle">- <em>integer</em>, 读/写属性。日期，范围从1到当前月的天数。</dd>
+      
+        <dt>month</dt>
+        <dd>- <em>integer</em>, 读/写属性。月份，范围从1到12。</dd>
+      
+        <dt>year</dt>
+        <dd>- <em>integer</em>, 读/写属性。年份，如2005。</dd>
+      
+        <dt>hour</dt>
+        <dd>- <em>integer</em>, 读/写属性。小时, 范围从0到23。</dd>
+      
+        <dt>minute</dt>
+        <dd>- <em>integer</em>, 读/写属性。分钟，范围从0到59。</dd>
+      
+        <dt>second</dt>
+        <dd>- <em>integer</em>, 读/写属性。秒, 范围从0到59。</dd>
+      
+        <dt>millisecond</dt>
+        <dd>- <em>integer</em>, 读/写属性。毫秒, 范围从0到999。</dd>
+      
+        <dt>dayOfWeek</dt>
+        <dd>- <em>integer</em>, 只读属性。星期，范围从0到6。其中0代表星期一。</dd>
+      
+        <dt>firstDayOfWeek</dt>
+        <dd>- <em>integer</em>, 只读属性。从0到6，其中0代表星期一 —— 当前区域一周的第一天。类属性(即可以直接使用Date.firstDayOfWeek)。</dd>
+
+
+        <h4>UTC时间</h4>      
+        <dt>UTCday</dt>
+        <dd>- <em>integer</em>, 读/写属性。日期，范围从1到当前月的天数。</dd>
+      
+        <dt>UTCmonth</dt>
+        <dd>- <em>integer</em>, 读/写属性。月份，范围从1到12。</dd>
+      
+        <dt>UTCyear</dt>
+        <dd>- <em>integer</em>,读/写属性。年份，如2005。</dd>
+      
+        <dt>UTChour</dt>
+        <dd>- <em>integer</em>, 读/写属性。小时, 范围从0到23。</dd>
+      
+        <dt>UTCminute</dt>
+        <dd>- <em>integer</em>, 读/写属性。分钟，范围从0到59。</dd>
+      
+        <dt>UTCsecond</dt>
+        <dd>- <em>integer</em>, 读/写属性。秒, 范围从0到59。</dd>
+      
+        <dt>UTCmillisecond</dt>
+        <dd>- <em>integer</em>, 读/写属性。毫秒, 范围从0到999。</dd>
+      
+        <dt>UTCdayOfWeek</dt>
+        <dd>- <em>integer</em>, 只读属性。星期，范围从0到6。其中0代表星期一。</dd>
+      
+        
+          <h2>方法</h2>
+      
+        <dt>[new Date]</dt>
+        <dd>
+          <p><strong>( </strong>[<em>string</em><strong> </strong>| <em>float</em> | <em>Date</em> |<strong> </strong> year, month, day [, hour [, minute [, second [, millisecond ]]]]]] )</p>
+          <p>创建一个新的日期对象。如果没有指定参数则初始化到当前时间(UTC)。<br/>
+		  如果只指定了<em>string</em>参数，则从该字符串中解析日期。<br/>
+		  如果year、month、day等参数被指定，则会将这些数字初始化到日期实例中。</p>
+          <p><code>new Date(string)</code> form recognizes date in RFC-822 date format ( <a href="http://www.w3.org/Protocols/rfc822/#z28">http://www.w3.org/Protocols/rfc822/#z28</a> ) and ISO 8601 ( <a href="http://www.w3.org/TR/NOTE-datetime">http://www.w3.org/TR/NOTE-datetime</a> ).</p></dd>
+    <dt>utc</dt>
+    <dd>
+      <p><strong>( </strong>year, month, day [, hour [, minute [, second [, millisecond ]]]]] )</p>
+      <p>静态方法，根据year、month、day等构造一个新的date对象。</p>
+      <p>注意: 值是<strong>UTC时区</strong>。</p>
+      <p>使用示例：<code>var date = Date.utc(1999,1,1);</code></p></dd>
+    <dt>local</dt>
+    <dd>
+      <p><strong>( </strong>year, month, day [, hour [, minute [, second [, millisecond ]]]]] )</p>
+      <p>静态方法, 根据year、month、day等构造一个新的date对象。</p>
+      <p>注意: 值是<strong>本地时区</strong>。</p>
+      <p>使用示例：<code>var date = Date.local(1999,1,1);</code></p></dd>      
+        <dt>toString<br/></dt>
+        <dd>
+          <div><strong>()</strong> : string</div>
+          <p>返回该日期对象RFC-822形式的日期/时间字符串。</p></dd>
+      
+        <dt>toUTCString</dt>
+        <dd>
+          <div><strong>()</strong> : string </div>
+          <p>返回该日期对象RFC-822形式的UTC日期/时间字符串。</p></dd>
+      
+        <dt>toISOString</dt>
+        <dd>
+          <div><strong>(</strong> [<em>asUTC</em>: <em>false|true </em>] <strong>)</strong></div>
+          <p>返回该日期对象ISO 8601形式的本地货UTC日期/时间字符串。</p></dd>
+      
+        <dt>toLocaleString</dt>
+        <dd>
+          <p><strong>( </strong>[<em>longFormat</em>]<strong> )</strong> returns: string</p>
+          <p>返回当前操作系统设置的日期字符串。本地事件。<br/>
+		  如果<em>longFormat</em>参数为<em>true</em>，则使用系统长格式形式的日期。</p></dd>
+      
+        <dt>valueOf</dt>
+        <dd>
+          <div><strong>()</strong> returns: <em>float</em></div>
+          <p>返回内部存储的从[midnight, January 1, 1970 UTC]开始的时间值。</p></dd>
+      
+        <dt>parse</dt>
+        <dd>
+          <p><strong>( </strong><em>string</em><strong> )</strong> returns: <em>float</em> | <em>undefined</em></p>
+          <p>静态方法。尝试从<em>string</em>中解析日期。如果解析成功则将日期距[since midnight, January 1, 1970 UTC]的毫秒数返回。 <br/>
+		  若解析错误，则返回<em>undefiend</em>值。</p></dd>
+      
+        <dt>UTC</dt>
+        <dd>
+          <p><strong>( </strong>year, month, day [, hour [, minute [, second [, millisecond ]]]]]<strong> )</strong> returns: <em>float</em> | <em>undefined</em></p>
+          <p>静态方法。返回参数定义的日期距[since midnight, January 1, 1970 UTC]的毫秒数。</p></dd>
+      
+        <dt>setTime</dt>
+        <dd>
+          <p><strong>( </strong><em>milliseconds</em><strong> )</strong> returns: <em>float</em></p>
+          <p>设置该日期对象的事件为<em>milliseconds</em>指定的事件。<em>milliseconds</em>是距[since midnight, January 1, 1970 UTC]的毫秒数(浮点数)。</p></dd>
+      
+        <dt>monthName</dt>
+        <dd>
+          <div><strong>( </strong><em>longFormat</em><strong> )</strong> returns: <em>string</em></div>
+          <p>返回当前用户区域的月份名称。如果<em>longFormat</em>为<em>true </em>，则返回全月份名称，否则返回简短格式。</p></dd>
+      
+        <dt>dayOfWeekName</dt>
+        <dd>
+          <div><strong>( </strong><em>longFormat</em><strong> )</strong> returns: <em>string</em></div>
+          <p>返回当前用户区域的星期名称。如果<em>longFormat</em>为<em>true </em>，则返回全星期名称，否则返回简短格式。</p></dd>
+      
+        <dt>isDaylight</dt>
+        <dd>
+          <div><strong>(</strong> <strong>)</strong> : <em>true</em> | <em>false</em></div>
+          <p>如果当前时钟使用白昼时间则返回<em>true</em>。</p></dd>
+      
+        <dt>timeZoneOffset</dt>
+        <dd>
+          <div><strong>(</strong> <strong>)</strong> : <em>integer</em></div>
+          <p>返回当前时区距离GMT的偏移毫秒数。</p></dd>
+      
+        <dt>timeZoneName</dt>
+        <dd>
+          <div><strong>(</strong> <strong>)</strong> : <em>string</em></div>
+          <p>返回当前时区的名称。</p></dd></dl>
+</body>
+</html>

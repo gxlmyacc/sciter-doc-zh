@@ -1,0 +1,75 @@
+﻿<html>
+  <head>
+    <title>@image-map</title>
+    <meta name="generator" content="h-smile:richtext"/>
+  </head>
+<body>
+  image-map特性为CSS提供了以下功能:<ol>
+    <li>支持所谓的CSS精灵(css精灵)，是一种网页图片应用处理方式。它允许你将一个页面涉及到的所有零星图片都包含到一张大图中去。</li>
+    <li>支持使用一个逻辑名称表示在不同的屏幕分辨率不同大小的多个图像。</li></ol>
+  <p>image-map特性使用 @image-map 的 at-规则 定义它自己的映射关系，使用image-map()函数来指定url(...)，这里的url指向一张图片。</li>
+	</ol></p>
+  <h2>@image-map at-规则</h2>
+  <p>@image-map规则包含关键字&quot;@image-map&quot;, 后面跟着一个指定的图像映射表的名称标识(将在image-map(name, ...)函数中引用):</p>
+  <pre>@image-map &lt;<em>name&gt; </em>{
+   src: <em>&lt;原图片列表&gt;</em>;
+   cells: <em>&lt;列数&gt;</em> <em>&lt;行数&gt;</em>;
+   items: <em>&lt;项列表&gt;</em>;
+}
+</pre>
+  <p>其中:</p>
+  <ul>
+    <li><strong>&lt;name&gt;</strong>是一个有效的<a href="http://www.w3.org/TR/CSS21/syndata.html#value-def-identifier">CSS标识符</a> - 映射表的名称。</li>
+    <li><strong>src</strong>既可以是一个url(...)，也可以是以逗号分隔的<code>url() NNdpi</code>对，如: <code>url(x1.png) 100dpi, url(x2.png) 200dpi, url(jumbo.png)</code>。<br/>
+	如果屏幕分辨率小于或等于定义的某一对中的URL的DPI值，则将会使用这一对中URL指定的图片来渲染图像映射表。列表中的最后一个元素可以不包含DPI值——它将作为在屏幕DPI大于列表中其他对的值时默认采用图片。</li>
+    <li><strong>cells</strong>是一个正数对——第一个是列数，第二个是行数。src指定的图片将会使用这个列数和行数来分隔，并且每一个(或每一组)单元格可以有一个由items属性定义的名称与它相关联。</li>
+    <li><strong>items</strong>是一个以逗号分隔的列表，它定义里图片中的项，每一项的定义可以为:</li>
+    <ul>
+      <li><code>&lt;name&gt;</code> &nbsp;- 只是一个节名称, 这个名称将会赋值到序列中的下一个单元格。单元格以 先列后行 的顺序排列，第一个(第一行最左边)的单元格序号为1。</li>
+      <li><code>&lt;name&gt; &lt;number&gt;</code> - 节名称和单元格序号(一个从1到单元格总数的正数)。序列中下一个数字将会设置到下一个单元格。</li>
+      <li><code>&lt;name&gt; &lt;column:number&gt; &lt;row:number&gt;</code> - 在column/row位置的单元格对应的节名称，序列中下一个数字将会对应到下一个单元格。</li>
+      <li><code>&lt;name&gt; &lt;column:number&gt; &lt;row:number&gt; &lt;columns:number&gt; &lt;rows:number&gt;</code> - 在column/row位置起始，跨越columns列和rows行的矩形单元格范围的节名词，序列中下一个数字不会改变。</li></ul></ul>
+  <p>@image-map声明中，<em>Cells</em> 和<em>items</em>属性是可选参数。如果它们被省略，则整个图像映射表将只有一个元素，即这张完整图片。</p>
+  <h2>image-map()函数</h2>
+  <p>image-map()函数定义使用的图像节点，它可以放置在CSS中任何需要该图片的地方。</p>
+  <p>有两种image-map函数的使用方法:</p>
+  <ol>
+    <li><code>image-map(&lt;image-map:name&gt;)</code> - 基于当前屏幕DPI设置，使用@image-map中<em>src</em>属性声明中的一张图像。</li>
+    <li><code>image-map(&lt;image-map:name&gt;, &lt;item:name&gt;)</code> - 使用图像映射表中一个命名项作为一张图片。</li></ol>
+  <p>如果没有这个image-map，或者不包含这个项名称，将什么也不做。</p>
+  <h2>示例:</h2>
+  <h3>1. 类工具条场景</h3>
+  <p>下面是一个image-map声明:</p>
+  <pre>@image-map toolbar-icons 
+{
+  src:url(rttb.png);
+  cells:15 2; /* 15 列, 2 行 */
+  /* 项逻辑名称, 参见toolbar-icons.png */ 
+  items: ulist, olist, unindent, indent, picture, table, link;
+}
+</pre>
+  <p>使用方法:</p>
+  <pre>.toolbar &gt; button.ulist    { background-image:image-map(toolbar-icons,ulist); } 
+.toolbar &gt; button.olist    { background-image:image-map(toolbar-icons,olist); } 
+.toolbar &gt; button.unindent { background-image:image-map(toolbar-icons,unindent); } 
+.toolbar &gt; button.indent   { background-image:image-map(toolbar-icons,indent); } 
+.toolbar &gt; button.picture  { background-image:image-map(toolbar-icons,picture); } 
+.toolbar &gt; button.table    { background-image:image-map(toolbar-icons,table); } 
+</pre>
+  <h3>2. DPI-识别 图像映射表</h3>
+  <p>为小于或等于100DPI的屏幕准备一张star-1x.png的图像映射表：</p>
+  <pre>    @image-map dpi-aware {
+      src: url(star-1x.png) 100dpi,
+           url(star-2x.png) ;
+    }
+</pre>
+  <p>使用方法：</p>
+  <pre>    #star {
+      size:180px;
+      background: no-repeat 50% 50% image-map(dpi-aware); /* 这里即可能是star-1x.png，也可能是star-2x.png */   
+      border:1px solid;  
+    }
+</pre>
+  <p></p>
+</body>
+</html>

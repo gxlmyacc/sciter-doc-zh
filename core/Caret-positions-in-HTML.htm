@@ -1,0 +1,66 @@
+<html>
+
+<head>
+	<title>HTML中的插入位置</title>
+</head>
+
+<body>
+<div class="post" id="post-41652">
+	 <h1 class="storytitle">HTML中的插入位置</h1>
+</div>
+	
+	<div class="storycontent">
+		<p>该文章在Sciter2以上的behavior:richtext行为中有效。<br />
+behavior:richtext行为时Sciter中<code>&lt;richtext&gt;</code>元素和Web浏览器中的<code>&lt;div contenteditable&gt;</code>的背后行为。</p>
+<p>Sciter1中的<code>behavior:richtext</code>使用&#8220;flat&#8221;DOM模型: div:element, paragraph:element, 这个默写与Windows中的RichTextBox类似。<br />
+不过在Sciter2中，新的<code>behavior:richtext</code>行为使用标准的DOM模型，它的HTML内容为: element:node, text:node, comment:node。<br />
+这个变化导致我需要重新思考插入位置的概念。</p>
+<p>  考虑下面的标记代码:</p>
+<pre class="brush: html">&lt;p&gt;12&lt;b&gt;34&lt;/b&gt;&lt;i&gt;56&lt;/i&gt;&lt;/p&gt;</pre>
+<p>它的渲染结果如下: </p>
+<p>12<b>34</b><i>56</i></p>
+<p>问题来了: 在这个段落中有多少个插入位置?</p>
+<p>所有已知的内如可编辑实现都会给出这里有7个插入位置: 1前, &nbsp;1和2之间, &#8230; 7后。所以他们都遵循了如Word或其他的所见即所得编辑工具的规范。</p>
+<p>现在，考虑下这个任务, 将&quot;AB&quot;文本插入到段落中&#8216;4&#8217;和&#8216;5&#8217;之间，这时结果可能有以下几种:</p>
+<ol>
+<li><code>&lt;b&gt;</code>内部: 12<b>34AB</b><i>56,</i> &nbsp;<code>12&lt;b&gt;34AB&lt;/b&gt;&lt;i&gt;56&lt;/i&gt;</code>;</li>
+<li><code>&lt;i&gt;</code>内部: 12<b>34</b><i>AB56</i> &nbsp;<code>12&lt;b&gt;34&lt;/b&gt;&lt;i&gt;AB56&lt;/i&gt;&lt;p&gt;</code>;</li>
+<li><code>&lt;b&gt;</code>和<code>&lt;i&gt;</code>之间: 12<b>34</b>AB<i>56</i> &nbsp;<code>12&lt;b&gt;34&lt;/b&gt;AB&lt;i&gt;56&lt;/i&gt;</code>;</li>
+</ol>
+<p>问题正如我们所见: 一个(视觉)插入位置实际上最起码有3个(物理)DOM插入位置。</p>
+<p>这是所见即所得编辑器实现的典型问题。在flat模型中，文本只是一个&quot;样式化字符&quot;的序列，所以这个问题不是一个主要问题。不过在HTML的所见即所得编辑器中，这个问题必须要想办法解决。</p>
+<p>在Sciter1中，我使用了&quot;有方向&quot;的插入位置 &#8211; 物理插入位置取决于当前光标到达该插入位置的方向:</p>
+<ul>
+<li>当你从右侧移动光标到当前位置时: <code>&lt;b&gt;3|4|&lt;/b&gt;&lt;i&gt;5|6|&lt;/i&gt;</code></li>
+<li>当你从左侧移动光标到当前位置时<code>&lt;b&gt;|3|4&lt;/b&gt;&lt;i&gt;|5|6&lt;/i&gt;</code></li>
+</ul>
+<p>这种处理方式覆盖了上面的问题#1和#2，但是问题#3依然没有覆盖。所以还需要想想办法。</p>
+<p>其实这个问题不仅仅是字符内部和跨文本才会出现，下面的这种情况也类似:</p>
+<pre class="brush: html">&lt;ul&gt;
+  &lt;li&gt;一&lt;/li&gt;
+  &lt;li&gt;二&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;一些代码&lt;/pre&gt;
+</pre>
+<p>这种情况下，如果你需要在列表的文本和&lt;pre&gt;块之间插入段落，你会怎么做:</p>
+<pre class="brush: html">&lt;ul&gt;
+  &lt;li&gt;一&lt;/li&gt;
+  &lt;li&gt;二&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;一些文本&lt;/p&gt;
+&lt;pre&gt;一些代码&lt;/pre&gt;
+</pre>
+<p>你可以在你的浏览器中试一下:</p>
+<div style="background:#EEE; border:1px dotted black" contenteditable>
+<ul>
+<li>一</li>
+<li>二</li>
+</ul>
+<pre>一些代码</pre>
+</div>
+	</div>
+	
+  
+</div>
+</body>
+</html>

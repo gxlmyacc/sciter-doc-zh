@@ -1,0 +1,49 @@
+﻿<html>
+  <head>
+    <meta name="source" content="http://www.terrainformatica.com/wiki/doku.php?id=h-smile:built-in-behaviors:checkbox"/>
+    <meta name="generator" content="h-smile:richtext"/>
+  </head>
+<body>
+  <h1>behavior:output</h1>
+  <p>格式化的输出行为。该行为可以被应用到任何文本容器上，如&lt;span&gt;、&lt;em&gt;等。</p>
+  <h2>元素</h2>
+  <p>默认情况下，应用了该行为的元素有:</p>
+  <ul>
+    <li><code>&lt;output type=..&gt;</code> - 只读输出元素;</li>
+    <li><code>&lt;(name)&gt;</code> - Sciter特有的短格式语法，相当于<code>&lt;output name=&quot;name&quot;&gt;</code>.</li></ul>
+  <p>注意：在Sciter中你可以使用output的短格式语句。所以下面3个声明是等价的:</p>
+  <pre>&lt;output name=&quot;first&quot; type=&quot;text&quot; /&gt;
+&lt;output|text(first)/&gt;
+&lt;(first)|text&gt;
+</pre>
+  <h2>示例</h2>
+  <div>
+    <output name="first" type="text" >输出内容1</output>
+    <output|text(first)>输出内容1</output>
+    <(first)|text> 
+  </div>
+  <h2>属性</h2>
+  <ul>
+    <li><code>type</code> - 格式化的类型，可以为以下值之一:</li>
+    <ul>
+      <li><code>&quot;text&quot;</code> - 输出纯文本, value值等同于toString()后的呈现;</li>
+      <li><code>&quot;integer&quot;</code> - 输出整数;</li>
+      <li><code>&quot;decimal&quot;</code> - 输出浮点数，值的格式基于当前地区(语言)的规则;</li>
+      <li><code>&quot;currency&quot;</code> &nbsp;- 输出金额， 值的格式基于当前地区(语言)的规则;</li>
+      <li><code>&quot;date&quot;</code> - 输出日期，值为UTC日期值，格式基于当前地区(语言)的规则;</li>
+      <li><code>&quot;date-local&quot;</code> - 输出日期，值为当前时区的日期值，格式基于当前地区(语言)的规则;</li>
+      <li><code>&quot;time&quot;</code> - 输出时间，值为UTC时间值，格式基于当前地区(语言)的规则;</li>
+      <li><code>&quot;time-local&quot;</code> - 输出时间，值为当前时区的的时间值，格式基于当前地区(语言)的规则;</li></ul>
+    <li><code>name=&quot;name&quot;</code> - 标准的<em>name</em>属性 - from表单上一个input元素的名称。</li>
+    <li><code>value=&quot;...&quot;</code> - 标准的<em>value</em>属性。该值的的显示格式基于type属性的定义。</li>
+    <li><code>novalue=&quot;no value text&quot;</code> - 当output没有输出内容时显示的文本。</li></ul>
+  <p>如果value无法转换为声明的类型，则该元素会被设置<code>:invalid</code>状态标志;</p>
+  <p>如果value是数字类型，且是一个负数，则该元素会有一个<code>negative</code>属性，这样你可以通过该属性改变该元素的样式，如<code>output[negative] { color:red; }</code></p>
+  <h2>事件</h2>
+  <p>N/A - 该行为没有特有的事件。</p>
+  <h2>value</h2>
+  <p><code>any</code> value, 该值应该匹配type属性声明的类型。</p>
+  <h2>方法</h2>
+  <p>N/A - 该行为没有引入任何特有的方法。</p>
+</body>
+</html>

@@ -1,0 +1,101 @@
+﻿<html>
+  <head>
+    <meta name="generator" content="h-smile:richtext"/>
+  </head>
+<body>
+  <h1>选择(Selection)对象</h1>
+  <p>代表<a href="Element.htm">元素</a>中的选择文本(块)。目前，指定了htmlarea、richtext行为的元素支持选择。</p>
+  <p>为了访问元素的选择对象，请使用它的<em>selection</em>属性：element.selection。</p>
+  <dl>
+    
+      
+      <h2>属性</h2>
+    
+      <dt>type</dt>
+      <dd><em>null | symbol</em>, 只读。选择内容的类型：#text, #cells, #blocks. </dd>
+    
+      <dt>isCollapsed</dt>
+      <dd><em>true</em> | <em>false</em>, 只读。 当选择只有光标时为true——即selection.start == selection.end。</dd>
+    
+      <dt>anchor</dt>
+      <dd><em>null | bookmark</em>, 只读。 选择内容的锚点的DOM位置。</dd>
+    
+      <dt>caret</dt>
+      <dd><em>null | bookmark</em>, 只读。 选择内容的光标的DOM位置。</dd>
+    
+      <dt>start</dt>
+      <dd><em>null | bookmark</em>, 只读。 选择内容的光标或锚点的DOM位置。以在DOM中顺序较小者为准。</dd>
+    
+      <dt>end</dt>
+      <dd><em>null | bookmark</em>, 只读。 选择内容的光标或锚点的DOM位置。以在DOM中顺序较大者为准。</dd>
+    
+      <dt>text</dt>
+      <dd><em>string</em>, 只读。 寻找内容中包含的文本。</dd>
+    
+      <dt>html</dt>
+      <dd><em>string</em>, 只读。 选择内容的html片段。</dd>
+    
+      
+      <h2>枚举/遍历</h2>
+    
+      <dt>for ... in</dt>
+      <dd>
+        <div>for(var<strong> <em>(pos,char)</em></strong> in<strong> <em>element</em></strong>.<strong><em>selection</em></strong>)<strong> { </strong>/* 循环体 */<strong> }</strong></div>
+        <p>(遍历选择内容中的光标位置和字符)</p></dd>
+    
+      
+        <h2>方法</h2>
+    
+      <dt>collapse</dt>
+      <dd>
+        <div><strong>( towhat</strong>:symbol<strong> )</strong> returns: <em>bookmark</em>.</div>
+        <p>折叠选择范围成一个光标。<em>towhat</em>参数为常量之一: <strong>#toCaret</strong>、 <strong>#toAnchor</strong>、<strong>#toStart</strong>、<strong>#toEnd</strong></p></dd>
+
+      <dt>select</dt>
+      <dd>
+        <div><strong>( caret:</strong><em>bookmark</em> [<strong> , anchor</strong>:bookmark ]<strong> ) </strong>returns: <em>true | false</em></div>
+        <p>设置选择范围或光标位置。</p></dd>
+    
+      <dt>advance</dt>
+      <dd>
+        <div><strong>( step</strong>:symbol [, <strong>target</strong>:symbol] <strong>)</strong> returns: <em>true | false</em>.</div>
+        <p>以<em>step</em>步调前进到新的位置。<em>target</em>定义的选择内容的末尾怎么前进, 可以为以下值之一:</p>
+        <ul>
+          <li><strong>#both</strong> - 默认, 光标和锚点移动到新的位置, 折叠选择内容;</li>
+          <li><strong>#caret</strong> - 光标位置, 修改选择内容;</li>
+          <li><strong>#anchor</strong> - 锚点位置, 修改选择内容;</li>
+          <li><strong>#start</strong> - (锚点或光标)的起始位置, 修改选择内容;</li>
+          <li><strong>#end</strong> - (锚点或光标)的末尾位置, 修改选择内容</li></ul>
+        <p>step可以为以下值之一:</p>
+        <ul>
+          <li><strong>#next</strong> - 下一个光标位置;</li>
+          <li><strong>#prior</strong> - 上一个光标位置;</li>
+          <li><strong>#wordStart</strong> - 词的起始位置;</li>
+          <li><strong>#wordEnd</strong> - 词的末尾位置;</li>
+          <li><strong>#lineStart</strong> - 行起始位置;</li>
+          <li><strong>#lineEnd</strong> - 行末尾位置;</li>
+          <li><strong>#first</strong> - 元素中的选择内容的第一个光标位置;</li>
+          <li><strong>#last</strong> - 元素中的选择内容的最后一个光标位置。</li></ul></dd>
+      <dt>applyMark</dt>
+      <dd>(<strong>start</strong>: <em>bookmark</em>, <strong>end</strong>: <em>bookmark</em>, <strong>markName</strong>: string): returns: integer
+		<p>对文本从<em>start</em>到<em>end</em>标记定义标记名称markName，该名称可在CSS中使用<code>::mark(markName) { ... }</code>选择器(伪类)来应用CSS样式。</p>
+		<p>该函数返回修改的数量。</p></dd>
+
+      <dt>clearMark</dt>
+      <dd>(<strong>start</strong>: <em>bookmark</em>, <strong>end</strong>: <em>bookmark</em>, <strong>markName</strong>: string): returns: integer
+		<p>清除指定区域内的标记(mark)名称。<br/>
+		 该函数返回修改的数量。</p>
+	  </dd>
+	</dl>
+
+  <h3 name="bookmark">书签</h3>
+  <p>上面的一些方法使用到了叫做书签(bookmark)的对象，它是一个有#bookmark标签的数组(长度为3)。通常，你需要先从上面的各个属性或方法中获取书签，不过书签也可以使用下面的语句创建：</p>
+  <pre>var bm = [bookmark: node, index, after];
+</pre>
+  <p>其中:</p>
+  <ul>
+    <li><em>node</em> - Element或Node对象。</li>
+    <li><em>index</em> - <em>node</em>中的索引位置。对于元素，index是它的子节点的<em>nodeIndex</em>。对于节点，index是它中字符的索引。</li>
+    <li><em>after</em> - true | false, 如果为true，则这个书签标记node/index对的实体标记的&quot;past edge&quot;。</li></ul>
+</body>
+</html>

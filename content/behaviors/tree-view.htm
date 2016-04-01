@@ -1,0 +1,83 @@
+﻿<html>
+  <head>
+    <meta name="generator" content="h-smile:richtext"/>
+  </head>
+<body>
+  <h1>behavior:tree-view</h1>
+  <p>树状结构的&lt;select&gt;列表行为。该行为可以被应用到任何块级容器元素上。</p>
+  <h2>元素</h2>
+  <p>默认情况下，应用了该行为的元素有:</p>
+  <ul>
+    <li><code>&lt;select|tree&gt;&lt;/select&gt;</code></li></ul>
+  <h2>示例</h2>
+  <div>
+    <select|tree >
+      <option>选项1</option>
+      <option>
+	    <caption>选项2</caption>
+        <option>子选项1</option>
+		<option>子选项2</option>
+	  </option>
+      <option expanded>
+	    选项3
+        <option>子选项1</option>
+		<option>子选项2</option>
+	  </option>
+    </select>
+  </div>
+  <h2>模型</h2>
+  <p>该行为识别两种类型的&lt;option&gt;:</p>
+  <ul>
+    <li>&quot;叶(Leaf)&quot; &lt;option&gt; 指不包含子&lt;option&gt;的元素。</li>
+    <li>&quot;节点(Node)&quot; &lt;option&gt; 指包含子&lt;option&gt;的元素。</li></ul>
+  <pre>&lt;option&gt;
+    &lt;caption&gt;Node标题&lt;/caption&gt;
+    &lt;option&gt;Leaf 1&lt;/option&gt;
+    &lt;option&gt;Leaf 2&lt;/option&gt;
+&lt;/option&gt;
+</pre>
+  <p>被选择项会被设置<code>:current</code>状态标志。</p>
+  <p>节点&lt;option&gt;在运行期会被设置<code>:node</code>标志(在CSS中可以使用:node伪类)。因此下面的CSS选择器:</p>
+  <ul>
+    <li><code>option:node</code> - 匹配所有节点option;</li>
+    <li><code>option:not(:node)</code> - 匹配所有的叶option.</li></ul>
+  <p><code>option:node</code>在响应UI事件(鼠标和键盘事件)时可能包含<code>:expanded</code>或<code>:collapsed</code>运行时状态标志。</p>
+  <p>该行为支持&quot;虚拟树&quot;模式。初始时，该树的所有节点option可能都是折叠的，并且是空的。这些节点option只有当接收到ELEMENT_EXPANDED事件时才填充。并且在ELEMENT_COLLAPSED事件中清除以便用最小的内存展示树。见<u>sdk/samples/ideas/virtual-tree/</u>示例。</p>
+  <h2>属性</h2>
+  <ul>
+    <li>&lt;option&gt;的<code>expanded</code>属性 - &lt;option expanded&gt;将会为该元素默认设置<code>:expanded</code>状态。</li></ul>
+  <h2>事件</h2>
+  <p>除了标准事件集(鼠标、按键、聚焦)外，该行为还生成:</p>
+  <ul>
+    <li>SELECT_SELECTION_CHANGED 事件, 当修改select中的选择项(在一个option上点击)时产生该事件。该事件为异步事件。</li>
+    <li>SELECT_SELECTION_CHANGING 事件, 当选择项将要改变时生成该事件。该事件为同步事件。</li>
+    <li>ELEMENT_EXPANDED 事件, 当节点option展开时会向该option发生该事件。</li>
+    <li>ELEMENT_COLLAPSED 事件, 当节点option折叠时会向该option发生该事件。</li></ul>
+  <h2>方法</h2>
+  <p>N/A - 该行为没有引入任何特有的方法。</p>
+  <h2>value</h2>
+  <p>any, 读/写属性。被选择项(option)的值。选择项(option)的值(value)。option的值是它的value属性或它的文本内容(如果未定义value属性时)。</p>
+  <h2>在脚本中树事件的处理</h2>
+  <h3><code>onControlEvent</code>事件</h3>
+  <pre>var btn = $(select#some);
+btn.onControlEvent = function(evt)
+{
+  switch(evt.type) {
+    case Event.SELECT_SELECTION_CHANGED: /* 当前option被改变 */ break;
+    case Event.ELEMENT_EXPANDED: /* evt.target 为展开的元素 */ break;
+    case Event.ELEMENT_COLLAPSED: /* evt.target 为折叠的元素 */ break;<br/>  }
+}
+</pre>
+  <h3><code>on()</code>订阅</h3>
+  <pre>var sel = $(select#some);
+sel.on(&quot;change&quot;, function() { ... 事件处理代码 ... });
+sel.on(&quot;expand&quot;, &quot;option&quot;, function() { ... 事件处理代码 ... });
+sel.on(&quot;collapse&quot;, &quot;option&quot;, function() { ... 事件处理代码 ... });
+</pre>
+  <h3>decorators.tis 装饰器</h3>
+  <pre>include &quot;decorators.tis&quot;;
+@when Event.ELEMENT_EXPANDED @on &quot;select#some&quot; :: ... 事件处理代码 ...;
+@when Event.ELEMENT_COLLAPSED @on &quot;select#some&quot; :: ... 事件处理代码 ...;
+</pre>
+</body>
+</html>

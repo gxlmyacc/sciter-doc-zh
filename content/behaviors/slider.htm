@@ -1,0 +1,60 @@
+﻿<html>
+  <head>
+    <meta name="source"/>
+    <meta name="source"/>
+    <meta name="generator" content="h-smile:richtext"/>
+  </head>
+<body>
+  <h1>behavior:slider</h1>
+  <p>这种行为提供了滑块功能。</p>
+  <h2>元素</h2>
+  <p>默认情况下，应用了该行为的元素有:</p>
+  <ul>
+    <li><code>&lt;input|hslider&gt;</code> - 水平滑块;</li>
+    <li><code>&lt;input|vslider&gt;</code> - 垂直滑块。</li></ul>
+  <h2>示例</h2>
+  <div>
+  	<input type="hslider" /> 
+    <input type="vslider" buddy="vslidercaption" /> 
+	<span#vslidercaption></span>
+  </div>
+    <p>注意: 要使创建的slider支持浮点范围，元素必须至少定义min和max属性，且它们的值必须是浮点数，例如: <br/>
+    <code>&lt;input|hslider min=&quot;0.0&quot; max=&quot;1.0&quot; step=&quot;0.01&quot;&gt;</code></p>
+  <h2>模型</h2>
+  <p>该行为初始化时会生成下面的DOM元素结构:</p>
+  <pre>&lt;input type=hslider&gt;
+  &lt;button.slider /&gt;
+&lt;/input&gt;
+</pre>
+  <p>其中，<code>&lt;button.slider&gt;</code>是滑块中的&quot;旋钮&quot;。</p>
+  <h2>属性</h2>
+  <p>该行为需要知道的属性:</p>
+  <dl>
+    <dt>min</dt>
+    <dd><em>integer|float</em>, 初始化滑块最小值;</dd>
+    <dt>max</dt>
+    <dd><em>integer|float</em>, 初始化滑块最大值;</dd>
+    <dt>step</dt>
+    <dd><em>integer|float</em>, 初始化步长值, 点击左/右侧的滑块是减/增的值。</dd>
+    <dt>value</dt>
+    <dd><em>integer|float</em>, 初始值</dd>
+    <dt>buddy</dt>
+    <dd>string, &quot;buddy&quot;元素的ID，通常是一些&lt;span&gt;元素来接收value值的文本表示。</dd>
+    <h2>方法</h2>
+    <dt>sliderMin</dt>
+    <dd>() : <em>integer|float</em><br/>报告当前(运行时)的最小值。</dd>
+    <dt>sliderMax</dt>
+    <dd>() : <em>integer|float</em><br/>报告当前(运行时)的最大值。</dd>
+    <dt>sliderStep</dt>
+    <dd>() : <em>integer|float</em><br/>报告当前(运行时)的步长值。</dd>
+    <dt>sliderRange</dt>
+    <dd>(<strong>min</strong> : <em>integer|float</em>, <strong>max</strong> : <em>integer|float</em> [, <strong>step</strong> : <em>integer|float</em>]) <br/>设置滑块的范围，步长值参数可选。</dd>
+    <h2>事件</h2>
+    <dt>BUTTON_STATE_CHANGED</dt>
+    <dd>- 当滑块的值被用户修改时生成该事件。该事件为异步事件。</dd>
+    <dt>BUTTON_CLICK</dt>
+    <dd>- 当用户完成编辑滑块时生成该事件。该事件为异步事件。</dd></dl>
+  <h2>value</h2>
+  <p><em>integer|float</em>, 滑块的当前值，返回在[ min ... max ]之间。</p>
+</body>
+</html>

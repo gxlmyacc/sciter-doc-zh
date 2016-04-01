@@ -1,0 +1,91 @@
+<html>
+ <head> 
+  <title>Sciter特有的HTML标签</title> 
+ </head> 
+ <body> 
+    <h1>Sciter特有的HTML标签</h1> 
+      <p>&lt;include&gt;, &lt;widget&gt; 和 &lt;popup&gt;</p> 
+	  <p>Sciter能够识别下面这些非标准HTML标签:</p> 
+	  <h3>&lt;include&gt;</h3> 
+	  <p>这个标签运行将一个HTML片段引入当前文档。Sciter支持该标签的两种格式:</p> 
+	  <p><font face="Courier">&lt;include src=&quot;url-of-the-fragment-html-text&quot; /&gt;</font> 和 </p>
+	  <p><font face="Courier">&lt;include src=&quot;url-of-the-fragment-html-text&quot; &gt; <br />
+	  &nbsp;替代标记(当src加载失败时) <br />
+	  &lt;/include&gt;</font></p>
+	  <p>第一种格式(空元素标签)将会用<em>src</em>属性指定的HTML片段替换这个include元素。</p> 
+	  <p>第二种格式与第一种相同，不过它允许定义当src文档不存在时的替代标记内容。示例:</p> <p>doument-base.html :</p> 
+      <blockquote> 
+       <div>
+        &lt;html&gt;&lt;body&gt;
+       </div> 
+       <blockquote> 
+        <div>
+         一个复合文档的示例。
+         <br />&lt;include src=&quot;document-fragment.html&quot;&gt;
+         <br /> &nbsp;&nbsp;&nbsp;&nbsp;&lt;em&gt;对不起，document-fragment.html不存在!&lt;/em&gt;
+         <br />&lt;/include&gt;
+        </div>
+       </blockquote> 
+       <div>
+        &lt;/body&gt;&lt;/html&gt;
+       </div>
+      </blockquote> 
+	  <p>document-fragment.html文档的内容为:</p> 
+      <blockquote> 
+       <p>&lt;p&gt;这是一个HTML文档片段。&lt;/p&gt;<br />
+	   &lt;p&gt;这是片段中的另一个段落&lt;/p&gt;</p>
+      </blockquote> <p>当doument-base.html加载完成后，组装和渲染的实际文档为:</p> 
+      <blockquote> 
+       <div>
+        &lt;html&gt;&lt;body&gt;
+       </div> 
+       <blockquote> 
+        <div>
+         一个复合文档的示例。
+        </div> 
+        <div>
+         &lt;p&gt;这是一个HTML文档片段。&lt;/p&gt;
+         <br />&lt;p&gt;这是片段中的另一个段落&lt;/p&gt;
+         <br />
+        </div>
+       </blockquote> 
+       <div>
+        &lt;/body&gt;&lt;/html&gt;
+       </div>
+      </blockquote> 
+	  <p>而如果document-fragment.html文档不存在时，组装和渲染的实际文档为:</p> 
+      <div>
+       &lt;html&gt;&lt;body&gt;
+      </div> 
+      <blockquote> 
+       <div>
+        一个复合文档的示例。
+        <br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;em&gt;对不起，document-fragment.html不存在!&lt;/em&gt;
+        <br />
+       </div>
+      </blockquote> 
+      <div>
+       &lt;/body&gt;&lt;/html&gt;
+      </div> 
+	  <h4>片段文件中的相对路径解决方案: </h4> 
+	  <p>片段文件中的所有相对路径属性(如<em>href</em>、<em>src</em>)和行内样式中的URL，它们的路径都是相对于doument-base.html文档的URL，而不是片段文件本身。可以将基本文档和片段文档认为一个文档的多个部分。</p> 
+	  <h3>&lt;widget&gt;</h3> 
+	  <p>&lt;widget&gt;是一个块级元素，它等同于内联的&lt;input&gt;、&lt;select&gt;标签。根据HTML规范，&lt;input&gt;元素只能出现在文本容器中。如果将&lt;input&gt;作为某些元素的立即子元素，如&lt;td&gt;，则引擎会为它创建一个匿名文本容器。有时这种行为时不可取的。例如，一些内联块元素的高度定义了百分比单位，它们的高度将使用这个匿名文本容器的高度来进行计算，而不是&lt;td&gt;元素。当你需要在垂直方向上展开input元素(如&lt;select&gt;、&lt;textarea&gt;)时，请使用&lt;widget&gt;元素。 Good analog for &lt;input&gt; is &lt;img&gt; element (it is also inline block) and analog of &lt;widget&gt; is &lt;div&gt;.</p> 
+	  <p>Widget与&lt;input&gt;元素有相同的属性集。唯一的不同是<em>type</em>属性的值的扩展集。除了(input)标准的值，如<em>text</em>、<em>checkbox</em>、<em>radio</em>等，type属性也接受以下值:</p> 
+      <ul> 
+       <li><strong>&lt;widget type=&quot;select&quot;&gt;</strong> - 选择列表块元素;</li> 
+       <li><strong>&lt;widget type=&quot;dropdown-select&quot;&gt;</strong> - 下拉选择框块元素;</li> 
+       <li><strong>&lt;widget type=&quot;textarea&quot;&gt;</strong> - 文本区域块元素;</li> 
+       <li><strong>&lt;widget type=&quot;htmlarea&quot;&gt;</strong> - html区域块元素;</li>
+      </ul> 
+      <div>
+       &lt;widget&gt;元素必须有&lt;/widget&gt;尾标签。
+      </div> 
+	  <h3>&lt;popup&gt;</h3> 
+	  <p>&lt;popup&gt;是一个块元素(类似&lt;div&gt;)，它用于定义文档中的弹出元素。通常情况下，弹出元素是不可见的。&lt;popup&gt;元素的一个主要目的是提供html格式化的气泡提示。例如下面的代码片段:</p>
+	  <p><font face="Courier">&lt;p titleid=&quot;my-html-title&quot;&gt;。当鼠标放在这个元素上时将看到HTML气泡提示&lt;/p&gt;<br />
+	  &lt;popup id=&quot;my-html-title&quot;&gt;<br /> 
+	  &nbsp;这是一个HTML气泡提示的&lt;em&gt;示例&lt;/em&gt;<br /> 
+	  &lt;/popup&gt;</font></p> 
+ </body>
+</html>

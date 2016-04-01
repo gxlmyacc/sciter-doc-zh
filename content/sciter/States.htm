@@ -1,0 +1,88 @@
+﻿<html>
+  <head>
+    <meta name="generator" content="h-smile:richtext"/>
+  </head>
+<body>
+  <h1>状态(States)对象</h1>
+  <p>代表DOM <a href="Element.htm">元素</a> 的状态。</p>
+  <p>为了访问元素的状态，请使用它的<em>state</em>属性：element.state。</p>
+  <dl>
+    <h2>属性</h2>
+    <dt>link</dt>
+    <dd><font color="#999999">读写</font> - true/false, 如果元素是一个链接则返回true——即定义了<em>href</em>属性。</dd>
+    <dt>hover</dt>
+    <dd><font color="#999999">读写</font> - true/false,</dd>
+    <dt>active</dt>
+    <dd><font color="#999999">读写</font> - true/false,</dd>
+    <dt>focus</dt>
+    <dd><font color="#999999">读写</font> - true/false, 元素是否聚焦，若要该元素获取焦点，则设置该属性为<em>true</em>：
+      <pre>el.state.focus = true;
+</pre></dd>
+    <dt>tabfocus</dt>
+    <dd><font color="#999999">只读</font> - true/false, 该元素是否是使用TAB/SHIFT+TAB键获取到的焦点。</dd>
+    <dt>visited</dt>
+    <dd><font color="#999999">读写</font> - true/false,</dd>
+    <dt>current</dt>
+    <dd><font color="#999999">读写</font> - true/false,</dd>
+    <dt>checked</dt>
+    <dd><font color="#999999">读写</font> - true/false,</dd>
+    <dt>disabled</dt>
+    <dd><font color="#999999">读写</font> - true/false,</dd>
+    <dt>readonly</dt>
+    <dd><font color="#999999">读写</font> - true/false,</dd>
+    <dt>expanded</dt>
+    <dd><font color="#999999">读写</font> - true/false,</dd>
+    <dt>collapsed</dt>
+    <dd><font color="#999999">读写</font> - true/false,</dd>
+    <dt>incomplete</dt>
+    <dd><font color="#999999">读写</font> - true/false,</dd>
+    <dt>animating</dt>
+    <dd><font color="#999999">只读</font> - true/false, 元素是否正在做动画。</dd>
+    <dt>focusable</dt>
+    <dd><font color="#999999">读写</font> - true/false, 该元素是否可获取焦点。是否可聚焦取决于是否设置了tabindex &gt;= 0属性 或 为该元素绑定了聚焦事件处理器。</dd>
+    <dt>anchor</dt>
+    <dd><font color="#999999">读写</font> - true/false, 元素是否是选择项里的锚点(第一个元素)。</dd>
+    <dt>synthetic</dt>
+    <dd><font color="#999999">读写</font> - true/false, 该元素是否是合成的——被某项行为(behavior)创建的。</dd>
+    <dt>popup</dt>
+    <dd><font color="#999999">读写</font> - true/false, 元素是否作为一个弹出框正在显示。若要关闭弹出窗口，只需要设置该属性为false:
+      <pre>el.state.popup = false;</pre></dd>
+    <dt>ownspopup</dt>
+    <dd><font color="#999999">只读</font> - true/false, 元素请求弹出显示且弹出是可见的。如下：
+      <pre>el.popup(elementToPopup, pos);</pre>
+      <p>将会导致该标志设置到<em>el</em>元素。</p></dd>
+    <dt>empty</dt>
+    <dd><font color="#999999">只读</font> - true/false, 该元素是否是空的——即没有子元素和内容文本。</dd>
+    <dt>busy</dt>
+    <dd><font color="#999999">读写</font> - true/false, 元素通过调用<code>el.request(...)</code>请求数据而数据还没有反馈时的状态。</dd>
+    <dt>dragover</dt>
+    <dd><font color="#999999">只读</font> - true/false, 被拖拽的元素经过该元素时的状态。</dd>
+    <dt>droptarget</dt>
+    <dd><font color="#999999">只读</font> - true/false, 正在拖拽，且该元素是拖拽元素的目标元素时的状态。</dd>
+    <dt>moving<br>copying</dt>
+    <dd><font color="#999999">只读</font> - true/false, 当元素被拖拽时，这两个状态之一为true。引擎会创建一个拖拽源的副本，该副本会进行拖拽。</dd>
+    <dt>dragsource</dt>
+    <dd><font color="#999999">只读</font> - true/false, 若该元素是被拖拽的元素之一，则该状态为true。</dd>
+    <dt>pressed</dt>
+    <dd><font color="#999999">读写</font> - true/false, 鼠标是否在该元素上按下。</dd>
+    <dt>isltr<br>isrtl</dt>
+    <dd><font color="#999999">只读</font> - true/false, 该元素是否定义了方向——即它或它的父元素之一有<em>dir</em>属性。</dd>
+    <dt>value</dt>
+    <dd><font color="#999999">读写</font> - 元素的&quot;内存&quot;值。如果元素附加了本地行为，则该值由本地行为管理，否则它是元素的内容文本(见Element.text)。</dd>
+    <dt>screen</dt>
+    <dd><font color="#999999">只读</font> - integer, 元素渲染时的屏幕(监视器)的数量。注意：它可能与弹出元素中的view.screen的值不一样。</dd>
+    <h2>方法</h2>
+    <dt>get</dt>
+    <dd>
+      <div><strong>()</strong> returns: <em>int</em></div>
+      <p>返回Element.STATE_***常量的&quot;或&quot;操作集。</p></dd>
+    <dt>set</dt>
+    <dd>
+      <div><strong>(</strong>flags:int<strong>) </strong>returns: <em>undefined</em></div>
+      <p>设置状态标志。<em>flags</em>为Element.STATE_***常量的&quot;或&quot;操作集。</p></dd>
+    <dt>clear</dt>
+    <dd>
+      <div><strong>(</strong>flags:int<strong>) </strong>returns: <em>undefined</em></div>
+      <p>清除状态标志<em>flags</em>。</p></dd></dl>
+</body>
+</html>

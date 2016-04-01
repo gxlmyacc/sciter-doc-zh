@@ -1,0 +1,52 @@
+﻿<html>
+ <head> 
+  <title>函数中的‘this’和‘this super’参数</title> 
+ </head> 
+ <body> 
+  <div class="post" id="post-41886"> 
+   <h1 class="storytitle">函数中的‘this’和‘this super’参数</h1> 
+  </div> 
+  <div class="storycontent"> 
+   <p> JavaScript和TIScript中的每个函数都有一个隐含的<code>this</code>参数。</p> 
+   <p> 所以当你调用一个对象的方法时，比如<code> foo.bar(1) </code>方法，<code> foo </code>对象会命名为this来作为函数的第一个参数来传递给<code> bar(param) </code>函数。</p> 
+   <p> 对于使用过JS, Python, Ruby等语言的人来说，‘this’变量应该是很熟悉的。 </p> 
+   <p> 但是当一个内部函数想访问它外部函数的‘this’值时，你该怎么做呢? 在JavaScript中，唯一的办法是定义一个变量，并且将外部函数的 ‘this’赋值给它: <code> var that = this; </code> 。 </p> 
+   <p> 为了处理这种情况，我在TIScript中引入了“super this”概念, 所以在任何一个函数中，都有以下几个隐含变量: </p> 
+   <ul> 
+    <li> <code> this </code> – 标准的this变量; </li> 
+    <li> <code> this super </code> – 外部函数的标准this变量; </li> 
+    <li> <code> this super super </code> – 外部函数的外部函数的this变量; </li> 
+    <li> 以此类推。</li> 
+   </ul> 
+   <p> 下面的示例，将在标准输出上输出“6”: </p> 
+   <pre style="background-color: #FEFCF6;">
+    class Test { 
+      function this(data) { 
+        <span style="color: green;">// 构造器</span>  
+        this.data = data; 
+        <span style="color: green;">// 实例字段</span> 
+      } 
+      
+      function Outer(arg1) { 
+        <span style="color: green;">// this - 隐藏参数, 局部变量</span> 
+        <span style="color: green;">// arg1 - 参数, 局部变量</span>  
+        function Inner(arg2) { 
+          <span style="color: green;">// this - 隐藏参数, 局部变量</span>   
+          <span style="color: green;">// arg2 - 参数, 局部变量</span>   
+          <span style="color: green;">// arg1 - 外部变量 - 外部参数</span>  
+          <span style="color: green;">// this super - 外部变量 - 外部的'this'参数</span>  
+          return (this super).data <span style="color: green;">// 1</span>  
+            + arg1 <span style="color: green;">// 2</span>  
+            + arg2 <span style="color: green;">// 3</span>  
+        } 
+        return Inner; 
+      } 
+    } 
+    
+    var test = new Test(1); 
+    var innerFunc = test.Outer(2);
+    stdout.println( innerFunc(3) );
+    </pre> 
+  </div>   
+ </body>
+</html>

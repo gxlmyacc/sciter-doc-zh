@@ -1,0 +1,46 @@
+﻿<html>
+  <head>
+    <meta name="generator" content="h-smile:richtext"/>
+  </head>
+<body>
+  <h1>behavior:hyperlink</h1>
+  <p>标准的超链接行为。它可以应用到任何有<code>href</code>属性的DOM元素上。</p>
+  <h2>元素</h2>
+  <p>默认情况下，应用了behavior:hyperlink行为的元素有:</p>
+  <ul>
+    <li><code>&lt;a href=&quot;url&quot;&gt;...&lt;/a&gt;</code></li></ul>
+  <h2>示例</h2>
+  <div>
+    <a href="http://www.baidu.com">百度</a>
+  </div>
+  <h2>属性</h2>
+  <p>该行为需要知道的属性:</p>
+  <ul>
+    <li><code>href=&quot;url&quot;</code> - 超链接URL;</li>
+    <li><code>target=&quot;ID&quot;</code> - 加载URL内容的frame元素的ID。</li></ul>
+  <h2>事件</h2>
+  <p>除了标准事件集(鼠标、按键、聚焦)外，behavior:hyperlink行为还生成:</p>
+  <ul>
+    <li>HYPERLINK_CLICK 事件, 当鼠标在超链接上按下/按起或当超链接聚焦时按下<code>空格</code>键时产生该事件。该事件为异步事件。</li></ul>
+  <p>如果这个事件用户没有处理掉，则最接近该链接的文档将会处理加载该URL。</p>
+  <h2>方法</h2>
+  <p>N/A - behavior:hyperlink没有引入任何特有的方法。</p>
+  <h2>value</h2>
+  <p>N/A.</p>
+  <h2>脚本中的超链接点击事件处理</h2>
+  <h3><code>onClick</code> 事件</h3>
+  <pre>var btn = $(a#some);
+btn.onClick = function() { 事件处理代码 ...; 
+                           return true; /*标明事件以被处理*/ }
+</pre>
+  <h3><code>on()</code> 订阅</h3>
+  <pre>var btn = $(a#some);
+btn.on(&quot;click&quot;, function() { ... 事件处理代码 ... });
+self.on(&quot;click&quot;, &quot;button#some&quot;, function() { ... 事件处理代码 ... });
+</pre>
+  <h3>decorators.tis 装饰器</h3>
+  <pre>include &quot;decorators.tis&quot;;
+@click @on &quot;a#some&quot; :: ... 事件处理代码 ...;
+</pre>
+</body>
+</html>

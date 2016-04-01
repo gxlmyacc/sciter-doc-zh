@@ -1,0 +1,98 @@
+<html>
+
+<head>
+	<title>更好的CSS精灵</title>
+</head>
+
+<body>
+<div class="post" id="post-41679">
+	 
+<h1 class="storytitle">更好的CSS精灵</h1>
+</div>
+	
+	
+<div class="storycontent">
+		
+<p>首先我要承认，目前的做法<a href="http://coding.smashingmagazine.com/2009/04/27/the-mystery-of-css-sprites-techniques-tools-and-tutorials/">CSS精灵</a>的做法类似于一个黑客。</p>
+
+<p>好吧, CSS精灵是什么? (准确的说，<em>精灵</em>一词对于实体来说是一个错误的名称，不过谁让它已经广泛传播了呢，那我也只能无奈接受了)</p>
+
+<p>这里的'精灵'其实是一些基本图像的部分片段。这个图像只加载一次，但是它的'片段'被当做一张完整的图片用在各个位置上。</p>
+
+<p>这是演示了如果使用标准CSS来实现'精灵'。这里取工具条作为一个典型示例 &#8211; 工具条上有一系列按钮，并且每个按钮都有它自己的图标。</p>
+
+<p>首先，我们需要为所有的按钮定义通用的样式: </p>
+<pre class="brush: css;">
+  .toolbar li a { width: 25px; height: 25px; display: block; background:no-repeat url(tb-icons.png); }
+</pre>
+<p>然后，为每个按钮的背景图像定义负偏移值，以便图像的某部分滚动到当前元素的&#8220;视图&#8221;上。像下面这样: </p>
+<pre class="brush: css;">
+.toolbar li a.btn-formatting { background-position: -25px 0; }
+.toolbar li a.btn-bold       { background-position: -50px 0; }
+.toolbar li a.btn-italic     { background-position: -75px 0; }
+.toolbar li a.btn-font-size  { background-position: -125px 0; }
+</pre>
+<p>因为按钮的&#8220;font-size&#8221;的图像位置是负值，所以渲染的结果如下:<br />
+
+  <a href="images/css-sprites.png">
+  <img src="images/css-sprites.png" alt="" title="css-sprites" width="246" height="45" class="aligncenter size-full wp-image-41680" />
+ </a></p>
+
+<p>到目前为止这工作地很好。</p>
+
+<p>不过现在设想一下，你的一个'土豪'用户有一个225 DPI的屏幕，这时你需要给他/她一个更大的图标以便有更好的体验。 专为96dpi设计的图像在225dpi的浏览器上看起来缩放的很厉害。</p>
+
+<p>所以，你最终需要设置一个新的样式集: </p>
+<pre class="brush: css;">
+media ... {
+  .toolbar li a { width: 25px; height: 25px; display: block; background:no-repeat url(tb-icons-x2.png); }
+  .toolbar li a.btn-formatting	 { background-position: -41px 0; }
+  .toolbar li a.btn-bold	 { background-position: -96px 0; }
+  .toolbar li a.btn-italic	 { background-position: -143px 0; }
+  .toolbar li a.btn-font-size    { background-position: -246px 0; }
+}
+</pre>
+<p>上面所说的这种做法不是很好的管理方式 &#8211; 每次你都需要重新计算图像的位置。 这种功能很贫乏的精灵方式还有许多其他问题。例如，你无法将图像定位到按钮的中间，每个图像的尺寸都必须完全精确的。</p>
+
+<p>所以，我决定在Sciter中提供一种更好的图像编目机制，这里引入了<code>@image-map</code>的 at-规则 和<code>image-map()</code> 函数。下面延时如果使用这种新方式来声明工具条。</p>
+
+<p>首先，定义我们的图像映射声明:</p>
+
+<pre class="brush: css;">
+      @image-map tb-icons 
+      {
+        /* 我们在下面的单一逻辑实体中定义3张图片 */
+        src:   url(tb-icons.png) 120dpi,    /* &lt;= 120dpi */
+               url(tb-icons-x2.png) 240dpi, /* &lt;= 240dpi */
+               url(tb-icons-jumbo.png);     /* 其他  */
+
+        cells: 15 2;                        /* 图片中有15列, 2 行 */
+
+        /* 图片中某部分的逻辑名称，参见tb-icons.png */ 
+        items: bold, italic, underline, strike,
+               font-family, font-size, text-color, text-back-color;
+      }
+</pre>
+<p>这里演示如何使用上面的声明:</p>
+<pre class="brush: css;">
+.toolbar > button {
+  size:2em;
+  background:no-repeat 50% 50%; padding:3px; /* 注意 - 居中对齐 */
+}
+</pre>
+<p>接下来就可以通过它们的逻辑名称来将它们当做普通图像使用了:</p>
+<pre class="brush: css;">
+.toolbar > button.bold      { background-image:image-map(tb-icons,bold); } 
+.toolbar > button.italic    { background-image:image-map(tb-icons,italic); } 
+.toolbar > button.underline { background-image:image-map(tb-icons,underline); } 
+.toolbar > button.strike    { background-image:image-map(tb-icons,strike); } 
+</pre>
+<p>注意：当你需要支持其他分辨率时，你无需重新设计你的CSS设计，只需修改下 @image-map 的声明。</p>
+
+<p>这里是半正式的<a href='http://www.terrainformatica.com/wp-content/uploads/2012/11/image-map.htm'>image-map feature</a>规范。</p>
+	</div>
+	
+  
+</div>
+</body>
+</html>

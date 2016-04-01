@@ -1,0 +1,81 @@
+﻿<html>
+  <head>
+    <meta name="generator" content="h-smile:richtext"/>
+  </head>
+<body>
+  <h1>behavior:dropdown-select</h1>
+  <p>标准的下拉选择列表&lt;select&gt;行为。</p>
+  <h2>元素</h2>
+  <p>默认情况下，应用了该行为的元素有:</p>
+  <ul>
+    <li><code>&lt;select size=&quot;1&quot;&gt;&lt;/select&gt;</code></li>
+    <li><code>&lt;select|dropdown&gt;&lt;/select&gt;</code></li></ul>
+  <h2>示例</h2>
+  <div>
+    <select|dropdown novalue="无选择项">
+      <option>选项1</option>
+      <option>选项2</option>
+      <option>选项3</option>
+    </select>
+	<select|dropdown editable novalue="无选择项" style="width:100;">
+      <option>选项1</option>
+      <option>选项2</option>
+      <option>选项3</option>
+    </select>
+  </div>
+  <h2>模型</h2>
+  <p>该行为会将下面的select代码:</p>
+  <pre>&lt;select&gt;
+  &lt;option value=&quot;#ff0000&quot; selected&gt;Red&lt;/option&gt;
+  &lt;option value=&quot;#00ff00&quot;&gt;Green&lt;/option&gt;
+  &lt;option value=&quot;#0000ff&quot;&gt;Blue&lt;/option&gt;
+&lt;/select&gt;
+</pre>
+  <p>转换成</p>
+  <pre>&lt;select&gt;
+  &lt;caption&gt;Red&lt;/caption&gt;
+  &lt;button /&gt;
+  &lt;popup&gt;
+    &lt;option value=&quot;#ff0000&quot; selected&gt;Red&lt;/option&gt;
+    &lt;option value=&quot;#00ff00&quot;&gt;Green&lt;/option&gt;
+    &lt;option value=&quot;#0000ff&quot;&gt;Blue&lt;/option&gt;
+  &lt;/popup&gt;
+&lt;/select&gt;
+</pre>
+  <p>这些部分的元素默认使用master.css中的样式，不过你可以在宿主文档里使用CSS重定义它们的样式。</p>
+  <h2>属性</h2>
+  <p>该行为需要知道的属性:</p>
+  <ul>
+    <li><code>size=integer</code> - 列表中可见元素的数量。注意：select元素的高度可以被CSS覆盖掉。</li>
+    <li><code>name=&quot;name&quot;</code> - 标准的<em>name</em>属性 - from表单上一个input元素的名称。</li>
+    <li><code>novalue=&quot;text&quot;</code> - 如果select中没有使用<code>&lt;option selected&gt;</code>初始化它，则将会使用该显示该文本。novalue属性使select可为空(<strong>nullable</strong>)，即如果没有选项被选择，则该select的value值为<em>undefined</em>。</li>
+    <li><code>editable</code> - 该属性会将<code>behavior:edit</code>行为应用到<code>&lt;caption&gt;</code>元素上，使它可编辑。</li></ul>
+  <h2>事件</h2>
+  <p>除了标准事件集(鼠标、按键、聚焦)外，该行为还生成:</p>
+  <ul>
+    <li>SELECT_SELECTION_CHANGED 事件, 当修改select中的选择项(在一个option上点击)时产生该事件。该事件为异步事件。</li>
+    <li>SELECT_SELECTION_CHANGING 事件, 当选择项将要改变时生成该事件。该事件为同步事件。</li></ul>
+  <h2>方法</h2>
+  <p>N/A - 该行为没有引入任何特有的方法。</p>
+  <h2>value</h2>
+  <ul>
+    <li>editable select - string, 读/写 - &lt;caption&gt;的内容</li>
+    <li>nullable select - any | undefined, 读/写 - 被选择项的value值。option的值是它的value属性或它的文本内容(如果未定义value属性时)。在用户做任何选择之前，该select的值为<em>undefined</em>。</li>
+    <li>normal select - any, 读/写 - 被选择项的value值。 ption的值是它的value属性或它的文本内容(如果未定义value属性时)。<br/>
+	  如果没有&lt;option selected&gt;项，则select的值为它的第一个&lt;option&gt;元素的值。</li></ul>
+ <h2>在脚本中选择项修改的处理</h2>
+  <h3><code>onValueChanged</code>事件</h3>
+  <pre>var btn = $(select#some);
+btn.onValueChanged = function() { var v = this.value; ... }
+</pre>
+  <h3><code>on()</code> 订阅</h3>
+  <pre>var btn = $(select#some);
+btn.on(&quot;change&quot;, function() { ... 事件处理代码 ... });
+self.on(&quot;change&quot;, &quot;select#some&quot;, function() { ... 事件处理代码 ... });
+</pre>
+  <h3>decorators.tis 装饰器</h3>
+  <pre>include &quot;decorators.tis&quot;;
+@change @on &quot;select#some&quot; :: ... 事件处理代码 ...;
+</pre>
+</body>
+</html>

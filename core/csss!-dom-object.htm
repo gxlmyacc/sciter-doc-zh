@@ -1,0 +1,122 @@
+﻿<html>
+  <head>
+    <meta name="generator" content="h-smile:richtext"/>
+  </head>
+<body>
+  <h1>CSSS!中的DOM元素对象</h1>
+  <p>$1()函数返回一个对象，这个对象表示一个DOM元素。DOM元素制成以下3种访问器:</p>
+  <ul>
+    <li><code>element.attribute</code> - 访问DOM元素的属性。</li>
+    <li><code>element:state-flag</code> - 访问DOM元素的运行期标志: hover, active, focus等。</li>
+    <li><code>element::style-attribute</code> - 访问DOM元素的样式(CSS)属性。</li></ul>
+  <p>DOM元素<code> </code>也有许多方法，这些方法通过下面的语句访问: <code>domobj.function-name()</code>。</p>
+  <h2>DOM元素属性</h2>
+  <p>DOM元素可以设置或移除任何属性。</p>
+  <p>要移除一个元素的某个属性，只需设置这个属性值为<code>null</code>:</p>
+  <pre>self.show = true; // 将会设置show属性的值为&quot;true&quot;;
+self.show = null; // 将self元素的show属性移除。
+</pre>
+  <h2>DOM元素的状态值</h2>
+  <p>元素有合成状态和纯状态。下面的代码在链接被点击时会为链接设置:visited状态。</p>
+  <pre>a:link
+{
+  click!: self:visited = true;
+}
+</pre>
+  <p>合成状态字段:</p>
+  <ul>
+    <li><code>:value</code> - 代表DOM元素的值。对于输入(input)元素(被附加的对应行为处理的元素)，这个值对应value值；对于纯DOM元素，是这个元素的文本内容。</li>
+    <li><code>:index</code> - 是元素在父容器中的索引。Index 是范围为<code>1 .. parent().children()</code>间的一个整数值。</li></ul>
+  <p>纯状态字段都是boolean类型的。这些状态标志的名称和对应的CSS伪类相同:</p>
+  <ul>
+    <li><code>:link</code> - 任何用于href属性的元素</li>
+    <li><code>:hover</code> - 鼠标悬停处的元素</li>
+    <li><code>:active</code> - 被激活(按下)的元素</li>
+    <li><code>:focus</code> - 处于聚焦的元素</li>
+    <li><code>:visited</code> - 辅助标志 - 目前内部不使用</li>
+    <li><code>:current</code> - 容器中的当前项，如&lt;select&gt;中的当前的&lt;option&gt;</li>
+    <li><code>:checked</code> - 被勾选(选择)的元素，如复选框或多选列表</li>
+    <li><code>:disabled</code> - 被禁用的元素，行为相关标志</li>
+    <li><code>:readonly</code> - 只读元素，行为相关标志</li>
+    <li><code>:expanded</code> - 处于展开状态的元素 - 如树视图中的节点、选择列表中&lt;options&gt;</li>
+    <li><code>:collapsed</code> - 与:expanded状态相反</li>
+    <li><code>:incomplete</code> - 元素有图像(back/fore/bullet)请求，但是未交付</li>
+    <li><code>:animating</code> - 当做正处于动画中</li>
+    <li><code>:focusable </code>- 可接受焦点的元素</li>
+    <li><code>:anchor</code> - &lt;select miltiple&gt;中的第一个元素，:CURRENT是当前元素。</li>
+    <li><code>:synthetic</code> - 合成DOM元素 - 如表格中所有缺失的单元格(&lt;td&gt;)将会设置这个标志</li>
+    <li><code>:owns-popup</code> - 可见弹出框的锚点(拥有者)元素</li>
+    <li><code>:tab-focus</code> - 通过tab键获取焦点的元素。设置该标志的同时会设置:focus标志</li>
+    <li><code>:empty</code> - 元素是空的。</li>
+    <li><code>:busy</code> - 元素是忙的。如果元素使用HTMLayoutRequestElementData请求额外数据时会设置这个标志，当请求数据到达后会重置这个标志。</li>
+    <li><code>:drag_over</code> - 拖拽时经过的可以接受拖拽源的块元素(所以是当前拖拽目标)。这个标志设置给拖拽目标块。在任何时刻只会有一个这样的块元素。</li>
+    <li><code>:drop-target</code> - 当前拖拽目标元素，当D&amp;D处于激活状态时，多个元素可以有这个状态标志。</li>
+    <li><code>:moving</code> - dragging/moving - 这个标志设置在正在移动的元素(拖拽源的副本)。</li>
+    <li><code>:copying</code> - dragging/copying - 这个标志设置在正在拷贝的元素(拖拽源的副本)。</li>
+    <li><code>:drag-source</code> - 被拖拽的元素</li>
+    <li><code>:popup</code> - 处于弹出状态的元素</li>
+    <li><code>:pressed</code> - 按下 - 于actvie状态相近，不过有更长的生命区间 - 在MOUSE_UP事件之前这个状态一直存在, 所以行为中可以在MOUSE_UP事件中检查这个状态来发现点击条件。</li>
+    <li><code>:has-children</code>- 有一个活多个子元素</li>
+    <li><code>:has-child</code> - 只有一个子元素</li>
+    <li><code>:ltr</code> - 该元素或它的最近父容器有@dir，并且dir值为&quot;ltr&quot;。</li>
+    <li><code>:rtl</code> - 该元素或它的最近父容器有@dir，并且dir值为&quot;rtl&quot;。</li></ul>
+  <h2>DOM元素的样式属性</h2>
+  <p>CSSS!允许设置所有支持的CSS属性值。支持的CSS属性列表可以在<a href="http://www.terrainformatica.com/htmlayout/cssmap.whtm">http://www.terrainformatica.com/htmlayout/cssmap.whtm</a>找到。</p>
+  <p>下面的样式规则使div元素在获得<em>fade-out</em>属性时显示fade-out特效:</p>
+  <pre>div[fade-out]
+{
+  assigned!: self::opacity = 1.0, self.start-timer(50);
+  timer!: self::opacity &lt; 1.0?
+          self::opacity = self::opacity + 0.1 # return cancel /* 停止计时器 */;
+}
+</pre>
+  <h2>DOM元素支持的函数(方法)</h2>
+  <p>下面是CSSS!中为DOM元素定义的方法集合:</p>
+  <ul>
+    <li><code>element.parent()</code> - DOM元素, 返回当前元素的父元素。</li>
+    <li><code>element.children()</code> - integer, 返回元素的子元素数量。</li>
+    <li><code>element.child(n:integer)</code> - DOM元素, 返回在<em>n</em>位置的子元素。<em>n</em>是一个范围在<code>1..children()</code>间的正数。</li>
+    <li><code>element.next()</code> - DOM元素, 返回当前元素的下一个兄弟元素。</li>
+    <li><code>element.previous()</code> - DOM元素, 返回当前元素的上一个兄弟元素。</li>
+    <li>选择器方法:</li>
+    <ul>
+      <li><code>element.$( selector )</code> - r返回满足选择的元素集合。这个返回只会检索element的子元素。selector中的<code>:root</code>伪类匹配element元素。示例: <code>self.$(:root &gt; li):expanded = true</code>将仅会为self的直接<em>li</em>子元素设置expanded状态。</li>
+      <li><code>element.$1( selector )</code> - 同上，区别是仅返回一个满足选择器的元素。</li>
+      <li><code>element.$p( selector )</code> - 返回匹配selector的element元素的父元素集。selector中的:root是全局的DOM根元素。</li>
+      <li><code>element.$1p( selector )</code> - 返回匹配selector的最近父元素。selector中的:root是全局的DOM根元素。</li></ul>
+    <li><code>element.start-timer(period:integer)</code> - 在element元素上启动一个时间间隔为period(毫秒)的计时器。这个计时器在period间隔后将会触发element元素的<em>timer!</em>事件。要停止计时器，可以调用<em>stop-timer()</em>函数或在<code>timer!</code>事件中<code>return cancel</code>。</li>
+    <li><code>element.stop-timer()</code> - 停止先前使用<code>start-timer()</code>方法启动的计时器。</li>
+    <li><code>element.scroll-to-view()</code> - 确保element元素是可见的。</li>
+    <li><code>element.box</code>-<em>type</em>-<em>what</em>() - 是一个方法集合，它们可以检测element的度量尺寸。示例:<br/>
+	<code>self.box-border-width()</code>将会返回元素的边框盒的宽度(像素)。函数中的<em>type</em>部分可以是下面值之一:</li>
+    <ul>
+      <li><code>margin</code> - 元素的外边距盒;</li>
+      <li><code>border</code> - 元素的内边框盒;</li>
+      <li><code>padding</code> - 元素的内边距盒;</li>
+      <li><code>content</code> - 元素的内容盒(内容轮廓盒);</li>
+      <li><code>inner</code> - 元素的内部盒;</li>
+      <li><code>client</code> - 元素的客户盒 - 元素的内部盒减去滚动条区域。如果没有滚动条则返回内部盒。</li></ul>
+    <p><em>what</em>部分的名称可以是以下值之一:</p>
+    <ul>
+      <li><code>left</code> - 盒的左边;</li>
+      <li><code>right</code> - 盒的右边;</li>
+      <li><code>top</code> - 盒的上边;</li>
+      <li><code>bottom</code> - 盒的下边;</li>
+      <li><code>width</code> - 盒的宽度;</li>
+      <li><code>height</code> - 盒的高度;</li></ul>
+    <p>这些名称组合起来共有30个<code>element.box-...-...()</code>函数。</p>
+    <li><code>element.x-</code><em>what</em>()是一个函数集合，它们检测element的相对x位置。<br/>
+	函数名中的<em>what</em>部分可以有以下值:</li>
+    <ul>
+      <li><code>parent</code> - 元素相对于它的父元素的水平位置值;</li>
+      <li><code>root</code> - 元素相对于根元素(&lt;html&gt;)的水平位置值;</li>
+      <li><code>view</code> - 元素相对于视图(窗口)的水平位置值;</li>
+      <li><code>screen</code> - 元素相对于屏幕的水平绝对位置值;</li></ul>
+    <li><code>element.y-</code><em>what</em>() 是一个函数集合，它们检测element的相对y位置。函数名中的<em>what</em>部分与上一个函数相同。</li>
+    <li><code>element.start-animation([duration])</code> - 启动animation-start!、animation-tick!、animation-end!事件中定义的动画。duration参数可以接受秒值: <code>self.start-animation(0.4s)</code> - 将会启动持续400ms的动画。</li>
+    <li><code>element.text-width(&quot;string&quot;)</code> -返回当前样式下的element元素的string字符串的像素宽度。</li>
+    <li><code>element.min-intrinsic-width()</code>, <code>element.max-intrinsic-width()</code> - 元素的内在宽度。</li>
+    <li><code>element.min-intrinsic-height()</code>, <code>element.max-intrinsic-height()</code> - 元素的内在高度。</li>
+    <li><code>element.refresh()</code> - 该方法将会导致element的尺寸重新计算。如果<code>width</code>或<code>height</code>使用<code>calc()</code>修改后，需要调用这个方法。 </li></ul>
+</body>
+</html>

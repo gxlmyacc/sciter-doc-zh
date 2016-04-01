@@ -1,0 +1,38 @@
+<html>
+
+<head>
+	<title>TIScript中的&#8220;::&#8221;构造器的含义是什么?</title>
+</head>
+
+<body>
+<div class="post" id="post-41691">
+	 <h1 class="storytitle">TIScript中的&#8220;::&#8221;构造器的含义是什么?</h1>
+</div>
+	
+	<div class="storycontent">
+		<p>在一个邮件中曾提到这个问题&#8230;</p>
+<p>它是<a href="http://www.codeproject.com/Articles/33662/TIScript-language-a-gentle-extension-of-JavaScript">TIScript中声明匿名函数的格式</a>之一，称为<em>单语句lambda(希腊字母的第11个字)函数</em>:</p>
+<pre>':' [参数-列表] ':' &lt;语句>;</pre>
+<p>比如说，我们有这样的JavaScript代码: </p>
+<pre class="brush: js;">var counter = 0;
+var inc = function() { counter++; }</pre>
+<p>当我们每次调用<code>inc()</code>, 计数器counter就会加1。</p>
+<p>在TIScript中除了这种写法，可有一种声明匿名函数的轻量级语法: </p>
+<pre class="brush: js;">var counter = 0;
+var inc = :: counter++; </pre>
+<p>其中，第一个&#8220;<code>:</code>&#8221;等同于JS声明中的&#8220;<code>function(</code>&#8221;，而第二个&#8220;<code>:</code>&#8221;等同于JS声明中的&#8220;<code>)</code>&#8221;。</p>
+<p>当然，你也可以在TIScript中使用JS的标准方式来声明匿名函数, 我只是认为有时更短的格式使用更方便。像这里:</p>
+<pre class="brush: js;">var accounts = [...]; // 账户列表
+accounts.sort( :a,b: a.balance - b.balance );</pre>
+<p>声明的这种写法是不是比下面这种写法更简洁:  </p>
+<pre class="brush: js;">accounts.sort( function(a,b){ return a.balance - b.balance });</pre>
+<p>Ruby也有一种类似的轻量级声明方式:</p>
+<pre>[1,2,3,4,5].each {|i| print "#{i} "}</pre>
+<p>对应的JS如下:</p>
+<pre class="brush: js;">[1,2,3,4,5].each(function(i){ println("#",i);});</pre>
+	</div>
+	
+  
+</div>
+</body>
+</html>

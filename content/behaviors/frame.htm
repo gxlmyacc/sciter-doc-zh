@@ -1,0 +1,77 @@
+﻿<html>
+  <head>
+    <meta name="generator" content="h-smile:richtext"/>
+  </head>
+<body>
+  <h1>behavior:frame</h1>
+  <p>该行为处理&lt;frame&gt;/&lt;iframe&gt;(宿主文档中的子文档容器)元素的扩展功能。</p>
+  <p>该行为可以应用到任何块级元素上, 如：&lt;div&gt;、&lt;section&gt;。</p>
+  <h2>元素</h2>
+  <p>默认情况下，应用了该行为的元素有:</p>
+  <ul>
+    <li><code>&lt;frame&gt;</code> - 块级文档容器;</li>
+    <li><code>&lt;iframe&gt;</code> - 行内块文档容器。</li></ul>
+  <p>Sciter中, <code>&lt;frame&gt;</code>是一个普通的DOM元素，它可以出现在任何其他块元素可出现的地方，而不仅仅是作为&lt;frameset&gt;的子元素。</p>
+  <h2>模型</h2>
+  <p>&lt;frame&gt;元素初始时可以有任何子元素，这方面&lt;frame&gt;和&lt;div&gt;、&lt;section&gt;没有什么区别。</p>
+  <pre>&lt;frame&gt;
+   &lt;p&gt;Select document to load&lt;/p&gt; 
+&lt;/frame&gt;
+</pre>
+  <p>在&lt;frame&gt;加载完子文档(由于<em>src</em>的处理 或 调用了<code>.load()</code>方法)后，frame将只有一个子元素 —— 加载文档根元素, 如&lt;html&gt;。</p>
+  <p>&lt;frame&gt;和加载的文档:</p>
+  <pre>&lt;frame&gt;
+   &lt;html&gt;
+     &lt;head&gt;...&lt;/head&gt;  
+     &lt;body&gt;...&lt;/body&gt;  
+   &lt;/html&gt;
+&lt;/form&gt;
+</pre>
+  <p>若脚本需要访问子文档，可以使用frame[0]来获取frame的第一个根元素 - 子文档的根元素:</p>
+  <pre>var frm = $(frame#main);
+var childDoc = frm[0];
+var someBtn = childDoc.$(&quot;button#some&quot;);
+...
+</pre>
+  <h2>属性</h2>
+  <p>该行为需要知道的属性:</p>
+  <ul>
+    <li><code>src=&quot;url&quot;</code> - 可选, 加载到frame的文档的URL;</li>
+    <li><code>content-style=&quot;url&quot;</code> - 可选, 应用到加载文档的.css文件的URL。 该属性用于宿主文档需要给子文档应用一些特定样式时。</li></ul>
+  <h2>状态标志</h2>
+  <ul>
+    <li><code>:busy</code> - 该标志表示文档正在加载。它可用于设置&quot;文档加载中...&quot;的样式。</li></ul>
+  <h2>事件</h2>
+  <ul>
+    <li>DOCUMENT_CREATED 事件 - 该事件生成于文档加载的第一步骤。这一刻新文档已经存在但为空;</li>
+    <li>DOCUMENT_COMPLETE 事件 - 该事件生成于文档完成加载时 ——DOM已经准备好，并且所有待处理资源请求已经处理完成。注意：该事件是Sciter特有的。</li></ul>
+  <h2>方法</h2>
+  <dl>
+    <dt>load</dt>
+    <dd>(url:string) - 从指定URL加载html文档;</dd>
+    <dt>load</dt>
+    <dd>(html:string, baseUrl: string) - 从<em>html</em>字符串加载html文档。baseUrl用于指定文档中的相对URL的根URL。</dd>
+    <dt>clear</dt>
+    <dd>() - 通过加载一个空文档来清除frame的内容。</dd>
+    <dt>mediaVars</dt>
+    <dd>() : object - 返回加载文档使用的媒体(media)变量的key/value映射表。</dd>
+    <dt>mediaVars</dt>
+    <dd>( map: object [,reset: true | false] ) - 设置map为加载文档的媒体变量，如果<em>reset</em>为true，将会应用该媒体。</dd></dl>
+  <h2>value</h2>
+  <p>N/A</p>
+  <h2>脚本中Frame事件的处理</h2>
+  <pre>var frame = $(frame#some);
+btn.onControlEvent = function(evt)
+{
+  switch(evt.type) {
+    case Event.DOCUMENT_CREATED: /* evt.target 是一个文档 */ break;
+    case Event.DOCUMENT_COMPLETE: /* evt.target 是一个文档 */ break;
+  }
+}
+</pre>
+  <h3>decorators.tis 装饰器</h3>
+  <pre>include &quot;decorators.tis&quot;;
+@when Event.DOCUMENT_COMPLETE @on &quot;frame#some&quot; :: ... 事件处理代码 ...;
+</pre>
+</body>
+</html>

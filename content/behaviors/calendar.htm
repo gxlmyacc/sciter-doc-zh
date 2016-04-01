@@ -1,0 +1,40 @@
+﻿<html>
+  <head>
+    <meta name="source" content="http://www.terrainformatica.com/wiki/doku.php?id=h-smile:built-in-behaviors:edit"/>
+    <meta name="generator" content="h-smile:richtext"/>
+  </head>
+<body>
+  <h1>behavior: calendar</h1>
+  <p>calendar是一个日期输入元素，它允许用户选择一个特定的日期。</p>
+  <h2>元素</h2>
+  <p>默认情况下，应用了该行为的元素有:</p>
+  <ul>
+    <li><code>&lt;input type=&quot;calendar&quot; /&gt;</code> - 行内日期输入元素</li></ul>
+  <h2>示例</h2>
+  <div>
+    <input type="calendar" />
+  </div>
+  <h2>模型</h2>
+  <p>calendar有以下4种不同的视图模式:</p>
+  <ul>
+    <li>十年视图 - 每个单元格为一个10年的时间段</li>
+    <li>年视图   - 每个单元格为一年</li>
+    <li>月视图   - 每个单元格为一个月</li>
+    <li>日视图   - 每个单元格为一天</li></ul>
+  <p>每种模式使用一个&lt;table&gt;来渲染视图的内容。如果使用DOM捡拾器(inspector)就会发现每个视图的DOM结构。如果你需要重定义calandar的内容样式时，可以在CSS中直接使用这些DOM元素。</p>
+  <h2>属性</h2>
+  <p>该行为需要知道的属性:</p>
+  <ul>
+    <li><code>value=&quot;YYYY-MM-DD&quot;</code> - 初始化日期, ISO 8601格式的字符串。</li></ul>
+  <h2>事件</h2>
+  <p>除了标准事件集(鼠标、按键、聚焦)外，该行为还生成:</p>
+  <ul>
+    <li>SELECT_STATE_CHANGED 事件 - 当视图被改变(如月份被改变)时生成该事件，该事件为异步事件。</li>
+    <li>SELECT_SELECTION_CHANGED 事件 - 当日期被改变时生成该事件，该事件为异步事件。</li></ul>
+  <h2>value</h2>
+  <p>Date值 或 undefined, 反应当前的选择内容。</p>
+  <h2>方法</h2>
+  <p>N/A - 该行为没有引入任何特有的方法。</p>
+  <dl></dl>
+</body>
+</html>

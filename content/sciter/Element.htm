@@ -1,0 +1,922 @@
+﻿<html>
+  <head>
+    <meta name="generator" content="h-smile:richtext"/>
+  </head>
+<body>
+  <h1>元素(Element)对象</h1>
+  <p>代表DOM元素。 拥有子对象(sub-objects): <a href="Attributes.htm">属性(attributes)</a> 和 样式(styles)。</p>
+  <p>元素(Element)类 派生自 节点(Node)类。</p>
+  <dl>
+    <h2>常量</h2>
+    <div>STATE_LINK</div>
+    <div>STATE_HOVER</div>
+    <div>STATE_ACTIVE</div>
+    <div>STATE_FOCUS</div>
+    <div>STATE_VISITED</div>
+    <div>STATE_CURRENT</div>
+    <div>STATE_CHECKED</div>
+    <div>STATE_DISABLED</div>
+    <div>STATE_READONLY</div>
+    <div>STATE_EXPANDED</div>
+    <div>STATE_COLLAPSED</div>
+    <div>STATE_INCOMPLETE</div>
+    <div>STATE_ANIMATING</div>
+    <div>STATE_FOCUSABLE</div>
+    <div>STATE_ANCHOR</div>
+    <div>STATE_POPUP</div>
+    <div>STATE_OWNS_POPUP</div>
+    <div>STATE_EMPTY</div>
+    <div>STATE_BUSY</div>
+    <dd>元素的状态标志位，用于get/setState函数。TBD。</dd>
+    <h2>属性</h2>
+    <dt>length</dt>
+    <dd><font color="#999999">只读</font> - <em>integer</em>, 该元素中的子元素数量。只读属性。</dd>
+    <dt>[index]</dt>
+    <dd><font color="#999999">读写 - </font><em>Element</em>, 子元素在该元素中的索引<em>index</em>位置，读写属性。索引从0开始。</dd>
+    <dt>root</dt>
+    <dd><font color="#999999">只读</font> - <em>Element</em>, 该元素所属DOM的根元素。只读属性。</dd>
+    <dt>parent</dt>
+    <dd><font color="#999999">只读 - </font><em>Element</em>, 该元素的父元素。若该元素是根元素，则值为<em>null</em>。只读属性。</dd>
+    <dt>layoutParent</dt>
+    <dd><font color="#999999">只读 - </font><em>Element</em>, 该元素的布局父元素。若该元素是根元素，则值为<em>null</em>。只读属性。<br/>对于绝对定位(position:absolute)元素，它的layoutParent为该元素用于计算top/left/bottom/right的绝对定位容器(最近的绝对定位父元素)。</dd>
+    <dt>owner</dt>
+    <dd><font color="#999999">只读 - </font><em>Element</em>, 该元素的拥有元素。若该元素是根元素，则值为<em>null</em>。只读属性。<br/>大多数情况下，拥有元素为父元素，但是对于弹出(popup)元素，拥有元素为该弹出功能的拥有者。例如，对于tooltip元素，它的拥有者为引发该tooltip显示的元素。</dd>
+    <dt>index</dt>
+    <dd><font color="#999999">只读</font> - Integer, 该元素在父容器中的索引。如果该元素未连接到任何父元素，则值为Undefined。</dd>
+    <dt>tag</dt>
+    <dd><font color="#999999">只读</font> - <em>String</em>, 该元素的标签(tag)名。只读属性。</dd>
+    <dt>id</dt>
+    <dd><font color="#999999">只读 - </font><em>String</em>, 该元素的<em>id</em>属性值(如果存在)。只读属性。</dd>
+    <dt>next</dt>
+    <dd><font color="#999999">只读 - </font><em>Element</em>, 该元素的下一个兄弟元素。如果该元素是父容器中的最后一个，则值为<em>null</em>。</dd>
+    <dt>prior</dt>
+    <dd><font color="#999999">只读</font> - <em>Element</em>, 该元素的上一个兄弟元素。如果该元素是父容器中的第一个，则值为<em>null</em>。</dd>
+    <dt>first</dt>
+    <dd><font color="#999999">只读</font> - <em>Element</em>, 该元素的第一个子元素。如果没有子元素，则值为<em>null</em>。</dd>
+    <dt>last</dt>
+    <dd><font color="#999999">只读</font> - <em>Element</em>, 该元素的最后一个子元素。如果没有子元素，则值为<em>null</em>。</dd>
+    <dt><u>attributes</u></dt>
+    <dd><font color="#999999">类 - </font><a href="Attributes.htm"><em>Attributes</em></a>, 该元素的html属性集合。</dd>
+    <dt><u>@</u></dt>
+    <dd><font color="#999999">类 -</font> 访问<font color="#999999"> </font><a href="Attributes.htm"><em>Attributes</em></a>属性的简短格式, 该元素的html属性集合。它只是上面的<em>attributes</em>的别名。<br/>示例：<br/><code>this.@[&quot;selected&quot;] = true</code> // 或者<br/><code>this.@#selected = true</code><br/>等价于<br/><code>this.attributes[&quot;selected&quot;] = true</code></dd>
+    <dt><u>style</u></dt>
+    <dd><font color="#999999">类 - </font><a href="Style.htm">Style</a>, 该DOM元素的CSS样式属性集合。</dd>
+    <dt><u>state</u></dt>
+    <dd><font color="#999999">类 - </font><a href="States.htm">States</a>, 该DOM元素的运行期状态(标志位)集合。</dd>
+    <dt><u>x</u></dt>
+    <dd><font color="#999999">类 - </font>Extenders, 附加到该元素上的本地行为(behavior)的列表集合:
+      <ul>
+        <li>element.x.length - 附加到该元素上的本地行为数量；</li>
+        <li>element.x[n] - 附加到该元素上的本地行为的第n个行为的名称；</li>
+        <li>element.x.<em>函数名(....)</em> - 调用本地行为实现的方法。</li></ul>
+      <p>该接口的主要目的是为单独的名称空间提供调用函数的机制。</p></dd>
+    <dt>text</dt>
+    <dd><font color="#999999">读写</font> - <em>String</em>, 元素的文本。对于符合元素，该属性返回内容的纯文本形式版本。</dd>
+    <dt>html</dt>
+    <dd><font color="#999999">读写</font> - <em>String</em>, (<em>内HTML</em>) 元素内容的html源码。返回的文本不包含该元素的前后标签。</div>
+      <div>值可以设置字符串和Stream流对象。</div></dd>
+    <dt>outerHtml</dt>
+    <dd>
+      <div><font color="#999999">读写 - </font><em>String</em>, (<em>外HTML</em>) 元素内容的html源码。返回的文本不包含该元素的前后标签。</div>
+      <div>值可以设置字符串和Stream流对象。</div></dd>
+    <dt>value</dt>
+    <dd><font color="#999999">读写 - </font><em>String</em>, 默认情况下，如果元素附加了本地行为，则value值可能为integer, boolean, array等等。例如，&lt;input type=&quot;radio&quot;&gt;若单选框出于&quot;on&quot;状态则返回<em>true</em>。
+      <p>注意: <code>property value(v)</code> 可以在脚本中的behavior类中覆盖。在这种情况下，为了访问本地value值，可以使用<em>Element.state.value</em>属性。</p></dd>
+    <dt>prototype</dt>
+    <dd><font color="#999999">读写 - </font>元素(Element)或行为(Behavior)的实例。Prototype值可以通过CSS(prototype:name_of_global_behavior_variable)或者该属性被设置。</dd>
+    <dt>isVisible</dt>
+    <dd><font color="#999999">只读</font> - 如果该元素和它的父容器元素处于可见状态(未定义visibility:hidden或display:none)则返回<em>true</em>。</dd>
+    <dt>isEnabled</dt>
+    <dd><font color="#999999">只读</font> - 如果元素和它的父容器不处在:disabled (setState(Element.STATE_DISABLED))状态时返回<em>true</em>。</dd>
+    <dt>ns</dt>
+    <dd><font color="#999999">读写</font> - <em>Object</em>, 该元素的名称空间对象。脚本中当前文档定义的所有静态方法和类都属于该名称空间[namespace]的成员。</dd>
+    <dt>rows</dt>
+    <dd><font color="#999999">读写</font> - <em>integer</em>, 该DOM元素中行(rows)的数量。对于&lt;table&gt;元素返回它里面的行的数量，对于其他元素则返回CSS的<em>flow</em>属性的行的数量。</dd>
+    <dt>columns</dt>
+    <dd><font color="#999999">读写</font> - <em>integer</em>, 该DOM元素中列(columns)的数量。对于&lt;table&gt;元素返回它里面列的数量，对于其他元素则返回CSS的<em>flow</em>属性的列的数量。</dd>
+    <dt>options</dt>
+    <dd><font color="#999999">读写</font> - <em>Element</em>, 对于&lt;select&gt;元素返回一个DOM元素，该元素是一个容器元素，使用它可以编程填充选项列表。</dd>
+    <dt>contentModel</dt>
+    <dd><font color="#999999">读写</font> - <em>标识符</em>, 该元素的当前内容模型，其值为以下值之一：
+      <ul>
+        <li><strong>#block-inside</strong> - 该元素可以包含块元素(如&lt;div&gt;)。</li>
+        <li><strong>#inline-inside</strong> - 该元素包括包含行内元素(如&lt;p&gt;)。</li>
+        <li><strong>#transparent</strong> - 内容模型为透明的元素，它的内容模型从它的父元素继承下来(如&lt;a&gt;)。</li>
+        <li><strong>#text-only</strong> - 该元素可以包含纯文本(如&lt;title&gt;)。</li>
+        <li><strong>#table</strong>, <strong>#table-section</strong>、<strong>#table-row</strong> - &lt;table&gt;、 &lt;tbody&gt;、&lt;tfoot&gt;、&lt;thead&gt;、&lt;tr&gt;元素。</li></ul></dd>
+    <dt>selection</dt>
+    <dd><font color="#999999">只读</font> - <em>null | Selection</em>, 若该元素支持选择的行为(如htmlarea、richtext)时返回<a href="selection.htm">Selection</a>对象，否则返回<em>null</em></dd>
+    <dt>firstCaretPos</dt>
+    <dd><font color="#999999">只读</font> - <em>null | bookmark</em>, 返回元素内第一个插入位置(光标)的书签。</dd>
+    <dt>lastCaretPos</dt>
+    <dd><font color="#999999">只读</font> - <em>null | bookmark</em>, 返回元素内最后一个插入位置(光标)的书签。</dd>
+    <dt>paintBackground</dt>
+    <dd><font color="#999999">只写</font> - <em>null | </em>function(gfx), 设置背景层的绘制函数。该函数能获取到绘制该层的Graphics对象。如果函数返回<em>true</em>时则默认的背景和边框绘制将不会再绘制。背景绘制函数是在本地绘制之<strong>前</strong>调用。</dd>
+    <dt>paintContent</dt>
+    <dd><font color="#999999">只写</font> - <em>null | </em>function(gfx), 设置内容层的绘制函数。该函数能获取到绘制该层的Graphics对象。如果函数返回<em>true</em>时则默认的内容绘制将不会再绘制。内容绘制函数是在本地绘制之<strong>前</strong>调用。</dd>
+    <dt>paintForeground</dt>
+    <dd><font color="#999999">只写</font> - <em>null | </em>function(gfx), 设置前景层的绘制函数。该函数能获取到绘制该层的Graphics对象。如果函数返回<em>true</em>时则默认的前景绘制将不会再绘制。前景绘制函数是在本地绘制之<strong>前</strong>调用。</dd>
+    <dt>paintOutline</dt>
+    <dd><font color="#999999">只写</font> - <em>null | </em>function(gfx), 设置轮廓层的绘制函数。该函数能获取到绘制该层的Graphics对象。如果函数返回<em>true</em>时则默认的前景绘制将不会再绘制。轮廓绘制函数是在本地绘制之<strong>前</strong>调用。</dd>
+    <h3>从 Node类 继承的属性 或者 Node 相关的属性</h3>
+    <dt>nodeIndex</dt>
+    <dd><font color="#999999">只读</font> - Integer, 该节点在父节点容器中的索引位置。</dd>
+    <dt>nextNode</dt>
+    <dd><font color="#999999">只读 - </font><em>Element 或 Node</em>, 该节点的下一个节点。若该节点是父容器中的最后一个则返回<em>null</em>。</dd>
+    <dt>priorNode</dt>
+    <dd><font color="#999999">只读</font> - <em>Element 或 Node</em>, 该节点的上一个节点。若该节点是父容器中的第一个则返回<em>null</em>。</dd>
+    <dt>firstNode</dt>
+    <dd><font color="#999999">只读</font> - <em>Element 或 Node</em>, 该节点的第一个子节点(元素/文本/注释)的引用。</dd>
+    <dt>lastNode</dt>
+    <dd><font color="#999999">只读</font> - <em>Element 或 Node</em>, 该节点的最后一个子节点(元素/文本/注释)的引用。</dd>
+    <dt>isElement</dt>
+    <dd><font color="#999999">只写</font> - 如果该节点是元素(Element)时返回<em>true</em>，否则返回<em>false</em>。</dd>
+    <dt>isText</dt>
+    <dd><font color="#999999">只写</font> - 如果该节点是文本时返回<em>true</em>，否则返回<em>false</em>。</dd>
+    <dt>isComment</dt>
+    <dd><font color="#999999">只写</font> - 如果该节点是注释时返回<em>true</em>，否则返回<em>false</em>。</dd>
+    <h2>枚举/遍历</h2>
+    <dt>for ... in</dt>
+    <dd>
+      <div>for(var<strong> child</strong> in<strong> element</strong>)<strong> { </strong>/* 循环体 */<strong> }</strong> 或 <br/>for(var<strong> (index,child)</strong> in<strong> element</strong>)<strong> { </strong>/* 循环体 */<strong> }</strong></div>
+      <p>为element元素的每个子元素执行循环体中的代码。</p>
+      <p>示例, 对于html中的<em>p</em>元素的for循环: <br/>
+	  <code>&lt;p&gt;Hello &lt;em&gt;wonderfull&lt;/em&gt; world&lt;/p&gt;</code><br/>
+	  循环将会执行一次，<em>child</em>变量将是Element(&quot;em&quot;)。</p></dd>
+
+    <h2>方法/函数</h2>
+    <dt>this</dt>
+    <dd>
+      <div><strong>(tagname[, text])</strong></div>
+      <p>创建一个新的标签为<em>tagname</em>(字符串/标识符)的元素对象，它的内容为text。使用方法如下：</p>
+      <pre>
+  var el = new Element(&quot;option&quot;); 
+  // 或者
+  var el = new Element(#option);
+</pre>
+      <p>元素创建后处于 未连接 状态。为了连接到DOM中，可以使用父元素的<em>insert</em>方法。</p></dd>
+    <dt>create</dt>
+    <dd>
+      <div><strong>(object)</strong> : <em>Element</em></div>
+      <p>DOM元素的静态构造函数。这里的<em>object</em>是一个用下面的微格式(<a href="#object-template">microformat</a>)定义的字符。</p>
+      <p>示例：下面的代码片段相当于创建一个元素，该元素包含标记：<code>&lt;p&gt;before &lt;button&gt;Hi!&lt;/button&gt; after&lt;/p&gt;</code>:</p>
+      <pre>
+  var para = Element.create { p, &quot;paragraph text&quot; }; 
+  //或者文本是变量: 
+  var para = Element.create { p, [paragraphText] };
+</pre></dd>
+    <dt>clear</dt>
+    <dd>
+      <div><strong>()</strong> : <em>undefined</em></div>
+      <p>清除一个元素的内容，移除它的所有子元素。</p></dd>
+    <dt>toString</dt>
+    <dd>
+      <div><strong>()</strong> : <em>string</em></div>
+      <p>返回该元素表示的HTML字符串，该字符串是外HTML——包含头和尾标签、内容等同于<em>html</em>的返回值。</p></dd>
+    <dt>clone</dt>
+    <dd>
+      <div><strong>() </strong>:<em>Element</em></div>
+      <p>返回元素的一个新拷贝，该方法为深拷贝。 新元素处于 未连接 状态，可以使用insert()方法插入到DOM中。</p></dd>
+    <dt>select</dt>
+    <dd>
+      <div><strong>(CSSselector</strong>:string<strong> [, argument1 [, argument2, ... ]])</strong> : <em>Element</em></div>
+      <p>返回满足CSS选择器(<em>CSSselector</em>, string)的第一个元素。CSSSelector可以包含格式化标识(如%d、%s)，这些标识在最终的CSS选择器字符串中可以被<em>argument1</em> ... <em>argumentN</em>替代。该函数的使用规则和Stream.printf方法相同。</p>
+      <p>示例：如果文档包含<code>&lt;input type=&quot;text&quot;/&gt;</code>元素，则下面的语句：</p>
+      <pre>var inp = self.select(&quot;input[type='text']&quot;);
+</pre>
+      <p>将会设置<em><code>inp</code></em>为这个元素的引用。</p></dd>
+    <dt>$</dt>
+    <dd>
+      <div><strong>( </strong><em>CSSselector</em><strong> )</strong> : <em>Element</em></div>
+      <p>返回满足CSS选择器的第一个元素。</p>
+      <p>注意：该选择器写的时候不需要用&quot;&quot;括住。</p>
+      <p>示例： 如果文档包含<code>&lt;input type=&quot;text&quot;/&gt;</code>元素，则下面的语句：</p>
+      <pre>var inp = self.$( input[type='text'] );</pre>
+      <p>将会设置<em><code>inp</code></em>为这个元素的引用。</p>
+      <p>而且下面的代码片段:</p>
+      <pre>
+  var n = 3;
+  var li3 = self.$( ul &gt; li:nth-child({n}) );
+      </pre>
+      <p>将会找到ul列表元素中第三个列表项。</p></dd>
+    <dt>select</dt>
+    <dd>
+      <div><strong>(func , CSSselector</strong>: string<strong> [, argument1 [, argument2, ... ]])</strong> returns: <em>integer</em></div>
+      <p>调用<em>func</em>(函数引用)方法来遍历满足<em>CSSselector</em>选择器的每个元素。<em>func</em>函数接受一个参数，该参数为匹配元素的引用。 <em>func</em>函数可以返回<em>true</em>来停止遍历。</p>
+      <p>示例：下面的代码片段将会打印所有input元素的"name"属性：<br/>
+	  function printel(el) { stdout.println( el.attributes[<font color="#336600">&quot;name&quot;</font>] );  }<br/>
+	  document.select(printel, &quot;input&quot;);</p></dd>
+    <dt>selectAll</dt>
+    <dd>
+      <div><strong>(CSSselector</strong>: string<strong> [, argument1 [, argument2, ... ]])</strong> returns: <em>Array</em></div>
+      <p>返回满足CSS选择器(<em>CSSselector</em>, string)的所有元素的数组。CSSSelector可以包含格式化标识(如%d、%s)，这些标识在最终的CSS选择器字符串中可以被<em>argument1</em> ... <em>argumentN</em>替代。该函数的使用规则和Stream.printf方法相同。</p></dd>
+    <dt>$$</dt>
+    <dd>
+      <div><strong>( </strong><em>CSSselector</em><strong> )</strong> returns: <em>Array</em></div>
+      <p>返回满足CSS选择器的所有元素的数组。</p>
+      <p>注意：该选择器写的时候不需要用&quot;&quot;括住。</p></dd>
+    <dt>selectParent</dt>
+    <dd>
+      <div><strong>(CSSselector</strong>: string<strong> [, argument1 [, argument2, ... ]])</strong> returns: <em>Element</em></div>
+      <p>返回在子/父链上满足CSS选择器的(<em>CSSselector</em>, string)的第一个元素。CSSSelector可以包含格式化标识(如%d、%s)，这些标识在最终的CSS选择器字符串中可以被<em>argument1</em> ... <em>argumentN</em>替代。该函数的使用规则和Stream.printf方法相同。</p>
+      <p>注意：该方法也会检查本元素(<em>this</em>)是否满足CSS条件。</p></dd>
+    <dt>$p</dt>
+    <dd>
+      <div><strong>( </strong><em>CSSselector</em><strong> )</strong> returns: <em>Element</em></div>
+      <p>返回在子/父链上满足CSS选择器的的第一个元素。</p>
+	  <p>注意1：该选择器写的时候不需要用&quot;&quot;括住。</p>
+      <p>注意2：该方法也会检查本元素(<em>this</em>)是否满足CSS条件。</p></dd>
+    <dt>selectParent</dt>
+    <dd>
+      <div><strong>(func , CSSselector</strong>: string<strong> [, argument1 [, argument2, ... ]])</strong> returns: <em>integer</em></div>
+      <p>调用<em>func</em>(函数引用)来遍历每个满足<em>CSSselector</em>的元素。<em>func</em>函数接受一个参数，该参数为匹配元素的引用。 <em>func</em>函数可以返回<em>true</em>来停止遍历。</p>
+      <p>示例：下面的代码片段可以打印出所有父div的id属性：</p>
+      <pre>
+  function printel(el) {  stdout.println( el.attributes[<font color="#336600">&quot;id&quot;</font>] );  }
+  some.selectParent(printel, &quot;div&quot;);
+      </pre>
+      <p>注意：该方法也会检查本元素(<em>this</em>)是否满足CSS条件。</p></dd>
+    <dt>$$p</dt>
+    <dd>
+      <div><strong>( </strong><em>CSSselector</em><strong> )</strong> returns: <em>Array of Element</em>s</div>
+      <p>返回在子/父链上满足CSS选择器的的所有元素数组。</p>
+      <p>注意1：该选择器写的时候不需要用&quot;&quot;括住。</p>
+      <p>注意2：该方法也会检查本元素(<em>this</em>)是否满足CSS条件。</p></dd>
+    <dt>match</dt>
+    <dd>
+      <div><strong>( CSSselector</strong>: string<strong> [, argument1 [, argument2, ... ]])</strong> returns: <em>true | false</em></div>
+      <p>检查该DOM元素是否满足给定的<em>CSSselector</em>选择器。</p></dd>
+    <dt>$is</dt>
+    <dd>
+      <div><strong>( </strong><em>CSSselector</em><strong> )</strong> returns: <em>true | false</em></div>
+      <p>检查该DOM元素是否满足给定的<em>CSSselector</em>选择器。</p>
+      <p>注意：该选择器写的时候不需要用&quot;&quot;括住。</p></dd>
+    <dt>belongsTo</dt>
+    <dd>
+      <div><strong>(</strong> <strong>parent</strong>: Element [, <strong>useUITree</strong>: true | <em>false</em> [, <strong>includingThis</strong>: true | <em>false</em> ]] <strong>)</strong> : <em>true | false</em></div>
+      <p>如果在该元素的父链上存在<em>parent</em>元素则返回<em>true</em>。</p>
+	  <p>如果<strong>useUITree</strong>参数提供了且为true，则该函数使用UI关系而不是DOM树上的父/子链关系。例如，弹出元素可以被声明在它的宿主元素之外，但是如果宿主元素创建该弹出元素后使用该函数将返回true。</p>
+      <p>如果<strong>includingThis</strong>参数提供了且为true,则若<em>parent</em>为该元素本身是返回<em>true</em>: el.belongsTo(el,false,true) -&gt; true。<em>includingThis</em>默认为<em>false</em>。</p></dd>
+    <dt>find</dt>
+    <dd>
+      <div><strong>(x, y)</strong> returns: <em>Element</em>.</div>
+      <p>返回相对于该元素在x、y坐标位置的子元素的引用。如果该位置没有元素，则返回该元素本身。</p></dd>
+    <dt>update</dt>
+    <dd>
+      <div><strong>([deep])</strong> returns: undefined</div>
+      <p>在修改后重新计算该元素(deep为true时)和刷新它的可视区域。如果由于某些操作会导致该元素尺寸有变化时，请设置<strong>deep=true</strong>。若果仅仅是装饰属性(不会改变尺寸，如color属性)发生变化，请省略deep参数(或设置它为<em>false</em>)。</p></dd>
+    <dt>update</dt>
+    <dd>
+      <div><strong>(stateUpdateFunction)</strong> returns: undefined</div>
+      <p>该方法用于&quot;过渡更新(transactioned update)&quot;。<em>stateUpdateFunction </em>函数被调用时包含<em>this</em>变量(指向该元素对象)，且预期该函数会改变元素的一些状态、内容、或者它的子元素的状态。</p>
+      <p>&quot;过渡更新(transactioned update)&quot;机制用在元素期待它的&quot;内容&quot;更新有过渡效果，这些效果在CSS中使用transition:blend()、scroll-***()、slide-***()等定义的。</p>
+      <p><code>Element.update(stateUpdateFunction)</code>执行时做以下步骤:</p>
+      <ol>
+        <li>制作该元素的初始状态快照；</li>
+        <li>调用提供的<code>stateUpdateFunction</code>函数来应用所有的该元素的修改至新状态；</li>
+        <li>制作最终状态的该元素快照；</li>
+        <li>使用这两张快照开始过渡动画(如果在CSS中为该元素定义的话)。</li></ol>
+      <p>如果没有在CSS为该元素定义过渡效果，则<code>stateUpdateFunction</code>会被调用，且视图会立即将元素更新为最新状态。</p></dd>
+    <dt>refresh</dt>
+    <dd>
+      <div><strong>( </strong>[<strong>x</strong>,<strong> y</strong>,<strong> width</strong>,<strong> height</strong>]<strong> )</strong> returns: true|false</div>
+      <p>刷新该元素在屏幕上占据的区域。如果<em>x</em>、<em>y</em>、<em>width</em>、<em>height </em>(元素内部的区域坐标)被指定，则只会刷新该部分区域。这个方法用在当你使用Graphics对象渲染了元素表面区域时。</p></dd>
+    <dt>animate</dt>
+    <dd>
+      <div><strong>( nextStep</strong>: function [, whenEnded: function] [, <strong>duration</strong>: diration | integer]<strong> )</strong> : undefined</div>
+      <p>启动该元素的动画。<em>nextStep</em>为动画的步骤函数(修改尺寸、透明度等)。这个函数调用时包含<em>this</em>变量(指向该元素对象)，且它应该返回一个整数——下一个步骤等待的毫秒数。如果返回0或非整数则动画终止。</p>
+      <p>如果<em>whenEnded</em>函数被提供，则它会在动画结束时被调用。</p>
+      <p><em>duration</em>为动画持续的时间。如果提供了该参数则<em>nextStep</em>函数的声明应该为：<br/> <code>function nextStep(progress: float) {}</code> <br/>progress为0.0至1.0的浮点数——动画的进度。nextStep总是以接收到progress == 1.0作为最后一步。</p></dd>
+    <dt>box</dt>
+    <dd>
+      <div><strong>( part</strong> [, <strong>edge</strong> [, <strong>relativeTo</strong> ]] <strong>) </strong>returns: integer, 设备像素</div>
+      <p>返回该元素边缘的坐标。参数：</p>
+      <ul>
+        <li><strong>part</strong> -<strong>#left</strong>, <strong>#top</strong>, <strong>#right</strong>, <strong>#bottom</strong>, <strong>#width</strong>, <strong>#height</strong>中定义的常量标识符之一。定义返回盒(矩形)的哪一部分。#part还可以接受以下常量：</li>
+        <ul>
+          <li>如果<em>part</em>是<strong>#rect</strong>，则该函数返回4个值——左、上、右、下。使用示例： <code><br/>var (x1,y1,x2,y2) = this.box(#rect, #inner, #view)</code>;</li>
+          <li>如果<em>part</em>是<strong>#rectw</strong>，则该函数返回4个值——左、上、宽、高。使用示例：<code><br/>var (x,y,w,h) = this.box(#rectw, #inner, #view)</code>;</li>
+          <li>如果<em>part</em>是<strong>#dimension</strong>，则该函数返回两个值——宽、高。使用示例：<code><br/>var (w,h) = this.box(#dimension, #inner)</code>;</li>
+          <li>如果<em>part</em>是<strong>#position</strong>，则该函数返回两个值——左、上。使用示例：<code><br/>var (x,y) = this.box(#position, #inner, #view)</code>;</li></ul>
+        <li><strong>edge</strong>, <a href="http://www.w3.org/TR/REC-CSS2/box.html">元素的边缘</a>常量标识之一:</li>
+        <ul>
+          <li><strong>#margin</strong> - 外边距边缘；</li>
+          <li><strong>#border</strong> - 边框边缘；</li>
+          <li><strong>#padding</strong> - 内边距边缘；</li>
+          <li><strong>#inner</strong>, <em>默认值</em> - 内部盒边缘；</li>
+          <li><strong>#content</strong> - 内容盒边缘。内容盒这里是指元素的内容轮廓，且它不是元素内部盒。比如，等元素设置了<em>overflow</em>属性时，内容盒可以大于内部盒。 </em></li>
+          <li><strong>#client</strong> - 客户区域。指#inner内部盒减去(可选的)滚动条区域。</li>
+          <li><strong>#icon</strong> -元素图标覆盖的区域。图标这里指元素设置了foreground-repeat: no-repeat;的前景图片。如果该元素没有这样的图片，则函数返回的<strong>#width</strong>、<strong>#height</strong>为0。</li></ul>
+        <li><strong>relativeTo</strong>, 下面的值之一:</li>
+        <ul>
+          <li><strong>#screen</strong> - 返回相对于屏幕原点的坐标；</li>
+          <li><strong>#root</strong> - 返回相对于根元素(视图)原点的坐标；</li>
+          <li><strong>#parent</strong> - 返回相对于它的父元素原点的坐标。注意：是相对于父元素滚动位置。</li>
+          <li><strong>#content</strong> - 返回相对于它的父元素的内容区的坐标。注意：不依赖于父元素的滚动位置。</li>
+          <li><strong>#container</strong> - 返回相对于布局父元素的坐标。布局父元素可以是和DOM父元素不相同的。如position:absolute的元素的布局父元素就可能和DOM父元素不相同。</li>
+          <li><strong>#self</strong>, <em>默认值</em> -所有坐标相对于该元素的内部盒原点。</li>
+          <li><strong>#view</strong> - 返回相对于Sciter窗口(view对象)原点的坐标。</li>
+          <li>或者 如果<em>relativeTo</em>等于以下值之一：</li>
+          <ul>
+            <li><strong>#margin</strong> - 外边距边缘；</li>
+            <li><strong>#border</strong> - 边框边缘；</li>
+            <li><strong>#padding</strong> - 内边距边缘；</li>
+            <li><strong>#inner</strong> - 内部盒边缘；</li>
+            <p>该函数将返回相应部分累积宽度，例：</p>
+            <p><code>var (mx1,my1,mx2,my2) = this.box(#rect, #margin, #inner)</code>;<br/>这里的每个mx*值将是外边距、边框、内边距在左、上、右、下方向上的总和。或者说，这个调用会返回元素内部(内容)盒的外边距的距离。而且这个调用：<code>var (mx1,my1,mx2,my2) = this.box(#rect, #margin, #border)</code>; 将只会CSS属性中margin-left、margin-top、margin-right、margin-bottom的计算值。</p></ul></ul></ul>
+      <p>若想获取更多信息，请看<em>CSS</em>的<a name="box-model"><em>ox model</em></a>规范: <a href="http://www.w3.org/TR/CSS2/box.html">http://www.w3.org/TR/CSS2/box.html</a></p></dd>
+    <dt>intrinsicWidthMin</dt>
+    <dd>
+      <div>( ) : integer, 设备像素</div>
+      <p>返回元素的最小内在(min-intrinsic)宽度。 最小内在宽度是显示元素没有横向滚动条时的最小宽度。</p></dd>
+    <dt>intrinsicWidthMax</dt>
+    <dd>
+      <div>( ) : integer, 设备像素</div>
+      <p>返回元素的最大内在(max-intrinsic)宽度。最大内在宽度是指显示元素无需换行的情况下的最小宽度。例如，&lt;p&gt;元素的最大内在宽度是它的文本只有一行时的宽度。</p></dd>
+    <dt>intrinsicHeight</dt>
+    <dd>
+      <div>( <strong>forWidth</strong>: integer ) : integer, 设备像素</div>
+      <p>返回元素在给定<em>forWidth</em>宽度情况下的最小内在(min-intrinsic)高度。最小内在高度是指显示元素没有垂直滚动条时的高度。</p></dd>
+    <dt>toPixels</dt>
+    <dd>
+      <div><strong>( length : </strong>length | string | symbol<strong> </strong>[, <strong>#width</strong> | <strong>#height</strong> ]<strong> ) :</strong> integer, 设备像素</div>
+      <p>返回length转换为设备像素后的值。该转换是基于当前元素样式的上下文，所以<code>el.toPixels( em(1.4) )</code>将会当前元素中字体尺寸的1.4em对应的像素值。</p>
+      <p>如果length是一个字符串或标识，则它会被当做一个CSS长度字符，所以length的值可以是<code>el.toPixels(#xx-small)</code>或<code>el.toPixels(#system-scrollbar-width)</code>。</p>
+      <p>第二个symbol参数用在百分比长度的转换时：<br/><code>var h50p = el.toPixels( pr(50.0), #height );</code> - 将会和下面的CSS声明计算出相同的值: <code>height:50%</code>.</p></dd>
+    <dt>scroll</dt>
+    <dd><img src="images/scroll.gif" align="right"/><strong>(part) </strong>returns: integer, 设备像素
+      <p>返回元素的各种滚动相关的位置。参数：</p>
+      <p><strong>part</strong> - 以下常量标识之一：</p>
+      <ul>
+        <li><strong>#left</strong> - 视图相对于内容原点视图左边位置；</li>
+        <li><strong>#top</strong> - 视图相对于内容原点视图上边位置；</li>
+        <li><strong>#right</strong> - 视图右边缘相对于内容盒右边缘的偏移；</li>
+        <li><strong>#bottom </strong>- 视图下边缘相对于内容盒下边缘的偏移；</li>
+        <li><strong>#width </strong>- 滚动区域的宽度；</li>
+        <li><strong>#height</strong> - 滚动区域的高度；</li></ul></dd>
+    <dt>scrollTo</dt>
+    <dd>
+      <div>( <strong>x</strong>:int, <strong>y</strong>:int [, <strong>smooth</strong>:bool [, <strong>unrestricted</strong> : bool] ] &nbsp;) : void</div>
+      <p>设置元素到x、y的滚动位置。该元素应该有overflow: hidden-scroll、scroll或者auto(即可以滚动它的内容区)。如果<strong>unrestricted</strong>被设置为true，则滚动位置将被允许操作内容边界。</p></dd>
+    <dt>scrollToView</dt>
+    <dd>
+      <div>( [<strong>toTop</strong>:bool, <strong>smooth</strong>: bool = true ] )</div>
+      <p>滚动元素到视图——确保元素是可见的。如果<em>toTop</em>为<em>true</em>，则强制元素滚动到它的滚动容器的顶部。该方法做深滚动——它将试图使元素在它的所有滚动容器中可见。如果<em>smooth</em>为false,则将不会使用动画滚动。</p>
+      <p>注意: 该方法只在建立了盒模型(display: block | inline-block | table-cell 等)的元素上。比如，表格中的<code>&lt;tr&gt;</code>不是一个盒元素。所以要滚到表格中的特定行时，你需要选择该行的第一个单元格元素来调用该方法。</p></dd>
+    <dt>insert</dt>
+    <dd>
+      <div><strong>( element</strong> | <strong>html</strong> | <strong>object </strong>| <strong>array</strong> [,<strong>index</strong> = Integer.MAX]<strong>)</strong> returns: true | false.</div>
+      <p><em>element</em>为将被插入到该元素中<em>index</em>位置的子DOM元素。如果index大于该元素当前的子元素数量，则新元素将会被添加到最后。<em>Index</em>为可选参数，如果省略则元素会被添加到最后。如果<em>element</em>已经是其他元素的子元素，则它将会立即取消与之前元素的连接。</p>
+      <p>如果第一个参数是字符串(<em>html</em>文本)，则将试图将它插入到给定位置。</p>
+      <p>如果第一个参数是一个对象，则它会被当做创建新DOM元素的模板。参考该对象的<a href="#object-template">微格式</a>定义</p>
+      <p>如果第一个参数是一个数组，则它将包含DOM节点的引用(元素 和/或 文本 节点)。</p></dd>
+    <dt>append</dt>
+    <dd>
+      <div><strong>( element</strong> | <strong>html</strong> | <strong>object</strong> | <strong>array )</strong> returns: true | false.</div>
+      <p>等价于<code>insert ( ... , Integer.MAX )</code>;</p></dd>
+    <dt>prepend</dt>
+    <dd>
+      <div><strong>( element</strong> | <strong>html</strong> | <strong>object </strong>| <strong>array )</strong> returns: true | false.</div>
+      <p>等价于<code>insert ( ... , 0 )</code>;</p></dd>
+    <dt>content</dt>
+    <dd>
+      <div><strong>( element</strong> | <strong>array</strong> [, <strong>element</strong>2 [, <strong>element</strong>3, ... ]]<strong> )</strong> returns: true | false.</div>
+      <p>替换元素的内容。该函数是el.clear(); el.append(element1); el.append(element2); ...的短格式。</p>
+      <p><em>该方法可以用在设置&lt;tr&gt;中的单元格。它会妥善处理col/rowspans。</em></p>
+      <p>对于其他所有元素，<em>elementN</em>可以是DOM元素、字符串、对象(使用<a href="#object-template">微格式</a>定义的元素模板)或者元素/节点数组。</p></dd>
+    <dt>$content</dt>
+    <dd>
+      <div><strong>(</strong> .. inline html .. <strong>)</strong> : Element</div>
+      <p>Stringizer方法，用inline html替代元素的内容。参数是Stringizer方法，即HTML可以这样提供：</p>
+      <pre>var el = ... , num = ...;
+el.$content(This is item number <b>{ num }</b>);
+</pre>
+      <p>该方法返回该元素本身。</p></dd>
+    <dt>$append</dt>
+    <dd>
+      <div><strong>(</strong> .. html .. <strong>)</strong> : Element</div>
+      <p>Stringizer方法，将html添加到元素的所有子元素最后。</p>
+      <p>该方法返回第一个添加的元素。</p></dd>
+    <dt>$prepend</dt>
+    <dd>
+      <div><strong>( </strong>.. html .. <strong>)</strong> : Element</div>
+      <p>Stringizer方法，插入html到元素的所有子元素第一个。</p>
+      <p>该方法返回第一个添加的元素。</p></dd>
+    <dt>$after</dt>
+    <dd>
+      <div><strong>(</strong> .. html .. <strong>)</strong> : Element</div>
+      <p>Stringizer方法，添加html到该元素的后面。</p>
+      <p>该方法返回第一个添加的元素。</p></dd>
+    <dt>$before</dt>
+    <dd>
+      <div>( .. html .. ) : Element</div>
+      <p>Stringizer方法，添加html到该元素的前面。</p>
+      <p>该方法返回最后一个添加的元素(即该元素的新<em>this.prior</em>)。</p></dd>
+    <dt>$replace</dt>
+    <dd>
+      <div>( .. html .. ) : Element</div>
+      <p>Stringizer方法，将该元素从DOM中移除并且将html替换到当前位置。</p>
+      <p>该方法返回第一个添加的元素。</p></dd>
+    <dt>detach</dt>
+    <dd>
+      <div><strong>( ) </strong>: Element</div>
+      <p>从它的父元素的子元素容器中移除该元素，所以当该方法调用后，该元素的<em>parent</em>将会变成<em>null</em>。如果update为true,则会为它的父元素调用update()。返回该元素。该方法不会销毁它的状态和附加到该元素上的行为，直到GC不在收集该元素(即没有指向它的引用)。</p></dd>
+    <dt>remove</dt>
+    <dd>
+      <div><strong>( ) </strong>: Element</div>
+      <p>从它的父元素的子元素容器中移除该元素，所以当该方法调用后，该元素的<em>parent</em>将会变成<em>null</em>。如果update为true,则会为它的父元素调用update()。返回该元素。所有运行时状态和行为将会被该方法销毁。本地行为会接收到BEHAVIOR_DETACHED事件。</p></dd>
+    <dt>load</dt>
+    <dd>
+      <div><strong>( url</strong>: string[, <strong>headers</strong>: object] <strong>) </strong>returns: <em>true/false</em></div>
+      <p>加载<em>url</em>指定的文档的内容作为该元素的内容。对于设置了<em>behavior:frame</em>的元素会加载url指向的html、样式和执行脚本或包含流。指定behavior:frame的元素在加载完成后会发送DOCUMENT_COMPLETE事件。而对于其他元素则只会加载文档的Body部分，且不会加载样式和脚本。如果<em>url</em>指向一个外部资源(如&quot;http://...&quot;)，则该方法是异步的，否则该方法将会使用同步方式加载。</p>
+      <p>如果<em>headers</em>对象(键/值 映射表)被指定，且url是http/https，则HTTP GET请求将会将headers作为请求头。</p></dd>
+    <dt>load</dt>
+    <dd>
+      <div><strong>( stream</strong>: Stream<strong> ) </strong>returns: <em>true/false</em></div>
+      <p>从内存流中加载文档的内容作为该元素的内容。对于设置了<em>behavior:frame</em>的元素会加载stream流指向的html、样式和执行脚本。指定behavior:frame的元素在加载完成后会发送DOCUMENT_COMPLETE事件。而对于其他元素则只会加载文档的Body部分，且不会加载样式和脚本。</p></dd>
+    <dt>load</dt>
+    <dd>
+      <div><strong>( html</strong>: string, <strong>url</strong>:string<strong> ) </strong>returns: <em>true/false</em></div>
+      <p>从<em>html</em>字符串中加载文档的内容作为该元素的内容。对于设置了<em>behavior:frame</em>的元素会加载html参数中的html、样式和执行脚本。指定behavior:frame的元素在加载完成后会发送DOCUMENT_COMPLETE事件。而对于其他元素则只会加载文档的Body部分，且不会加载样式和脚本。</p></dd>
+    <dt>loadImage</dt>
+    <dd>
+      <div><strong>( url</strong>: string [, <strong>callback</strong>: function <strong>) </strong>returns: <em>Image | null</em></div>
+      <p>从url中加载图像。如果<em>callback</em>被省略，则引擎将会试图同步加载图像。否则(<em>callback</em>是一个函数)引擎会异步处理请求且在图像加载后调用callback函数。</p>
+      <p>callback函数的声明是<font face="Courier New">function callback(image)</font>，<em>image</em>参数是一个Image类或null(当出错时)。</p></dd>
+    <dt>bindImage</dt>
+    <dd>
+      <div><strong>( url</strong>: string , <strong>img</strong>: Image <strong>) </strong>returns: <em>true</em> | <em>false</em></div>
+      <p>将<em>img</em>对象绑定到url。作为结果，该img可以被用在CSS中(如作为背景)。URL可以是任意的字符串，如&quot;in-memory:dyn-image1&quot;。</p></dd>
+    <dt>bindImage</dt>
+    <dd>
+      <div><strong>( url</strong>: string <strong>) </strong>returns: <em>Image | null</em></div>
+      <p>返回先前绑定到该URL上的图像，如果没有图像则返回null。</p></dd>
+    <dt>request</dt>
+    <dd>
+      <div><strong>(</strong> <strong>callback</strong>: function | integer, <strong><em>#get</em> | <em>#post</em> | <em>#post-data</em> | <em>#put-data</em> |<em> #post-json</em></strong> <strong>|<em> #put-json | #delete</em></strong>, <strong>url</strong>: string [, <strong>params</strong>: object [, <strong>headers</strong>: object] ] <strong>) </strong>: Object | Stream | Bytes | Error</div>
+      <p>发送同步或异步HTTP数据GET/POST请求道服务端/页面(url)，使用JSON-RPC调用。</p>
+      <ul>
+        <li><em>#get</em>、<em>#post、#post-data、#json</em>为标识符——发送的http请求类型：</li>
+        <ul>
+          <li><em><strong>#get</strong></em> - 发送纯HTTP GET请求, URL编码的参数(如果存在)被附加到表单的请求的<em>url</em>中；</li>
+          <li><em><strong>#post</strong></em> - 发送HTTP POST请求，参数作被序列化为<code>Content-Type: application/x-www-form-urlencoded;charset=utf-8</code>；</li>
+          <li><strong><em>#post-data</em></strong> - 发送HTTP POST请求，参数作被序列化为<code>Content-Type: multipart/form-data; boundary= ...</code>；</li>
+          <li><strong><em>#put-data</em></strong> - 发送HTTP PUT请求，参数作被序列化为<code>Content-Type: multipart/form-data; boundary= ...</code>;</li>
+          <li><strong><em>#post-json</em></strong> - 发送HTTP POST请求，参数作被序列化为JSON:<code>Content-Type: application/json;charset=utf-8</code>;</li>
+          <li><strong><em>#put-json</em></strong> - 发送HTTP PUT请求，参数作被序列化为JSON:<code>Content-Type: application/json;charset=utf-8</code>;</li>
+          <li><strong><em>#delete</em></strong> - 发送HTTP DELETE请求。</li></ul>
+        <li><em>url</em> 是一个字符串 - 处理HTTP请求的服务端页面(位置)的URL。</li>
+        <li><em>params</em>是一个对象, 它的属性是HTTP请求的服务参数。</li>
+        <li><em>headers</em>是一个对象 - 一个被单独附加到请求中的键/值对请求头。</li>
+        <li>returns: 对于异步请求返回<em>true|false</em>；对于同步请求返回(status:integer,data:any)——请求的结果，<em>data</em>值见下面，status为HTTP状态代码(如200 - 请求成功, 404 - 资源在服务端未找到)。</li></ul>
+      <div>如果参数<em>callback</em>是一个整数，则该参数被当做超时值(毫秒数)，且该函数执行<em>同步</em>请求。如果callback是一个函数，则服务端的响应将会调用<em>callback</em>函数来处理。<em>callback</em>函数的声明如下：</div>
+      <pre>function dataArrivedCallback( data: any, status: integer );
+</pre>
+      <p><em>data</em>值为以下之一:</p>
+      <ul>
+        <li><em>Error</em>对象的实例, 在数据响应解析错误时；</li>
+        <li><em>stream</em>对象, 如果data为服务端返回文本类型(text/plain、text/html、text/xml等)。</li>
+        <li>对象、数组实例。如果响应有text/javascript、text/ecmascript、text/tiscript、 application/json类型的内容，且这些内容成功解析到data对象。</li>
+        <li><em>Bytes</em>对象, 如果服务端返回的类型是二进制类型(image / *等)。在这种情况下，Bytes.type会包含一个字符串——服务端报告的该数据的mime-type。</li></ul>
+      <p>status为一个整数—— HTTP状态码(如200 - 请求成功, 404 - 资源在服务端未找到)，如果该代码大于12000，则它是WinInet的错误代码。见<a href="http://support.microsoft.com/kb/193625">http://support.microsoft.com/kb/193625</a>。</p>
+      <p>服务端响应的data示例(type: text/javascript):</p>
+      <p><font face="Courier New"><code>({ id : 1234, message : &quot;Hello from XYS server!&quot; }</code></font><code>)</code></p>
+      <p>- 在这种情况下，服务端返回的对象有两个属性：id和message。in this case server returns object having two properties: id and message. <font face="Courier New">({</font> 和 <font face="Courier New">})</font>的解释请看<a href="http://www.terrainformatica.com/index.php/?p=14">这里</a>。</p></dd>
+    <dt>getState</dt>
+    <dd>
+      <div><strong>( </strong>[<strong>stateFlags</strong>:int]<strong> ) </strong>:int</div>
+      <p>返回元素的状态。<em>stateFlags</em>参数是一个位集合——STATE_***常量的&quot;或&quot;操作集。 如果<em>stateFlags</em>被提供，则函数返回<em>整数</em>标识集——元素的状态标识和<em>stateFlags</em>的&quot;与&quot;操作。如果<em>stateFlags</em>未指定，则函数返回该元素当前在全状态标识集合。</p></dd>
+    <dt>setState</dt>
+    <dd>
+      <div><strong>( stateFlags</strong>:int<strong>) </strong>:void</div>
+      <p>设置该元素的状态标识并且更新文档在屏幕上的相应位置(处理样式和刷新)。</p></dd>
+    <dt>clearState</dt>
+    <dd>
+      <div><strong>( stateFlags</strong>:int<strong> ) </strong>:void</div>
+      <p>清除元素的状态标识，且更新文档在屏幕上的相应位置。</p></dd>
+    <dt>capture</dt>
+    <dd>
+      <div><strong>( onOff</strong>: true | false | #strict<strong> ) </strong>:void</div>
+      <p>
+	    element.capture(<em>true</em>) - 设置&quot;宽松&quot;的鼠标捕获到该元素，鼠标消息被传递到该元素和它的子元素；<br/>
+	    element.capture(#strict) - 设置&quot;严格&quot;的鼠标捕获到该元素，鼠标消息仅被传递到该元素；<br/>
+	    element.capture(<em>false</em>) - 从该元素移除鼠标捕获。
+	 </p>
+	</dd>
+    <dt>popup</dt>
+    <dd>
+      <div><strong>( el</strong>: Element, <strong>placement</strong>: int<strong> )</strong> :void</div>
+      <p>将el元素作为弹出窗口显示，位置相对于该元素。<em>Placement</em> 接受以下值:</p>
+      <ul>
+        <li><em>2</em> - 弹出元素在该元素(锚点)的下面;</li>
+        <li><em>8</em> - 弹出元素在该元素(锚点)的上面;</li>
+        <li><em>4</em> - 弹出元素在该元素(锚点)的左面;</li>
+        <li><em>6</em> - 弹出元素在该元素(锚点)的右面;</li></ul>
+      <div>( 见小键盘上的数字 )。</div></dd>
+    <dt>popup</dt>
+    <dd>
+      <div><strong>( el</strong>: Element, <strong>x</strong>:int, <strong>y</strong>:int ) :void</div>
+      <p>将el元素作为弹出窗口在x、y(相对于视图的坐标)坐标位置显示。<em>Placement</em>是7。</p>
+      <div>( 见小键盘上的数字 )。</div></dd>
+    <dt>closePopup</dt>
+    <dd>
+      <div><strong>()</strong> :void</div>
+      <p>如果el或者它的父元素是弹出窗口，则关闭弹出窗口。</p></dd>
+    <dt>timer</dt>
+    <dd>
+      <div><strong>(</strong> <strong>milliseconds</strong>: integer, <strong>callback</strong>: function [, <strong>avoidSameOriginCheck</strong> : bool ] <strong>)</strong></div>
+      <p>如果<em>milliseconds</em>大于0，则该方法会为DOM元素创建一个有<em>milliseconds</em>延时的计时器。</p>
+      <p>在<em>milliseconds</em>毫秒延迟后，引擎会调用<em>callback</em>函数并且有一个执行该dom元素的<em>this</em>变量。如果你需要计时器继续执行，则<em>callback</em>函数返回<em>true</em>，否则返回<em>false</em>。</p>
+      <p>调用timer()方法，且<em>milliseconds = 0</em>时，则会停止计时器。</p>
+	  <p>如果元素正在运行的计时器已经包含相同的callback函数(同源)，则该计时器将会在增加新的计时器之前移除旧的计时器。设置<em>avoidSameOriginCheck</em>参数未<em>true</em>则会抑制同源匹配。</p></dd>
+</dd>
+    <dt>graphics</dt>
+    <dd>
+      <div><strong>(</strong> [ <strong>color</strong>: integer | <strong>color</strong>: color[, <strong>forceInitialization</strong>:bool = true ]] <strong>)</strong> : <a href="Graphics.htm">Graphics</a></div>
+      <p>返回该元素的<a href="Graphics.htm">Graphics</a>对象。Graphics是一张该元素同大小的位图。因此，一旦绘制，图像会保留到屏幕上。如果<em>forceInitialization</em>为<em>true</em>或者graphics不存在(第一层调用graphics())，则每次调用Graphics方法，带上color值，会返回一个所有位都初始化为该值的位图。若调用graphics()没有指定参数，第一次调用时会创建一个Graphic对象且使用透明颜色0xFFFFFF初始化它，再调用时会创建Graphics对象且不再做其他事。</p>
+      <p>若要移除graphics对象，则调用<code>el.graphics(#destroy)</code>。</p></dd>
+    <dt>graphics</dt>
+    <dd>
+      <div><strong>(</strong> <strong>#destroy</strong> <strong>)</strong> : <a href="Graphics.htm">Graphics</a> | null</div>
+      <p>移除该元素上的graphics对象。</p></dd>
+    <dt>swap</dt>
+    <dd>
+      <div><strong>(other</strong>: Element <strong>)</strong> : null</div>
+      <p>呼唤两个元素的DOM位置——该方法的拥有者和<em>other</em>元素。返回调用该方法的元素。</p></dd>
+    <dt>sendEvent</dt>
+    <dd>
+      <div><strong>( eventCode</strong>:int<em> </em>[<em>, </em><strong>reason</strong><em>:</em> int<em> </em>[, <strong>owner</strong>: Element | null [, <strong>data</strong>:value ]]]<strong> )</strong> : true | false | value</div>
+      <p>在该元素的父/子链上冒泡传递(发送)事件。事件被该方法生成，且被链上的元素的<em>onControlEvent</em>方法处理。</p>
+      <ul>
+        <li><em>eventCode</em> 是<em>内建行为的逻辑事件代码</em>(见<a href="Event.htm">Event</a>)。或者任意的大于0x1000的整数(自定义控件事件范围)。</li>
+        <li><em>reason</em> 这里是任意一个整数值(该值对于发送者和接受者是知道的)。</li>
+        <li><em>owner</em> 是一个可选的指向某项DOM元素。例如，在MENU_ITEM_CLICK事件中，它指向一个元素——弹出菜单的拥有者或null。</li>
+        <li><em>data</em>是任何一个JSON值——将会同BEHAVIOR_EVENT_PARAMS.data字段传递(见sdk/api/sciter-x-behavior.h文件)。</li></ul>
+      <div><em>sendEvent</em>函数会遍历父子链，如果消息被消耗则返回true——即在父子链上的某个元素的<em>onControlEvent</em>()处理了该事件且返回true。如果父子链上某些元素处理了该事件且设置了<em>data</em>字段，则sendEvent()方法的data参数值会被更新。</div></dd>
+    <dt>sendEvent</dt>
+    <dd>
+      <div><strong>( event</strong>:string<em> </em>[, <strong>data</strong>:value ]<strong> )</strong> : true | false | value</div>
+      <p>在该元素的父/子链上冒泡传递(发送)事件。事件被该方法生成，且被链上的元素的<em>onControlEvent</em>方法处理。</p>
+      <ul>
+        <li><em>event</em>是一个事件名称(可能包含名称空间)，见下面的Element.subscribe/unsubscribe()方法。</li>
+        <li><em>data</em>是任何一个JSON值——将会同BEHAVIOR_EVENT_PARAMS.data字段传递(见sdk/api/sciter-x-behavior.h文件)。</li></ul>
+      <div><em>sendEvent</em>函数会遍历父子链，如果消息被消耗则返回true——即在父子链上的某个元素的<em>onControlEvent</em>()处理了该事件且返回true。如果父子链上某些元素处理了该事件且设置了<em>data</em>字段，则sendEvent()方法的data参数值会被更新。</div></dd>
+    <dt>postEvent</dt>
+    <dd>
+      <div><strong>( event</strong>:string<em> </em>[, <strong>data</strong>:value ]<strong> )</strong> : true</div>
+      <p><em>postEvent</em>方法将事件放到内部的发送队列中以便延迟调用<em>sendEvent</em>(name,data)发送消息。该方法是立即返回的。</p></dd>
+    <dt>postEvent</dt>
+    <dd>
+      <div><strong>( eventCode</strong>:int<em> </em>[<em>, </em><strong>reason</strong><em>:</em> int<em> </em>[, <strong>owner</strong>: Element | null [, <strong>data</strong>:value ]]]<strong> )</strong> : undefined</div>
+      <p><em>postEvent</em>方法将事件放到内部的发送队列中以便延迟调用<em>sendEvent</em>发送消息。该方法是立即返回的。</p></dd>
+    <dt>sendKeyEvent</dt>
+    <dd>
+      <div><strong>( eventDef</strong>: object<strong> )</strong> : true | false | undefined</div>
+      <p><em>sendKeyEvent</em>方法模拟按键事件。eventDef可能有以下字段：</p>
+      <pre>
+{
+  type: Event.KEY_DOWN 或 Event.KEY_UP 或 Event.KEY_CHAR; // 按键事件的类型
+  keyCode: int;            // 按键 或 字符代码 如'O'
+  altKey: true 或 false;   // 可选, 'ALT' 键按下标志
+  shiftKey: true 或 false; // 可选, 'SHIFT' 键按下标志
+  ctrlKey: true 或 false;  // 可选, 'CTRL' 键按下标志
+  shortcutKey: true 或 false; // 可选, 'CTRL/win' 或 'COMMAND/mac' 键按下标志
+  commandKey: true 或 false; // 可选, 'WIN/win' 或 'COMMAND/mac' 键按下标志
+}
+</pre>
+      <p>在捕获/冒泡过程中,该元素或作为target参数。若事件被处理了，则返回true。</p></dd>
+    <dt>sendMouseEvent</dt>
+    <dd>
+      <div><strong>( eventDef</strong>: object<strong> )</strong> : true | false | undefined</div>
+      <p><em>sendMouseEvent</em>模拟鼠标事件。eventDef可能有以下字段：</p>
+      <pre>{
+  type: Event.MOUSE_ENTER或MOUSE_LEAVE或MOUSE_MOVE或MOUSE_UP或MOUSE_DOWN或MOUSE_DCLICK或MOUSE_WHEEL或MOUSE_TICK或MOUSE_IDLE, // 鼠标事件类型
+  altKey: true 或 false;   // 可选, 'ALT' 键按下标志
+  shiftKey: true 或 false; // 可选, 'SHIFT' 键按下标志
+  ctrlKey: true 或 false;  // 可选, 'CTRL' 键按下标志
+  shortcutKey: true 或 false; // 可选, 'CTRL/win' 或 'COMMAND/mac' 键按下标志
+  commandKey: true 或 false; // 可选, 'WIN/win' 或 'COMMAND/mac' 键按下标志
+  mainButton: true 或 false, // 可选, 鼠标左键按下标志
+  propButton: true 或 false, // 可选, 鼠标右键按下标志
+  x: int, // 鼠标x坐标，相对于视图
+  y: int, // 鼠标y坐标，相对于视图
+}
+</pre>
+      <p>在捕获/冒泡过程中,该元素或作为target参数。若事件被处理了，则返回true。</p></dd>
+    <dt>post</dt>
+    <dd>
+      <div><strong>( callback</strong>: function [,<strong>only_if_not_there</strong>:boolean]<strong> ) </strong>: undefined</div>
+      <p>该方法运行延迟执行<em>callback</em>函数。当调用callback函数时，<em>this</em>环境变量指向post的调用者。</p>
+      <p><strong>only_if_not_there</strong>可选参数如果被指定，且为<em>true</em>时，运行只延迟发送事件一次。多次post相同的callback函数时，它将会post队列中相同的入口。</p></dd>
+    <dt>url</dt>
+    <dd>
+      <div><strong>( </strong>[ <strong>relativeUrl</strong>: string ]<strong> )</strong> : string</div>
+      <p>该方法使用文档的url作为基url，和 <em>relativeUrl</em>组合成绝对url。如果没有<em>relativeUrl</em>，则只返回当前DOM元素所属的文档的url。</p></dd>
+    <dt>sort</dt>
+    <dd>
+      <div><strong>( comparator</strong>: function<strong> </strong>[, <strong>fromIndex</strong>: integer [, <strong>numOfElements</strong>:integer]]<strong> В )</strong> : void</div>
+      <p>使用<em>comparator</em>函数来排序元素的子元素。<em>comparator</em>函数的声明必须是：</p>
+      <pre>function cmp(el1: Element, el2: Element) : int
+</pre>
+      <p>如果返回负数则认为el1小于el2，如果返回0则认为他们相等，如果返回正数则认为el1大于el2。</p>
+      <p><em>fromIndex</em>和<em>numOfElements</em>用于定义排序元素的范围。</p></dd>
+    <dt>move</dt>
+    <dd>
+      <div><strong>( </strong>[<strong>x</strong>: int, <strong>y</strong>: int [, <strong>w</strong>: int, <strong>h</strong>: int] [, <strong>#view</strong> | <strong>#root</strong> | <strong>#screen</strong> | <strong>#self</strong> [, mode: <strong>#auto</strong> | <strong>#attached-window</strong> | <strong>#detached-window</strong> ]]] &nbsp;<strong>)</strong> : void</div>
+      <p>该方法将该元素变成一个&quot;调皮鬼&quot;——它将独立于其他DOM元素进行移动：</p>
+      <p>声明该元素<em>position:popup</em>且移动它到position(<em>x</em>,<em>y</em>)。如果元素移动到了视图外面则引擎会为它创建一个弹出窗口。第三个参数描述了x和y的角色。如果提供了<em>w</em>、<em>h</em>参数则将会改变元素的尺寸。<br/>
+	    <em>mode</em>参数：</p>
+      <ul>
+        <li><em>#auto</em> - 如果元素移动到视图外面将会创建窗口。如果元素在视图内则它会被渲染为popup:fixed。</li>
+        <li><em>#attached-window</em> - 强制引擎为该元素创建一个弹出窗口。该窗口和它的宿主窗口(视图)是同步移动的。</li>
+        <li><em>#detached-window</em> - 强制引擎为该元素创建弹出窗口，该元素的窗口位置独立于它的宿主窗口。</li>
+        <li><em>#detached-topmost-window</em> - 与<em>#detached-window</em>相同，不过是创建在最顶窗口层上。</li></ul>
+      <p>参考示例：sdk/samples/ideas/moveable-windows/ and sdk/samples/ideas/rect-tracker/ 。</p>
+      <p>调用<code>move()</code>函数没有参数时将还原元素的默认位置。</p>
+      <p>见: Element.style.dimension() 方法。</p></dd>
+    <dt>textWidth</dt>
+    <dd>
+      <div><strong>( text</strong>: string<strong> )</strong> : int</div>
+      <p>以该元素的当前字体计算text文本的宽度。如果文本使用&quot;\n&quot;分隔多行则该方法将返回最宽的字符串的宽度。</p></dd>
+    <dt>textHeight</dt>
+    <dd>
+      <div><strong>( text</strong>: string<strong> )</strong> : int</div>
+      <p>以该元素的当前字体和行高计算text文本的高度。如果文本使用&quot;\n&quot;分隔多行则该方法将返回所有行字符串高度之和。</p></dd>
+    <dt>subscribe</dt>
+    <dd>
+      <div><strong>(</strong> <strong>handler</strong>: function, <strong>eventGroup</strong> : int [, <strong>eventType</strong>: int] <strong>)</strong> : &lt;this element&gt;</div>
+      <p>将<em>handler</em>函数绑定到该元素DOM对象特定的事件上。</p>
+      <p><em>handler</em>函数的声明应该为: function(<em>evt</em>) {...}, 其中evt为描述当前事件详细信息的事件(Event)对象。</p>
+      <p><em>eventGroup</em>参数这里是以下常量之一：</p>
+      <ul>
+        <li><code>Event.MOUSE</code> - 鼠标事件组( 如Event.MOUSE_DOWN、Event.MOUSE_UP等 );</li>
+        <li><code>Event.KEY</code> - 键盘事件组( 如Event.KEY_DOWN、Event.KEY_UP等 );</li>
+        <li><code>Event.BEHAVIOR_EVENT</code> - 人工合成事件组 ( 如控件事件Event.BUTTON_CLICK、 Event.HYPERLINK_CLICK、Event.BUTTON_STATE_CHANGED等 );</li>
+        <li><code>Event.FOCUS</code> - 焦点事件组;</li>
+        <li><code>Event.SCROLL</code> - 滚动事件组;</li>
+        <li><code>Event.SIZE</code> - 尺寸改变事件;</li></ul>
+      <p><em>eventType</em>参数这里是为特定事件组定义的以下常量之一。 <em>eventType</em> 参数是可选的——如果它没有被提供则handler会接收到<em>eventGroup</em>的所有事件。</p>
+      <p>subscribe()方法依序附加多个和独立的事件处理函数到一个元素上。</p>
+      <p>注意：subscribe()不是下面定义的事件处理器的<strong>onMouse</strong>(evt)、<strong>onKey</strong>(evt)等方法的替代。这是两种不同的事件处理方式。<strong>onXXXX</strong>()方法用于为元素类的事件处理器类(Behaviors)中定义事件处理。而subscribe()/unsubscribe()方法用于将事件处理器附加到特定的元素上。</p>
+      <p>该方法返回调用它的元素，则运行链式调用subscribe()。</p></dd>
+    <dt id="subscribe-by-name">subscribe</dt>
+    <dd>
+      <div>( <strong>event</strong>: string [, <strong>selector</strong>: string] , <strong>handler</strong>: function ) : &lt;this element&gt;</div>
+      <p>将<em>handler</em>函数绑定到该元素或它的子元素DOM对象特定的事件上。<em>event</em>参数这里是一个字符串，它可以接受<a href="Event.htm#symbolic-event-names">符号事件名称</a>。</p>
+      <p>事件名可以含有名称空间。例如：<code>&quot;click.mywidget&quot;</code>为一些<em>mywidget</em>组件定义了单击事件。名称空间在你需要一次unsubscribe多个事件处理器时会比较有用。例如<code>el.unsubscribe(&quot;.mywidget&quot;)</code>会移除所有包含<em>mywidget</em>名称空间的事件处理器。</p>
+      <p><em>selector</em>是一个可选参数——子元素的CSS选择器。当需要给一些特定子元素订阅事件处理器时可以使用这个参数。</p>
+      <p><em>handler</em>参数可以是任意的 <code>function(evt:Event) {...}</code> - 当事件发生时被调用的回调函数。<em>this</em>变量被设置到<code>evt.target</code>字段上 - 事件发生的最初元素。</p>
+      <p>要在元素的EVENT_SINKING阶段订阅事件，则需要事件名前添加<code>~</code>标识符。例如下面的示例：<br/>
+	  <code>container.subscribe(&quot;~keydown&quot;, function() {...});</code> <br/>
+	  该处理器将会在它的子元素之前接收到keydown事件。</p>
+      <p>注意：这个方法模仿jQuery的<code>.on()</code>方法且具有相同的语意。</p></dd>
+    <dt>on</dt>
+    <dd>上面的<strong>subscribe</strong>(<strong>event</strong>: string [, <strong>selector</strong>: string] , <strong>handler</strong>: function)方法的别名。</dd>
+    <dt>unsubscribe</dt>
+    <dd>
+      <div>(<strong>handler</strong>: function ) or</div>
+      <div>(<strong>eventGroup</strong> : int [, <strong>eventType</strong>: int]) : &lt;this element&gt;</div>
+      <p><em>unsubscribe</em>()方法从元素上移除事件处理器。</p></dd>
+    <dt>unsubscribe</dt>
+    <dd>
+      <div>(<strong>event</strong> : string [, <strong>selector</strong>: string]) : &lt;this element&gt;</div>
+      <p>该方法移除元素上匹配的事件处理器。这些事件处理器时使用上面的subscribe(&quot;name&quot;,...)方法定义的。<br/>
+	  示例： <br/> 
+	  &nbsp;&nbsp;<code>el.unsubscribe(&quot;click&quot;)</code>;<br/>
+	  将会移除所有的&quot;click&quot;名称的事件处理器，即使它们包含名称空间(如&quot;click.mywidget&quot;)。</p>
+      <p>注意：这个方法模拟jQuery的<code>.off()</code>方法。</p></dd>
+    <dt>off</dt>
+    <dd>上面的<strong>unsubscribe</strong>方法的别名。</dd>
+    <dt>commonParent</dt>
+    <dd>
+      <div>(<strong>other</strong> : Element) : Element</div>
+      <p>返回<em>this</em>与<em>other</em> DOM元素的共同父元素。</p></dd>
+    <dt>row</dt>
+    <dd>
+      <div>(<strong>rowNo</strong>: integer) : array of Elements</div>
+      <p>该函数返回该元素给定行的元素列表(数组)。</p></dd>
+    <dt>column</dt>
+    <dd>
+      <div>(<strong>colNo</strong>: integer) : array of Elements</div>
+      <p>该函数返回该元素给定列的元素列表(数组)。</p></dd>
+    <dt>rowY</dt>
+    <dd>
+      <div>(<strong>rowNo</strong>: integer) : (y: integer, height: integer)</div>
+      <p>该函数返回给定行的位置和行高。</p></dd>
+    <dt>columnX</dt>
+    <dd>
+      <div>(<strong>colNo</strong>: integer) : (x: integer, width: integer)</div>
+      <p>该函数返回指定列的位置和列宽。</p></dd>
+    <dt>transact</dt>
+    <dd>
+      <div>( <strong>action</strong>:function [, <strong>name</strong>:string] ) : <em>true</em> | <em>false</em></div>
+      <p>该方法使可以进行事务操作——一组可以undone/redone的操作集合。<em>action</em>函数的声明为<code>function action(transaction) { ... }</code></p>
+      <p>transaction是一个<a href="Transact.htm" target="content">Transaction</a>实例——用于修改DOM状态的原语。当用户在编辑器上选择撤销/重做后，任何修改可以通过这些方法来撤销/重做。 </p></dd>
+    <dt>execCommand</dt>
+    <dd>
+      <div>( <strong>command</strong>:string [, <strong>attributes</strong>:map] ) : <em>true</em> | <em>false</em></div>
+      <p>execCommand方法用于执行可撤销的编辑命令。<em>command</em>字符串标识要执行的命令。</p>
+      <p>编辑命令对所有可编辑元素( &lt;input|text&gt;、&lt;textarea&gt;、&lt;plaintext&gt;、&lt;htmlarea&gt;)是通用的:</p>
+      <ul>
+        <li><code>&quot;edit:cut&quot;</code> - 剪切选择内容(selection) - 复制选择内容(selection)到剪切板并移除它；</li>
+        <li><code>&quot;edit:copy&quot;</code> - 复制选择内容到剪切板;</li>
+        <li><code>&quot;edit:paste&quot;</code> - 粘贴剪切板中的内容;</li>
+        <li><code>&quot;edit:selectall&quot;</code> - 选择元素的所有内容;</li>
+        <li><code>&quot;edit:undo&quot;</code> - 测试最后一次编辑操作;</li>
+        <li><code>&quot;edit:redo&quot;</code> - 重做最后一次撤销的编辑操作;</li>
+        <li><code>&quot;edit:delete-next&quot;</code> - 如果有选择内容，则删除选择的内容，否则删除下一个字符;</li>
+        <li><code>&quot;edit:delete-prev&quot;</code> - 如果有选择内容，则删除选择的内容，否则删除前一个字符;</li>
+        <li><code>&quot;edit:delete-word-next&quot;</code> - 如果有选择内容，则删除选择的内容，否则删除下一个单词;</li>
+        <li><code>&quot;edit:delete-word-prev&quot;</code> - 如果有选择内容，则删除选择的内容，否则删除上一个单词;</li></ul>
+      <p>富文本(richtext)元素(如&lt;htmlarea&gt;)支持的编辑命令:</p>
+      <ul>
+        <li><code>&quot;edit:insert-break&quot;</code> - 本质上这个相当于&quot;ENTER&quot;(VK_RETURN)命令, 准确地说，DOM的修改取决于上下文;</li>
+        <li><code>&quot;edit:insert-soft-break&quot;</code> - &quot;SHIFT+ENTER&quot;命令, 插入一个<code>&lt;br&gt;</code>分隔符，但是准确地说，DOM的修改取决于上下文;</li>
+        <li><code>&quot;format:apply-span:{tag-list}&quot;</code> - 将选择内容包装到一个span类型的元素中, 如果选择内容中包含{tag-list}中的某元素时，则这些标签将会被移除。</li>
+        <ul>
+          <li><code>{tag-list}</code> 时一个以管道符(<code>|</code>)分隔的标签名称列表，比如:<br/>
+          <code>execCommand(&quot;format:apply-span:b|strong&quot;)</code> - 将会将选择内容包装到<code>&lt;b&gt;...&lt;/b&gt;</code>中，同时从选择内容中移除 其他所有的<code>&lt;b&gt;</code>和<code>&lt;strong&gt;</code>元素。</li>
+          <li>以外一个map参数可以保护一个DOM属性列表，该属性列表会条件到包装元素上, 比如:<br/>
+          <code>execCommand(&quot;format:apply-span:font&quot;,{color:&quot;#F00&quot;})</code> - 将会将选择内容包装到<code>&lt;font color=&quot;#F00&quot;&gt;...&lt;/font&gt;</code>元素中。</li></ul>
+        <li><code>&quot;format:toggle-span:{tag-list}&quot;</code> - 如果选择内容中包含{tag-list}中的某元素，则移除所有这些元素，否则做和<code>&quot;format:apply-span:...&quot;</code>一样的动作。</li>
+        <li><code>&quot;format:toggle-list:{list-tag}&quot;</code> - 将选择内容转换到一个列表中。如果选择内容已经是指定的列表类型，则列表中的项将会被转换为简单段落;</li>
+        <ul>
+          <li><code>{list-tag}</code> 可以是<code>ul</code>、<code>ol</code>或<code>dl</code>。</li></ul>
+        <li><code>&quot;format:toggle-pre&quot;</code> - 转换选择内容包装到<code>&lt;pre&gt;</code>块中，或从<code>&lt;pre&gt;</code>中移出来。</li>
+        <li><code>&quot;format:indent&quot;</code> - 将选择内容包装到<code>&lt;blockquote&gt;</code>或sub-list中。</li>
+        <li><code>&quot;format:unindent&quot;</code> - 将选择内容从<code>&lt;blockquote&gt;</code>或sub-list中移出到上一级。</li>
+        <li><code>&quot;format:morph-block:{to-tag}&quot;</code> - 修改被选择的块元素的标签。比如，通过这种方式可以将当前的<code>&lt;blockquote&gt;</code>元素修改为<code>&lt;div&gt;</code>元素。</li></ul></dd>
+    <dt>queryCommand</dt>
+    <dd>
+      <div>( <strong>command</strong>:string [, <strong>attributes</strong>:map] ) : <em>integer</em></div>
+      <p>queryCommand方法反馈指定命令的状态以及是否允许使用。这个方法的参数与execCommand()相同。返回值是一个整数 - 以下标志的混合值: </p>
+      <ul>
+        <li><code>0x01</code> - 命令处于&quot;on&quot;或&quot;selected&quot;状态。例如,当选择文本包含<code>&lt;b&gt;</code>或<code>&lt;strong&gt;</code>元素时，<code>queryCommand(&quot;format:apply-span:b|strong&quot;)</code>将会返回0x01值。</li>
+        <li><code>0x02</code> - 命令处于&quot;disabled&quot;状态，或者当前上下文不允许该命令。</li>
+        <ul></ul></ul></dd>
+    <h2>节点(Node)特有的方法</h2>
+    <dt>insertNodeBefore</dt>
+    <dd>
+      <div><strong>( node: Node)</strong></div>
+      <p>将node插入到DOM树中该元素之前。</p></dd>
+    <dt>insertNodeAfter</dt>
+    <dd>
+      <div><strong>( node: Node)</strong></div>
+      <p>将node插入到DOM树中该元素之后。</p></dd>
+    <dt>appendNode</dt>
+    <dd><strong>( node: Node)</strong>
+      <p>将node:插入到该元素的子节点的最后，是其成为该元素的最后一个子节点。</p></dd>
+    <dt>prependNode</dt>
+    <dd><strong>( node: Node)</strong>
+      <p>将node:插入到该元素的子节点的最前，是其成为该元素的第一个子节点。</p></dd>
+</dl>
+  <h2>元素的事件</h2>
+  <dl>
+    <h3>捕获/冒泡 事件:</h3>
+    <h4>onMouse(event) : true|false</h4>
+    <dt>Event.MOUSE_ENTER</dt>
+    <dd>鼠标/指针 进入到该元素</dd>
+    <dt>Event.MOUSE_LEAVE</dt>
+    <dd>鼠标/指针 离开该元素</dd>
+    <dt>Event.MOUSE_MOVE</dt>
+    <dd>鼠标/指针 在该元素上移动</dd>
+    <dt>Event.MOUSE_DOWN</dt>
+    <dd>鼠标按钮之一在该元素上按下。通过<em>event.mainButton</em>和<em>event.</em>propButton来识别是哪个按钮按下。</dd>
+    <dt>Event.MOUSE_UP</dt>
+    <dd>鼠标按钮之一在该元素上按起。通过<em>event.mainButton</em>和<em>event.</em>propButton来识别是哪个按钮按起。<br/>
+	如果只检查MOUSE CLICK事件，则请使用下面的条件：<br/>
+	  <font face="Courier New" size="2">event.type == Event.MOUSE_UP &amp;&amp; this.getState(Element.STATE_PRESSED)</font></dd>
+    <dt>Event.MOUSE_CLICK</dt>
+    <dd>鼠标在该元素上单击。</dd>
+    <dt>Event.MOUSE_DCLICK</dt>
+    <dd>鼠标在该元素上双击。</dd>
+    <dt>Event.MOUSE_WHEEL</dt>
+    <dd>鼠标滚轮在该元素上转动。<em>event.wheelDelta</em>为鼠标滚轮转动量。</dd>
+    <dt>Event.MOUSE_TICK</dt>
+    <dd>重复事件，当鼠标某个按钮按下时被触发。</dd>
+    <dt>Event.MOUSE_IDLE</dt>
+    <dd>脉冲事件，当鼠标短时间没有移动时会触发。如果该事件没有处理，则引擎会使用它来弹出该元素的气泡提示。</dd>
+    <h4>onKey(event) : true|false</h4>
+    <dt>Event.KEY_DOWN</dt>
+    <dd>键盘按键被按下。<em>event.keyCode</em>为该按键的虚拟键代码。</dd>
+    <dt>Event.KEY_UP</dt>
+    <dd>键盘按键按起。<em>event.keyCode</em>为该按键的虚拟键代码。</dd>
+    <dt>Event.KEY_CHAR</dt>
+    <dd>某个按键字符被按下。<em>event.keyCode</em>是该字符的UNICODE代码。</dd>
+    <h4>onFocus(event) : true|false</h4>
+    <dt>Event.GOT_FOCUS</dt>
+    <dd>元素获取输入焦点事件。</dd>
+    <dt>Event.LOST_FOCUS</dt>
+    <dd>元素失去输入焦点事件。</dd>
+    <h4>onControlEvent(event) :true|false</h4>
+    <p>合成(逻辑)事件 :</p>
+    <dt>Event.BUTTON_CLICK</dt>
+    <dd>按钮点击事件，被<em>button, checkbox, radio</em>这些行为支持。</dd>
+    <dt>Event.BUTTON_PRESS</dt>
+    <dd>鼠标/按键 在按钮上按下事件。被<em>button, checkbox, radio</em>这些行为支持。</dd>
+    <dt>Event.BUTTON_STATE_CHANGED</dt>
+    <dd>按钮的状态(value值)改变事件。被<em>checkbox, radio</em>这些行为支持。</dd>
+    <dt>Event.EDIT_VALUE_CHANGING</dt>
+    <dd>输入框的值将被改变事件。被<em>edit, number, decimal, date, masked</em>这些行为支持。<em>element.value</em>反应旧的值。</dd>
+    <dt>Event.EDIT_VALUE_CHANGED</dt>
+    <dd>输入框的值已被改变事件。被<em>edit, number, decimal, date, masked</em>这些行为支持。<em>element.value</em>反应新的值。</dd>
+    <dt>Event.SELECT_SELECTION_CHANGED</dt>
+    <dd>元素中元素选择器的选择内容被改变事件。被<em>select, dropdown-select, calendar</em>这些行为支持。</dd>
+    <dt>Event.SELECT_STATE_CHANGED</dt>
+    <dd>元素中元素选择器的某项的状态改变事件。当<em>select</em>中的某些&lt;options&gt;被折叠/展开时被触发。<em>event.target</em>是状态被改变的项。当日历改变月份时，<em>behavior: calendar</em>会发送该消息，通过处理该消息你可以更新日历中的DOM。</dd>
+    <dt>Event.HYPERLINK_CLICK</dt>
+    <dd>点击超链接事件。<em>event.target</em>为那个超链接元素。</dd>
+    <dt>Event.ACTIVATE_CHILD</dt>
+    <dd>请求容器激活它的子元素事件。当为元素定义了快捷键且被动触发时，<em>accesskey</em>处理器会发送该消息。例如，Tabs空间中的tab。见extenders.js / type Tabs。</dd>
+    <dt>Event.POPUP_REQUEST</dt>
+    <dd>Secret stuff.</dd>
+    <dt>Event.POPUP_READY</dt>
+	<dd></dd>
+    <dt>Event.POPUP_DISMISSED</dt>
+	<dd></dd>
+    <dt>Event.MENU_ITEM_ACTIVE</dt>
+    <dd>当菜单项高亮时被触发。</dd>
+    <dt>Event.MENU_ITEM_CLICK</dt>
+    <dd>当单击菜单项时。<em>event.target</em>是单击项。<em>event.owner</em>是弹出菜单的拥有元素。</dd>
+    <dt>Event.range 0x1000 .. 0x7FFF</dt>
+    <dd>自定义控件事件。在这个范围内的任何代码都可以使用<em>element.sendEvent(code,...)</em>来发送消息。<br/>
+	例如，如果定义了一个行为类，它看上去像一个按钮，则你可以使用<em>element.postEvent(Event.BUTTON_CLICK,...)</em>来通知其他元素发生了按钮单击事件。</dd>
+    <h4>onGesture(event): true|false</h4>
+    <dd>手势，DOM事件，在触摸屏器件上支持该事件。
+      <p>见 事件(Event)对象定义中的<strong>手势(触摸屏)事件代码</strong>。</p></dd>
+    <h4>onCommand(event): true|false</h4>
+    <p>命令, 指的是类似&lt;textarea&gt;、&lt;input|text&gt;、&lt;htmlarea&gt;、&lt;plaintext&gt;等文本编辑元素执行的动作, 参见: Element.execCommand()。</p>
+    <dt>Event.COMMAND_EXEC</dt>
+    <dd>执行命令: event.command:string 为被执行的命令, &nbsp;event.data - 参数。</dd>
+    <dt>Event.COMMAND_QUERY</dt>
+    <dd>查询命令执行的状态或是否被允许。</dd>
+    <h3>无冒泡 事件</h3>
+    <h4>onScroll(event) : true|false</h4>
+    <dt>Event.SCROLL_HOME</dt>
+    <dd>
+      <div>滚动请求，特别是&lt;input type=vscrollbar&gt; or &lt;input type=hscrollbar&gt;。</div>
+      <div>在这种情况下，SCROLL_POS使用<em>event.scrollPos</em>字段来获取请求的滚动位置。</div>
+      <div></div></dd>
+    <dt>Event.SCROLL_END</dt>
+	<dd></dd>
+    <dt>Event.SCROLL_STEP_PLUS</dt>
+	<dd></dd>
+    <dt>Event.SCROLL_STEP_MINUS</dt>
+	<dd></dd>
+    <dt>Event.SCROLL_PAGE_PLUS</dt>
+	<dd></dd>
+    <dt>Event.SCROLL_PAGE_MINUS</dt>
+	<dd></dd>
+    <dt>Event.SCROLL_POS</dt>
+	<dd></dd>
+    <h4>Behavior特有事件</h4>
+    <dt>attached() : void</dt>
+    <dd>behavior类的方法。如果在类型定义中定义了该事件，则它会在该DOM元素附加该行为时被调用。<em>this</em>变量执行该行为附加的元素。 <em>attached</em>()等价于一个构造函数。</dd>
+    <dt>onTimer()</dt>
+    <dd>计时器脉冲事件。使用<em>element.timer(milliseconds)</em>来启动计时器。若返回<em>false</em>则终止计时器。</dd>
+    <dt>onSize()</dt>
+    <dd>元素尺寸改变事件。若想获取元素尺寸，请使用<em>this.box()</em>函数。</dd>
+    <h4>根元素(Root)特有事件</h4>
+    <dt>self.ready()</dt>
+    <dd>文档加载的最后一步生成该事件。</dd>
+    <dt>self.closing(reason)</dt>
+    <dd>文档将被关闭时触发。事件处理器可以通过返回<em>false</em>来阻止文档的卸载。reason参数可以为以下标识符:<br/>
+	  <strong>- #by-chrome</strong> - 用户点击窗口上的close按钮;<br/>
+	  <strong>- #by-code</strong> - 调用view.close();<br/>
+	  <strong>- #by-load</strong> - 文档加载新文档时导致旧文档被卸载。
+	</dd>
+  </dl>
+  <h2 align="left"><a name="object-template">Element.create和Element.insert方法中的 对象模板微格式</a></h2>
+  <div>对象模板是用于生成新元素的对象文本。它应当遵循以下规则：</div>
+  <pre>{
+  div, <font face="monospace" color="#336600">//强制，第一个属性，它没有值——DOM元素的标签名，如<em>div</em>、<em>p</em>、<em>option</em>、<em>select</em>等。</font>
+  attr1name : <font face="monospace" color="#cc00cc">&quot;attr1value&quot;</font><font face="monospace">, </font><font face="monospace" color="#336600">//可选, 创建DOM元素的属性attr1name
+</font>
+  attrNname : <font face="monospace" color="#cc00cc">&quot;attrNvalue&quot;</font><font face="monospace">, </font><font face="monospace" color="#336600">//可选, 创建DOM元素的属性attrNname
+  </font><font face="monospace" color="#cc00cc"> 
+  &quot;some text&quot;</font><font face="monospace">, </font><font face="monospace" color="#336600">//可选字符串，DOM元素的文本(当该元素是文本容器，如<em>p</em>、<em> text</em>、<em>span</em>等时)。
+</font>
+  [ object-1, <font face="monospace" color="#cc00cc">&quot;text&quot;</font>, ... object-N ] <font face="monospace" color="#336600">//可选数组模板——定义元素的子元素和文本
+</font>}
+</pre>
+  <p>&quot;文本&quot;和[ 子元素数组 ]是互斥的，只能定义其中一个。</p>
+  <p>示例, 请看下面的脚本:</p>
+  <pre> sb.insert
+ {
+    div, class:&quot;dyn&quot;,
+     [
+      {p, &quot;文本1&quot; },
+      {p, [&quot;文本2 前&quot;, {button, &quot;Hi!&quot;}, &quot; 后&quot;] }
+     ]
+ };
+</pre>
+  <p>等价于:</p>
+  <pre>sb.insert(
+   &quot;&quot;
+   &quot;文本1&quot;
+   &quot;文本2 Hi! 后&quot;
+   &quot;&quot;
+);
+</pre>
+</body>
+</html>

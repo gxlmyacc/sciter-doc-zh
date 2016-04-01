@@ -1,0 +1,50 @@
+﻿<html>
+ <head> 
+  <title>为开发者介绍下URL的“原理”</title> 
+ </head> 
+ <body> 
+  <div> 
+   <h1 class="storytitle">为开发者介绍下URL的“原理”</h1> 
+  </div> 
+  <div class="storycontent"> 
+   <p>现在，我们使用过很多URL, 但是并不是所有人都明白URL到底是什么。</p> 
+   <p>在这篇文章里，我将尝试解释它们的结构，以及Sciter/HTMLayout怎么处理它们的。<br /> 
+      请注意这是一张非正式解释，我这里讲的“URL”，实际上更正确的名称应该是“URI”。</p> 
+   <p>URL由5个主要部分组成:</p> 
+   <pre>
+&lt;模式/协议&gt; : [//] &lt;资源唯一标识&gt; [ ? &lt;查询&gt; ] [ # &lt;片段/书签&gt; ]
+</pre> 
+   <p>其中:</p> 
+   <ul> 
+    <li><code>模式/协议</code> – 原则是是一个名称token – URL的协议名称。 如: “file:”, “http:”等。</li> 
+    <li><code>//</code> 部分 – 如果有的话，它的含义是接下来的 “资源唯一标识”部分采用层次化的命名约定，并且以‘/’作为分隔符。</li> 
+    <li><code>资源唯一标识</code> – 如果它之前有‘//’，则它是由‘/’分隔的路径名，否则它是一个“平”名称。</li> 
+    <li><code>查询</code> 部分原则上只对“动态客户端/服务端”场景有意义。 它是客户端为服务端提供的资源的一些参数说明。</li> 
+    <li><code>片段/书签</code> – 是一个名称，或者是资源中某一个位置或部分的ID。</li> 
+   </ul> 
+   <p>考虑下这种场景，当你在3个不同的位置上有一些相同的test-file.html文件: </p> 
+   <ol> 
+    <li>file:///c:/test-folder/test-file.htm</li> 
+    <li>http://example.com/test-folder/test-file.htm</li> 
+    <li>res:test-file.htm</li> 
+   </ol> 
+   <p>我们假设这个文档中包含一个有一个相对路径的图片:</p> 
+   <pre>
+  &lt;html&gt;
+  &lt;img src=&quot;image.png&quot;&gt;
+  &lt;/html&gt;
+</pre> 
+   <p>在加载这个文档时，Sciter将会按照以下步骤来处理“image.png”这个名称的路径:</p> 
+   <ol> 
+    <li>file:///c:/test-folder/image.png – 作为基URL的一个分层。</li> 
+    <li>http://example.com/test-folder/image.png – 同上。</li> 
+    <li>res:image.png – 这里仅继承基URL的资源协议。</li> 
+   </ol> 
+   <p>原则上，你的Sciter应用程序可以定义你自己的URL协议。你只需要觉得它是分层的还是“平”的。</p> 
+   <p>例如，如果你调用<code>SciterLoadHtml(html, &quot;app://module/main.htm&quot;);</code>，则文档中的所有相对链接<br /> 
+      将会把<code>app://module/</code>当做基地址。所以在你的SCN_LOAD_DATA处理事件中，你将会收到: “app://module/images/img1.png”, “app://module/styles.css” 等等。</p> 
+   <p>但是，如果你计划将你的所有文件都放到你的应用程序的资源文件中时，你应该使用一种类似 “res:”的“平”协议。</p> 
+   <p>最后需要注意的是: 如果你在SciterLoadHtml和SciterLoadFile中使用了层次URL，则这些URL必须是绝对定位，否则Sciter将不知道怎么处理它们。</p> 
+  </div>   
+ </body>
+</html>

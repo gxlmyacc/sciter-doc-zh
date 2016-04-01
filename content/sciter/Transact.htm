@@ -1,0 +1,91 @@
+<html>
+  <head>
+    <meta name="generator" content="h-smile:richtext"/>
+  </head>
+<body>
+  <h1>事务(Transaction)对象</h1>
+  <p>事务对象(接口)作为第一个参数用在<code>Element.transact(callback,name)</code>方法中。</p>
+  <p><code>Element.transact</code>方法提供了将执行一个或多个编辑行为作为单一事务——可以重做/撤销或回滚。 </p>
+  <p>所有使用其他方法所做的DOM修改不是可事务的。</p>
+  <dl>
+    
+      
+        <h2>属性</h2>
+    
+      <dt/>
+      <dd>N/A</dd>
+    
+      
+        <h2>枚举/遍历</h2>
+    
+      <dt/>
+      <dd>
+        <div>N/A</div></dd>
+    
+      
+        <h2>方法</h2>
+    
+      <dt>attr</dt>
+      <dd>
+        <div><strong>( element</strong>:Element, <strong>name</strong>: string, <strong>value</strong>: undefined | string <strong>)</strong> : <em>Transact</em></div>
+        <p>通过名称添加或移除属性。要移除属性则只需将它赋值为<em>undefined</em>。</p></dd>
+    
+      <dt>tag</dt>
+      <dd>
+        <div><strong>( element</strong>:Element, <strong>tag</strong>: string<strong> ) </strong>: <em>Transact</em></div>
+        <p>修改元素的标签。例如，某些情况下你可能想在不重新创建元素的情况下将<code>&lt;p&gt;</code>元素改成<code>&lt;li&gt;</code>。</p></dd>
+    
+      <dt>split</dt>
+      <dd>
+        <div><strong>( pos</strong>:bookmark, <strong>until</strong>: Element <strong>)</strong> : <em>Transact</em></div>
+        <p>从<em>pos</em>位置开始分隔DOM元素，直到<em>until</em>元素。例如：</p>
+        <pre>&lt;p id=test&gt;123&lt;b&gt;456&lt;/b&gt;789&lt;/p&gt;
+</pre>
+        <p>下面的代码:</p>
+        <pre>
+var p = $(p#test);
+var b = p.$(b);
+var pos = [bookmark: b.nodes()[0], 1, false]; //从&lt;b&gt;元素的第一个文本节点中的字符'5'的起始边缘。
+transact.split( pos, p );
+</pre>
+        <p>将会将DOM修改成：</p>
+        <pre>&lt;p id=test&gt;123&lt;b&gt;4&lt;/b&gt;&lt;b&gt;56&lt;/b&gt;789&lt;/p&gt;
+</pre></dd>
+    
+      <dt>wrap</dt>
+      <dd>
+        <div><strong>( from</strong>:bookmark, <strong>to</strong>:bookmark, <strong>into</strong>: Element <strong>)</strong> : <em>Transact</em></div>
+        <p>TBD (将该范围的元素封装到into元素中)</p></dd>
+    
+      <dt>unwrap</dt>
+      <dd>
+        <div><strong>( el</strong>: Element <strong>)</strong> : <em>Transact</em></div>
+        <p>TBD (将元素的内容移到它的父元素中，同时移除该元素。</p></dd>
+    
+      <dt>insertNode</dt>
+      <dd>
+        <div><strong>( node</strong>: Node,<strong> el</strong>: Element, <strong>at</strong>: index [, <strong>after</strong>: true] <strong>)</strong> : <em>Transact</em></div>
+        <p>TBD (将node节点或元素插入到<em>el</em>元素中的<em>index</em>位置。</p></dd>
+    
+      <dt>removeNode</dt>
+      <dd>
+        <div><strong>( node</strong>: Node <strong>)</strong> : <em>Transact</em></div>
+        <p>TBD (从DOM树中移除node节点或元素).</p></dd>
+    
+      <dt>insertHtml</dt>
+      <dd>
+        <div><strong>( at</strong>:bookmark, <strong>html</strong>:string <strong>)</strong> : <em>[nodes]</em></div>
+        <p>将HTML片段插入到at位置。返回插入的最顶层节点数组。</p></dd>
+    
+      <dt>insertText</dt>
+      <dd>
+        <div><strong>( at</strong>:bookmark, <strong>text</strong>:string <strong>)</strong> : <em>bookmark</em></div>
+        <p>在at位置处插入文本。返回插入的最后一个字符的书签。</p></dd>
+    
+      <dt>removeRange</dt>
+      <dd>
+        <div><strong>( from</strong>:bookmark, <strong>to</strong>:bookmark <strong>)</strong> : <em>Transact</em></div>
+        <p>TBD (从DOM树中移除该范围).</p></dd></dl>
+  <p/>
+</body>
+</html>

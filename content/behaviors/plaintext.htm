@@ -1,0 +1,65 @@
+﻿<html>
+  <head>
+    <meta name="source" content="http://www.terrainformatica.com/wiki/doku.php?id=h-smile:built-in-behaviors:edit"/>
+    <meta name="generator" content="h-smile:richtext"/>
+  </head>
+<body>
+  <h1>behavior: plaintext</h1>
+  <p>多行可编辑文本框行为。该行为优化了对大文本(上千行的文本)的处理。 </p>
+  <h2>元素</h2>
+  <p>默认情况下，应用了该行为的元素有:</p>
+  <ul>
+    <li><code>&lt;plaintext&gt;...&lt;/plaintext&gt;</code> display:block编辑器;</li></ul>
+  <h2>示例</h2>
+  <div>
+  	<plaintext style="height:100;">  
+	  请输入文本
+	</plaintext>
+  </div>
+  <h2>属性</h2>
+  <p>该行为需要知道的属性:</p>
+  <ul>
+    <li><code>readonly</code> - 声明该元素是只读的。</li></ul>
+  <h2>模型</h2>
+  <p>Plaintext解析每行文本到&lt;text&gt;元素中: </p>
+  <pre>&lt;plaintext&gt;
+   &lt;text&gt;Line 1&lt;/text&gt;
+   &lt;text&gt;Line 2&lt;/text&gt;
+   &lt;text&gt;Line 3&lt;/text&gt;
+&lt;/plaintext&gt;
+</pre>
+  <h2>事件</h2>
+  <p>除了标准事件集(鼠标、按键、聚焦)外，该行为还生成:</p>
+  <ul>
+    <li>EDIT_VALUE_CHANGED 事件 - 当元素的值被用户修改时产生该事件。该事件为异步事件。</li>
+    <li>EDIT_VALUE_CHANGING 事件 - 当任何修改该元素的值时发生该事件。通过该事件你可以在字符插入到文本框前过滤一些字符。该事件为同步事件。其中:</li>
+    <ul>
+      <li>event.reason 为以下值之一: </li></ul>
+    <ul>
+      <ul>
+        <li>const BY_INS_CHAR  = 3; // 因输入单个字符引起的事件。</li>
+        <li>const BY_INS_CHARS = 4; // 从剪切板粘贴引起的事件。</li>
+        <li>const BY_DEL_CHAR  = 5; // 由DELETE/BACKSPACE按键引起的事件。</li>
+        <li>const BY_DEL_CHARS = 6; // 由删除选择内容引起的事件。</li></ul>
+      <li>event.data - string, 读/写。 如果reason为BY_INS_***值，则包含插入的字符;</li></ul></ul>
+  <h2>value</h2>
+  <p>string, 反应内部输入缓冲区的当前状态。</p>
+  <h2>特有组合键</h2>
+  <ul>
+    <li>LEFT, CTRL+LEFT, SHIFT+LEFT, CTRL+SHIFT+LEFT</li>
+    <li>RIGHT, CTRL+RIGHT, SHIFT+RIGHT, CTRL+SHIFT+RIGHT</li>
+    <li>HOME, SHIFT+HOME</li>
+    <li>END, SHIFT+END</li>
+    <li>BACKSPACE, ALT+BACKSPACE, CTRL+BACKSPACE</li>
+    <li>CTRL+A</li>
+    <li>DELETE, SHIFT+DELETE, CTRL+DELETE</li>
+    <li>INSERT, SHIFT+INSERT, CTRL+INSERT</li>
+    <li>CTRL+X</li>
+    <li>CTRL+V</li>
+    <li>CTRL+Z</li>
+    <li>CTRL+(LEFT)SHIFT 和 CTRL+(RIGHT)SHIFT - 如果form表单上有<code>dir</code>属性时，这个组合键用来在<code>dir=&quot;ltr&quot;</code>和切换<code>dir=&quot;rtl&quot;</code>间切换。</li></ul>
+  <h2>方法</h2>
+ 
+    <div>TBD</div>
+</body>
+</html>

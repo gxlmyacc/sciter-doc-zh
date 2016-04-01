@@ -1,0 +1,63 @@
+﻿<html>
+  <head>
+    <title>打印页面(Pager)模板格式</title>
+    <meta name="generator" content="h-smile:richtext"/>
+  </head>
+<body>
+  <h1>behavior:pager</h1>
+  <p>该行为处理&lt;frame|pager&gt;和&lt;frame type=pager&gt;元素的相关功能。</p>
+  <p>pager实现了打印和打印预览功能。</p>
+  <p>该行为可以被应用到任何块元素上。</p>
+  <h2>元素</h2>
+  <p>默认情况下，拥有<em>behavior:pager</em>行为的元素有:</p>
+  <ul>
+    <li><code>&lt;frame|pager&gt;</code> - 页面打印预览的容器;</li></ul>
+  <h2>模型</h2>
+  <p>在文档加载完成后，&lt;frame|pager&gt;元素将会有一些&lt;pagebox&gt;子元素，它们的数量由<code>cols</code>和<code>rows</code>属性定义:</p>
+  <pre>&lt;frame|pager cols=2&gt;
+   &lt;pagebox/&gt;
+   &lt;pagebox/&gt;
+&lt;/frame&gt;
+</pre>
+  <p>每个&lt;pagebox/&gt;元素渲染它自己要打印的页面的模板实例。</p>
+  <h2>属性</h2>
+  <p>&lt;frame&gt;元素中有特定含义的属性:</p>
+  <ul>
+    <li><code>src=&quot;url&quot;</code> - 可选, 加载到frame中的文档URL;</li>
+    <li><code>page-template=&quot;url&quot;</code> - 可选, 页面模板文档的URL;</li>
+    <li><code>cols=&quot;number&quot;</code> 和 <code>rows=&quot;number&quot;</code> - 者两个属性定义打印预览时的&lt;pagebox&gt;(页面盒)的数量。</li></ul>
+  <h2>状态标识</h2>
+  <ul>
+    <li>N/A</li></ul>
+  <h2>事件</h2>
+  <ul>
+    <li><code>&quot;paginationstart&quot;</code> 事件 - 在分页时的第一步触发事件。这时要打印的文档刚加载完成;</li>
+    <li><code>&quot;paginationpage&quot;</code> 事件 - 在打印每个页面时触发该事件。event.reason是页号 - 1...N;</li>
+    <li><code>&quot;paginationend&quot;</code> 事件 - 在分页时的最后一步触发事件。这时待打印页数已经知道，并且通过event.reason字段来报告。</li></ul>
+  <h2>方法</h2>
+  <dl>
+    <dt>loadDocument</dt>
+    <dd>([templateUrl:string], documentUrl:string) - 从给定的url加载文档和打印模板;</dd>
+    <dt>pagesTotal</dt>
+    <dd>() : integer, 返回找到的页数;</dd>
+    <dt>pageNo</dt>
+    <dd>() : integer, 返回视图中渲染的第一个页面的页号;</dd>
+    <dt>pageNo</dt>
+    <dd>(number: integer), 将视图导航到number指定的页面;</dd>
+    <dt>selectPrinter</dt>
+    <dd>() : 打开系统的选择打印机对话框来选择目标打印机, 然后自动配置的页面尺寸，可能启动分页操作。</dd>
+    <dt>selectDefaultPrinter()</dt>
+    <dd>() : 选择默认打印机作为打印目标, 可能启动分页操作。</dd>
+    <dt>print</dt>
+    <dd>() - 打印当前文档到目标打印机上。</dd></dl>
+  <h2>值</h2>
+  <p>N/A</p>
+  <h2>在脚本中处理Frame事件</h2>
+  <pre>var pager = $(frame#pager);
+
+pager.on(&quot;paginationstart&quot;, function() {...});
+pager.on(&quot;paginationend&quot;, function(evt) { var npages = evt.reason; ...});
+
+</pre>
+</body>
+</html>

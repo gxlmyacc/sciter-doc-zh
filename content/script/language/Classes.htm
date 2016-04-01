@@ -1,0 +1,153 @@
+<html>
+  <head>
+    <title>>TIScript 3.2操作指南——类和名称空间</title>
+    <link rel="stylesheet" href="for-screen.css"/>
+    <meta name="generator" content="h-smile:richtext"/>
+  </head>
+<body>
+  <h1>类和名称空间</h1>
+  <p><strong>namespace</strong>用于声明一个新的名称空间。一个名称空间是一个函数、类、变量等聚合到一个单元的集合。名称空间也可以包含其他(内部)名称空间. 在内部，一个名称空间实际上是一个命名全局对象。 <em>super</em>关键字可以用于方法父名称空间的成员——在内部名称空间有相同名称的。 </p>
+  <p>名称空间的声明:</p>
+  <pre class="code tiscript"><code>namespace</code> &lt;名称&gt;
+<code>{
+</code>  [ &lt;function&gt; | &lt;var&gt; | &lt;const&gt; | &lt;class&gt; | &lt;namespace&gt; ]*
+<code>}
+</pre>
+  <h1><a name="classes" id="classes">类</a></h1>
+  <p><strong>class</strong>用于定义一个新的类(对象的类型):</p>
+  <pre class="code tiscript"><code>class</code> &lt;类名&gt; [ <code>:</code> &lt;父类名&gt; ]
+<code>{
+</code>  [ &lt;function&gt; | &lt;constructor&gt; | &lt;property&gt; | &lt;var&gt; | &lt;const&gt; | &lt;this var&gt; | &lt;class&gt; ]*
+<code>}
+</pre>
+  <dl>
+    <dt>其中:</dt>
+    <dd><code>&lt;function&gt;</code> 函数，是一个标准的函数声明。这样的函数可以被类的示例或静态方法使用。<br/>
+	<code>&lt;constructor&gt;</code> 构造函数，是一个名称为<em>this</em>的函数。<br/>
+	<code>&lt;property&gt;</code> 属性，是一个特定类型的成员函数。参见下面的内容。<br/>
+	<code>&lt;var&gt;</code> 变量，是一个标准的var声明——允许定义类或模块变量(又名静态变量)。<br/>
+	<code>&lt;const&gt;</code> 常量，是一个命名常量的声明。<br/>
+	<code>&lt;class&gt;</code> 类，是一个内部类的声明。<br/>
+	<code>&lt;this var&gt;</code> 成员变量, 是一个成员变量的声明:<br/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>this var &lt;name&gt; [= &lt;value&gt;] [, &lt;name&gt; = &lt;value&gt; , ...];</code> </dd></dl>
+  <h2><a name="constructors" id="constructors">构造函数</a></h2>
+  <p>该函数的名称为<em>this</em>, 在类的上下文中声明，作为该类的所有实例的函数-构造器:</p>
+  <pre class="code tiscript">class Tor
+{
+  <code>this var</code> one = 1; // 声明一个成员变量
+  <code>function</code> <code>this</code>() { <code>this</code>.two = 2; } // 构造器
+}
+</pre>
+  <p>构造函数的主要目标是用来初始化一个类(又名对象)的新实例。它通过创建和初始化实例将包含的所有字段。在构造函数中可以使用名称为<em>this</em>的变量来方法被创建的对象<sup><a href="#fn__1" name="fnt__1" id="fnt__1" class="fn_top">1)</a></sup>。</p>
+  <p>编译器在处理完成new操作符后调用构造函数:</p>
+  <pre class="code tiscript">var tor = new Tor();
+//  tor.one == 1 并且
+//  tor.two == 2 
+</pre>
+  <p>在其他情况下, <code>function this()</code>是一个普通函数，它也可以定义一些参数, 包括<a href="/wiki/tiscript/functions#optional_parameters" class="wikilink1" title="tiscript:functions">可选参数</a>。</p>
+  <h2><a name="methods" id="methods">方法</a></h2>
+  <p>在类的上下文中声明的，其他名称的函数，是该类的一个方法。如果一个方法有一个<em>this</em>变量的引用，则它被称作<em><strong>实例方法</strong></em>(又名 动态方法)。如果它没有<em>this</em>变量的引用，则它是一个<em><strong>类方法</strong></em>(又名 静态方法)。原则上，一个函数，既可以作为实例方法，也可以作为类方法。当作为<em>类方法</em>调用时，<em>this</em>将会指向定义该方法所在的类或名称空间。当作为实例方法调用时(如<em>obj.method()</em>)，<em>this</em>将会指向对象实例(这种情况下指向obj)。</p>
+  <h3><a name="instance-methods" id="instance-methods">实例方法</a></h3>
+  <p>实例方法必须在该类的特定对象上下文中调用:</p>
+  <pre class="code tiscript">class Tor
+{
+  function rotate( angle ) {  this.angle = angle; this.update(); }
+}
+var tor = new Tor();
+tor.rotate(270);     // Tor.rotate()方法在一个特定实例-'tor'的上下文上调用
+</pre>
+  <h3><a name="static-methods" id="static-methods">静态方法</a></h3>
+  <p>类/名称空间的静态方法可以使用<em>ClassOrNamespace.Method</em>语句(又名&quot;点语句&quot;):</p>
+  <pre class="code tiscript">class Tor
+{
+  var all = [];
+  function rotateAll( angle ) {  for(var t in Tor.all) t.rotate(angle);  }
+}
+Tor.rotateAll(270); // Tor.rotateAll()方法被当做类方法调用
+</pre>
+  <h2><a name="properties" id="properties">属性</a></h2>
+  <p>TIScript支持可计算(又名 虚拟)属性的定义。它是特殊函数——用于设置或获取一个属性的值。可计算属性的定义语法如下:</p>
+  <pre class="code tiscript"><code>property</code> &lt;函数名&gt; <code>(</code> &lt;参数&gt; <code>)
+</code>{
+  [ &lt;语句&gt; | get &lt;语句&gt; | set &lt;语句&gt; ]*
+}
+</pre>
+  <p>property的语句体内可以包含语句，语句可以出现在正常的函数体内，也可以出现在<em>get</em>和<em>set</em>节内。<em>get</em>节(一个或多个)在函数用于获取属性值时执行，而<em>set</em>节函数用于设置属性值时执行。示例:</p>
+  <pre class="code tiscript">class Baz
+{
+  function this() { this._first = 1; this._second = 2; }
+
+  property first( val )
+  {
+    get return this._first; // single expression get block
+    set this._first = val;  // single expression set block
+  }
+
+  property second( val )
+  {
+    stdout &lt;&lt; &quot;second&quot;;
+    get
+    {
+      stdout &lt;&lt; &quot;get\n&quot;;
+      return this._second + 2;
+    }
+    set
+    {
+      stdout &lt;&lt; &quot;set\n&quot;;
+      this._second = val - 2;
+    }
+  }
+}
+</pre>
+  <div>注意：属性函数的声明必须包含一个参数，如<code>val</code>。</div>
+  <h3>未定义的属性处理器</h3>
+  <p>你可以定义一个所谓的未定义的属性处理器(<em>Undefined Property Handler</em>), 它用于处理未定义属性。 定义<em>UPH</em>的语法类似于可计算属性处理器，只是它的名称是<em>undefined</em>:</p>
+  <pre class="code tiscript"><code>property</code> <code>undefined</code> ( &lt;name&gt;, &lt;value&gt; )
+<code>{
+</code>  [&lt;语句&gt; | <code>get</code> &lt;语句&gt; | <code>set</code> &lt;语句&gt; ]*
+<code>}
+</pre>
+  <p>UPH函数必须有两个参数: 属性的名称&lt;name&gt;和属性的值&lt;value&gt;(用在属性的set操作)。UPH可用在设置属性时属性名未知的情况下。例如，你可能希望将访问数据集的字段作为属性: </p>
+  <pre class="code tiscript">property Recordset.undefined(name, val)
+{
+  get return this.getFieldValue(name);
+}
+...
+
+var rs = DB.exec(&quot;SELECT firstName, secondName FROM employee&quot;);
+var n1 = rs.firstName;  // 通过undefined()属性直接调用rs.getFieldValue(#firstName); 
+var n2 = rs.secondName; 
+</pre>
+  <h2><a name="type-variables" id="type-variables">类/名称空间 变量</a></h2>
+  <p>类，或名称空间、变量使用<em>var</em>关键字定义在类或名称空间的上下文。示例:</p>
+  <pre class="code tiscript">namespace Toz
+{
+  var all = []; //创建一个空数组变量;
+  var singleton = { something: 123; }; // 创建一个对象变量;
+  var counter = 0; // 创建一个包含整数0的变量;
+}
+</pre>
+  <p>为了访问这些变量，请使用它的全名:</p>
+  <pre class="code tiscript">Toz.all.push(&quot;anything&quot;);
+Toz.counter += 1;
+</pre>
+  <h2><a name="constants" id="constants">常量</a></h2>
+  <p>名称空间常量(又名 常量) 是只读变量，它使用<code>const</code>关键字定义。示例:</p>
+  <pre class="code tiscript">namespace Toz
+{
+  const ALIGN_LEFT = 1;
+  const ALIGN_CENTER = 2;
+  const ALIGN_RIGHT = 3;
+}
+</pre>
+  <p>为了访问这些常量，请使用它的全名:</p>
+  <pre class="code tiscript">switch(alignment)
+{
+  case Toz.ALIGN_LEFT: ... break;
+  case Toz.ALIGN_CENTER: ... break;
+  case Toz.ALIGN_RIGHT: ... break;
+  default: ... break;
+}
+</pre>
+  <p><sup><a href="#fnt__1" id="fn__1" name="fn__1">1)</a></sup> 使用<em>this</em>作为构造函数的名称 的想法来自<a href="http://digitalmars.com/d/class.html#constructors" class="urlextern" title="http://digitalmars.com/d/class.html#constructors" rel="nofollow">D语言</a></p>
+</body>
+</html>

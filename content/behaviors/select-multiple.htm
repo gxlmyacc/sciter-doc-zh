@@ -1,0 +1,61 @@
+﻿<html>
+  <head>
+    <meta name="generator" content="h-smile:richtext"/>
+  </head>
+<body>
+  <h1>behavior:select-multiple</h1>
+  <p>多选列表(&lt;select multiple&gt;)的行为(当按照ctrl键时可以进行多选)。原则上它可以被应用到任何元素上。</p>
+  <h2>元素</h2>
+  <p>默认情况下，应用了该行为的元素有:</p>
+  <ul>
+    <li><code>&lt;select size=&quot;2...N&quot; multiple&gt;&lt;/select&gt;</code></li>
+    <li><code>&lt;select|list multiple&gt;&lt;/select&gt;</code></li></ul>
+  <h2>示例</h2>
+  <div>
+    <select|list multiple novalue="无选择项">
+      <option>选项1</option>
+      <option>选项2</option>
+      <option>选项3</option>
+    </select>
+	<select|list multiple novalue="无选择项">
+      <option>选项1</option>
+      <option>选项2</option>
+      <option>选项3</option>
+    </select>
+  </div>
+  <h2>模型</h2>
+  <p>于behavior:select行为相同。</p>
+  <p>被选择项被设置了<code>:checked</code>状态标志，因此可以在CSS中使用:checked伪类来设置选择状态项的样式:</p>
+  <pre>select &gt; option:checked { background-image: url(my-checkmark.png); }
+</pre>
+  <h2>属性</h2>
+  <p>该行为需要知道的属性:</p>
+  <ul>
+    <li><code>size=integer</code> - 列表中可见元素的数量。注意：select元素的高度可以被CSS覆盖掉。</li>
+    <li><code>name=&quot;name&quot;</code> - 标准的<em>name</em>属性 - from表单上一个input元素的名称。</li>
+    <li><code>novalue=&quot;text&quot;</code> -如果select中没有使用<code>&lt;option selected&gt;</code>初始化它，则将会使用该显示该文本。</li></ul>
+  <h2>事件</h2>
+  <p>除了标准事件集(鼠标、按键、聚焦)外，该行为还生成:</p>
+  <ul>
+    <li>SELECT_SELECTION_CHANGED event, 当修改select中的选择项(在一个option上点击)时产生该事件。该事件为异步事件。</li>
+    <li>SELECT_SELECTION_CHANGING event, 当选择项将要改变时生成该事件。该事件为同步事件。</li></ul>
+  <h2>方法</h2>
+  <p>N/A - 该行为没有引入任何特有的方法。</p>
+  <h2>value</h2>
+  <p>value数组, 读/写属性, 选择项的列表。 </p>
+  <h2>在脚本中处理选择项的修改</h2>
+  <h3><code>onValueChanged</code>事件</h3>
+  <pre>var btn = $(select#some);
+btn.onValueChanged = function() { var v = this.value; ... }
+</pre>
+  <h3><code>on()</code> 订阅</h3>
+  <pre>var btn = $(select#some);
+btn.on(&quot;change&quot;, function() { ... 事件处理代码 ... });
+self.on(&quot;change&quot;, &quot;select#some&quot;, function() { ... 事件处理代码 ... });
+</pre>
+  <h3>decorators.tis 装饰器</h3>
+  <pre>include &quot;decorators.tis&quot;;
+@change @on &quot;select#some&quot; :: ... 事件处理代码 ...;
+</pre>
+</body>
+</html>

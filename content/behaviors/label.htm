@@ -1,0 +1,30 @@
+﻿<html>
+  <head>
+    <meta name="generator" content="h-smile:richtext"/>
+  </head>
+<body>
+  <h1>behavior:label</h1>
+  <p>该行为将绑定了该行为的元素上的鼠标事件重定向到它标签指定的元素。因此，当鼠标在标签上点击时，会导致标签指定的元素获取焦点或生成点击事件。 </p>
+  <h2>元素</h2>
+  <p>默认情况下，应用了该行为的元素有:</p>
+  <ul>
+    <li><code>&lt;label&gt;</code></li>
+    <li><code>&lt;label for=...&gt;</code></li></ul>
+  <h2>属性</h2>
+  <p>该行为需要知道的属性:</p>
+  <ul> 
+    <li><code>for=&quot;id&quot;</code> - label标签指定的输入元素的ID。</li></ul>
+  <h2>事件</h2>
+  <p>N/A - 该行为没有引入任何特有的事件。</p>
+  <h2>方法</h2>
+  <p>N/A - 该行为没有引入任何特有的方法。</p>
+  <h2>value</h2>
+  <p>N/A</p>
+  <h2>示例</h2>
+  <p>下面的标记: </p>
+  <pre>&lt;label&gt;点我&lt;input|text&gt;&lt;/label&gt;
+&lt;label for=&quot;buddy&quot;&gt;也点我&lt;/label&gt; &lt;input|text id=&quot;buddy&quot;&gt;
+</pre>
+  <p>将会生成两个绑定了标签的input元素。</p>
+</body>
+</html>

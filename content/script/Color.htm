@@ -1,0 +1,79 @@
+﻿<html>
+  <head>
+    <title>TIScript - Date object</title>
+    <meta name="generator" content="h-smile:richtext"/>
+  </head>
+<body>
+  <h1>Color(颜色)对象</h1>
+  <p>表示一个颜色值。</p>
+  <dl>
+    <p>颜色值由全局函数color()创建:</p>
+    <dt>color</dt>
+    <dd>(<strong>r</strong>: int, <strong>g</strong>: int, <strong>b</strong>: int [, <strong>opacity</strong>: int | float]) : color<br/>(<strong>s</strong>: string ) : color
+      <p><em>color</em>函数根据red、green、blue、opacity分量构建一个颜色值。也可以解析CSS语法规则的颜色字符串。</p></dd>
+    <h2>常量</h2>
+    <div><strong>N/A</strong></div>
+    <h2>属性</h2>
+    <dt>r</dt>
+    <dd>只读, <em>integer</em> 0..255, 红色通道值。</dd>
+    <dt>g</dt>
+    <dd>只读, <em>integer</em> 0..255, 绿色通道值。</dd>
+    <dt>b</dt>
+    <dd>只读, <em>integer</em> 0..255, 蓝色通道值。</dd>
+    <dt>a</dt>
+    <dd>只读, <em>integer</em> 0..255, Alpha通道值。</dd>
+    <dt>opacity</dt>
+    <dd>只读, <em>float</em> 0.0 .. 1.0, 这是Alpha通道值的浮点数表示形式。</dd>
+    <h2>方法</h2>
+    <dt>rgba</dt>
+    <dd>
+      <p>(<strong>r</strong>: int, <strong>g</strong>: int, <strong>b</strong>: int [, <strong>opacity</strong>: int | float]) : color</p>
+      <p>静态方法(类的), 根据red、green、blue、opacity分量构建一个颜色值。</p></dd>
+    <dt>hsv</dt>
+    <dd>
+      <p>(<strong>hue</strong>: float | angle, <strong>saturation</strong>: float, <strong>value</strong>: float [, <strong>opacity</strong>: int | float]) : color</p>
+      <p>静态方法(类的), 根据HSV(色调[0-360]、饱和度[0.0-1.0]、明度[0.0-1.0])值构建一个颜色值。见: <a href="http://en.wikipedia.org/wiki/HSL_color_space">http://en.wikipedia.org/wiki/HSL_color_space</a></p></dd>
+    <dt>hsl</dt>
+    <dd>
+      <p>(<strong>hue</strong>: float | angle, <strong>saturation</strong>: float, <strong>lightness</strong>: float [, <strong>opacity</strong>: int | float]) : color</p>
+      <p>静态方法(类的), 根据HSL(色调[0-360]、饱和度[0.0-1.0]、亮度[0.0-1.0])值构建一个颜色值。见: <a href="http://en.wikipedia.org/wiki/HSL_color_space">http://en.wikipedia.org/wiki/HSL_color_space</a></p></dd>
+    <dt>tint</dt>
+    <dd>
+      <p>( <strong>luminance</strong>: float [, <strong>saturation</strong>: float[, <strong>hue</strong>: float | angle]] ) : color</p>
+      <p>返回颜色值-该方法应用的颜色值的色调。luminance和saturation是范围为-1.0...+1.0间的浮点值。<em>hue</em>可以说角度值也可以是浮点值。(角度范围: 0 .. 360)</p></dd>
+    <dt>parse</dt>
+    <dd>
+      <p>( <strong>text</strong>: string )</p>
+      <p>静态方法(类的), 解析<strong>text</strong>字符串为一个颜色值。支持的格式:</p>
+      <ul>
+        <li>&quot;#RGB&quot;</li>
+        <li>&quot;#RRGGBB&quot;</li>
+        <li>&quot;rgb(r,g,b)&quot;</li>
+        <li>&quot;rgba(r,g,b,a)&quot;</li>
+        <li>类似于下面的文字: &quot;yellow&quot;、&quot;gold&quot;、&quot;red&quot;等。</li></ul></dd>
+    <dt>toString</dt>
+    <dd>
+      <p>( [#RGB | #rgb | #rgba] ) : string</p>
+      <p>根据提供的格式返回颜色值的字符串表示形式。支持的格式:</p>
+      <ul>
+        <li><em>#RGB</em> -  输出颜色值字符串格式为&quot;#RRGGBB&quot;;</li>
+        <li><em>#rgb</em> -  输出颜色值字符串格式为&quot;rgb(r,g,b)&quot;;</li>
+        <li><em>#rgba</em> - 输出颜色值字符串格式为&quot;rgba(r,g,b,a)&quot;。</li></ul></dd>
+    <dt>toInteger</dt>
+    <dd>
+      <p>( ) : int</p>
+      <p>转换颜色值为一个32位整数。</p></dd>
+    <dt>toHSV</dt>
+    <dd>
+      <p>( ) : float,float,float</p>
+      <p>将颜色值转换成3个值 - H、S和V颜色分量。</p></dd>
+    <dt>toHSL</dt>
+    <dd>
+      <p>( ) : float,float,float</p>
+      <p>将颜色值转换成3个值 - H、S和L颜色分量。</p></dd>
+    <dt>morph</dt>
+    <dd>
+      <p>( from : color, to:color, ratio: float ) : color</p>
+      <p>根据下面的公式计算平均值: <code>(to - from) * ratio + from</code>(应用于每个颜色分量)。 该转换基于左乘颜色空间。</p></dd></dl>
+</body>
+</html>

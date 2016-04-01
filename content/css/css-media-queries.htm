@@ -1,0 +1,60 @@
+<html>
+  <head>
+    <title>H-SMILE中的媒体查询</title> 
+    <meta name="generator" content="h-smile:richtext"/>
+  </head>
+<body>
+  <h1>H-SMILE中的媒体查询</h1>
+  <p>H-SMILE中的媒体查询的实现类似于<a href="http://www.w3.org/TR/css3-mediaqueries" class="l vst" onmousedown="return clk(this.href,'','','res','1','n1c-ltxK7tB3dQHZvXaBMg','0CBcQFjAA')"><em>CSS3媒体查询</em></a>，不过使用的是CSSS!表达式语法。</p>
+  <p>这里是CSS3的媒体查询(MQ): </p>
+  <pre>@media handheld and (min-width: 20em),
+       screen and (min-width: 20em) { ... }
+</pre>
+  <p>在H-SMILE中看起来将是这样的:</p>
+  <pre>@media handheld &amp;&amp; (min-width &gt;= 20em),
+       screen &amp;&amp; (min-width &gt;= 20em) { ... }
+</pre>
+  <p>媒体查询在运行时当引擎接收的OS关于环境变量改变的通知后执行。比如，如果设备的方向改变，你可以设置一些这样的样式:</p>
+  <pre>@media handheld &amp;&amp; orientation-portrait 
+{
+  body { flow:vertical; }
+}
+@media handheld &amp;&amp; orientation-landscape 
+{
+  body { flow:horizontal; }
+}
+</pre>
+  <p>默认情况下，H-SMILE设置了以下变量。这些变量可以被应用程序为整个视图或某个特定的<code>&lt;frame&gt;</code>重置。</p>
+  <ul>
+    <li><strong>&quot;width&quot;</strong>, <strong>&quot;height&quot;</strong> - 像素, 视图的宽度和高度;</li>
+    <li><strong>&quot;min-width&quot;</strong>, <strong>&quot;min-height&quot;</strong> - 像素, 视图的最小宽度和高度;</li>
+    <li><strong>&quot;max-width&quot;</strong>, <strong>&quot;max-height&quot;</strong> - 像素, 窗口全屏时，视图的最大宽度和高度;</li>
+    <li><strong>&quot;aspect-ratio&quot;</strong> - float, 视图的宽度/高度比;</li>
+    <li><strong>&quot;monitors&quot;</strong> - integer, 系统的监视器数量;</li>
+    <li><strong>&quot;device-width&quot;</strong>, <strong>&quot;device-height&quot;</strong> - 像素, 主监视器的宽度和高度;</li>
+    <li><strong>&quot;device-aspect-ratio&quot;</strong> - float, 主监视器的宽度/高度比;</li>
+    <li><strong>&quot;orientation-portrait&quot;</strong> - bool, 如果宽度小于高度则为true;</li>
+    <li><strong>&quot;orientation-landscape&quot;</strong> - bool, 如果宽度大于高度则为true;</li>
+    <li><strong>&quot;color&quot;</strong> - integer, 显示器每像素的位数;</li>
+    <li><strong>&quot;color-index&quot;</strong> - integer, 支持的颜色值总数;</li>
+    <li><strong>&quot;resolution&quot;</strong> - integer, DPI, 分辨率，每英寸的点数;</li>
+    <li><strong>&quot;min-resolution&quot;</strong> - integer, DPI, 最小分辨率，每英寸的点数;</li>
+    <li><strong>&quot;max-resolution&quot;</strong> - integer, DPI, 最大分辨率，每英寸的点数;</li>
+    <li><strong>&quot;resolution-dpcm&quot;</strong> - integer, DPCM, 分辨率，每厘米的点数;</li>
+    <li><strong>&quot;min-resolution-dpcm&quot;</strong> - integer, DPCM, 最小分辨率，每厘米的点数;</li>
+    <li><strong>&quot;max-resolution-dpcm&quot;</strong> - integer, DPCM, 最大分辨率，每厘米的点数;</li>
+    <li><strong>&quot;high-contrast&quot;</strong> - bool, 当系统使用高对比度访问模式时返回true;</li>
+    <li><strong>&quot;has-pen&quot;</strong> - bool, 如果系统是基于写字笔时返回true;</li>
+    <li><strong>&quot;has-mouse&quot;</strong> - bool, 如果系统是基于鼠标时返回true;</li>
+    <li><strong>&quot;has-mouse-wheel&quot;</strong> - bool, 如果系统是基于有滚轮的鼠标时返回true;</li>
+    <li><strong>&quot;screen-reader&quot;</strong> - bool, 可访问性, 如果屏幕阅读器有效时返回true;</li>
+    <li><strong>&quot;slow-machine&quot;</strong> - bool, 如果OS检测到低端处理器时返回true;</li>
+    <li><strong>&quot;engine&quot;</strong> - string, 引擎的名称，目前值可能是&quot;sciter&quot;或&quot;htmlayout&quot;。使用在如果你的媒体查询不仅用在Sciter中，也用在其他通用浏览器上;</li>
+    <li><strong>&quot;engine-version-minor&quot;</strong> - int, 引擎的小版本号;</li>
+    <li><strong>&quot;engine-version-major&quot;</strong> - int, 引擎的主版本号, 如对于Sciter, 它将会是3，minor号应该为2。</li>
+	<li><strong>&quot;composition-supported&quot;</strong> - bool, 是否支持组合模式，当DWM(win7以上)可用时为true。</li>
+	<li><strong>&quot;on-glass&quot;</strong> - bool, 是否处于透明模式。</li>
+   </ul>
+  <p>媒体查询也被&lt;style media=&quot;&quot;&gt;、&lt;link media=&quot;&quot;&gt;元素和@import语句支持。</p>
+</body>
+</html>

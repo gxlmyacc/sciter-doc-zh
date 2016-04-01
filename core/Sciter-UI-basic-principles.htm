@@ -1,0 +1,42 @@
+﻿<html>
+ <head> 
+  <title>Sciter UI的基本设计原则。调用UI背后的工作线程中的代码。</title> 
+ </head> 
+ <body> 
+  <div class="post" id="post-41772"> 
+   <h1 class="storytitle">Sciter UI的基本设计原则。调用UI背后的工作线程中的代码。</h1> 
+  </div> 
+  <div class="storycontent"> 
+   <p>我在SDK中添加了新的示例: /sdk/demos/ui-framework。<br /> 
+   这个示例演示了<a href="Sciter-UI-application-architecture.htm" title="Sciter UI及它的应用架构">“Sciter UI及它的应用架构”</a>文章中描述的设计原则。</p> 
+   <p><a href="images/wth.png"><img src="images/wth.png" alt="Sciter demo screenshot" width="629" height="648" class="aligncenter size-full wp-image-41773" /></a></p> 
+   <p>这个示例演示了怎么定义一个本地函数(view.execTask() -&gt; window::exec_task())，以及如何从工作线程中调用UI方法(通过回调)。</p> 
+   <p>我已经在<a href="http://www.terrainformatica.com/2011/01/c0x-running-code-in-gui-thread-from-worker-threads/">这篇文章</a>中解释了如何在工作线程中调用UI，不过在这个示例里，我使用了一种稍微不同的机制。</p> 
+   <p>gui_exec函数看起来类似这样的:</p> 
+   <pre class="brush: cpp;">// 这个函数被工作线程调用，用于执行GUI线程中gui_block 
+inline void gui_exec( std::function&lt;void()&gt; gui_block )
+{
+  sciter::sync::event evt;
+  PostThreadMessage(gGUIThreadId, WM_EXEC, WPARAM(&amp;evt),LPARAM(&amp;gui_block));
+  evt.wait(); // 暂停工作线程，直到GUI线程执行完毕gui_block。
+}
+</pre> 
+   <p>它将消息post到GUI线程的消息队列中，WM_EXEC消息的接收者是是Windows的WH_GETMESSAGE的hook函数:</p> 
+   <pre class="brush: cpp;">// message hook to handle WM_EXEC in GUI thread
+static LRESULT CALLBACK gui_exec_hook_GetMsgProc(int code, WPARAM wParam, LPARAM lParam )
+{
+  MSG* pmsg = reinterpret_cast&lt;MSG*&gt;(lParam);
+  if(pmsg-&gt;message == WM_EXEC)
+  {
+    sciter::sync::event* pe = reinterpret_cast&lt;sciter::sync::event*&gt;(pmsg-&gt;wParam);
+    gui_block* pf = reinterpret_cast&lt;gui_block*&gt;(pmsg-&gt;lParam);
+    (*pf)();      // execute the block in this GUI thread
+    pe-&gt;signal(); // signal that we've done with it
+                  // this will resume execution of worker thread.
+  }
+  return CallNextHookEx(0,code, wParam,lParam);
+}</pre> 
+   <p>Using hooks allows this mechanism to work reliably even when application is running modal dialog loops.</p> 
+  </div>  
+ </body>
+</html>

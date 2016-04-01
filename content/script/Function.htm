@@ -1,0 +1,76 @@
+<html>
+  <head>
+    <title>TIScript - Function(函数)对象</title>
+    <meta name="generator" content="h-smile:richtext"/>
+  </head>
+<body>
+  <h1>Function(函数)对象</h1>
+  <p>脚本函数对象。</p>
+  
+    <dl>
+      
+        
+          <h2>属性</h2>
+      
+        <dt>name</dt>
+        <dd>只读, string. 函数名。匿名函数的该属性值为undefined。</dd>
+      
+        <dt>fullName</dt>
+        <dd>只读, string. 函数的全名，包含类名或名称空间名。匿名函数的该属性值为undefined。</dd>
+      
+        <dt>length</dt>
+        <dd>只读, integer. 返回声明的参数总数。</dd>
+        
+        <dt>arguments[index]</dt>
+        <dd>只读, string. 返回索引(基于0)位置的参数名称。</dd>
+      
+        <dt>optionals</dt>
+        <dd>只读, integer. 返回可选参数总数。</dd>
+      
+        
+          <h2>方法</h2>
+      
+        <dt>[this]</dt>
+        <dd>
+          <p>([<em>arg1</em>:string [, <em>arg2</em>:string [, ... <em>argN</em>:string]],] <em>functionBody</em>:string)</p>
+          <p>构造器, 编译函数体并创建它的函数对象。arg1... argN是该函数的正式参数名称，每个值必须是对应的有效的JavaScript标识符的字符串。</p></dd>
+      
+        <dt>call</dt>
+        <dd>
+          <p>( thisObj: object [, p0:value, ... pN:value] ) : value</p>
+          <p>调用设置到thisObj的<em>this</em>上下文中的该函数。</p></dd>
+      
+        <dt>apply</dt>
+        <dd>
+          <p>( thisObj: object [,p0:value, ... pN:value] [, argv:array] ) : value</p>
+          <p>调用设置到thisObj的<em>this</em>上下文中的该函数。调用该函数的参数由p0 ... pN和<em>argv</em>数组的成员组成。因此实际的调用参数列表为: p0, ..., pN, argv[0], ... argv[N]。</p></dd>
+      
+        <dt>exists</dt>
+        <dd>( <strong>tag</strong>: value, [<strong>deep</strong> = false] ) : true | false
+          <p>检查<strong>tag</strong>属性是否存在。如果deep == true，则进行深查找——查找函数本身和它的子类链。</p></dd>
+      
+        <dt>remove</dt>
+        <dd>( <strong>tag</strong>: value ) : void
+          <p>移除函数的<strong>tag</strong>(又名name)属性。</p></dd>
+      
+        <dt>propertyAt</dt>
+        <dd>( <strong>tag</strong>: value ) : value
+          <p>根据tag参数检索该对象中的成员/属性。它等价于<em>obj.tag</em>构造函数。</p></dd>
+      
+        <dt>seal</dt>
+        <dd><strong>( </strong>[<strong>strict</strong>:true|false] <strong>)</strong> : object
+          <p>密封。锁定对象的结构——调用该方法后任何对该对象属性的新增或移除操作都将会抛出一个异常。已经存在的属性可以被修改。如果<em>strict</em>参数为true，则当访问未知属性是将会抛出一个异常。</p></dd>
+      
+        <dt>isSealed</dt>
+        <dd><strong>( </strong>[<strong>strict</strong>:true|false]<strong> )</strong> : true | false | undefined
+          <p>如果对象被密封则返回<em>true</em>。如果<em>strict</em>为<em>true</em>则只有<em>seal(true)</em>时才返回<em>true</em>。</p></dd>
+      
+        <dt>freeze</dt>
+        <dd><strong>( </strong>[<strong>strict</strong>:true|false] <strong>)</strong> : object
+          <p>冻结。锁定对象 - 使该对象不可改变 - 该对象的任何的新增、移除和修改值操作都将会抛出一个异常。返回该对象本身。如果<em>strict</em>参数为true，则当访问未知属性是将会抛出一个异常。</p></dd>
+      
+        <dt>isFrozen</dt>
+        <dd><strong>( </strong>[<strong>strict</strong>:true|false]<strong> )</strong> : true | false | undefined
+          <p>如果对象被冻结则返回<em>true</em>。如果<em>strict</em>为<em>true</em>则只有<em>freeze(true)</em>时才返回<em>true</em>。</p></dd></dl>
+</body>
+</html>
