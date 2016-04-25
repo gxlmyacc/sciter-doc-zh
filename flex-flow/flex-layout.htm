@@ -6,14 +6,14 @@
 <body>
   <h1>CSS 灵活的流(Flow)布局</h1>
   <h2>摘要</h2>
-  <p>本部分用于说明<strong>流式(flow)属性</strong>和<strong>弹力(flex)单位</strong>. 使用它们可以创建非常灵活地适用于各种各样的视图(view)和内容尺寸(content sizes)的布局。</p>
-  <p>流式(flow)属性和弹力(flex)单位旨在解决目前现下的CSS无法解决或实现的一些问题: </p>
+  <p>本部分用于说明<strong>流式(flow)属性</strong>和<strong>弹性(flex)单位</strong>. 使用它们可以创建非常灵活地适用于各种各样的视图(view)和内容尺寸(content sizes)的布局。</p>
+  <p>流式(flow)属性和弹性(flex)单位旨在解决目前现下的CSS无法解决或实现的一些问题: </p>
   <ul>
     <li>支持在容器(containers)和视口(viewport)中的元素的垂直和水平对齐；</li>
     <li>支持当替代元素在同一行内且高度相同时，实现灵活的多栏布局（边栏-内容-边栏）。</li>
     <li>支持定义复杂的位置：当元素的视图顺序(visual order)与DOM中的元素顺序不同时，可以使用静态布局。</li></ul>
   <h2 id="overview">1. 概述</h2>
-  <p id="overview">弹力布局(Flexible layouts)是指使用<em>弹力(flex)</em>长度单位和<em>流(flow)</em>属性。 弹力长度单位(flex units)允许使用在定义元素的尺寸(size)、外边距(margin)、 内边距(padding)，作为包含块(containing block)的剩余可用空间的一部分。弹力单位的值是一个十进制数字，数字后加上&quot;*&quot;(星号)作为单位识别符。</p>
+  <p id="overview">弹性布局(Flexible layouts)是指使用<em>弹性(flex)</em>长度单位和<em>流(flow)</em>属性。 弹性长度单位(flex units)允许使用在定义元素的尺寸(size)、外边距(margin)、 内边距(padding)，作为包含块(containing block)的剩余可用空间的一部分。弹性单位的值是一个十进制数字，数字后加上&quot;*&quot;(星号)作为单位识别符。</p>
   <p><em>流(flow)</em>属性用来定义包含块(contained blocks)在正常流(position:static)中的布局方法。或者可以说，<em>流(flow)</em> 定义了容器的布局管理器。此模块包含以下标准的布局管理器定义：</p>
   <ol>
     <li>垂直布局 (vertical)</li>
@@ -21,7 +21,7 @@
     <li>水平布局-允许换行 (horizontal-flow)</li>
     <li>垂直布局-允许换行 (vertical-flow)</li>
     <li>模板化布局 (templated layout)</li></ol>
-  <p>弹力(Flex)单元的值可以认为是有弹簧张力的。它根据自己本身的&quot;弹力&quot;来自动调整尺寸和位置。如定义值如下：</p>
+  <p>弹性(Flex)单元的值可以认为是有弹簧张力的。它根据自己本身的&quot;弹性&quot;来自动调整尺寸和位置。如定义值如下：</p>
   <p><img src="images/flex-springs.png" title="flexes presented as spring coils"/></p>
   <p>上面图片中块的布局的HTML代码如下：</p>
   <pre>&lt;div class=&quot;container&quot;&gt;
@@ -37,11 +37,11 @@
   border:1px solid black; /* 固定宽度的边框 */
 }
 </pre>
-  <h2>2. 弹力（Flex）长度单位</h2>
-  <p>在弹力单位中，元素的尺寸是对剩余空间内的可用<a name="containing-block">包含框</a>的计算。</p>
-  <p>弹力单位值是在所有非弹力单位值计算完成后计算的——是布局算法的最后一步。在这一步中，它的值可能来于包含容器的剩余未分配空间。在容器的垂直和水平方向上，所有弹力值在这个剩余未分配空间通过竞争来得出自己的计算值。</p>
-  <p>弹力单位只适用于元素的CSS属性中的<em>内边距(padding)</em>、<em>外边距(margin)</em>、<em>宽度(width)</em>、<em>高度(height)</em>。 它也可以用在静态(static正常流)、绝对定位(absolute)的元素中。浮动元素(float)不支持弹力单位——若为浮动元素指定了弹力单位值时会被当做<em>auto</em>值。</p>
-  <p>在计算元素的最终尺寸时，弹力单元的值被解释为一个权重(weight)。如果剩余空间的弹力值总和小于1*，相应的剩余部分将保持未分配。若果弹力值总和大于或等于1*，所有的剩余空间将使用该弹力值作为比例分配权重来分配。</p>
+  <h2>2. 弹性（Flex）长度单位</h2>
+  <p>在弹性单位中，元素的尺寸是对剩余空间内的可用<a name="containing-block">包含框</a>的计算。</p>
+  <p>弹性单位值是在所有非弹性单位值计算完成后计算的——是布局算法的最后一步。在这一步中，它的值可能来于包含容器的剩余未分配空间。在容器的垂直和水平方向上，所有弹性值在这个剩余未分配空间通过竞争来得出自己的计算值。</p>
+  <p>弹性单位只适用于元素的CSS属性中的<em>内边距(padding)</em>、<em>外边距(margin)</em>、<em>宽度(width)</em>、<em>高度(height)</em>。 它也可以用在静态(static正常流)、绝对定位(absolute)的元素中。浮动元素(float)不支持弹性单位——若为浮动元素指定了弹性单位值时会被当做<em>auto</em>值。</p>
+  <p>在计算元素的最终尺寸时，弹性单元的值被解释为一个权重(weight)。如果剩余空间的弹性值总和小于1*，相应的剩余部分将保持未分配。若果弹性值总和大于或等于1*，所有的剩余空间将使用该弹性值作为比例分配权重来分配。</p>
   <p>例如，下面这个示例:</p>
   <pre>#container { width:300px; }
 #element { width:1*;
@@ -52,25 +52,25 @@
 </pre>
   <p>#container元素中的#element元素将会应用下面的这个计算尺寸：</p>
   <pre>
-  弹力值总和   = 1* + 2* + 1*               = 4*;
+  弹性值总和   = 1* + 2* + 1*               = 4*;
   待分配宽度   = 300px - 2px - 2px          = 296px; // 容器宽度 - 固定边框宽度
   宽度(width)  = 1/4 * 待分配宽度(296px)   = 74px;
   右外边距     = 1/4 * 待分配宽度(296px)   = 74px;
   左外边距     = 2/4 * 待分配宽度(296px)   = 148px;
 </pre>
-  <p>弹力单位值的计算遵循所有的通常约束。 例如, 最小宽度(<code>min-width</code>)和最大宽度(<code>max-width</code>)定义可以&quot;弹性&quot;的宽度的边界。出于弹力单位计算的原因，初始（默认）的最小宽度属性值被解释为具有最小的内在价值(intrinsic value)。</p>
+  <p>弹性单位值的计算遵循所有的通常约束。 例如, 最小宽度(<code>min-width</code>)和最大宽度(<code>max-width</code>)定义可以&quot;弹性&quot;的宽度的边界。出于弹性单位计算的原因，初始（默认）的最小宽度属性值被解释为具有最小的内在价值(intrinsic value)。</p>
   <h3>2.1. 最小内在价值(min-intrinsic), 最大内在价值(max-intrinsic) 长度值。</h3>
   <p>CSS的<em>最小宽度(min-width)</em>、<em>最大宽度(max-width)</em>、<em>宽度(width)</em>和<em>最小高度(min-height)</em>、最大高度(max-height)、<em>高度(height)</em>属性值可以接受以下的指定值： <code>'最小内在价值(min-intrinsic)'</code>和<code>'最大内在价值(max-intrinsic)'。</p>
   <ul>
     <li><code>最小内在价值(min-intrinsic)</code> —— 在一些容器中，该值指在相应方向上无需溢出(overflow)渲染时的最小长度。例如：对于设置overflow:auto的元素，它的最小长度为显示时没有滚动条的最小长度。</li>
     <li><code>最大内在价值(max-intrinsic)</code>—— 在一些容器中，该值指所有的子元素显示无需换行时的最小长度。或者说，当某元素的高度为max-intrinsic时，在水平布局(类似<em>rtl</em>/<em>ltr</em>)的系统,或者垂直布局的系统(类似<em>ttb</em>)上，最大内在价值(max-intrinsic)指当该元素的宽度达到最小时的该元素最小高度。</li></ul>
   <p>若为段落<code>&lt;p&gt;first second&lt;/p&gt;</code>设置<code>width:min-intrinsic</code>时，该段落的宽度为该段落中最宽的那个单词的宽度。 若为这个段落设置<code>width:max-intrinsic</code>时，则它的宽度为该段落中所有单词和空格长度的总和——该段落将呈现为单行文本。</p>
-  <h3>2.2. &quot;相对弹力&quot;, <code>fx()</code>函数.</h3>
-  <p><code>fx()</code>函数允许基于一个基准值来定义弹力长度。fx函数有两种格式:</p>
+  <h3>2.2. &quot;相对弹性&quot;, <code>fx()</code>函数.</h3>
+  <p><code>fx()</code>函数允许基于一个基准值来定义弹性长度。fx函数有两种格式:</p>
   <ol>
-    <li><code>fx( &lt;十进制数字&gt; | &lt;百分比&gt; )</code> &nbsp;- 这个格式定义了平(又名&quot;绝对&quot;)弹力值。<code>fx(1)</code>相当于<code>1*</code> &nbsp; <code>fx(50%)</code>相当于<code>0.5*</code>.</li>
-    <li><code>fx( &lt;十进制数字&gt; | &lt;百分比&gt;, &lt;长度&gt; | &lt;百分比&gt; )</code> - 这种格式定义的弹力长度值是基于一个弹力基值。</li></ol>
-  <p>示例: 有两个子元素使用了相对弹力值:</p>
+    <li><code>fx( &lt;十进制数字&gt; | &lt;百分比&gt; )</code> &nbsp;- 这个格式定义了平(又名&quot;绝对&quot;)弹性值。<code>fx(1)</code>相当于<code>1*</code> &nbsp; <code>fx(50%)</code>相当于<code>0.5*</code>.</li>
+    <li><code>fx( &lt;十进制数字&gt; | &lt;百分比&gt;, &lt;长度&gt; | &lt;百分比&gt; )</code> - 这种格式定义的弹性长度值是基于一个弹性基值。</li></ol>
+  <p>示例: 有两个子元素使用了相对弹性值:</p>
   <pre>&lt;div#container style=&quot;flow:horizontal; width:440px&quot;&gt;
   &lt;div#child1 style=&quot;width:fx(1,160px)&quot; /&gt;
   &lt;div#child1 style=&quot;width:fx(1,80px)&quot; /&gt;
@@ -78,8 +78,8 @@
 </pre>
   <p>它们将会使用以下方式计算出来的长度值来渲染元素：</p>
   <p><img src="images/relative-flexes.png"/></p>
-  <p>为了计算弹力值，我们从容器的剩余空间中减去了所有基准值，然后分配剩余的空间(又名post-base空间)给各个弹力宽度元素。这个post-base空间值可以为正也可以为负数。如果post-base空间值为负数，则div#child1、div#child2的最终长度将小于它们的基准值,若post-base空间值为正值，则div#child1、div#child2的最终长度将等于它们的基准值。</p>
-  <p><code>fx()</code>函数可以被使用在接受弹力单位的CSS属性中。</p>
+  <p>为了计算弹性值，我们从容器的剩余空间中减去了所有基准值，然后分配剩余的空间(又名post-base空间)给各个弹性宽度元素。这个post-base空间值可以为正也可以为负数。如果post-base空间值为负数，则div#child1、div#child2的最终长度将小于它们的基准值,若post-base空间值为正值，则div#child1、div#child2的最终长度将等于它们的基准值。</p>
+  <p><code>fx()</code>函数可以被使用在接受弹性单位的CSS属性中。</p>
   <h2>3. 流(flow)属性</h2>
   <p>流(flow)属性定义了容器如何布局它的子元素们。或者说，它建立了容器元素的布局管理器。</p>
   <p><a name="propdef-flow" class="propdef-title"><strong>'flow'</strong></a></p>
@@ -140,9 +140,9 @@
       <dt><em>流元素(flowed element)</em></dt>
       <dd>流元素(flowed element)的直接父元素为流式容器(flow container)。这些元素被父流式容器的布局管理器用来替换。</dd></dl></ul>
   <h3>3.1. 垂直布局(flow:vertical)</h3>
-  <p>垂直流比较接近标准的自上而下的块元素的布局方式，例如<code>div</code>, <code>ul</code>等等。和标准布局方式唯一的区别在于硫元素使用弹力单位时。</p>
-  <p>flow:vertical容器中的所有静态子元素将会被替换为从上到下、一个接一个的根据容器宽度形成一个单一的列。其所包含的定义了弹力单位的子元素的宽度值将会使用容器的宽度值来计算。同样，被包含元素的垂直尺寸会使用容器的高度来计算。如果容器的高度未定义，或者高度定义为height:auto，则将没有剩余空间来分配给弹力值，这样的话，在这个方向上的弹力值可以被忽略掉。</p>
-  <p>如果容器定义了高度，且它的高度大于被包含元素的最小价值高度(min-intrinsic)，则存在剩余空间。在这样的容器里，这个空间被分配给定义了垂直弹力值的子元素。</p>
+  <p>垂直流比较接近标准的自上而下的块元素的布局方式，例如<code>div</code>, <code>ul</code>等等。和标准布局方式唯一的区别在于硫元素使用弹性单位时。</p>
+  <p>flow:vertical容器中的所有静态子元素将会被替换为从上到下、一个接一个的根据容器宽度形成一个单一的列。其所包含的定义了弹性单位的子元素的宽度值将会使用容器的宽度值来计算。同样，被包含元素的垂直尺寸会使用容器的高度来计算。如果容器的高度未定义，或者高度定义为height:auto，则将没有剩余空间来分配给弹性值，这样的话，在这个方向上的弹性值可以被忽略掉。</p>
+  <p>如果容器定义了高度，且它的高度大于被包含元素的最小价值高度(min-intrinsic)，则存在剩余空间。在这样的容器里，这个空间被分配给定义了垂直弹性值的子元素。</p>
   <p>例如，下面的样式:<img src="images/sample-vertical.png" title="Sample of vertical alignment" align="right"/></p>
   <pre>  #container { height:100%; border:1px dotted; }
   #first { margin-bottom:1*; }
@@ -161,11 +161,11 @@
 </pre>
   <p>则会将#first元素放在#container的顶部，而将#second元素放在它的底部。</p>
   <h4>3.1.1. 在flow:vertical容器中外边距堆叠(collapsing)</h4>
-  <p>在CSS中，被包含元素的垂直编辑通常会叠到一起。&nbsp;这里唯一需要注意的时当堆叠到垂直边距包含弹力值，而对应的另一个元素是固定值时。这种情况下，这个固定值会作为两个元素间弹力计算值的&quot;最小约束(min-constraint)&quot;。这样，边距是弹力的，但是它不能小于这个固定值。</p>
+  <p>在CSS中，被包含元素的垂直编辑通常会叠到一起。&nbsp;这里唯一需要注意的时当堆叠到垂直边距包含弹性值，而对应的另一个元素是固定值时。这种情况下，这个固定值会作为两个元素间弹性计算值的&quot;最小约束(min-constraint)&quot;。这样，边距是弹性的，但是它不能小于这个固定值。</p>
   <h3>3.2. 水平布局(flow:horizontal)</h3>
   <p>这是一个单行布局。 设置flow:horizontal的容器的所有静态子元素会水平地一个接一个的排列成一行。布局是相对于容器的方向<code>direction</code>属性进行。</p>
-  <p>在水平方向上，若子元素的宽度(width)、左右外边距(margin)、边框(border)、内边距(padding)给定了一个弹力值，它们将参与剩余空间的分配。flow:horizontal容器的所有直接子元素将对容器内容区(content box)中左右边界间的剩余空间进行计算，使这个空间根据它们的弹力值进行分配。</p>
-  <p>在垂直方向上：被包含元素的高度、上下外边距、边框、内边距的弹力值使用容器的高度值来计算。这使flow:horizontal容器的子元素排序不仅是水平地，也可以是垂直的。</p>
+  <p>在水平方向上，若子元素的宽度(width)、左右外边距(margin)、边框(border)、内边距(padding)给定了一个弹性值，它们将参与剩余空间的分配。flow:horizontal容器的所有直接子元素将对容器内容区(content box)中左右边界间的剩余空间进行计算，使这个空间根据它们的弹性值进行分配。</p>
+  <p>在垂直方向上：被包含元素的高度、上下外边距、边框、内边距的弹性值使用容器的高度值来计算。这使flow:horizontal容器的子元素排序不仅是水平地，也可以是垂直的。</p>
   <p>下面的样式中，所有的子元素拥有相同的高度：</p>
   <pre>#container       { flow:horizontal; border-spacing:4px; padding:4px; }
 #container &gt; div { margin:0; height:1*; }
@@ -189,8 +189,8 @@
   <ol>
     <li>某元素上使用了<code>clear:left|right|both</code>属性；</li>
     <li>该行没有足够的水平工具来放置该元素。</li></ol>
-  <p>在垂直方向上，设置弹力值的包含块的高度、上下外边距、边框、内边距的值是使用当前<em>行</em>的高度。该行的高度等于在不影响弹力值计算的情况下该行中最高元素的高度。</p>
-  <p>在水平方向上，一行中的元素的弹力值计算和flow:horizontal布局相同。</p>
+  <p>在垂直方向上，设置弹性值的包含块的高度、上下外边距、边框、内边距的值是使用当前<em>行</em>的高度。该行的高度等于在不影响弹性值计算的情况下该行中最高元素的高度。</p>
+  <p>在水平方向上，一行中的元素的弹性值计算和flow:horizontal布局相同。</p>
   <p>例如, 下面的HTML标记语言:</p>
   <pre>
 &lt;div style=&quot;flow:horizontal-flow&quot; &gt;
@@ -218,11 +218,11 @@
   <p><code>clear:left|right|both</code> 属性允许中断列，使其明确地成为多列布局。</p>
   <p>在满足一下条件之一时，会进行换列：</p>
   <ol>
-    <li>在垂直方向上，该列上所有元素的弹力值之和大于1*；</li>
+    <li>在垂直方向上，该列上所有元素的弹性值之和大于1*；</li>
     <li><code>clear:left|right|both</code>属性在某个元素中明确使用；</li>
     <li>没有足够的垂直空间来放置下一个元素。</li></ol>
-  <p>在水平方向上，容器内的子元素的宽度、左右外边距、内边距的弹力值使用当前列的宽度来计算。该行的宽度等于在不影响弹力值计算的情况下该行中最宽元素的宽度。</p>
-  <p>在垂直方向上，某列中元素的弹力值计算方法与flow:vertical布局相同。</p>
+  <p>在水平方向上，容器内的子元素的宽度、左右外边距、内边距的弹性值使用当前列的宽度来计算。该行的宽度等于在不影响弹性值计算的情况下该行中最宽元素的宽度。</p>
+  <p>在垂直方向上，某列中元素的弹性值计算方法与flow:vertical布局相同。</p>
   <p>例如，下面的HTML标记：</p>
   <pre>
 &lt;ul style=&quot;flow:vertical-flow&quot;&gt;
@@ -371,8 +371,8 @@ section[tab=first] &gt; div:nth-child(1) { visibility:visible; }<br/>section[tab
   <h2>5. <em>flow</em>属性 与<em>position</em>属性</h2>
   <p>流元素(flowed element)是指在流容器中的position为静态(默认)的子元素们。这意味着那些包含<code>position: absolute | fixed</code>的子元素会被当做<code>position:static</code>来处理。</p>
   <p>在流元素中<code>position:relative</code> 是被允许的。因此，这些元素可以使用<code>left</code>、<code>right</code>、 <code>bottom</code>和<code>top</code>属性来定义它们相对于静态位置的偏移。</p>
-  <h3>5.1 <em>position: absolute | fixed</em> 与 弹力<em>(Flex)</em>单位值</h3>
-  <p><img src="images/sample-position-fixed.png" align="right" alt="sample:position-fixed"/>弹力单位可以用在定义了<em>position:absolute</em>或<em>position:fixed</em>的元素的<em>left</em>、<em>top</em>、<em>right</em>和<em>bottom</em>属性中，这些元素的内边距(<em>padding</em>), 外边距(<em>margin</em>), 宽度(<em>width</em>)和高度(<em>height</em>)中的弹力单位值的计算将会参考包含它们的父块。</p>
+  <h3>5.1 <em>position: absolute | fixed</em> 与 弹性<em>(Flex)</em>单位值</h3>
+  <p><img src="images/sample-position-fixed.png" align="right" alt="sample:position-fixed"/>弹性单位可以用在定义了<em>position:absolute</em>或<em>position:fixed</em>的元素的<em>left</em>、<em>top</em>、<em>right</em>和<em>bottom</em>属性中，这些元素的内边距(<em>padding</em>), 外边距(<em>margin</em>), 宽度(<em>width</em>)和高度(<em>height</em>)中的弹性单位值的计算将会参考包含它们的父块。</p>
   <p>例如：下面的样式将会将#light-box-dialog元素放置在视口(viewport)的中央：</p>
   <pre>
 #light-box-dialog
@@ -387,15 +387,15 @@ section[tab=first] &gt; div:nth-child(1) { visibility:visible; }<br/>section[tab
   <h2>6. <em>flow</em>属性与<em>vertical-align</em>属性</h2>
   <p>流元素建立了一个块格式上下文。因此它们的vertical-align属性定义了它们内部垂直方向上的对齐方式，而不是它们本身在垂直方向上的对齐方式。或者说<em>vertical-align</em>类似于表格中的单元格。</p>
   <h2>7. <em>flow</em>属性与<em>border-spacing</em>属性</h2>
-  <p><em>border-spacing</em>属性定义了两个流元素在水平和垂直方向上外边距的最小值。如果一个流元素定义了自己的外边距，则外边距使用的值是<em>border-spacing</em>定义值和该外边距定义中比较大的那个值。 如果这个外边距值使用了弹力单位值，则该弹力值的计算会将<em>border-spacing</em>值作为最小约束值。在这种情况下，计算出的弹力值不能小于<em>border-spacing</em>属性值。</p>
+  <p><em>border-spacing</em>属性定义了两个流元素在水平和垂直方向上外边距的最小值。如果一个流元素定义了自己的外边距，则外边距使用的值是<em>border-spacing</em>定义值和该外边距定义中比较大的那个值。 如果这个外边距值使用了弹性单位值，则该弹性值的计算会将<em>border-spacing</em>值作为最小约束值。在这种情况下，计算出的弹性值不能小于<em>border-spacing</em>属性值。</p>
   <h2>8. <em>flow</em>属性 与 外边距堆叠</h2>
   <p>不同的布局管理器的对流元素的外边距堆叠处理是不一样的。流容器外边距不会与它内部的硫元素堆叠。</p>
   <h2>9. <em>flow</em>属性和 行内块(<em>inline-block</em>)元素</h2>
   <p>行内块放置在对应的行框中。原则上，行框是可以&quot;弹性&quot;的。</p>
-  <p>所以, 像&lt;img&gt;、&lt;input&gt;、&lt;span style=&quot;display:inline-block&quot;&gt;这些<em>inline-block</em>元素可以使用弹力单位来定义它们的尺寸、外边距、内边距。行框上下文的弹力单位计算依据于行框的水平、垂直尺寸，而它们的内容将不是可弹性的。</p>
-  <p>在水平方向上，行框在分配完所有非弹力内容后可能存在剩余的空间(例如单词框)。这些空间将会在所有指定了弹力值的元素的宽度、左右外边距(或内边距)间分配。</p>
-  <p>在垂直方向上, 行内块(inline-block)元素的高度、上下外边距、内边距中的弹力值依据于行框的高度。例如，可以定义多个和行框同高度的子元素。</p>
-  <p>如果这样定义了，text-align:justify属性的计算将会放置弹力值计算之后。</p>
+  <p>所以, 像&lt;img&gt;、&lt;input&gt;、&lt;span style=&quot;display:inline-block&quot;&gt;这些<em>inline-block</em>元素可以使用弹性单位来定义它们的尺寸、外边距、内边距。行框上下文的弹性单位计算依据于行框的水平、垂直尺寸，而它们的内容将不是可弹性的。</p>
+  <p>在水平方向上，行框在分配完所有非弹性内容后可能存在剩余的空间(例如单词框)。这些空间将会在所有指定了弹性值的元素的宽度、左右外边距(或内边距)间分配。</p>
+  <p>在垂直方向上, 行内块(inline-block)元素的高度、上下外边距、内边距中的弹性值依据于行框的高度。例如，可以定义多个和行框同高度的子元素。</p>
+  <p>如果这样定义了，text-align:justify属性的计算将会放置弹性值计算之后。</p>
   <p>例如下面的HTML标记:</p>
   <pre>&lt;style&gt;
   p
@@ -416,6 +416,6 @@ section[tab=first] &gt; div:nth-child(1) { visibility:visible; }<br/>section[tab
   <p>这回到这<code>p</code>元素各种各样的宽度值：</p>
   <p><img src="images/sample-inline-block-1.png" title="Use of flexes with inline-block elements"/></p>
   <p><img src="images/sample-inline-block-2.png" title="Use of flexes with inline-block elements"/></p>
-  <p>注意，上面的最后一个图像上，span已经达到了它的最小内在宽度(min-intrinsic)，所以它们已经排除掉了相关的弹力值计算。</p>
+  <p>注意，上面的最后一个图像上，span已经达到了它的最小内在宽度(min-intrinsic)，所以它们已经排除掉了相关的弹性值计算。</p>
 </body>
 </html>

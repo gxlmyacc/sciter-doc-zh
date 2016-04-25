@@ -53,6 +53,6 @@
     <li>执行脚本本身包含的类和行为；</li>
     <li>执行在CSS中使用<em>prototype:somebehavior</em>;设置了的元素行为；</li>
     <li>执行<strong>self.ready()</strong>引用的方法(如果它在脚本中声明了的话)。</li></ol>
-  <p>当文档需要从视图中卸载(如Sciter窗口从用户那接收到关闭窗口的请求)时, 引擎会调用<strong>self.closing()</strong>方法(如果它在脚本中声明了的话)。如果该方法返回<code>false</code>，则终止卸载。使用这种方式可以需求文档的卸载。</p>
+  <p>当文档需要从视图中卸载(如Sciter窗口从用户那接收到关闭窗口的请求)时, 引擎会调用<strong>self.closing()</strong>方法(如果它在脚本中声明了的话)。如果该方法返回<code>false</code>，则终止卸载。使用这种方式可以拦截文档的卸载。</p>
 </body>
 </html>

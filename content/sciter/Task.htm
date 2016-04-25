@@ -43,9 +43,21 @@
     <h2>方法</h2>
     <dt>then</dt>
     <dd>
-      <p>( <strong>onFulfilled</strong>: function , <strong>onRejected</strong>: function ) : this Task</p>
+      <p>( <strong>onFulfilled</strong>: function [, <strong>onRejected</strong>: function] ) : this Task</p>
       <p>添加onFulfilled和onRejected回调函数到task的回调列表。在task完成时会调用onFulfilled(result)或onRejected(error)。</p>
       <p>then()方法可以被异步任务例程调用</p></dd>
+    <dt>catch</dt>
+    <dd>
+      <p>( <strong>onRejected</strong>: function ) : this Task</p>
+      <p>添加onRejected回调函数到task回调列表中。onRejected(error)将在task抛出错误时被调用。</p>
+      <p>catch()方法仅在异步task例程中被调用。</p>
+      <p>等价于调用<code>task.then(null, onRejected);</code>。</p></dd>
+    <dt>finally</dt>
+    <dd>
+      <p>( <strong>onComplete</strong>: function ) : this Task</p>
+      <p>添加onComplete回调函数到task回调列表中。onComplete(result | error)将在任务完成时被调用。</p>
+      <p>finally()方法仅在异步task例程中被调用。</p>
+      <p>等价于调用<code>task.then(onComplete, onComplete);</code>。</p></dd>
     <dt>next</dt>
     <dd>
       <p>( [val:any] &nbsp;) : value</p>
