@@ -1,11 +1,4 @@
 ﻿<html>
-  <head>
-    <meta name="GENERATOR" content="BLOCKNOTE.NET"/>
-    <meta name="source"/>
-    <meta name="source"/>
-    <basefont face="Verdana" size="2"/>
-    <meta name="generator" content="h-smile:richtext"/>
-  </head>
 <body>
   <h1>System(系统)对象</h1>
   <p class="note">脚本中这个对象的方法不总是有效的 - 它们依赖于当前VM创建时的一些特征参数。</p>
@@ -30,11 +23,30 @@
         <li><code>#Windows-2003</code></li>
         <li><code>#Windows-XP</code></li>
         <li><code>#Windows-Vista</code></li>
-        <li><code>#Windows-7</code></li></ul>
-		    <li><code>#Windows-7.1</code></li></ul>
-		    <li><code>#Windows-8</code></li></ul>
-		    <li><code>#Windows-8.1</code></li></ul>
-		    <li><code>#Windows-10</code></li></ul></dd>
+        <li><code>#Windows-7</code></li>
+		    <li><code>#Windows-7.1</code></li>
+		    <li><code>#Windows-8</code></li>
+		    <li><code>#Windows-8.1</code></li>
+		    <li><code>#Windows-10</code></li>
+      </ul>
+    </dd>
+    <dt>PLATFORM</dt>
+    <dd>- symbol, 以下值之一:
+      <ul>
+        <li><code>#Windows</code></li>
+        <li><code>#OSX</code></li>
+        <li><code>#Linux</code></li>
+      </ul>
+    </dd>
+  
+    <h2>属性</h2>
+    <dt>language</dt>
+    <dd>语言的缩写名称, ISO 639标准中的名称。</dd>
+    <dt>country</dt>
+    <dd>国家/地区名称, 基于ISO 3166标准。</dd>
+    <dt>ticks</dt>
+    <dd>高分辨率定时器。返回自引擎启动后到只当前为止的毫秒数。</dd>
+    
     <h2>方法</h2>
     <dt>scanFiles</dt>
     <dd>
@@ -65,11 +77,8 @@
     <dd>
       <div><strong>(</strong>exe-path: string [,arg1:string ... argN: string]<strong>)</strong> returns: integer</div>
       <p>异步启动一个可执行程序，可传递可选命令行参数列表。这个方法无需等待可执行程序执行结束。</p>
-      <p>如果程序启动成功则返回0。否则返回C运行库的<code>errno</code>变量代码(<span>EACCES</span>, <span>ENOTDIR</span>等)。 &nbsp;&nbsp;</p></dd>
-    <h2>属性</h2>
-    <dt>language</dt>
-    <dd>语言的缩写名称，ISO 639标准名称。</dd>
-    <dt>country</dt>
-    <dd>国家/地区名称，基于ISO 3166标准。</dd></dl>
+      <p>如果程序启动成功则返回0。否则返回C运行库的<code>errno</code>变量代码(<span>EACCES</span>, <span>ENOTDIR</span>等)。 &nbsp;&nbsp;</p>
+    </dd>
+  </dl>
 </body>
 </html>
