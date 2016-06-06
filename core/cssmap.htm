@@ -7,7 +7,6 @@
   <meta name="generator" content="h-smile:richtext" /> 
  </head> 
  <body> 
-  <p align="left">h-smile支持的CSS级别是很'重要'的。不过我们无意打算覆盖所有的CSS1/CSS2属性。</p> 
   <p align="left">Sciter独有的特性:</p> 
   <ul> 
    <li> 
@@ -2613,6 +2612,11 @@ input[focus] { aspect: handleFocusAttribute; }
    <li><strong>pt</strong> - 点 — 点是由CSS2.1使用的，1pt等于1/72英尺;</li> 
    <li><strong>pc</strong> - 派卡(Pica)。绝对长度单位。相当于我国新四号铅字的尺寸。1pc等于12pt;</li> 
    <li><strong>%</strong> - 百分数 — 通常等于对应父元素的度量值的百分比值，但也不是总是这样, 参见CSS规范。</li> 
+   <li><strong>vw</strong> - 视图(窗口)宽度的1/100th;</li>
+   <li><strong>vh</strong> - 视图(窗口)高度的1/100th;</li>
+   <li><strong>vmin</strong> - 视图(窗口)最小边(宽/高)的1/100th;</li>
+   <li><strong>vmax</strong> - 视图(窗口)最大边(宽/高)的1/100th.</li>
+    
    <li><strong><font color="#990033">%%</font></strong><font color="#990033"> - flex (&quot;weight&quot;) — 参见<a href="http://www.terrainformatica.com/htmlayout/fspu.whtm">h-smile弹力单位</a>。</font></li> 
    <li><strong><font color="#990033">*</font></strong><font color="#990033"> - flex (&quot;weight&quot;) — 1* 等于  100%%;</font></li> 
    <li><strong><font color="#990033">dip - 设备独立像素(d</font></strong><font color="#990033">evice <strong>i</strong>ndependent <strong>p</strong>ixels) - 逻辑单位. 1dip = 1/96(英尺)，因此在96DPI的显示器上等于1像素。在高dpi屏幕上，它将会大于物理像素。示例: 在120DPI屏幕上，2dip将等于3px。在打印机上，'dip'和'px'单位是相等的。</font></li>
@@ -2624,6 +2628,7 @@ input[focus] { aspect: handleFocusAttribute; }
    <li><font face="monospace">color: <strong>#ff0000</strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- #rrggbb 形式。</font></li> 
    <li><font face="monospace">color: <strong>rgb</strong>(255,0,0) &nbsp;&nbsp;&nbsp;- rgb(0..255,0..255,0..255) 形式。</font></li> 
    <li><font face="monospace">color: <strong>rgb</strong>(100%,0%,0%) - rgb(0..100%,0..100%,0..100%) 形式。</font></li> 
+    <li><code>color: <strong>rgba</strong>(255,0,0,0.5) - rgba(0..255,0..255,0..255,0..1) 形式。</code></li>    
    <li><font face="monospace">color: <strong>hsl</strong>(300,0%,0%) &nbsp;- hsl(0..360,0..100%,0..100%) 形式 - HSL色彩空间。</font></li> 
    <li><font face="monospace" color="#990033">color: <strong>tint</strong>(@base-color, 50%, 0%) - tint(base-color, -1.0..1.0 [, -1.0..1.0]) 形式。</font></li>
   </ul> 

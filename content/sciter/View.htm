@@ -102,7 +102,7 @@ view.<u>eventsRoot</u> = null;
       <p>如果<em>clientCoordinates</em>为<em>true</em>，则x、y、<em>width</em>、<em>height</em>被理解成期望的屏幕上客户区域的位置/尺寸。</p></dd>
     <dt>selectFile</dt>
     <dd>
-      <div><strong>(</strong> <em>#save</em> | <em>#load</em>, <em>filter</em>:string , <em>ext</em>: string [, <em>path</em>: string [, <em>title</em>: string]] <strong> ) </strong>: string | null</div>
+      <div><strong>(</strong> <em>#save</em> | <em>#open</em>, <em>filter</em>:string , <em>ext</em>: string [, <em>path</em>: string [, <em>title</em>: string]] <strong> ) </strong>: string | null</div>
       <p>该方法显示系统的文件选择模态对话框，并且返回选择文件的全名，如果用户选择了取消则返回null。</p>
       <ul>
         <li>第一个参数为#save或#load标识符。如果为#save则对话框的标题为<em>保存</em>，如果为#load则对话框的标题为<em>打开</em>。</li>
@@ -157,7 +157,7 @@ if( fn ) view.<strong>load</strong>(fn);
           <li><strong>#ok</strong>, <strong>#cancel</strong>, <strong>#abort</strong>, <strong>#ignore</strong>, <strong>#yes</strong>, <strong>#no</strong> or <strong>#close</strong>标签之一, </li>
           <li>类<font face="Courier New">{ id:#somesymbol, text:&quot;Some Text&quot; }</font>结构的对象,</li>
           <li>上面的标识符或对象的数组;</li></ul>
-        <li><em>onClose</em> - 签名为<code>function(id, root)</code>，返回<em>true</em>|<em>false</em>。在尝试关闭对话框时调用该函数。 <em>id</em> - 按下的按钮的id, <em>root</em> - 对话框中文档的根节点。如果对话框可以关闭则该函数应该返回true。</li>
+        <li><em>onClose</em> - 签名为<code>function(root, id)</code>，返回<em>true</em>|<em>false</em>。在尝试关闭对话框时调用该函数。 <em>id</em> - 按下的按钮的id, <em>root</em> - 对话框中文档的根节点。如果对话框可以关闭则该函数应该返回true。</li>
         <li><em>onLoad</em> - 函数签名为<code>function(root)</code>。在创建对话框窗口时调用该函数。使用该函数你可以做一些初始化，例如<em>text</em>是一个包含输入框的html，可以填充输入只读的数据。</li></ul>
       <div>示例:</div>
       <ol>

@@ -1,0 +1,60 @@
+﻿<h2 id="cssattributes">CSS 属性</h2>
+
+<h3 id="fontandparagraphproperties">字体和段落属性</h3>
+<section property >
+
+<h4 id="font-family">font-family</h4>
+
+<p>值为以逗号分隔的列表值，列表中每项为以下值之一:</p>
+
+<dl>
+<dt>family-name</dt>
+<dd>系统中已安装的任何可用的字体家族名。比如: Times, Helvetica, Zapf-Chancery, Western, 或 Courier。</dd>
+
+<dt>generic-name</dt>
+<dd>对应字体家族中的任何值: serif, sans-serif, cursive, fantasy, 或 monospace。</dd>
+</dl>
+
+<p>示例:</p>
+
+<pre><code class="css">body {
+  font-family: &quot;Gill Sans Extrabold&quot;, Helvetica, sans-serif;
+}
+</code></pre>
+</section>
+<section property >
+
+<h4 id="font-size">font-size</h4>
+
+<p>字体的大小, 可以指定以下值之一:</p>
+
+<dl>
+<dt>named-font-size</dt>
+<dd>一系列预定义的字体尺寸关键字集合。缩放根据用户的字体设置选项。
+ 可能的值有: <em>xx-small</em>, <em>x-small</em>, <em>small</em>, <em>medium</em>, <em>large</em>, <em>x-large</em>, <em>xx-large</em>;</dd>
+
+<dt>relative-size</dt>
+<dd>一系列代表相对于父对象字体尺寸的关键字集合。
+ 可能的值有: <em>larger</em>, <em>smaller</em>;</dd>
+
+<dt>length</dt>
+<dd><a href="#lengthunits">长度单位</a>值;</dd>
+
+<dt>percentage</dt>
+<dd>一个整数, 后面跟着一个百分号(%)。值代表父对象字体尺寸的百分比;</dd>
+</dl>
+
+<p>示例:</p>
+
+<pre><code class="css">/* &lt;length&gt; values */
+font-size: 12px;
+font-size: 0.8em;
+
+/* &lt;percentage&gt; values */
+font-size: 80%;
+</code></pre>
+</section>
+
+<h2 id="lengthunits">长度单位</h2>
+
+<p>一个浮点数, 后面跟着一个绝对单位(cm, mm, in, pt, pc, px) 或相对单位 (em, ex)。关于支持的长度单位的更多信息, 参见CSS长度单位。</p>

@@ -31,6 +31,12 @@
   <pre>&lt;li&gt;&lt;picture @src=&quot;customer.image&quot; /&gt; &lt;output(customer.name)/&gt;&lt;/li&gt;
 </pre>
   <p>上面的picture元素的<code>src</code>属性将绑定<code>customer.image</code>变量，并且output元素也绑定了<code>customer.name</code>变量。</p>
+  <p>下面这几个绑定属性将映射到state状态上:</p>
+  <ul>
+    <li><code>@enabled=&quot;表达式&quot;</code> - bool类型的表达式，绑定到element.state.disabled = !表达式;</li>
+    <li><code>@disabled=&quot;表达式&quot;</code> - bool类型的表达式，绑定到element.state.disabled = 表达式;</li>
+    <li><code>@expanded=&quot;表达式&quot;</code> - bool类型的表达式，绑定到element.state.expanded = 表达式;</li>
+    <li><code>@collapsed=&quot;表达式&quot;</code> - bool类型的表达式，绑定到element.state.collapsed = 表达式;</li></ul>
   <h2>可重复项(Repeatable)</h2>
   <p>任何容器元素可以有个each=&quot;<em>item</em> in <em>items</em>&quot;属性定义。这时容器内的元素将被当做模板代码，容器的内容的初始化将会遍历items集合，items中每一项都会根据模板克隆并填充数据。 <em>each</em>属性的格式如下:</p>
   <pre>{item} <strong>in</strong> {items-表达式} [ <strong>|</strong> {filter-表达式}
