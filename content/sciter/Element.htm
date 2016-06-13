@@ -343,7 +343,7 @@
       <p>返回length转换为设备像素后的值。该转换是基于当前元素样式的上下文，所以<code>el.toPixels( em(1.4) )</code>将会当前元素中字体尺寸的1.4em对应的像素值。</p>
       <p>如果length是一个字符串或标识，则它会被当做一个CSS长度字符，所以length的值可以是<code>el.toPixels(#xx-small)</code>或<code>el.toPixels(#system-scrollbar-width)</code>。</p>
       <p>第二个symbol参数用在百分比长度的转换时：<br/><code>var h50p = el.toPixels( pr(50.0), #height );</code> - 将会和下面的CSS声明计算出相同的值: <code>height:50%</code>.</p></dd>
-    <dt>scroll</dt>
+    <dt id="method-scroll">scroll</dt>
     <dd><img src="images/scroll.gif" align="right"/><strong>(part) </strong>returns: integer, 设备像素
       <p>返回元素的各种滚动相关的位置。参数：</p>
       <p><strong>part</strong> - 以下常量标识之一：</p>
@@ -353,7 +353,8 @@
         <li><strong>#right</strong> - 视图右边缘相对于内容盒右边缘的偏移；</li>
         <li><strong>#bottom </strong>- 视图下边缘相对于内容盒下边缘的偏移；</li>
         <li><strong>#width </strong>- 滚动区域的宽度；</li>
-        <li><strong>#height</strong> - 滚动区域的高度；</li></ul></dd>
+        <li><strong>#height</strong> - 滚动区域的高度；</li></ul>
+        <li><strong>#rect</strong> - 返回left,top,right,bottom四个整数值。</li></ul></dd>
     <dt>scrollTo</dt>
     <dd>
       <div>( <strong>x</strong>:int, <strong>y</strong>:int [, <strong>smooth</strong>:bool [, <strong>unrestricted</strong> : bool] ] &nbsp;) : void</div>

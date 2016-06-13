@@ -86,7 +86,7 @@
    <table border="1" bordercolor="#fff2cc" cellspacing="0"> 
     <tbody>
      <tr> 
-      <td rowspan="18" valign="top"><strong>字体和段落属性</strong></td> 
+      <td rowspan="19" valign="top"><strong>字体和段落属性</strong></td> 
       <td nowrap="" valign="top" align="right"><strong>font</strong></td> 
       <td> <p>font是一个简写属性，在一个声明中设置所有字体属性，用于一次设置元素字体的两个或更多方面。</p> <p class="note"><span>注释：</span>此属性也有第六个值：&quot;line-height&quot;，可设置行间距。</p> <p>可以按顺序设置如下属性：</p> 
        <ul> 
@@ -525,7 +525,7 @@
        </div></td>
      </tr> 
      <tr> 
-      <td nowrap="" valign="top" align="right"><strong>text-wrap</strong></td> 
+      <td nowrap="" valign="top" align="right"><strong>word-wrap</strong></td> 
       <td> 
        <div>
         指定下面中的值之一：
@@ -535,22 +535,27 @@
          <tr> 
           <td valign="top">normal</td> 
           <td>行只允许在断点处断行，如空白符。</td>
-         </tr> 
-         <tr> 
-          <td valign="top">none</td> 
-          <td>换行符被抑制。内容不能转到下一行。</td>
-         </tr> 
-         <tr> 
-          <td valign="top">unrestricted</td> 
-          <td>行允许在两个字符间换行。</td>
-         </tr>
-        </tbody>
-       </table> 
-       <div>
-        参见: 
-        <a href="http://www.w3.org/TR/CSS1#text-wrap">层叠样式表CSS1</a>
-       </div></td>
-     </tr> 
+          <tr>
+            <td valign="top">break-word</td>
+            <td>如果一行中没有可接受的换行点时，单词也可以子啊在任何点上换行。</td>
+          </tr>
+        </table>
+        <div>参见: <a href="http://www.w3.org/TR/css3-text/#text-wrap">Cascading Style Sheets, level 3</a></div></td>
+      </tr>
+      <tr>
+        <td nowrap align="right"><strong>word-break</strong></td>
+        <td>指定下面中的值之一：
+          <table>
+            <tr>
+              <td valign="top">normal</td>
+              <td>使用默认的换行规则。</td></tr>
+            <tr>
+              <td valign="top">break-all</td>
+              <td>可以在任意字符间进行换行。</td>
+            </tr>
+          </table>
+       </td>
+     </tr>
      <tr> 
       <td nowrap="" bgcolor="#ffffdd" valign="top" align="right"><strong>text-selection-color</strong></td> 
       <td bgcolor="#ffffdd">指定被选择文本的颜色(输入元素和有behavior:htmlarea行为的元素)。非标准。继承属性。</td>
