@@ -16,6 +16,8 @@
     <dd>线帽类型, <em>lineCap</em>属性的值。</dd>
     <dt>ALIGN_DEFAULT<br/>ALIGN_START<br/>ALIGN_END<br/>ALIGN_CENTER</dt>
     <dd>文本的对齐方式，<em>Text.Alignment</em>函数参数的值。</dd>
+    <dt>FILL_ONLY<br/>STROKE_ONLY<br/>STROKE_AND_FILL<br/>FILL_BY_LINE_COLOR</dt>
+    <dd><em>drawPath</em>标志。</dd>
     <h3>属性</h3>
     <dt>lineJoin</dt>
     <dd>读写 - <em>integer</em>, 线条连接类型，值为JOIN_xxx常量之一。</dd>
@@ -263,6 +265,10 @@
     <dt>arcTo</dt>
     <dd>
       <div>( x:<em>float</em>, y:<em>float,</em> angle:<em>float, </em>rx:<em>float</em>, ry:<em>float, </em>largeArc:<em>bool, </em>sweep: <em>bool </em>[, relative <em>= false</em> ] ) : Graphics.Path</div>
+      <p>(tbd)</p></dd>
+    <dt>ellipseTo</dt>
+    <dd>
+      <div>( x:<em>float</em>, y:<em>float, </em>rx:<em>float</em>, ry:<em>float, </em>[, clockwise <em>= true</em> ] ) : Graphics.Path</div>
       <p>(tbd)</p></dd>
     <dt>quadraticCurveTo</dt>
     <dd>
