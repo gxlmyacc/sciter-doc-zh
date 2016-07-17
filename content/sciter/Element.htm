@@ -441,9 +441,11 @@ el.$content(This is item number <b>{ num }</b>);
       <p>从<em>html</em>字符串中加载文档的内容作为该元素的内容。对于设置了<em>behavior:frame</em>的元素会加载html参数中的html、样式和执行脚本。指定behavior:frame的元素在加载完成后会发送DOCUMENT_COMPLETE事件。而对于其他元素则只会加载文档的Body部分，且不会加载样式和脚本。</p></dd>
     <dt>loadImage</dt>
     <dd>
-      <div><strong>( url</strong>: string [, <strong>callback</strong>: function <strong>) </strong>returns: <em>Image | null</em></div>
+      <div><strong>( url</strong>: string [, <strong>callback</strong>: function [, useCache: true|<em>false</em> ] ]<strong>) </strong>returns: <em>Image | null</em></div>
       <p>从url中加载图像。如果<em>callback</em>被省略，则引擎将会试图同步加载图像。否则(<em>callback</em>是一个函数)引擎会异步处理请求且在图像加载后调用callback函数。</p>
-      <p>callback函数的声明是<font face="Courier New">function callback(image)</font>，<em>image</em>参数是一个Image类或null(当出错时)。</p></dd>
+      <p>callback函数的声明是<font face="Courier New">function callback(image)</font>，<em>image</em>参数是一个Image类或null(当出错时)。</p>
+      <p>如果<em>useCache</em>不为false，则该方法将尝试从图像缓存中获取图像，并且下载成功的图像也会放到缓存中。useCache默认值为<em>false</em>。</p>
+      <p>callback函数的声明是<font face="Courier New">function callback(image, status)</font>，<em>image</em>参数是一个Image类或null(当出错时), <em>status</em> 为http状态(200、404等)。</p></dd>
     <dt>bindImage</dt>
     <dd>
       <div><strong>( url</strong>: string , <strong>img</strong>: Image <strong>) </strong>returns: <em>true</em> | <em>false</em></div>

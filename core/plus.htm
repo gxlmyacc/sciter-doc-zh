@@ -18,6 +18,7 @@
 }
 </pre>
   <p>这种情况下，则body元素的内容将会链接(绑定)到MyDataNamespace名称空间中的数据上。</p>
+  <p>有model属性的最顶层的元素被当做<em>数据模型视图</em> - 反应模型数据名称空间/对象的状态。</p>
  <h2>元素绑定(Bound)</h2>
   <p>元素的value值可以被绑定到模型的某些变量上。+plus框架使用<em>name</em>属性值进行绑定，其中<em>name</em>属性值可以是绑定的变量名或一个表达式。</p>
   <pre>&lt;body model=&quot;Data&quot;&gt; 
@@ -26,6 +27,7 @@
 &lt;/body&gt;
 </pre>
   <p>上面的两个元素都绑定了模型中的同一个<code>Data.greeting</code>变量。修改&lt;input&gt;元素的值将会自动反应到&lt;output&gt;元素上。</p>
+  <p>普通的数据变量直接绑定到关联元素的<code>value</code>属性上。但是如果元素(或它的行为类上)定义了<code>setBoundValue(newVal)</code>元素，则将调用该函数来设置绑定的数据。</p>
   <h2>属性绑定(Bound)</h2>
   <p>Sciter也支持将元素的属性值绑定到变量或对象属性上。要定义绑定属性，仅需在需要绑定的属性名前加上'@'字符，然后在属性值中写入绑定的变量名或一个表达式: </p>
   <pre>&lt;li&gt;&lt;picture @src=&quot;customer.image&quot; /&gt; &lt;output(customer.name)/&gt;&lt;/li&gt;
@@ -34,7 +36,8 @@
   <p>下面这几个绑定属性将映射到state状态上:</p>
   <ul>
     <li><code>@enabled=&quot;表达式&quot;</code> - bool类型的表达式，绑定到element.state.disabled = !表达式;</li>
-    <li><code>@disabled=&quot;表达式&quot;</code> - bool类型的表达式，绑定到element.state.disabled = 表达式;</li>
+    <li><code>@disabled=&quot;表达式&quot;</code> - bool类型的表达式，绑定到element.state.disabled = 表达式;</li> 
+    <li><code>@readonly=&quot;表达式&quot;</code> - bool类型的表达式，绑定到element.state.readonly = 表达式;</li>
     <li><code>@expanded=&quot;表达式&quot;</code> - bool类型的表达式，绑定到element.state.expanded = 表达式;</li>
     <li><code>@collapsed=&quot;表达式&quot;</code> - bool类型的表达式，绑定到element.state.collapsed = 表达式;</li></ul>
   <h2>可重复项(Repeatable)</h2>
@@ -63,6 +66,33 @@
   <pre>  &lt;b click=&quot;items.removeByValue(item)&quot;&gt;x&lt;/b&gt;
 </pre>
   <p>点击上面的<code>&lt;b&gt;</code>元素将会调用<code>items.removeByValue()</code>函数，并且将当前item对象作为它的第一参数。</p>
+  <h2>子-模型</h2>
+  <p>主数据模型视图元素内部的元素也可以定义<em>model</em>属性 - 它们被称作子视图，看起来像数据树的一部分。</p>
+  <pre>namespace MyDataNamespace
+{
+  var records = [ {name: &quot;first&quot;, ...},<br/>                  {name: &quot;second&quot;, ...},
+                  {name: &quot;third&quot;, ...} ];
 
+  var <u>currentRecord</u> = {}; // 用于子模型;
+
+  // 设置当前记录的函数
+  function setCurrentRecord(index) { currentRecord = records[index]; }
+}
+</pre>
+  <p>通过子模型，我们可以在视图树，这些视图元素在当前模型(名称空间/对象)中查找绑定元素:</p>
+  <pre>&lt;body model=&quot;MyDataNamespace&quot;&gt;
+   &lt;!-- records list --&gt;
+   &lt;ol each=&quot;index,record in records&quot;&gt;
+      &lt;li&gt;&lt;output(record.name) click=&quot;setCurrentRecord(index)&quot; /&gt;&lt;/li&gt;
+   &lt;/ol&gt;
+   &lt;!-- current record view --&gt;
+   &lt;section #record-details-view <u>model=&quot;currentRecord&quot;</u>&gt;
+      &lt;input(name) /&gt;
+      ...
+   &lt;/section&gt;
+&lt;/body&gt;
+</pre>
+  <p>子视图元素观察[子]模型中的变量的修改, 因此当变量被改变时，所以观察元素都将重新绑定新的数据。</p>
+  <p>在上面的示例中，在列表中的<em>output(name)</em>元素上点击时，将会调用<code>setCurrentRecord()</code>函数，从而触发currentRecord被设置为一个新对象。参见demos/L-list-detail.htm示例。</p>
 </body>
 </html>
