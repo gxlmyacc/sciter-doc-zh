@@ -2549,7 +2549,7 @@ input[focus] { aspect: handleFocusAttribute; }
 <p>将会引起该元素对handleClickAttribute()和handleFocusAttribute()的调用，在所有调用中，<em>this</em>变量执行该元素。</p></td>
      </tr> 
      <tr> 
-      <td rowspan="5" bgcolor="#ffe4ca" valign="top"><strong>其他属性</strong></td> 
+      <td rowspan="6" bgcolor="#ffe4ca" valign="top"><strong>其他属性</strong></td> 
       <td nowrap="" bgcolor="#ffe4ca" valign="top" align="right"><strong>content</strong></td> 
       <td bgcolor="#ffe4ca"> 
        <div><code>&quot;string&quot; | attr(attrname)</code></div>
@@ -2602,6 +2602,16 @@ input[focus] { aspect: handleFocusAttribute; }
       <td bgcolor="#ffe4ca"><em>default</em> | <em>top-left |</em> <em>top-center |</em> <em>top-right</em> | <em>middle-left |</em> <em>middle-center</em> | <em>middle-right |</em> <em>bottom-left</em> | <em>bottom-center</em> | <em>bottom-right</em><br /><em>default</em> | <em>top-left |</em> <em>top-center |</em> <em>top-right</em> | <em>middle-left |</em> <em>middle-center</em> | <em>middle-right |</em> <em>bottom-left</em> | <em>bottom-center</em> | <em>bottom-right</em> 
 	  <p>上面的<strong>popup-position</strong>的个别部分。</p></td>
      </tr>
+     <tr>
+      <td nowrap bgcolor="#ffe4ca" align="right"><strong>zoom</strong></td>
+      <td bgcolor="#ffe4ca">% 或 浮点数- 元素的<strong>内容(content)</strong>的缩放比例。100% 或 1.0 表示无缩放。
+       <p>注意: Sciter中的zoom类似于IE的zoom，但有两处不同:</p>
+       <ol>
+        <li>sciter中的<em>zoom</em>定义的缩放因子可以表示为任何长度单位<strong>(除了px)</strong>. px单元总是被处理为物理像素。</li>
+        <li>zoom定义的是子元素的缩放比例，而不是元素本身。</li>
+       </ol>
+      </td>
+      </tr> 
     </tbody>
    </table>
   </div> 
