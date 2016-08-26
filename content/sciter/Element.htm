@@ -532,16 +532,6 @@ el.$content(This is item number <b>{ num }</b>);
       <p>在<em>milliseconds</em>毫秒延迟后，引擎会调用<em>callback</em>函数并且有一个执行该dom元素的<em>this</em>变量。如果你需要计时器继续执行，则<em>callback</em>函数返回<em>true</em>，否则返回<em>false</em>。</p>
       <p>调用timer()方法，且<em>milliseconds = 0</em>时，则会停止计时器。</p>
 	  <p>如果元素正在运行的计时器已经包含相同的callback函数(同源)，则该计时器将会在增加新的计时器之前移除旧的计时器。设置<em>avoidSameOriginCheck</em>参数未<em>true</em>则会抑制同源匹配。</p></dd>
-</dd>
-    <dt>graphics</dt>
-    <dd>
-      <div><strong>(</strong> [ <strong>color</strong>: integer | <strong>color</strong>: color[, <strong>forceInitialization</strong>:bool = true ]] <strong>)</strong> : <a href="Graphics.htm">Graphics</a></div>
-      <p>返回该元素的<a href="Graphics.htm">Graphics</a>对象。Graphics是一张该元素同大小的位图。因此，一旦绘制，图像会保留到屏幕上。如果<em>forceInitialization</em>为<em>true</em>或者graphics不存在(第一层调用graphics())，则每次调用Graphics方法，带上color值，会返回一个所有位都初始化为该值的位图。若调用graphics()没有指定参数，第一次调用时会创建一个Graphic对象且使用透明颜色0xFFFFFF初始化它，再调用时会创建Graphics对象且不再做其他事。</p>
-      <p>若要移除graphics对象，则调用<code>el.graphics(#destroy)</code>。</p></dd>
-    <dt>graphics</dt>
-    <dd>
-      <div><strong>(</strong> <strong>#destroy</strong> <strong>)</strong> : <a href="Graphics.htm">Graphics</a> | null</div>
-      <p>移除该元素上的graphics对象。</p></dd>
     <dt>swap</dt>
     <dd>
       <div><strong>(other</strong>: Element <strong>)</strong> : null</div>

@@ -271,7 +271,19 @@ VK_F20      VK_F21      VK_F22      VK_F23      VK_F24
     <dl>
     <dt>match</dt>
     <dd>(<strong>eventName</strong>:string [,<strong>selector</strong>:string]) : true | false
-      <p>当事件含有<em>eventName</em>事件名且它的目标元素匹配<em>selector</em>选择器。<em>eventName</em>可以接受<a href="Event.htm#symbolic-event-names">符号事件名称</a>：</p></dd></dl>
+      <p>当事件含有<em>eventName</em>事件名且它的目标元素匹配<em>selector</em>选择器。<em>eventName</em>可以接受<a href="Event.htm#symbolic-event-names">符号事件名称</a>：</p></dd>    
+    <dt>exchangeData</dt>
+    <dd>() : array of symbols.
+      <p>返回一个关联到exchange操作上的数据项类型的列表。这个列表是一个数组，它包含<code>#text</code>, <code>#html</code>, <code>#url</code>, <code>#file</code>, <code>#picture</code>或<code>#json</code>。</p></dd>
+    <dt>exchangeData</dt>
+    <dd>(<strong>dataType</strong>:symbol) : value
+      <p>这个方法可以或安全到指定数据类型的数据:</p>
+      <p><code>#text</code> - 返回字符串 - 拖拽文本;</p>
+      <p><code>#html</code> - 返回(url,html)部分 - 被拖拽的HTML片段和HTML本身的url;</p>
+      <p><code>#url</code> -  返回(caption,url)部分 - 标题和url本身;</p>
+      <p><code>#file</code> - 返回文件名数组 - 被拖拽的文件路径列表;</p>
+      <p><code>#picture</code> - 如果拖拽数据中包含一个图像，则返回Image对象;</p>
+      <p><code>#json</code> - 返回一个值 - json值。</p></dd></dl>
   <h2 id="symbolic-event-names">符号事件名称</h2>
   <p>符号事件名称被<code>Element.subscribe(&quot;name&quot;, ...)</code>、<code>Element.on(&quot;name&quot;, ...)</code>以及<code>Event.match(&quot;name&quot;, ...)</code>方法使用。</p>
   <dl>
