@@ -42,11 +42,12 @@
     <li><code>@collapsed=&quot;表达式&quot;</code> - bool类型的表达式，绑定到element.state.collapsed = 表达式;</li></ul>
   <h2>可重复项(Repeatable)</h2>
   <p>任何容器元素可以有个each=&quot;<em>item</em> in <em>items</em>&quot;属性定义。这时容器内的元素将被当做模板代码，容器的内容的初始化将会遍历items集合，items中每一项都会根据模板克隆并填充数据。 <em>each</em>属性的格式如下:</p>
-  <pre>{item} <strong>in</strong> {items-表达式} [ <strong>|</strong> {filter-表达式}
+  <pre>[{index},]{item} <strong>in</strong> {items-表达式} [ <strong>|</strong> {filter-表达式}
 </pre>
   <p>其中:</p>
   <ul>
     <li><code>{item}</code> - 任意名称，它代表repeatable节中当前项的变量名称;</li>
+    <li><code>{index}</code> - 可选, 当前项在items数组中的索引;</li>
     <li><code>{items-表达式}</code> - 模型中的一个变量，或者是一个返回对象列表/数组的表达式</li>
     <li><code>{filter-表达式}</code> - 可选, 应用到对象列表/数组上的过滤器。它可以是:</li>
     <ul>

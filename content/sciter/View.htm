@@ -280,8 +280,12 @@ function retrieveDataFromDB(recordSet)
   <dl>
     <dt>&quot;size&quot;</dt>
     <dd>当视图(窗口)的尺寸被改变时触发。使用view.box()方法可获取该尺寸。</dd>
+    <dt>&quot;sizing&quot;</dt>
+    <dd>当用户正在调整窗口尺寸的时候触发。事件处理函数的签名应该为: <code>function(sizingParams)</code>，其中<code>sizingParams</code>是一个对象，它的结构为：<code>{ x:integer, y:integer, width:integer, height: integer, side: 1...9 }</code>，<code>side</code>是修改窗口尺寸拖拽的窗口边/角。</dd>
     <dt>&quot;move&quot;</dt>
     <dd>当视图(窗口)的位置发生改变时触发。使用view.box()方法可获取该尺寸或位置。</dd>
+    <dt>&quot;moving&quot;</dt>
+    <dd>当拖拽窗口标题移动窗口时被触发。事件处理函数的签名应该为: <code>function(movingParams)</code>，其中<code>movingParams</code>是一个对象，它的结构为：<code>{ x:integer, y:integer, width:integer, height: integer }</code>，事件函数可以修改这个对象的属性来重新调整窗口的移动。</dd>
     <dt>&quot;statechange&quot;</dt>
     <dd>当视图的状态(最大化、最小化、隐藏、显示)被改变时触发。见View<em>.state</em>属性。</dd>
     <dt>&quot;resolutionchange&quot;</dt>
