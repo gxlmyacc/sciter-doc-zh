@@ -143,5 +143,15 @@ for(var (k,v) in Foo )
     <dd>(<strong> v</strong>: float ) : angle, 根据一个弧度浮点值构造一个角度值。</dd>
     <dt>deg</dt>
     <dd>(<strong> v</strong>: int | float ) : angle, 根据一个度数值构造一个角度值。</dd></dl>
+  <h2>JSON namespace</h2>
+  <dl>
+    <dt>JSON.stringify</dt>
+    <dd>(<strong>value</strong>[, <strong>replacer</strong>: function | array][, <strong>space</strong>:string | integer]) : string
+      <p>生成规范的JSON字符串表示形式。</p>
+      <p>如果<em>replacer</em>是一个<code>function (key, value) </code>函数，则它会在每次迭代key / value时被调用。这个函数应该返回兼容JSON的值。如果<em>replacer</em>是一个数组, 则value对象中只有在数组中存在的键才会被JSON字符串化。value中成员的顺序与数组中指定的键的顺序一致。当value参数也是一个数组时，replacer数组将被忽略。</p>
+      <p>如果<em>space</em>是一个字符串，则输出的所有的\t字符将被替换为这个字符串。如果它是一个数值，则所有\t字符将被替换为该数值指定数量的空白符。</p></dd>
+    <dt>JSON.parse</dt>
+    <dd>(<strong>text</strong>:string[, <strong>reviver</strong>]) : value
+      <p>解析JSON字符串为一个JSON对象。<em>reviver</em>是一个<code>function (key, value): value</code>或<code>function (key, value): (key,value</code>)函数 - 该函数可以将被转换的键值替换为另一个值或key/value对。</p></dd></dl>
 </body>
 </html>

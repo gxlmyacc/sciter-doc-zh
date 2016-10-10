@@ -19,7 +19,8 @@
         <dd>- <em>boolean</em>, 只写属性。index中的对象的访问方向。</dd>
       
         <dt>[key]</dt>
-        <dd><strong>- </strong><em>value</em>, 读写属性。在<em>key</em>位置的DbIndex的元素。<em>key</em>必须是和<em>DbIndex</em>对象相同的类型。</dd>
+        <dd><strong>- </strong><em>value</em>, 读写属性。在<em>key</em>位置的DbIndex的元素。<em>key</em>必须是和<em>DbIndex</em>对象相同的类型。<br/>
+        如果index非唯一，则返回值将是<em>undefined</em>或一个数组<em>array</em> - 匹配该键的所有项列表。</dd>
       
         <dt>[begin..end]</dt>
         <dd><strong>- </strong><em>keys</em>, first和last元素范围指定的键集合。返回DbIndex从<em>start</em>键到<em>end</em>键的元素片段。<br/>
