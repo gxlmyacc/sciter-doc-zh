@@ -12,8 +12,8 @@
     <h2>属性</h2>
     <dt>root</dt>
     <dd><font color="#999999">只读 - </font><em>Element</em>, 被加载到视图中的文档的根元素。</dd>
-    <dt>state</dt>
-    <dd><font color="#999999">读写</font> - 视图的窗口的状态。仅适用于顶层框架窗口(sciter.exe)。</dd>
+    <dt>windowState</dt>
+    <dd><font color="#999999">读写</font> - 视图的窗口的状态。仅适用于顶层框架窗口(非子窗口)。 可接受的值: <code>View.WINDOW_MINIMIZED,</code> <code>View.WINDOW_MAXIMIZED</code>, <code>View.WINDOW_HIDDEN</code>, <code>View.WINDOW_SHOWN</code> 或 <code>View.WINDOW_FULL_SCREEN</code>.</dd>
     <dt>focus</dt>
     <dd><font color="#999999">读写</font> - <em>Element</em>, 当前获取输入角度的元素。若要设置一个新元素为聚焦状态，请使用view.focus = el;</dd>
     <dt>eventsRoot</dt>
@@ -29,24 +29,26 @@ view.<u>eventsRoot</u> = null;
     <dd><font color="#999999">只读</font> - integer, 该窗口位于的屏幕数量。</dd>
     <dt>screens</dt>
     <dd><font color="#999999">只读</font> - integer, 系统中的屏幕(监视器)数量。</dd>
-    <dt>caption</dt>
+    <dt>windowCaption</dt>
     <dd><font color="#999999">读写</font> - string, 窗口标题。</dd>
-    <dt>aspectRatio</dt>
+    <dt>windowAspectRatio</dt>
     <dd><font color="#999999">r/w</font> - float | null,这个窗口的客户区域的缩放比例;</dd>
-    <dt>isResizeable</dt>
+    <dt>windowResizable</dt>
     <dd><font color="#999999">r/w</font> - boolean, 如果窗口可被用户调整尺寸，则返回<em>true</em>;</dd>
-    <dt>isMinimizable</dt>
+    <dt>windowMinimizable</dt>
     <dd><font color="#999999">r/w</font> - boolean, 如果窗口有最小化按钮(可被用户手动最小化)则返回<em>true</em>;</dd>
-    <dt>isMaximizable</dt>
+    <dt>windowMaximizable</dt>
     <dd><font color="#999999">r/w</font> - boolean, 如果窗口有最大化按钮(可被用户手动最大化)则返回<em>true</em>;</dd>
-    <dt>isTopmost</dt>
+    <dt>windowTopmost</dt>
     <dd><font color="#999999">r/w</font> - boolean, 如果窗口在最顶层，则返回<em>true</em>;</dd>
-    <dt>minSize</dt>
+    <dt>windowMinSize</dt>
     <dd><font color="#999999">r/w</font> - (x:integer,y:integer), 最小窗口尺寸的限制。用户不能使窗口小于这个值;<br/>
-	示例: <code>view.minSize = (160,100);</code></dd>
-    <dt>maxSize</dt>
+	示例: <code>view.windowMinSize = (160,100);</code></dd>
+    <dt>windowMaxSize</dt>
     <dd><font color="#999999">r/w</font> - (x:integer,y:integer), 最大窗口尺寸的限制。用户不能使窗口大于这个值;<br/>
-	示例: <code>view.maxSize = (1600,1000);</code></dd>
+	示例: <code>view.windowMaxSize = (1600,1000);</code></dd>
+    <dt>windowIcon</dt>
+    <dd><font color="#999999">r/w</font> - 窗口图标, 该属性可接受的值: <code>null</code> - 设置默认图标; <code>&quot;url&quot;</code> - string, 窗口图标的url; code>Image</code>对象实例.</dd>
     <h2>方法</h2>
     <dt><strike>this</strike></dt>
     <dd>(不可用)</dd>

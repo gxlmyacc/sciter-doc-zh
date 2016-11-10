@@ -118,6 +118,8 @@
     <dd><font color="#999999">只写</font> - <em>null | </em>function(gfx), 设置前景层的绘制函数。该函数能获取到绘制该层的Graphics对象。如果函数返回<em>true</em>时则默认的前景绘制将不会再绘制。前景绘制函数是在本地绘制之<strong>前</strong>调用。</dd>
     <dt>paintOutline</dt>
     <dd><font color="#999999">只写</font> - <em>null | </em>function(gfx), 设置轮廓层的绘制函数。该函数能获取到绘制该层的Graphics对象。如果函数返回<em>true</em>时则默认的前景绘制将不会再绘制。轮廓绘制函数是在本地绘制之<strong>前</strong>调用。</dd>
+    <dt>isPointInside</dt>
+    <dd>r/w - <em>null | </em>function(x,y), 一个hit测试函数，这个函数根据x,y坐标值判断该坐标点是否在该元素图形区域内，如果在则返回<em>true</em>，这个元素可以是任意形状。</dd>
     <h3>从 Node类 继承的属性 或者 Node 相关的属性</h3>
     <dt>nodeIndex</dt>
     <dd><font color="#999999">只读</font> - Integer, 该节点在父节点容器中的索引位置。</dd>
