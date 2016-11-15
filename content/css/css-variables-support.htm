@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>CSS variables support / sciter</title>
+</head>
+
+<body>
+  <p>我正在添加支持CSS变量。对于Sciter,这是一个非常不错的功能，它与<a href="https://drafts.csswg.org/css-variables/">CSS Variables Working Draft</a>中的变量定义相似但语法有点不同:</p>
+  <p>变量的声明:</p>
+  <pre>body {
+   var(foo): #f00;       /* 声明一个名为"foo"的变量，并定义了它的默认值 */
+   color: var(foo,#000); /* 使用这个变量var(变量名, 变量不存在时的默认值) */
+}</pre>
+  <p>变量是可以继承的，所以&lt;body&gt;中的所有子元素都可以使用这个变量:</p>
+  <pre>div {
+   background-color: var(foo,#00f);
+   size:200dip;
+}</pre>
+  <p>注意，变量包含两部分内容: 变量的<em>名称</em>，已经等变量未定义时的<em>默认值</em>。</p>
+  <p>在运行期，脚本也可可以调用DOM API来获取/设置这些CSS变量:</p>
+  <pre>$(body).style.setVariable("foo", color(0,255,0));</pre>
+  <p>在脚本中设置后，所有在样式中使用这个变量的元素都会采用新的颜色。</p>
+</body>
+
+</html>
