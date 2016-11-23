@@ -56,7 +56,7 @@
       <p>compositionOp是以下可选的合并操作: #src-over, #dst-over, #src-in, #dst-in, #src-out, #dst-out, #src-atop, #dst-atop, #xor, #copy。</p></dd>
     <dt>update</dt>
     <dd>
-      <div>( <strong>renderer</strong>: function )</div>
-      <p>这个方法允许在一个已存在image上做渲染操作，通过<code>function renderer(gfx:</code><a href="Graphics.htm"><code>Graphics</code></a><code>)</code>回调函数的graphics对象参数来实现渲染。</p></dd></dl>
+      <div>( <strong>renderer</strong>: function [, <strong>clearBy</strong>: color ])</div>
+      <p>这个方法允许在一个已存在image上做渲染操作，通过<code>function renderer(gfx:</code><a href="Graphics.htm"><code>Graphics</code></a><code>)</code>回调函数的graphics对象参数来实现渲染。如果提供了<em>clearBy</em>参数，且是一个颜色值，则在渲染前将使用该颜色擦除图像。</p></dd></dl>
 </body>
 </html>

@@ -35,6 +35,8 @@
     <dd><font color="#999999">读写 - </font><em>Element</em>, 子元素在该元素中的索引<em>index</em>位置，读写属性。索引从0开始。</dd>
     <dt>root</dt>
     <dd><font color="#999999">只读</font> - <em>Element</em>, 该元素所属DOM的根元素。只读属性。</dd>
+    <dt>view</dt>
+    <dd><font color="#999999">只读</font> - <em>View</em>, 元素的父视图(窗口)。只读属性。注意: 如果元素是从另一个view移过来时，<code>element.view</code>可以与全局的<code>view</code>变量并不相同。</dd>
     <dt>parent</dt>
     <dd><font color="#999999">只读 - </font><em>Element</em>, 该元素的父元素。若该元素是根元素，则值为<em>null</em>。只读属性。</dd>
     <dt>layoutParent</dt>
@@ -617,7 +619,7 @@ el.$content(This is item number <b>{ num }</b>);
       <p><em>fromIndex</em>和<em>numOfElements</em>用于定义排序元素的范围。</p></dd>
     <dt>move</dt>
     <dd>
-      <div><strong>( </strong>[<strong>x</strong>: int, <strong>y</strong>: int [, <strong>w</strong>: int, <strong>h</strong>: int] [, <strong>#view</strong> | <strong>#root</strong> | <strong>#screen</strong> | <strong>#self</strong> [, mode: <strong>#auto</strong> | <strong>#attached-window</strong> | <strong>#detached-window</strong> ]]] &nbsp;<strong>)</strong> : void</div>
+      <div><strong>( </strong>[<strong>x</strong>: int, <strong>y</strong>: int [, <strong>w</strong>: int, <strong>h</strong>: int]  [, <strong>relto</strong>] [, <strong>mode</strong> ][, <strong>referencePoint</strong>: int] &nbsp;<strong>)</strong> : void</div>
       <p>该方法将该元素变成一个&quot;调皮鬼&quot;——它将独立于其他DOM元素进行移动：</p>
       <p>声明该元素<em>position:popup</em>且移动它到position(<em>x</em>,<em>y</em>)。如果元素移动到了视图外面则引擎会为它创建一个弹出窗口。第三个参数描述了x和y的角色。如果提供了<em>w</em>、<em>h</em>参数则将会改变元素的尺寸。<br/>
 	    <em>mode</em>参数：</p>
@@ -626,9 +628,11 @@ el.$content(This is item number <b>{ num }</b>);
         <li><em>#attached-window</em> - 强制引擎为该元素创建一个弹出窗口。该窗口和它的宿主窗口(视图)是同步移动的。</li>
         <li><em>#detached-window</em> - 强制引擎为该元素创建弹出窗口，该元素的窗口位置独立于它的宿主窗口。</li>
         <li><em>#detached-topmost-window</em> - 与<em>#detached-window</em>相同，不过是创建在最顶窗口层上。</li></ul>
+      <p><em>relto</em> 指示x,y坐标的类型，可以是: <strong>#view</strong>, <strong>#root</strong>, <strong>#screen</strong>或<strong>#self</strong>。默认为<strong>#view</strong>.</p>
+      <p><em>referencePoint</em>是一个1到9之间的数字 - 定义x,y坐标代表的位置。7代表左上角，5代表元素的中间, 请参考键盘上的数字键盘。注意:如果定义了<em>referencePoint</em>，则x/y定义的是相对于元素<em>边框盒</em>的位置，否则x/y是相对于内容盒的位置。</p>
       <p>参考示例：sdk/samples/ideas/moveable-windows/ and sdk/samples/ideas/rect-tracker/ 。</p>
       <p>调用<code>move()</code>函数没有参数时将还原元素的默认位置。</p>
-      <p>见: Element.style.dimension() 方法。</p></dd>
+      <p>见: <code>Element.style.dimension()</code> 方法。</p></dd>
     <dt>textWidth</dt>
     <dd>
       <div><strong>( text</strong>: string<strong> )</strong> : int</div>

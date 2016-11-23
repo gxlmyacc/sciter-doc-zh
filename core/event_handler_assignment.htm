@@ -1,0 +1,28 @@
+﻿<html lang="en-US">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>事件处理器的赋值</title>
+</head>
+
+<body>
+  <div class="article-header">
+    <h1 class="article-title">事件处理器的赋值</h1>
+  </div>
+  <div class="article-content">
+    <p>Sciter支持jQuery风格的事件处理器赋值方式:</p>
+    <pre>element.on("event", "selector", function(evt) {...});</pre>
+    <p>这种方式大部分情况下已经足够了，不过因为某些元素，我觉得它&#8220;不够美观&#8221; 所以我正在想它的替代方法。</p>
+    <p>目前，有一个比较灵活的选项/主意，类似下面这样:</p>
+    <pre>// subscribe function for "click" event on element
+element &lt;&lt; function "click" (evt) {...};</pre>
+    <p>上面的语句等同于</p>
+    <pre>element.on("click", function (evt) {...});</pre>
+    <p>以及它的完整格式(带选择器)： </p>
+    <pre>// subscribe function for "click" event on &lt;button id=first> element
+self &lt;&lt; function ["click","button#first"] (evt) {...};</pre>
+    <p>目前主要的挑战是JS syntax/grammar&#8230;</p>
+  </div>
+</body>
+
+</html>

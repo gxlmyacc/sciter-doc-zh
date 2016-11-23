@@ -104,14 +104,14 @@ view.<u>eventsRoot</u> = null;
       <p>如果<em>clientCoordinates</em>为<em>true</em>，则x、y、<em>width</em>、<em>height</em>被理解成期望的屏幕上客户区域的位置/尺寸。</p></dd>
     <dt>selectFile</dt>
     <dd>
-      <div><strong>(</strong> <em>#save</em> | <em>#open</em>, <em>filter</em>:string , <em>ext</em>: string [, <em>path</em>: string [, <em>title</em>: string]] <strong> ) </strong>: string | null</div>
+      <div><strong>(</strong> <em>#save</em> | <em>#open</em>, <em>filter</em>:string , <em>ext</em>: string  [,<em>initialPath</em>:string[, <em>dialogCaption</em>:string]] <strong> ) </strong>: string | null</div>
       <p>该方法显示系统的文件选择模态对话框，并且返回选择文件的全名，如果用户选择了取消则返回null。</p>
       <ul>
         <li>第一个参数为#save或#load标识符。如果为#save则对话框的标题为<em>保存</em>，如果为#load则对话框的标题为<em>打开</em>。</li>
         <li><em>filter</em>为一个字符串 - 为文件过滤器，它需要兴义一个以'|'字符分隔的文件扩展列表。格式：&quot;label1|file.ext1|label2|file.ext1|..&quot; 其中<em>label</em>是该项的显示标签(显示在对话框中的文件类型选择列表中)，file.ext是以';'分隔的文件名列表。</li>
         <li><em>ext</em>是一个字符串 - 默认的文件扩展名，用于用户输入的文件名没有扩展名时。</li>
-        <li><em>path</em>是一个字符串 - 默认的初始文件路径，用于设置对话框默认路径。</li>
-        <li><em>title</em>是一个字符串 - 对话框的标题文字。</li></ul>
+        <li><em>initialPath</em>是一个字符串 - 默认的初始文件路径，用于设置对话框默认路径。</li>
+        <li><em>dialogCaption</em>是一个字符串 - 对话框的标题文字。</li></ul>
       <div>下面的示例会弹出一个对话框来选择一个html文件，并且加载该文件到当前视图。：</div>
       <pre>
 <font color="#0033cc">var</font> fn = view.<strong>selectFile</strong>(<font color="#0033cc">#open</font>,
@@ -120,10 +120,11 @@ if( fn ) view.<strong>load</strong>(fn);
 </pre></dd>
     <dt>selectFolder</dt>
     <dd>
-    <div><strong>(</strong> [<em>title</em>:string] <strong>) </strong>: string | null</div>
+    <div><strong>(</strong> [ <em>dialogCaption</em>:string] <strong>) </strong>: string | null</div>
     <p>该方法显示系统的目录选择模态对话框，并且返回选择目录的全名，如果用户选择了取消则返回null。</p>
       <ul>
-        <li><em>title</em>设置选择对话框的标题</li></ul>
+        <li><em>dialogCaption</em>设置选择对话框的标题</li></ul>
+        <div>注意：在不同的系统中，selectFile有不同的UI。</div>
     </dd>
     <dt>selectPrinter</dt>
     <dd>TBD</dd>
