@@ -2513,15 +2513,9 @@
       <td nowrap="" bgcolor="#ffe4ca" valign="top" align="right"><strong>behavior</strong></td> 
       <td bgcolor="#ffe4ca"> 
        <div>
-	    以空格分隔的<a href="http://www.w3.org/TR/REC-xml/#NT-Nmtoken">nmtoken</a>列表 - 应用到该元素上的行为名称列表。
+	    以空格分隔的<a href="http://www.w3.org/TR/REC-xml/#NT-Nmtoken">nmtoken</a>列表 - 应用到该元素上的本地行为名称列表。
        </div> 
-       <div>
-        可以在列表的前面后后面包含'~'标识符:
-       </div> 
-       <ul> 
-        <li><em>behavior: <strong>~</strong> new-behavior;</em> 插入新行为前，会更新该元素之前定义的行为列表。</li> 
-        <li><em>behavior: new-behavior <strong>~</strong>;</em> 插入新行为到该元素之前定义的行为列表的后面。</li>
-       </ul> <p>Behavior是应用程序或内建的behavior类型的名称。(内建)标准行为列表在<a href="http://www.terrainformatica.com/htmlayout/behaviors.whtm">这里</a>。</p></td>
+       <p>Behavior是应用程序或内建的behavior类型的名称。</p></td>
      </tr> 
      <tr> 
       <td nowrap="" bgcolor="#ffe4ca" valign="top" align="right"><strong>prototype</strong></td> 
@@ -2561,17 +2555,9 @@ input[focus] { aspect: handleFocusAttribute; }
        <div>
         示例：这个属性允许作为一个开关给一些元素通过CSS定义不同的标题:
        </div> 
-        <blockquote> 
-         <div>
-          <font face="Courier New">p.status[state=&quot;pending&quot;] { content: &quot;Pending&quot;; foreground-image:...; }</font>
-         </div> 
-         <div>
-          <font face="Courier New">p.status[state=&quot;done&quot;] { content: &quot;Done&quot;; foreground-image:...; }</font>
-         </div> 
-         <div>
-          <font face="Courier New">p.status[state=&quot;warning&quot;] { content: &quot;Warning!&quot;; foreground-image:...; }</font>
-         </div>
-        </blockquote>
+        <pre>p.status[state=&quot;pending&quot;] { content: &quot;Pending&quot;; foreground-image:...; }
+p.status[state=&quot;done&quot;] { content: &quot;Done&quot;; foreground-image:...; }
+p.status[state=&quot;warning&quot;] { content: &quot;Warning!&quot;; foreground-image:...; }</pre>
        <div>
         <em>content</em>属性只允许应用于有文本内容的属性。例如，它对于P、SPAN等是有效的，但它对DIV是无效的。
        </div></td>

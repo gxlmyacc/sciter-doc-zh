@@ -18,7 +18,7 @@
     <dt>其中:</dt>
     <dd><em>&lt;函数名&gt;</em>是一个函数的名称, 或者是: <br/>
 	简单的<em>&lt;nmtoken&gt;</em> , 或<br/>组合名称: <em>&lt;nmtoken1&gt;</em> [ <code>.</code> <em>&lt;nmtoken2&gt;</em> [ <code>.</code> <em>&lt;nmtoken3&gt;</em> [ <code>.</code> <em>&lt;nmtokenN&gt;</em> ]]] <sup><a href="#fn__1" name="fnt__1" id="fnt__1" class="fn_top">1)</a></sup><br/><em>&lt;参数&gt;</em>是一个函数参数列表:<br/>
-	[<code> </code><em>&lt;参数名1&gt;</em> [ <code>,</code> <em>&lt;参数名2&gt;</em> [ <code>,</code> ... <em>&lt;参数名N&gt;</em> ]]]</dd></dl>
+	[<em>&lt;参数名1&gt;</em> [ <code>,</code> <em>&lt;参数名2&gt;</em> [ <code>,</code> ... <em>&lt;参数名N&gt;</em> ]]]</dd></dl>
   <h2><a name="anonymous-functions" id="anonymous-functions">匿名函数</a></h2>
   <p>匿名函数可以使用以下语句来声明:</p>
   <p>经典的JavaScript格式:</p>
@@ -31,6 +31,22 @@
   <pre><code>:</code> &lt;parameters&gt; <code>{</code> &lt;statements&gt; <code>}</code>
 </pre>
   <p>嵌套函数(其他函数内部的函数)是允许的。</p>
+  <h2><a name="event-functions" id="event-functions">事件函数</a></h2>
+  <p>事件处理函数是一种函数名称是字符串的正常函数。它不是使用<code>function</code>来声明，而是使用<code>event</code>关键字:</p>
+  <pre><code>event</code> &quot;event-definition&quot; <code>(</code> [eventObj [,element] <code>)</code>
+</code>{
+  //... 事件处理函数体
+}
+</pre>
+  <p>其中:</p>
+  <ul>
+    <li><code>&quot;event-definition&quot;</code>是一个字符串，它的内容格式为: <code>&quot;event.namespace|css-selector&quot;</code>，其中:</li>
+    <ul>
+      <li><em>name</em>是一个已知事件或自定义事件的名称;</li>
+      <li><em><code>.</code> namespace</em>是类似jQuery中的任意的事件namespace的名称, 可省略;</li>
+      <li><code>|</code> <em>css-selector</em>是一个CSS选择器。如果提供了，则仅有满足条件的DOM元素上才能接收到事件, 可省略。</li></ul>
+    <li><code>eventObj</code>是接收到的事件对象实例参数名称。它可以是任意有效的名称，比如: <em>evt</em>, <em>eo</em> 或<em>event</em>。</li>
+    <li><code>element</code> 是接收到消息的DOM元素的参数名称。</li></ul>
   <h2><a name="optional-parameters" id="optional-parameters">可选参数</a></h2>
   <p>TIScript在函数声明中支持可选参数:</p>
   <h3><a name="parameters-with-default-values" id="parameters-with-default-values">有默认值的参数</a></h3>
