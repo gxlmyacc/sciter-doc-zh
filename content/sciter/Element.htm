@@ -368,6 +368,12 @@
       <div>( [<strong>toTop</strong>:bool, <strong>smooth</strong>: bool = true ] )</div>
       <p>滚动元素到视图——确保元素是可见的。如果<em>toTop</em>为<em>true</em>，则强制元素滚动到它的滚动容器的顶部。该方法做深滚动——它将试图使元素在它的所有滚动容器中可见。如果<em>smooth</em>为false,则将不会使用动画滚动。</p>
       <p>注意: 该方法只在建立了盒模型(display: block | inline-block | table-cell 等)的元素上。比如，表格中的<code>&lt;tr&gt;</code>不是一个盒元素。所以要滚到表格中的特定行时，你需要选择该行的第一个单元格元素来调用该方法。</p></dd>
+    <dt>mapLocalToView</dt>
+    <dd>(<strong>xLocal</strong>:int, <strong>yLocal</strong>:int ) : (int,int)
+      <p>映射元素的xLocal/yLocal点到xView/yView (window)坐标。</p></dd>
+    <dt>mapViewToLocal</dt>
+    <dd>(<strong>xView</strong>:int, <strong>yView</strong>:int ) : (int,int)
+      <p>映射视图的xView/yViewl点到xLocal/yLocal (element)坐标。</p></dd>
     <dt>insert</dt>
     <dd>
       <div><strong>( element</strong> | <strong>html</strong> | <strong>object </strong>| <strong>array</strong> [,<strong>index</strong> = Integer.MAX]<strong>)</strong> returns: true | false.</div>
@@ -504,12 +510,11 @@ el.$content(This is item number <b>{ num }</b>);
     <dt>capture</dt>
     <dd>
       <div><strong>( onOff</strong>: true | false | #strict<strong> ) </strong>:void</div>
-      <p>
-	    element.capture(<em>true</em>) - 设置&quot;宽松&quot;的鼠标捕获到该元素，鼠标消息被传递到该元素和它的子元素；<br/>
-	    element.capture(#strict) - 设置&quot;严格&quot;的鼠标捕获到该元素，鼠标消息仅被传递到该元素；<br/>
-	    element.capture(<em>false</em>) - 从该元素移除鼠标捕获。
-	 </p>
-	</dd>
+      <ul>
+        <li>element.capture(<em>true</em>) - 设置&quot;宽松&quot;的鼠标捕获到该元素，鼠标消息被传递到该元素和它的子元素；</li>
+        <li>element.capture(<em>#strict</em>) - 设置&quot;严格&quot;的鼠标捕获到该元素，鼠标消息仅被传递到该元素；</li> 
+        <li>element.capture(<em>false</em>) - 从该元素移除鼠标捕获。</li></ul>
+	  </dd>
     <dt>popup</dt>
     <dd>
       <div><strong>( el</strong>: Element, <strong>placement</strong>: int<strong> )</strong> :void</div>

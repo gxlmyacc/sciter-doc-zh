@@ -237,6 +237,28 @@ function retrieveDataFromDB(recordSet)
     <dd>
       <div><strong>(#put</strong>, data: string | object | Image <strong>)</strong> : undefined;</div>
       <p>将数据存储到剪切板。</p></dd>
+    <dt>performDrag</dt>
+    <dd>
+        (<strong>element</strong>:Element, <strong>data</strong>:Object, ddMode: <strong>#any</strong> | <strong>#copy</strong> | <strong>#move</strong>) : <strong>null</strong> | <strong>#copy</strong> | <strong>#move</strong>
+        <p>执行系统拖拽操作。</p>
+        <p><em>element</em> 是一个DOM元素，它用于作为一个拖拽图像。</p>
+        <p><em>data</em> 是一个对象，它包含以下属性：</p>
+        <ul>
+            <li><code>{text: String}</code> - 纯文本字符串;</li>
+            <li><code>{html: String | Element}</code> - html, 可以是一个字符串或指元素的外部HTML(outer HTML);</li>
+            <li><code>{file: String | [String, String, ...]}</code> - 拖拽的单个文件名或文件名列表;</li>
+            <li><code>{link: String}</code> - 一个url字符串;</li>
+            <li><code>{json: value}</code> - 可以序列化为JSON字符串的任意的值。JSON可以用于在不同的Sciter窗口之间传递数据。</li>
+        </ul>
+        <p><em>data</em>对象可以包含多个属性, 目标会根据场景选择不同的数据。</p>
+        <p><em>ddMode</em>定义拖拽(drag-n-drop)操作允许的类型:</p>
+        <ul>
+            <li><strong>#copy</strong> - 从源位置拷贝到目标位置;</li>
+            <li><strong>#move</strong> - 从源位置移动到目标位置;</li>
+            <li><strong>#any</strong> - 即可移动也可拷贝。</li>
+        </ul>
+        <p><code>performDrag()</code>是一个阻塞操作 - 该函数在拖拽(drag-n-drop)操作完成或被拒绝时返回。</p>
+    </dd>
     <dt>cursorLocation</dt>
     <dd>
       <div><strong>(</strong> <strong>)</strong> : (x:int, y: int)</div>

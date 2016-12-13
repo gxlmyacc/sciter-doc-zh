@@ -27,8 +27,8 @@
     <h2>方法</h2>
     <dt>connect</dt>
     <dd>
-      <p><strong>( url: string</strong> <strong>)</strong> : WebSocket</p>
-      <p>WebSocket的静态构造函数。websocket接受的URL结构: &quot;ws://domain/path&quot;. 返回一个新的处于INITIAL状态的socket。</p></dd>
+      <p><strong>( url</strong>: string [,<strong> timeout</strong>: duration] <strong>)</strong> : WebSocket</p>
+      <p>WebSocket的静态构造函数。websocket接受的URL结构: &quot;ws://domain/path&quot;。返回一个新的处于INITIAL状态的socket。<em>timeout</em>是连接的超时时间。当连接超时将产生一个错误。</p></dd>
     <dt>on</dt>
     <dd>
       <p><strong>( event</strong>: string<strong>, callback</strong>: function<strong> )</strong> : this</p>

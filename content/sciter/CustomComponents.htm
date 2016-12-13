@@ -54,12 +54,13 @@
    <u>function</u> boo() { ... }
 
    // 事件处理器:
-
+   
    // 点击事件
-   <u>event</u> &quot;click&quot; (evt, onElement) { /* 注意: <em>this</em>在这里是MyWidget元素类*/ }
+   <u>event</u> click (evt, that) { /* 注意: <em>this</em>指代生成click事件的元素
+                                <em>that</em>为订阅元素 - 一个MyWidget类的实例 */ }
 
    // 在 &lt;a class=&quot;next&quot;&gt;元素上的点击事件
-   <u>event</u> &quot;click|a.next&quot; (evt, onElement) { ... }
+   <u>event</u> click $(a.next) (evt, that) { ... /* 注意: <em>this</em>指代a.next元素，即生成click事件的元素 */  }
    ...
 }
 </pre>
@@ -112,15 +113,15 @@ MicroChart.Donut(params); // 实际上是调用MicroChart.Donut.call(domElement,
   <h3>事件函数</h3>
   <p>你可以在某处定义<a href="../script/language/Functions.htm#event-functions">事件函数</a>，然后在合适的位置通过移位运算符赋值到DOM元素上:</p>
   <pre>// 一个基础的事件处理器
-elem &lt;&lt; <u>event</u> &quot;click&quot; () { ... }
+elem &lt;&lt; <u>event</u> click () { ... }
 </pre>
-  <p>注意上面的<code>&quot;click</code>&quot;字符串, 它是一个事件定义字符串，它的格式为: &quot;name.namespace|css-selector&quot; 其中:</p>
+  <p>注意上面的<code>click</code>语句, 它是一个事件定义，它的格式为: <em>name</em>[<code>.</code><em>namespace</em>] [<code>$(</code><em>selector</em><code>)</code>]， 其中:</p>
   <ul>
     <li><em>name</em>是一个<a href="Event.htm#symbolic-event-names">已知事件</a> 或 自定义事件 的名称;</li>
     <li><em><code>.</code> namespace</em>是类似jQuery中的任意的事件namespace的名称, 可省略;</li>
-    <li><code>|</code> <em>css-selector</em>是一个CSS选择器。如果提供了，则仅有满足条件的DOM元素上才能接收到事件, 可省略。</li></ul>
+    <li><em>selector</em>是一个CSS选择器。如果提供了，则仅有满足条件的DOM元素上才能接收到事件, 可省略。</li></ul>
   <p>这里是一个&quot;change&quot;事件的处理示例，它绑定到文档中任意一个&lt;input type=text&gt;元素上:</p>
-  <pre>elem &lt;&lt; <u>event</u> &quot;change|input[type=text]&quot; () { 
+  <pre>elem &lt;&lt; <u>event</u> change $(input[type=text]) { 
   <em>// this</em> 指代input[type=text]
   var changedValue = this.value;
   ...
@@ -128,10 +129,6 @@ elem &lt;&lt; <u>event</u> &quot;click&quot; () { ... }
 </pre>
   <p>事件的名称空间用于在必要时唯一标识该事件, 比如要<strong>unsubscribe</strong>某个特定的事件处理器组:</p>
   <pre>elem &gt;&gt; &quot;.mygroup&quot;; // 移除所有包含.mygroup名称空间的事件处理器
-</pre>
-  <p>如有必要，你可以一次性定义多个事件处理器:</p>
-  <pre>elem &gt;&gt; &quot;change|input[type=text]&quot; 
-     &gt;&gt; &quot;mousedown|input[type=text]&quot;;
 </pre>
   <h3>传统的事件处理函数</h3>
   <p>Element类的<code>Element.on(&quot;name.namespace&quot;, &quot;selector&quot;, function )</code>方法可以用于根据指定的&quot;name&quot;向元素附加事件处理器。 </p>
