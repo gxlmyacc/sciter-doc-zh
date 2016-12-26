@@ -370,10 +370,10 @@
       <p>注意: 该方法只在建立了盒模型(display: block | inline-block | table-cell 等)的元素上。比如，表格中的<code>&lt;tr&gt;</code>不是一个盒元素。所以要滚到表格中的特定行时，你需要选择该行的第一个单元格元素来调用该方法。</p></dd>
     <dt>mapLocalToView</dt>
     <dd>(<strong>xLocal</strong>:int, <strong>yLocal</strong>:int ) : (int,int)
-      <p>映射元素的xLocal/yLocal点到xView/yView (window)坐标。</p></dd>
+      <p>映射元素的xLocal/yLocal点到xView/yView (window)坐标，它会随着CSS的变化而改变。</p></dd>
     <dt>mapViewToLocal</dt>
     <dd>(<strong>xView</strong>:int, <strong>yView</strong>:int ) : (int,int)
-      <p>映射视图的xView/yViewl点到xLocal/yLocal (element)坐标。</p></dd>
+      <p>映射视图的xView/yViewl点到xLocal/yLocal (element)坐标，它会随着CSS的变化而改变。</p></dd>
     <dt>insert</dt>
     <dd>
       <div><strong>( element</strong> | <strong>html</strong> | <strong>object </strong>| <strong>array</strong> [,<strong>index</strong> = Integer.MAX]<strong>)</strong> returns: true | false.</div>
@@ -517,14 +517,35 @@ el.$content(This is item number <b>{ num }</b>);
 	  </dd>
     <dt>popup</dt>
     <dd>
-      <div><strong>( el</strong>: Element, <strong>placement</strong>: int<strong> )</strong> :void</div>
-      <p>将el元素作为弹出窗口显示，位置相对于该元素。<em>Placement</em> 接受以下值:</p>
+      <div><strong>( el</strong>: Element[, <strong>placement</strong>: int]<strong> )</strong> :void</div>
+      <p>将el元素作为弹出窗口显示，位置相对于该元素。<em>Placement</em> 是下面两组数字的混合:</p>
+      <p>相对于<em>this</em>元素的点( 又名 弹出锚点 )</p>
       <ul>
-        <li><em>2</em> - 弹出元素在该元素(锚点)的下面;</li>
-        <li><em>8</em> - 弹出元素在该元素(锚点)的上面;</li>
-        <li><em>4</em> - 弹出元素在该元素(锚点)的左面;</li>
-        <li><em>6</em> - 弹出元素在该元素(锚点)的右面;</li></ul>
-      <div>( 见小键盘上的数字 )。</div></dd>
+        <li><code>1</code> - 弹出元素在该元素(锚点)的左下角;</li>
+        <li><code>2</code> - 弹出元素在该元素(锚点)的下面居中的位置;</li>
+        <li><code>3</code> - 弹出元素在该元素(锚点)的右下角;</li>
+        <li><code>4</code> - 弹出元素在该元素(锚点)的中间居左的位置;</li>
+        <li><code>5</code> - 弹出元素在该元素(锚点)的中间居中的位置;</li>
+        <li><code>6</code> - 弹出元素在该元素(锚点)的中间居右的位置;</li>
+        <li><code>7</code> - 弹出元素在该元素(锚点)的左上角;</li>
+        <li><code>8</code> - 弹出元素在该元素(锚点)的上面居中的位置;</li>
+        <li><code>9</code> - 弹出元素在该元素(锚点)的右上角;</li></ul>
+      <p><em>popup</em>弹出元素放置在锚点上的点:</p>
+      <ul>
+        <li><code>1 &lt;&lt; 16 </code>- popup元素的bottom-left在锚点上;</li>
+        <li><code>2 &lt;&lt; 16</code> - popup元素的bottom-center在锚点上;</li>
+        <li><code>3 &lt;&lt; 16</code> - popup元素的bottom-right在锚点上;</li>
+        <li><code>4 &lt;&lt; 16</code> - popup元素的center-left在锚点上;</li>
+        <li><code>5 &lt;&lt; 16</code> - popup元素的middle-center在锚点上;</li>
+        <li><code>6 &lt;&lt; 16</code> - popup元素的middle-right在锚点上;</li>
+        <li><code>7 &lt;&lt; 16</code> - popup元素的top-left在锚点上;</li>
+        <li><code>8 &lt;&lt; 16</code> - popup元素的top-center在锚点上;</li>
+        <li><code>9 &lt;&lt; 16</code> - popup元素的top-right在锚点上;</li></ul>
+      <div>( 见小键盘上的数字 )。</div>      
+      <div></div>
+      <p class="MsoNormal"><em>placement</em>参数是可省略的。弹出位置也可以在CSS中通过<code>popup-position</code>属性来定义。</p>
+      <div></div>
+     </dd>
     <dt>popup</dt>
     <dd>
       <div><strong>( el</strong>: Element, <strong>x</strong>:int, <strong>y</strong>:int ) :void</div>

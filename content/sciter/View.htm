@@ -49,6 +49,8 @@ view.<u>eventsRoot</u> = null;
 	示例: <code>view.windowMaxSize = (1600,1000);</code></dd>
     <dt>windowIcon</dt>
     <dd><font color="#999999">r/w</font> - 窗口图标, 该属性可接受的值: <code>null</code> - 设置默认图标; <code>&quot;url&quot;</code> - string, 窗口图标的url; code>Image</code>对象实例.</dd>
+    <dt>windowBlurbehind</dt>
+    <dd><font color="#999999">r/w</font> - 窗口模糊特效, 该属性接受以下值: <code>#auto</code> | <code>#ultra-dark</code> | <code>#dark</code> | <code>#light</code> | <code>#ultra-light</code> | <code>#none</code>。 如果设置了该标志，则window窗口将是半透明的。根文档元素应该使用<code>html { background:transparent; }</code>以便看到窗口后面的桌面。</dd>
     <h2>方法</h2>
     <dt><strike>this</strike></dt>
     <dd>(不可用)</dd>
@@ -67,8 +69,8 @@ view.<u>eventsRoot</u> = null;
       <ul>
         <li><strong>part</strong> - <strong>#left</strong>, <strong>#top</strong>, <strong>#right</strong>, <strong>#bottom</strong>, <strong>#width</strong>, <strong>#height</strong>中定义的常量标识符之一。定义返回盒(矩形)的哪一部分。#part还可以接受以下常量：</li>
         <ul>
-          <li><strong>#rect</strong> - (x1,y1,x2,y2);</li>
-          <li><strong>#rectw</strong> - (x,y,width,height), <em>默认</em>;</li>
+          <li><strong>#rect</strong> - (x1,y1,x2,y2), <em>默认</em>;</li>
+          <li><strong>#rectw</strong> - (x,y,width,height);</li>
           <li><strong>#position</strong> - (x,y)<em>,</em></li>
           <li><strong>#dimension</strong> - (width,height)<em>,</em></li></ul>
         <li><strong>edge</strong>, 以下常量之一:</li>
@@ -102,6 +104,11 @@ view.<u>eventsRoot</u> = null;
       <div><strong>( </strong><em>x</em>:int, <em>y</em>:int, <em>width</em>:int, <em>height</em>:int [, <em>clientCoordinates</em>: true | false] <strong> ) </strong>:void</div>
       <p>调整屏幕上的视图(对话框或框架)的窗口位置和尺寸。该方法仅适用于Sciter。</p>
       <p>如果<em>clientCoordinates</em>为<em>true</em>，则x、y、<em>width</em>、<em>height</em>被理解成期望的屏幕上客户区域的位置/尺寸。</p></dd>
+    <dt>mediaVars</dt>
+    <dd>
+      <div><strong>()</strong> : Object</div>
+      <p>返回当前视图的媒体变量。</p>
+    </dd>
     <dt>selectFile</dt>
     <dd>
       <div><strong>(</strong> <em>#save</em> | <em>#open</em>, <em>filter</em>:string , <em>ext</em>: string  [,<em>initialPath</em>:string[, <em>dialogCaption</em>:string]] <strong> ) </strong>: string | null</div>
