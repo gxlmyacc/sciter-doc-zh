@@ -60,6 +60,27 @@
       &lt;li&gt;&lt;picture @src=&quot;customer.image&quot; /&gt; &lt;output(customer.name)/&gt;&lt;/li&gt;
   &lt;/ol&gt;
 </pre>
+  <h2>在数据路径上观察变化</h2>
+  <p>Plus定义了<code>@observing</code>装饰器换上，它可以用于在模型数据树上订阅事件函数。订阅的语法如下:</p>
+<pre>@observing &quot;path&quot; [&quot;path2&quot;[,&nbsp;... &quot;pathN&quot; ]] 
+  function(path) {
+      
+  }</pre>
+  <p>其中，<i>path</i>是一个以<code>.</code>(点)和<code>[]</code>(如果元素路径是一个数组时)分隔的字符串。</p>
+  <p>这个函数被调用时，<i>this</i>被设置为路径最右端的对象或数组。</p>
+  <p>示例:</p>
+<pre>namespace Data 
+{ 
+   var items = [
+       { name:&quot;Alan&quot;, state: true },
+       { name:&quot;Winston&quot;, state: false }
+   ];
+
+   @oberving &quot;items[].state&quot; function() {
+      // items中某项的.state属性被改变
+      // 'this'这里是item
+   }
+}</pre>
   <h2>基本的事件绑定属性</h2>
   <p>元素可以包含一些事件属性，它们可以定义一个当对应事件发生时执行的函数。这个处理器函数被调用时，<code>this</code>变量被设置为对应的DOM元素。而第一个参数被设置为该DOM元素绑定的模型对象。</p>
   <p>事件属性列表: &quot;click&quot;, &quot;dblclick&quot;, &quot;change&quot;, &quot;enter&quot;, &quot;escape&quot;, &quot;focusin&quot;, &quot;focusout&quot;.</p>

@@ -12,11 +12,18 @@
   <dl>
     <h2>属性</h2>
     <dt>length</dt>
-    <dd bgcolor="#fffff0" valign="middle">- <em>integer</em>, 只读属性。字符串中字符的数量。</dd>
+    <dd>- <em>integer</em>, 只读属性。字符串中字符的数量。</dd>
     <dt>[index]</dt>
-    <dd bgcolor="#fffff0" valign="middle">- <em>integer</em>, 读写属性。字符串中在<em>index</em>位置的字符。索引基于0开始。</dd>
+    <dd>- <em>integer</em>, 读写属性。字符串中在<em>index</em>位置的字符。索引基于0开始。</dd>
     <dt>[begin..end]</dt>
-    <dd bgcolor="#fffff0" valign="middle">- <em>integers</em>, begin和end索引基于0，表示一段范围。返回字符串中一个从<em>start</em>索引(包含)开始到<em>end</em>索引(不包含)结束的子字符串。<em>Begin</em>和<em>end</em>参数是可忽略的。如果begin被忽略，则会假设begin为0，如果end被忽略，则会假设end值为<em>length</em>。</dd>
+    <dd>- <em>integers</em>, begin和end索引基于0，表示一段范围。返回字符串中一个从<em>start</em>索引(包含)开始到<em>end</em>索引(不包含)结束的子字符串。<em>Begin</em>和<em>end</em>参数是可忽略的。如果begin被忽略，则会假设begin为0，如果end被忽略，则会假设end值为<em>length</em>。</dd>
+	</dl>
+	<h2>迭代</h2>
+	<p><code>for (var <i>codepoint</i> in str) {...}</code></p>
+	<p> 迭代字符串中所有UNICODE代码值。在内部，字符串被当做一个UTF16代码数组保存的，<code>str.length</code>报告这个数组的长度。在每次迭代中，<i>codepoint</i>遍历接收一个整数值 - UNICODE代码值。注意，如果字符串中包含代理对(两个UTF16代码值表示一个字符)，则迭代的次数可能小于<code>str.length</code>。</p>
+	<p><i><code>for (var (strpos,codepoint) in str) {...}</code><br/></i></p>
+	<p>上面的代码也报告代码值在字符串中的索引位置。</p>
+  <dl>
     <h2>方法</h2>
     <dt>toInteger</dt>
     <dd>

@@ -12,9 +12,7 @@
     <li><code>&lt;plaintext&gt;...&lt;/plaintext&gt;</code> display:block编辑器;</li></ul>
   <h2>示例</h2>
   <div>
-  	<plaintext style="height:100;">  
-	  请输入文本
-	</plaintext>
+  	<plaintext style="height:100;">请输入文本</plaintext>
   </div>
   <h2>属性</h2>
   <p>该行为需要知道的属性:</p>
@@ -26,8 +24,7 @@
    &lt;text&gt;Line 1&lt;/text&gt;
    &lt;text&gt;Line 2&lt;/text&gt;
    &lt;text&gt;Line 3&lt;/text&gt;
-&lt;/plaintext&gt;
-</pre>
+&lt;/plaintext&gt;</pre>
   <h2>事件</h2>
   <p>除了标准事件集(鼠标、按键、聚焦)外，该行为还生成:</p>
   <ul>
@@ -58,8 +55,40 @@
     <li>CTRL+V</li>
     <li>CTRL+Z</li>
     <li>CTRL+(LEFT)SHIFT 和 CTRL+(RIGHT)SHIFT - 如果form表单上有<code>dir</code>属性时，这个组合键用来在<code>dir=&quot;ltr&quot;</code>和切换<code>dir=&quot;rtl&quot;</code>间切换。</li></ul>
+    <h2>命令</h2>
+    <p>支持<code>Element.execCommand()</code> and <code>Element.queryMethods()</code>命令:</p>
+    <ul>
+      <li><code>&quot;edit:cut&quot;</code> - 剪切选择内容 - 复制选择内容到剪切板，并移除它;</li>
+      <li><code>&quot;edit:copy&quot;</code> - 复制选择内容到剪切板;</li>
+      <li><code>&quot;edit:paste&quot;</code> - 粘贴剪切板中的内容到content;</li>
+      <li><code>&quot;edit:selectall&quot;</code> - 选择元素中的所有内容;</li>
+      <li><code>&quot;edit:undo&quot;</code> - 撤销最近一起的编辑操作;</li>
+      <li><code>&quot;edit:redo&quot;</code> - 重做最近被撤销的操作;</li>
+      <li><code>&quot;edit:delete-next&quot;</code> - 如果有选择内容则删除它，否则删除下一个字符;</li>
+      <li><code>&quot;edit:delete-prev&quot;</code> - 如果有选择内容则删除它，否则删除上一个字符;</li>
+      <li><code>&quot;edit:delete-word-next&quot;</code> - 如果有选择内容则删除它，否则删除下一个单词;</li>
+      <li><code>&quot;edit:delete-word-prev&quot;</code> - 如果有选择内容则删除它，否则删除上一个单词;</li>
+    </ul>
   <h2>方法</h2>
- 
-    <div>TBD</div>
+  <dl>
+    <dt><code>loadDocument</code></dt>
+    <dd><code>(url:string): true|false</code> 
+      <p>从URL加载文件到编辑器中;</p></dd>
+    <dt><code>saveDocument</code></dt>
+    <dd><code>(url:string): true|false</code> 
+      <p>保存content到文件中;</p></dd>
+    <dt><code>setContent</code></dt>
+    <dd><code>(text:string):&nbsp;true|false</code>
+      <p>将text字符串设置到content中;</p></dd>
+    <dt><code>setContent</code></dt>
+    <dd><code>(text:string, selStart:integer, selEnd:integer):&nbsp;true|false</code>
+      <p>将<i>text</i>字符串设置到content中，并且根据<i>selStart</i>和<i>selEnd</i>设置选择范围;</p>
+    </dd>
+    <dt><code>getContent</code></dt>
+    <dd>
+      <code>() : [string, integer, integer] </code>
+      <p>返回一个有3个元素的数组，包括content和选择范围;</p>
+    </dd>
+  </dl>
 </body>
 </html>
