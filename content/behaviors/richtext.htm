@@ -33,7 +33,7 @@
         &lt;p&gt;Line 3&lt;/p&gt;
       &lt;/body&gt;
    &lt;/html&gt;
-&lt;/htmlarea&gt;</pre> 内容模型取决于加载到编辑器中的文档类型。
+&lt;/htmlarea&gt;</pre> <p>内容模型取决于加载到编辑器中的文档类型。</p>
 <h2>事件</h2>
   <p>除了标准的事件集(mouse, keyboard, focus)外， <em>behavior: htmlarea</em>还生成:</p>
   <ul>
@@ -41,6 +41,7 @@
     <li>EDIT_VALUE_CHANGING 事件 - 当元素的值将要改变之前被触发。同步事件。</li></ul>
   <h2>值</h2>
   <p>string, 反应编辑缓冲区的当前状态。</p>
+  <p>string, 反应DOM内容的当前状态- value可以获取/设置当前HTML的内容; 对于富文本DOM元素，<i>value</i>属性是<i>html</i>属性的别名。</p>
   <h2>特有的快捷键组合</h2>
   <ul>
     <li>LEFT, CTRL+LEFT, SHIFT+LEFT, CTRL+SHIFT+LEFT</li>
@@ -63,16 +64,17 @@
     <dt><code>saveDocument</code></dt>
     <dd><code>(url:string): true|false</code> 
       <p>保存content到文件中;</p></dd>
-    <dt><code>setContent</code></dt>
+    <dt><code>emptyDocument</code></dt>
     <dd><code>(text:string):&nbsp;true|false</code>
-      <p>将text字符串设置到content中;</p></dd>
-    <dt><code>setContent</code></dt>
-    <dd><code>(text:string, selStart:integer, selEnd:integer):&nbsp;true|false</code>
+      <p>初始化编辑器为一个空文档;</p></dd>
+    <dt><code>sourceToContent</code></dt>
+    <dd><code>(html:string, url:string, selStart:integer, selEnd:integer):&nbsp;true|false</code>
       <p>将<i>text</i>字符串设置到content中，并且根据<i>selStart</i>和<i>selEnd</i>设置选择范围;</p>
-    </dd>
-    <dt><code>getContent</code></dt>
+       <p>这个方法将<i>html</i>字符串设置到content中，并且根据<i>selStart</i>和<i>selEnd</i>设置选择内容。</p>
+			<p>这个方法增量更新内容 - 该方法用于从可选的撤销/重做栈中从使用HTML源代码更新时使用;</p></dd>
+    <dt><code>contentToSource</code></dt>
     <dd>
-      <code>() : [string, integer, integer] </code>
+      <code>() : [html:string, selStart:integer, selEnd:integer] </code>
       <p>返回一个有3个元素的数组，包括content和选择范围;</p>
     </dd>
   </dl>

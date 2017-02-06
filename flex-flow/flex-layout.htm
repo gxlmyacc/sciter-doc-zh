@@ -65,22 +65,7 @@
     <li><code>最小内在价值(min-intrinsic)</code> —— 在一些容器中，该值指在相应方向上无需溢出(overflow)渲染时的最小长度。例如：对于设置overflow:auto的元素，它的最小长度为显示时没有滚动条的最小长度。</li>
     <li><code>最大内在价值(max-intrinsic)</code>—— 在一些容器中，该值指所有的子元素显示无需换行时的最小长度。或者说，当某元素的高度为max-intrinsic时，在水平布局(类似<em>rtl</em>/<em>ltr</em>)的系统,或者垂直布局的系统(类似<em>ttb</em>)上，最大内在价值(max-intrinsic)指当该元素的宽度达到最小时的该元素最小高度。</li></ul>
   <p>若为段落<code>&lt;p&gt;first second&lt;/p&gt;</code>设置<code>width:min-intrinsic</code>时，该段落的宽度为该段落中最宽的那个单词的宽度。 若为这个段落设置<code>width:max-intrinsic</code>时，则它的宽度为该段落中所有单词和空格长度的总和——该段落将呈现为单行文本。</p>
-  <h3>2.2. &quot;相对弹性&quot;, <code>fx()</code>函数.</h3>
-  <p><code>fx()</code>函数允许基于一个基准值来定义弹性长度。fx函数有两种格式:</p>
-  <ol>
-    <li><code>fx( &lt;十进制数字&gt; | &lt;百分比&gt; )</code> &nbsp;- 这个格式定义了平(又名&quot;绝对&quot;)弹性值。<code>fx(1)</code>相当于<code>1*</code> &nbsp; <code>fx(50%)</code>相当于<code>0.5*</code>.</li>
-    <li><code>fx( &lt;十进制数字&gt; | &lt;百分比&gt;, &lt;长度&gt; | &lt;百分比&gt; )</code> - 这种格式定义的弹性长度值是基于一个弹性基值。</li></ol>
-  <p>示例: 有两个子元素使用了相对弹性值:</p>
-  <pre>&lt;div#container style=&quot;flow:horizontal; width:440px&quot;&gt;
-  &lt;div#child1 style=&quot;width:fx(1,160px)&quot; /&gt;
-  &lt;div#child1 style=&quot;width:fx(1,80px)&quot; /&gt;
-&lt;/div&gt;
-</pre>
-  <p>它们将会使用以下方式计算出来的长度值来渲染元素：</p>
-  <p><img src="images/relative-flexes.png"/></p>
-  <p>为了计算弹性值，我们从容器的剩余空间中减去了所有基准值，然后分配剩余的空间(又名post-base空间)给各个弹性宽度元素。这个post-base空间值可以为正也可以为负数。如果post-base空间值为负数，则div#child1、div#child2的最终长度将小于它们的基准值,若post-base空间值为正值，则div#child1、div#child2的最终长度将等于它们的基准值。</p>
-  <p><code>fx()</code>函数可以被使用在接受弹性单位的CSS属性中。</p>
-  <h2>3. 流(flow)属性</h2>
+  <h3>3. 流(flow)属性</h3>
   <p>流(flow)属性定义了容器如何布局它的子元素们。或者说，它建立了容器元素的布局管理器。</p>
   <p><a name="propdef-flow" class="propdef-title"><strong>'flow'</strong></a></p>
   <table class="propinfo" cellpadding="0" cellspacing="0">

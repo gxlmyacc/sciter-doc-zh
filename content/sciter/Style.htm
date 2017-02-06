@@ -81,8 +81,8 @@ elem.style.height = ... ;
       <p>唯一的不同是当<em>delayed</em>为<code>true</code>时，该方法会立即改变元素的尺寸，但是该元素的子元素们的重新计算会推迟一段时间。这个方法在你需要频繁响应(如在MOUSE_MOVE中自定义splitter实现时)更新拥有大量子元素<em>overflow:auto | scroll</em>元素尺寸会比较有用。在这种情况下，多个MOUSE_MOVE处理只会重新计算一次元素的内容。</p></dd>
     <dt>documentRules</dt>
     <dd>
-      <div>(<em> </em>[<em>callback</em>: function] [, <em>filter</em>: object ] ) 返回处理的规则数量 (integer)</div>
-      <p>枚举定义的CSS规则和被使用的文档。</p>
+      <div>(<em> </em>[<em>callback</em>: function] [, <em>filter</em>: object ] ) : integer </div>
+      <p>枚举定义的CSS规则和被使用的文档。返回处理的规则数量。</p>
       <p>其中:</p>
       <ul>
         <li><em>callback</em>是一个<code>function( selector, file, lineNo, usageCounter )</code>函数，它接收CSS选择器、文件URL、被应用的html文档中的行号和在documentRules()被调用时html文档中规则的被使用次数。</li>
@@ -94,6 +94,9 @@ elem.style.height = ... ;
           <li><em>properties</em> - <code>function(props:object) : null | object</code> , 属性访问器函数, 这个函数将接受到规则中定义的CSS属性。如果该函数返回一个对象，则属性中的CSS规则将会被更新到对应的CSS规则对象中。</li></ul></ul>
       <p>因此，<em>documentRules</em>函数可以对文档关联的CSS规则表进行检查和应对突变。</p>
 	</dd>
+  <dt>variables</dt>
+  <dd>(  [<i>varsToSet</i>:object] ) : object | undefined
+  <p>该方法获取或设置(如果提供了<i>varsToSet</i>的话)在元素上定义的CSS变量。</p></dd>
    </dl>
 </body>
 </html>

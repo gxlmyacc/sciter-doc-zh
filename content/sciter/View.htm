@@ -106,15 +106,16 @@ view.<u>eventsRoot</u> = null;
       <p>如果<em>clientCoordinates</em>为<em>true</em>，则x、y、<em>width</em>、<em>height</em>被理解成期望的屏幕上客户区域的位置/尺寸。</p></dd>
     <dt>mediaVars</dt>
     <dd>
-      <div><strong>()</strong> : Object</div>
-      <p>返回当前视图的媒体变量。</p>
+      <div><strong>(</strong>[ newVars:object]<strong>)</strong> : Object | undefined</div>
+      <p>如果没有<i>newVars</i>参数，则该方法返回当前视图使用的媒体变量集合。</p>
+			<p>如果<i>newVars</i>参数是一个对象，则该方法将会根据该对象的属性来更新视图中的媒体变量。</p>
     </dd>
     <dt>selectFile</dt>
     <dd>
       <div><strong>(</strong> <em>#save</em> | <em>#open</em>, <em>filter</em>:string , <em>ext</em>: string  [,<em>initialPath</em>:string[, <em>dialogCaption</em>:string]] <strong> ) </strong>: string | null</div>
       <p>该方法显示系统的文件选择模态对话框，并且返回选择文件的全名，如果用户选择了取消则返回null。</p>
       <ul>
-        <li>第一个参数为#save或#load标识符。如果为#save则对话框的标题为<em>保存</em>，如果为#load则对话框的标题为<em>打开</em>。</li>
+        <li>第一个参数为#save或#open标识符。如果为#save则对话框的标题为<em>保存</em>，如果为#open则对话框的标题为<em>打开</em>。</li>
         <li><em>filter</em>为一个字符串 - 为文件过滤器，它需要兴义一个以'|'字符分隔的文件扩展列表。格式：&quot;label1|file.ext1|label2|file.ext1|..&quot; 其中<em>label</em>是该项的显示标签(显示在对话框中的文件类型选择列表中)，file.ext是以';'分隔的文件名列表。</li>
         <li><em>ext</em>是一个字符串 - 默认的文件扩展名，用于用户输入的文件名没有扩展名时。</li>
         <li><em>initialPath</em>是一个字符串 - 默认的初始文件路径，用于设置对话框默认路径。</li>

@@ -39,6 +39,19 @@
       <p>例如, <code>/e?le?/</code>会匹配&quot;angel&quot;中的'el'和&quot;angle.&quot;中的'le'。</p>
       <p>注意：当该字符紧跟在任何一个其他限制符 (*, +, ?, {n}, {n,}, {n,m}) 后面时，匹配模式是非贪婪的。非贪婪模式尽可能少的匹配所搜索的字符串，而默认的贪婪模式则尽可能多的匹配所搜索的字符串。例如，对于字符串 "oooo"，'o+?' 将匹配单个 "o"，而 'o+' 将匹配所有 'o'。</p>
       <p>也用于前瞻断言，如<code>(?=)</code>, <code>(?!)</code>, and <code>(?:)</code>。</p></dd>
+    <dt><code>x{n}</code></dt>
+    <dd>
+      <p>其中n是一个正整数。匹配n次出现的前一项x。</p>
+      <p>比如, /a{2}/ 讲不会匹配&quot;candy&quot;中的&quot;a&quot;, 但是它将匹配&quot;caandy&quot;中出现的所有&quot;a&quot;, 以及&quot;caaandy&quot;中的第一个两个&quot;a&quot;。</p>
+    </dd> 
+    <dt><code>x{n,}</code></dt>
+    <dd>
+      <p>其中n是一个正整数。匹配至少n次出现的前一项x。</p>
+    </dd> 
+    <dt><code>x{n,m}</code></dt>
+    <dd>
+      <p>其中n和m是一个正整数。 匹配至少n次最多m次出现的前一项x。</p>
+    </dd> 
     <dt><code>.</code></dt>
     <dd>
       <p>匹配除"\n"、\r、\u2028、\u2029之外的任何单个字符。要匹配包括 '\n' 在内的任何字符，请使用象 '[.\n]' 的模式。(<code>[\s\S]</code>可以匹配任意字符，包括换行符号)</p>
@@ -59,6 +72,12 @@
     <dd>
       <p>匹配<code><em>x</em></code>并记住这一匹配。这称为捕获括号。</p>
       <p>例如, <code>/(foo)/</code>匹配并记住&quot;foo bar.&quot;中的'foo'。可以从结果数组中使用<code>[1], ..., [n]</code>或者从定义的<code>RegExp</code>对象的<code>$1, ..</code>属性中调用被匹配的字符串。</p></dd>
+    <dt><code>(x?=y)</code></dt>
+    <dd>
+      <p>仅当<i>x</i>后面跟着<i>y</i>时才匹配<i>x</i>。</p></dd>
+    <dt><code>x(?!y)</code></dt>
+    <dd>
+      <p>仅当<i>x</i>后面跟着不是<i>y</i>时才匹配<i>x</i>。</p></dd>   
     <dt><code>x|y</code></dt>
     <dd>
       <p>匹配<code><em>x</em></code>或<code><em>y</em></code>。</p>
@@ -82,7 +101,7 @@
     <dt><code>(?:x)</code></dt>
     <dd>
       <p>匹配x但不获取匹配结果，也就是说这是一个非获取匹配，不进行存储供以后使用。这在使用 "或" 字符 (|) 来组合一个模式的各个部分是很有用。</p>
-      <p>例如，'industr(?:y|ies) 就是一个比 'industry|industries' 更简略的表达式。</p></dd>
+      <p>例如，&apos;industr(?:y|ies) 就是一个比 &apos;industry|industries&apos; 更简略的表达式。</p></dd>
 	<dt><code>(?=x)</code></dt>
     <dd>
       <p>正向预查，在任何匹配x的字符串开始处匹配查找字符串。这是一个非获取匹配，也就是说，该匹配不需要获取供以后使用。</p>
@@ -102,74 +121,33 @@
     <dt><code>\d</code></dt>
     <dd>
       <p>匹配一个数字字符。等价于 [0-9]。</p>
-      <p>例如, <code>/\d/</code>或<code>/[0-9]/</code>匹配&quot;B2 is the suite number&quot;中的'2'。</p></dd>
+      <p>例如, <code>/\d/</code>或<code>/[0-9]/</code>匹配&quot;B2 is the suite number&quot;中的'2'。</p>
+			<p><b>注意:</b> 它与JavaScript中的\d不同的，在JS中，\d仅匹配[0-9]字符。</p></dd>
     <dt><code>\D</code></dt>
     <dd>
       <p>匹配一个非数字字符。等价于 [^0-9]。</p>
       <p>例如, <code>/\D/</code>或<code>/[^0-9]/</code>匹配&quot;B2 is the suite number&quot;中的'B'。</p></dd>
-    <dt><code>\m</code></dt>
-    <dd>
-      <p>匹配一个字母或数字字符。</p></dd>
-    <dt><code>\M</code></dt>
-    <dd>
-      <p>>匹配一个非字母且非数字的字符。</p></dd>
     <dt><code>\a</code></dt>
     <dd>
       <p>匹配一个字母字符。</p></dd>
     <dt><code>\A</code></dt>
     <dd>
       <p>匹配一个非字母字符。</p></dd>
-    <dt><code>\c</code></dt>
+    <dt><code>\w</code></dt>
     <dd>
-      <p>匹配一个控制字符。</p>
-	  <p>例如, \cM 匹配一个 Control-M 或回车符。x 的值必须为 A-Z 或 a-z 之一。否则，将c视为一个原义的'c'字符。</p></dd>
-    <dt><code>\C</code></dt>
+      <p>匹配任意来自字母表的字母和数字字符。</p>
+			<p><b>注意:</b> 它与JavaScript中的不同，在JS中\w仅匹配ASCII字符和数字。</p></dd>
+    <dt><code>\W</code></dt>
     <dd>
-      <p>匹配一个非控制字符。</p></dd>
-    <dt><code>\g</code></dt>
-    <dd>
-      <p>匹配一个有图形表示的字符。</p></dd>
-    <dt><code>\G</code></dt>
-    <dd>
-      <p>匹配一个没有图形表示的字符。</p></dd>
-    <dt><code>\p</code></dt>
-    <dd>
-      <p>匹配一个可打印的字符或空格。</p></dd>
-    <dt><code>\P</code></dt>
-    <dd>
-      <p>匹配一个不可打印且非空格字符。</p></dd>
-    <dt><code>\l</code></dt>
-    <dd>
-      <p>匹配一个小写字符。</p></dd>
-    <dt><code>\L</code></dt>
-    <dd>
-      <p>匹配一个非小写字符。</p></dd>
-    <dt><code>\u</code></dt>
-    <dd>
-      <p>匹配一个大写字符。</p></dd>
-    <dt><code>\U</code></dt>
-    <dd>
-      <p>匹配一个非大写字符。</p></dd>
-    <dt><code>\n</code></dt>
-    <dd>
-      <p>匹配一个标点字符。</p></dd>
-    <dt><code>\N</code></dt>
-    <dd>
-      <p>匹配一个非标点字符。</p></dd>
+      <p>匹配任意非来自字母表的字母和数字字符。</p></dd>    
     <dt><code>\s</code></dt>
     <dd>
-      <p>匹配一个空格字符。</p></dd>
+      <p>匹配任意来自字母表的空白字符。</p></dd>
     <dt><code>\S</code></dt>
     <dd>
-      <p>匹配一个非空格字符。</p></dd>
-    <dt><code>\x</code></dt>
-    <dd>
-      <p>匹配一个二进制字符。</p></dd>
-    <dt><code>\X</code></dt>
-    <dd>
-      <p>匹配一个非二进制字符。</p></dd></dl>
-  <dl>
+      <p>匹配非任意来自字母表的空白字符。</p></dd></dl>
     <h2>属性</h2>
+    <dl>
     <dt>length</dt>
     <dd>- <em>integer</em>, 在最后一次调用<em>exec</em>或<em>match</em>方法后的匹配数量。</dd>
     <dt>input</dt>

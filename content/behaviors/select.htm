@@ -51,14 +51,18 @@
   <ul>
     <li><code>size=integer</code> - 列表中可见元素的数量。注意：select元素的高度可以被CSS覆盖掉。</li>
     <li><code>name=&quot;name&quot;</code> - 标准的<em>name</em>属性 - from表单上一个input元素的名称。</li>
-    <li><code>novalue=&quot;text&quot;</code> - 如果select中没有使用<code>&lt;option selected&gt;</code>初始化它，则将会使用该显示该文本。</li></ul>
+    <li><code>novalue=&quot;text&quot;</code> - 如果select中没有使用<code>&lt;option selected&gt;</code>初始化它，则将会使用该显示该文本。</li>
+    <li><code>options</code> - 一个<code>&lt;option&gt;</code>列表的引用, 在这种场景中，this是元素本身。</li></ul>
   <h2>事件</h2>
   <p>除了标准事件集(鼠标、按键、聚焦)外，该行为还生成:</p>
   <ul>
-    <li>SELECT_SELECTION_CHANGED event, 当修改select中的选择项(在一个option上点击)时产生该事件。该事件为异步事件。</li>
-    <li>SELECT_SELECTION_CHANGING event, 当选择项将要改变时生成该事件。该事件为同步事件。</li></ul>
+    <li><code>SELECT_SELECTION_CHANGED</code> event, 当修改select中的选择项(在一个option上点击)时产生该事件。该事件为异步事件。</li>
+    <li><code>SELECT_SELECTION_CHANGING</code> event, 当选择项将要改变时生成该事件。该事件为同步事件。</li></ul>
   <h2>方法</h2>
   <p>N/A - 该行为没有引入任何特有的方法。</p>
+	<h2>命令</h2>
+	<p>注意: 命令时通过调用<code>element.execCommand(&quot;cmd-name&quot;[,params])</code>方法执行的。</p>
+	<ul><li><b>&quot;set-current&quot;</b> - 当该命令发送给一个select内部的<code>&lt;option&gt;</code>元素时，该option将被设置为当前元素;</li></ul>
   <h2>value</h2>
   <p>any, 读/写属性。选择项(option)的值(value)。option的值是它的value属性或它的文本内容(如果未定义value属性时)。</p>
   <h2>在脚本中选择项修改的处理</h2>

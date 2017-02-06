@@ -55,6 +55,9 @@
   <ul>
     <li>SELECT_SELECTION_CHANGED 事件, 当修改select中的选择项(在一个option上点击)时产生该事件。该事件为异步事件。</li>
     <li>SELECT_SELECTION_CHANGING 事件, 当选择项将要改变时生成该事件。该事件为同步事件。</li></ul>
+	<h2>命令</h2>
+	<p>注意: 命令时通过调用<code>element.execCommand(&quot;cmd-name&quot;[,params])</code>方法执行的。</p>
+	<ul><li><b>&quot;set-current&quot;</b> - 当该命令发送给一个select内部的<code>&lt;option&gt;</code>元素时，该option将被设置为当前元素;</li></ul>
   <h2>方法</h2>
   <p>N/A - 该行为没有引入任何特有的方法。</p>
   <h2>value</h2>
