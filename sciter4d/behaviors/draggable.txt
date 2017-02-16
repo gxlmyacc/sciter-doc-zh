@@ -1,0 +1,37 @@
+  BEHAVIOR: draggable
+     goal: 元素可拖动行为
+  引用：
+     在CSS中添加 { behavior: draggable; }
+  VIEWS:
+      ________________________________________________
+     |     _________________________                 |
+     |    |    容器元素            |                 |
+     |    |    _____________       |                 |
+     |    |   |            |       |     body        |
+     |    |   | 可拖动元素 |       |                 |
+     |    |   |____________|       |                 |
+     |    |________________________|                 |
+     |_______________________________________________|
+  COMMENTS:
+      <html>
+        <body>
+          <div.container style="positon:relative|absolute|fixed;">
+            <div style="behavior:draggable" draggable="both|horizontal|vertical" drag-margin="5 5 5 5" dragmode="auto|attached-window|detached-window" />
+          </div>
+      </html>
+  NOTE:
+    1、【可拖动元素】可以在【容器元素】内部被鼠标拖动来移动位置；
+    2、【可拖动元素】可以通过【draggable】属性来设置允许拖动的方向：
+         both:        双向拖动
+         horizontal:  横向拖动
+         vertical:    纵向拖动
+    3、【可拖动元素】可以通过【drag-margin】属性来设置在【容器元素】中被拖动的最大范围，格式为【上 右 下 左】；
+         比如【drag-margin="5 5 5 5"】的含义是：【可拖动元素】可在由【容器元素】的边界距离5像素的位置组成的矩形内拖动；
+    4、【容器元素】指包含【可拖动元素】，且它的样式中包含【positon:relative|absolute|fixed;】的元素，
+         如果没有这样的元素，则【容器元素】为网页的根元素,即HTML元素。
+    5、【可拖动元素】中的dragmode属性指定拖动模式，支持以下模式：
+         空:                      通过移动元素的left和top属性来拖动元素
+         auto:                    如果元素移动到视图外面将会创建窗口。如果元素在视图内则它会被渲染为popup:fixed
+         attached-window:         强制引擎为该元素创建一个弹出窗口。该窗口和它的宿主窗口(视图)是同步移动的
+         detached-window:         强制引擎为该元素创建弹出窗口，该元素的窗口位置独立于它的宿主窗口
+         detached-topmost-window: 与#detached-window相同，不过是创建在最顶窗口层上。 

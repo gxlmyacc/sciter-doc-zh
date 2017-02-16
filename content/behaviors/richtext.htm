@@ -40,7 +40,6 @@
     <li>EDIT_VALUE_CHANGED 事件 - 由于用户的操作导致元素的值被改变事件。异步事件。</li>
     <li>EDIT_VALUE_CHANGING 事件 - 当元素的值将要改变之前被触发。同步事件。</li></ul>
   <h2>值</h2>
-  <p>string, 反应编辑缓冲区的当前状态。</p>
   <p>string, 反应DOM内容的当前状态- value可以获取/设置当前HTML的内容; 对于富文本DOM元素，<i>value</i>属性是<i>html</i>属性的别名。</p>
   <h2>特有的快捷键组合</h2>
   <ul>
@@ -56,6 +55,45 @@
     <li>CTRL+V</li>
     <li>CTRL+Z</li>
     <li>CTRL+(LEFT)SHIFT 和 CTRL+(RIGHT)SHIFT - 这两个快捷键在形式上相当于在<code>dir</code>属性上切换<code>dir=&quot;ltr&quot;</code>和<code>dir=&quot;rtl&quot;</code>。</li></ul>
+	<h2>命令</h2>
+	<p><code>htmlarea.execCommand(command,attributes)</code>麻烦执行科撤销的编辑命令。<em>command</em>参数指示要执行的命令。</p>
+  <p>编辑命令对所有可编辑元素都是通用的( &lt;input|text&gt;, &lt;textarea&gt;, &lt;plaintext&gt;, &lt;htmlarea&gt; ):</p>
+  <ul>
+    <li><code>&quot;edit:cut&quot;</code> - 剪切选择内容 - 复制选择内容到剪切板并移除它;</li>
+    <li><code>&quot;edit:copy&quot;</code> - 复制选择内容到剪切板;</li>
+    <li><code>&quot;edit:paste&quot;</code> - 粘贴剪切板中的内容;</li>
+    <li><code>&quot;edit:selectall&quot;</code> - 选择当前元素的所有内容;</li>
+    <li><code>&quot;edit:undo&quot;</code> - 撤销最近一次编辑操作;</li>
+    <li><code>&quot;edit:redo&quot;</code> - 重做最近一次撤销的操作;</li>
+    <li><code>&quot;edit:delete-next&quot;</code> - 如果有选择内容，则删除选择内容, 否则删除下一个字符;</li>
+    <li><code>&quot;edit:delete-prev&quot;</code> - 如果有选择内容，则删除选择内容, 否则删除上一个字符;</li>
+    <li><code>&quot;edit:delete-word-next&quot;</code> - 如果有选择内容，则删除选择内容, 否则删除下一个单词;</li>
+    <li><code>&quot;edit:delete-word-prev&quot;</code> - 如果有选择内容，则删除选择内容, 否则删除上一个单词;</li>
+  </ul>
+  <p><code>behavior:richtext</code> ( <code>&lt;htmlarea&gt;</code> )特有的命令:</p>
+  <ul>
+    <li><code>&quot;edit:insert-break&quot;</code> - 本质上它是一个&quot;ENTER&quot; (VK_RETURN) 命令, 具体的DOM操作取决于上下文;</li>
+    <li><code>&quot;edit:insert-soft-break&quot;</code> - &quot;SHIFT+ENTER&quot;命令, 插入一个<code>&lt;br&gt;</code>分隔符，并且具体的DOM操作取决于上下文;</li>
+    <li><code>&quot;format:apply-span:{tag-list}&quot;</code> - 包装选择内容到一个span元素中, 如果选择内容包含以下标签，则它们将被移除：
+    <ul>
+        <li><code>{tag-list}</code>时一个以管道符(<code>|</code>)分隔的标签名列表。比如:<br/>
+            <code>execCommand(&quot;format:apply-span:b|strong&quot;)</code> - 将包装选择内容到<code>&lt;b&gt;...&lt;/b&gt;</code>，并且从选择内容中移除所有的<code>&lt;b&gt;</code>和<code>&lt;strong&gt;</code>元素。</li>
+        <li>另外可以添加一个参数用来包含添加到包装元素上的属性映射表, 比如:<br/>
+            <code>execCommand(&quot;format:apply-span:font&quot;,{color:&quot;#F00&quot;})</code> - 将包装选择内容到<code>&lt;font color=&quot;#F00&quot;&gt;...&lt;/font&gt;</code>元素上。</li>
+      </ul>
+    </li>
+    <li><code>&quot;format:toggle-span:{tag-list}&quot;</code> - 如果选择内容包含tag-list中的标签则移除它, 否则它相当于做了<code>&quot;format:apply-span:...&quot;</code>命令。</li>
+    <li><code>&quot;format:toggle-list:{list-tag}&quot;</code> - 转换选择内容中的段落到一个列表中。如果选择内容已经是一个指定的列表类型，则列表中的项将转换成一个简单的段落。
+        <ul>
+          <li><code>{list-tag}</code>可以是<code>ul</code>, <code>ol</code> 或 <code>dl</code>。</li>
+        </ul>
+    </li>
+    <li><code>&quot;format:toggle-pre&quot;</code> - 转换选择内容到<code>&lt;pre&gt;</code>块中，或移除<code>&lt;pre&gt;</code>。</li>
+    <li><code>&quot;format:indent&quot;</code> - 保存选择的段落到<code>&lt;blockquote&gt;</code> 或 sub-list。</li>
+    <li><code>&quot;format:unindent&quot;</code> - 将选择内容从<code>&lt;blockquote&gt;</code>中卸载，或移动子列表到上一层级。</li>
+    <li><code>&quot;format:morph-block:{tag}&quot;</code> - 改变选择块内容的标签。比如可以通过它将当前的<code>&lt;blockquote&gt;</code>标签改成<code>&lt;div&gt;</code>。</li>
+  <li><code>&quot;format:unwrap-element:{tag}&quot;</code> - 将元素的内容移到它的父元素中，并且从DOM中移除该元素。</li>
+  </ul>
   <h2>方法</h2>
   <dl>
     <dt><code>loadDocument</code></dt>

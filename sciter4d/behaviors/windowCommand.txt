@@ -1,0 +1,35 @@
+  BEHAVIOR: windowCommand
+     goal: 窗口行为(最大化、最小化、标题拖动等)的实现
+  引用：
+     在CSS中添加 { behavior: windowCommand; }
+  VIEWS:
+     -------------------------------------------------
+     | caption         | min | max | restore | close |
+     -------------------------------------------------
+     |                                               |
+     |                     客户区                    |
+     |                                               |
+     |_______________________________________________|
+  COMMENTS:
+      <html>
+        <body style="behavior:windowCommand">
+          <div.header command="window-caption">
+            <span.min command="window-min">最小化</span>
+            <span.max command="window-max ">最大化</span>
+            <span.restore command="window-restore">还原</span>
+            <span.close command="window-close">关闭</span>
+          </div>
+          <div.client>
+          </div>
+        </body>
+      </html>
+  NOTE:
+     1、如果某元素指定了windowCommand行为，该行为将在该元素内查找有command属性的元素，不同的command值代表不同的含义：
+          -command:window-min      //最小化 按钮
+          -command:window-max      //最大化 按钮
+          -command:window-restore  //还原   按钮
+          -command:window-close    //关闭   按钮
+          -command:window-caption  //允许拖动,节点可指定command但不是此属性禁止拖动
+    2、 【最大化】和【还原】按钮都需要在网页中定义，该行为会负责对这两个按钮的显隐控制；
+    3、在【command=window-caption】的元素内部，只要不是其他command命令元素上，按下鼠标时可以拖动窗口；
+    4、如果在【command=window-caption】的元素内部的某个元素上要求不能拖动窗口，需要在关元素上添加【command=no-window-caption】;

@@ -145,7 +145,7 @@
     <dd>当元素的可见性(<code>display</code>/<code>visibility</code> CSS属性)修改时触发该事件。该事件之后发送给该元素本身(不会进行冒泡)。</dd>
     <dt>DISABLED_STATUS_CHANGED</dt>
     <dd>当元素或者它的容器元素修改了它的禁用(disabled)状态是触发。</dd>
-    <dt>REQUEST_TOOLTIP</dt>
+    <dt>TOOLTIP_REQUEST</dt>
     <dd>气泡提示的请求，该事件是在鼠标空闲(MOUSE_IDLE)期间触发的。<em>evt.source</em>中的元素是将要显示的气泡提示元素。你可以设置你自己的DOM元素到<em>evt.source</em>字段。若要取消其他提示，请设置<em>evt.source</em>为<em>null</em>，且事件处理函数返回<em>true</em>。</dd>
     <dt>DOCUMENT_COMPLETE</dt>
     <dd>当文档加载完成后触发——所有的外部资源加载完毕。<em>evt.target</em>为文档的根节点( <code>&lt;html&gt;</code> )。注意：即使某些外部资源未获取到最终也会触发该事件。那些未获取到资源的元素会在状态标识位中设置<code>:incomplete</code>标识。</dd>
@@ -351,6 +351,8 @@ VK_F20      VK_F21      VK_F22      VK_F23      VK_F24
     <dd>- Event.POPUP_READY, 当popup元素创建的最后一阶段被触发, 这时弹出窗口已经被创建。 event.source 为弹出popup元素。</dd>
     <dt>&quot;popupdismissed&quot;</dt>
     <dd>- Event.POPUP_DISMISSED, 这个事件在弹出窗口从屏幕上移除后被触发。</dd>
+		<dt>&quot;tooltiprequest&quot;</dt>
+		<dd>- Event.TOOLTIP_REQUEST, 该事件用于响应Event.MOUSE_IDLE。</dd>
     <dt>&quot;close&quot;</dt>
     <dd>- Event.DOCUMENT_CLOSE, 这个事件在文档从它的容器(view或frame)中移除时被触发。仅文档元素和它的容器可以接收这个事件。</dd>
     <dt>&quot;closerequest&quot;</dt>

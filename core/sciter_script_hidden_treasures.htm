@@ -1,0 +1,17 @@
+﻿<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Sciter脚本隐藏特性</title>
+	</head>
+	<body>
+		<h1 class="article-title">Sciter脚本隐藏特性</h1>
+		<p>在脚本中，有一个<code>otherwise</code>关键字，它用在循环语句中，比如:</p>
+<pre>var emptyArr = [];
+for(var el in emptyArr)
+  stdout.println(el);
+otherwise
+  stdout.println("nothing seen, array is empty!");</pre>
+<p>上面的代码执行后将输出：<code>nothing seen, array is empty!</code>。</p>
+<p>当循环体未执行时，循环语句(块)之后的<code>otherwise</code>语句将被执行。</p>
+	</body>
+</html>
