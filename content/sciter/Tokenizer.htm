@@ -75,6 +75,32 @@
           <li><strong>#OPERATOR</strong> - 解析到&quot;操作符&quot; 如: <code>:!%+-/*;</code> ,等。</li>
           <li><strong>#O-PAREN</strong> 和 <strong>#C-PAREN</strong> - 当遇到<code>(</code> 或 <code>)</code> 时。</li>
           <li><strong>#ERROR</strong> - 基础语法错误，例如未关闭的字符串。</li>
-          <li><strong>#END-OF-ISLAND</strong> - 当被压栈的tokeinizer获取到<em>until </em>参数指定的字符序列时。</li></ul></ul></dd></dl>
+          <li><strong>#END-OF-ISLAND</strong> - 当被压栈的tokeinizer获取到<em>until </em>参数指定的字符序列时。</li></ul></ul></dd>
+    <dt>elementType</dt>
+		<dd>( tag: string ) : (elementType, contentModelType, parsingType)
+      <p>这个静态方法返回sciter默认已知的HTML标记元素类型。</p>
+			<p><i>elementType</i>是以下值之一:</p>	
+			<pre>const UNKNOWN_TAG = 0;      // 未知 
+const INLINE_BLOCK_TAG = 1; // &lt;img&gt;, &lt;input&gt; ...
+const BLOCK_TAG = 2;        // &lt;div&gt;,&lt;ul&gt;,&lt;p&gt; ... 
+const INLINE_TAG = 3;       // &lt;span&gt;,&lt;b&gt;,&lt;strong&gt; ...
+const TABLE_TAG = 4;        // &lt;table&gt;
+const TABLE_BODY_TAG = 5;   // &lt;thead&gt;,&lt;tbody&gt;,&lt;tfoot&gt;
+const TABLE_ROW_TAG = 6;    // &lt;tr&gt;
+const TABLE_CELL_TAG = 7;   // &lt;td&gt;,&lt;th&gt;
+const INFO_TAG = 8;         // &lt;link&gt;,&lt;style&gt;,&lt;head&gt; ...  
+</pre>
+      <p><i>contentModelType</i>描述该元素内蒙被允许存在的内容类型:</p>
+			<pre>const CMODEL_BLOCKS = 0;      // 流元素 - 块和内联元素: &lt;div&gt;
+const CMODEL_INLINES = 1;     // 段落元素 - inlines: &lt;p&gt;
+const CMODEL_TRANSPARENT = 2; // &lt;del&gt;, &lt;a&gt;, etc. 
+const CMODEL_TEXT = 3;        // 仅文本: &lt;title&gt; 
+const CMODEL_TABLE = 4;       // 仅表格组件元素
+</pre>
+      <p><i>parsingType</i> 描述HTML解析结果:</p>
+			<pre>const PMODEL_NORMAL = 0;  // 正常的头/为: &lt;div&gt;&lt;/div&gt; ...
+const PMODEL_NO_TAIL = 1; // 没有尾: &lt;img&gt;, &lt;br&gt;, &lt;hr&gt; ...
+const PMODEL_CDATA = 2;   // 头/尾, 已知包含CDATA: &lt;script&gt;,&lt;style&gt;,...
+</pre></dd></dl>
 </body>
 </html>

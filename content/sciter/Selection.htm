@@ -3,7 +3,7 @@
     <meta name="generator" content="h-smile:richtext"/>
   </head>
 <body>
-  <h1>选择(Selection)对象</h1>
+  <h1 id="selection">选择(Selection)对象</h1>
   <p>代表<a href="Element.htm">元素</a>中的选择文本(块)。目前，指定了htmlarea、richtext行为的元素支持选择。</p>
   <p>为了访问元素的选择对象，请使用它的<em>selection</em>属性：element.selection。</p>
   <dl>
@@ -18,16 +18,16 @@
       <dd><em>true</em> | <em>false</em>, 只读。 当选择只有光标时为true——即selection.start == selection.end。</dd>
     
       <dt>anchor</dt>
-      <dd><em>null | bookmark</em>, 只读。 选择内容的锚点的DOM位置。</dd>
+      <dd><em>null | </em><a href="#bookmark">bookmark</a>, 只读。 选择内容的锚点的DOM位置。</dd>
     
       <dt>caret</dt>
-      <dd><em>null | bookmark</em>, 只读。 选择内容的光标的DOM位置。</dd>
+      <dd><em>null | </em><a href="#bookmark">bookmark</a>, 只读。 选择内容的光标的DOM位置。</dd>
     
       <dt>start</dt>
-      <dd><em>null | bookmark</em>, 只读。 选择内容的光标或锚点的DOM位置。以在DOM中顺序较小者为准。</dd>
+      <dd><em>null | </em><a href="#bookmark">bookmark</a>, 只读。 选择内容的光标或锚点的DOM位置。以在DOM中顺序较小者为准。</dd>
     
       <dt>end</dt>
-      <dd><em>null | bookmark</em>, 只读。 选择内容的光标或锚点的DOM位置。以在DOM中顺序较大者为准。</dd>
+      <dd><em>null | </em><a href="#bookmark">bookmark</a>, 只读。 选择内容的光标或锚点的DOM位置。以在DOM中顺序较大者为准。</dd>
     
       <dt>text</dt>
       <dd><em>string</em>, 只读。 寻找内容中包含的文本。</dd>
@@ -93,7 +93,7 @@
 	  </dd>
 	</dl>
 
-  <h3 name="bookmark">书签</h3>
+  <h3 id="bookmark">书签</h3>
   <p>上面的一些方法使用到了叫做书签(bookmark)的对象，它是一个有#bookmark标签的数组(长度为3)。通常，你需要先从上面的各个属性或方法中获取书签，不过书签也可以使用下面的语句创建：</p>
   <pre>var bm = [bookmark: node, index, after];
 </pre>

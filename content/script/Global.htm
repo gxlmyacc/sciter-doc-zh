@@ -27,7 +27,8 @@
 </pre>
       <p><em>obj</em>变量将会包含一个对象，它有两个字段: <em>one</em>和<em>two</em>。</p>
       <p><em>env</em>是一个环境对象 - 如果该参数被提供，则脚本在该对象的名称空间中执行。</p>
-      <pre>var env = { one:1, two:2 };<br/>var res = eval( <font color="#990099">&quot;one + two&quot;, </font>env);
+      <pre>var env = { one:1, two:2 };
+var res = eval( <font color="#990099">&quot;one + two&quot;, </font>env);
 </pre>
       <div>在上面两行代码执行后，<em>res</em>的值将为整数3。</div>
       <p class="note">要使用这些函数，需要宿主程序配置了引擎可以使用它们。</p></dd>
@@ -153,5 +154,45 @@ for(var (k,v) in Foo )
     <dt>JSON.parse</dt>
     <dd>(<strong>text</strong>:string[, <strong>reviver</strong>]) : value
       <p>解析JSON字符串为一个JSON对象。<em>reviver</em>是一个<code>function (key, value): value</code>或<code>function (key, value): (key,value</code>)函数 - 该函数可以将被转换的键值替换为另一个值或key/value对。</p></dd></dl>
+	<h2>URL namespace</h2>
+	<p>宜兴用于URL的函数:</p>
+	<dl><dt>URL.parse</dt>
+		<dd>(<b>url</b>:string) : object
+      <p>该函数解析url，并返回一个URL分量组成的对象:</p>
+      <ul>
+        <li><em>port</em> - integer, tcp/ip 端口号;</li>
+        <li><em>protocol</em> - string, 协议，比如&quot;http&quot;, &quot;file&quot;, 等;</li>
+        <li><em>hostname</em> - string, 域名;</li>
+        <li><em>anchor</em> - string, 锚点;</li>
+        <li><em>username</em> - string;</li>
+        <li><em>password</em> - string;</li>
+        <li><em>params</em> - string, http GET请求参数</li>
+        <li><em>dir</em> - string, 目录</li>
+        <li><em>name</em> - string, 文件名(无扩展名)</li>
+        <li><em>ext</em> - string, 扩展名</li>
+        <li><em>name_ext</em> - string, 文件名(有扩展名)</li></ul>
+			</dd>
+    <dt>URL.relative</dt>
+		<dd>(<b>url</b>: string, <b>baseUrl</b>:string) : string
+      <p>返回相对于<i>baseUrl</i>的<i>url</i>，比如，如果:</p>
+			<ul>
+        <li>baseUrl:<code>http://example.com/foo/bar.htm</code>  and</li>
+        <li>url :<code>http://example.com/zar/laf.htm#location</code></li>
+				</ul>
+			<p>这该函数返回<code>../zar/laf.htm#location</code></p>
+			
+			</dd>
+    <dt>URL.absolute</dt>
+		<dd>( <b>relUrl</b>: string, <b>baseUrl</b>: string ) : string
+    <p>该函数拼接相对URL与基URL。</p></dd>
+    <dt>URL.encode</dt>
+		<dd>( str: string ) : string
+    <p>该函数对所有非url字符进行编码, 比如空白字符将表示为<code>%20</code>。/p></dd>
+    <dt>URL.encodeParam</dt>
+		<dd>( str: string ) : string
+    <p>该函数将编码所有字符，除了以下字符: 字母, 数字, <code>- _ . ! ~ * &#x27; ( )</code></p></dd>
+    <dt>URL.decode</dt>
+		<dd>( str: string&nbsp;) : string
+    <p>该函数对URL字符串进行解码。</p></dd></dl><p></p>
 </body>
 </html>

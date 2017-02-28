@@ -109,9 +109,9 @@
     <dt>selection</dt>
     <dd><font color="#999999">只读</font> - <em>null | Selection</em>, 若该元素支持选择的行为(如htmlarea、richtext)时返回<a href="selection.htm">Selection</a>对象，否则返回<em>null</em></dd>
     <dt>firstCaretPos</dt>
-    <dd><font color="#999999">只读</font> - <em>null | bookmark</em>, 返回元素内第一个插入位置(光标)的书签。</dd>
+    <dd><font color="#999999">只读</font> - <em>null | bookmark</em><a href="Selection.htm#bookmark">bookmark</a>, 返回元素内第一个插入位置(光标)的书签。</dd>
     <dt>lastCaretPos</dt>
-    <dd><font color="#999999">只读</font> - <em>null | bookmark</em>, 返回元素内最后一个插入位置(光标)的书签。</dd>
+    <dd><font color="#999999">只读</font> - <em>null | bookmark</em><a href="Selection.htm#bookmark">bookmark</a>, 返回元素内最后一个插入位置(光标)的书签。</dd>
     <dt>paintBackground</dt>
     <dd><font color="#999999">只写</font> - <em>null | </em>function(gfx), 设置背景层的绘制函数。该函数能获取到绘制该层的Graphics对象。如果函数返回<em>true</em>时则默认的背景和边框绘制将不会再绘制。背景绘制函数是在本地绘制之<strong>前</strong>调用。</dd>
     <dt>paintContent</dt>
@@ -428,6 +428,9 @@ el.$content(This is item number <b>{ num }</b>);
       <div>( .. html .. ) : Element</div>
       <p>Stringizer方法，将该元素从DOM中移除并且将html替换到当前位置。</p>
       <p>该方法返回第一个添加的元素。</p></dd>
+		<dt>nodes</dt>
+		<dd><div>( ) : Array</div>
+    <p>该方法创建一个数组并将子元素列表添加到该数组中。其中，文本和注释节点是<a href="Node.htm#node">Node</a>对象，DOM元素是Element对象实例。</p></dd>
     <dt>detach</dt>
     <dd>
       <div><strong>( ) </strong>: Element</div>
