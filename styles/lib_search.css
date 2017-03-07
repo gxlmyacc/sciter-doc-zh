@@ -1,0 +1,29 @@
+::mark(hilite) { background-color: lime; }
+::mark(hiactual) { background-color: blue; }
+
+#search-box
+{
+  position: fixed;
+  right: 40px;
+  height: 24px;
+  background-color: white;
+  border-radius: 3px;
+  padding: 9px;
+  border: solid 1px gray;
+  flow: horizontal;
+  vertical-align: middle;
+
+  bottom: 0px;
+  transition: bottom(linear, 200ms);
+}
+#search-box > .search-input { height: 18px; margin-right: 3px; }
+#search-box > .search-input[reddish] { background: #ff6666; color: white; }
+#search-box:disabled { bottom: -50px; }
+
+#search-box > .btn-seek-prev { font-family:webdings; font-size: 14px; border: 1px solid white; }
+#search-box > .btn-seek-next { font-family:webdings; font-size: 14px; border: 1px solid white;}
+#search-box > .btn-close { font-family:webdings; font-size: 14px; border: 1px solid white; border-radius: 3px;}
+#search-box > .btn-seek-prev:hover {  border-color: #3298FE;  background-color: #E8F3FE; }
+#search-box > .btn-seek-next:hover {  border-color: #3298FE;  background-color: #E8F3FE; }
+#search-box > .btn-close:hover {  background-color: #D24545; color: white; }
+#search-box > .btn-close:active { background-color: #A72C2C; color: white; }

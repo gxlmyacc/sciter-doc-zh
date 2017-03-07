@@ -27,7 +27,7 @@ function makeToc( content, list )
   
   function showTree(tree)
   {
-	last_tree = tree;
+	  last_tree = tree;
 
     list.clear();
     for(var sect in tree)

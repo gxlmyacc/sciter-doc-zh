@@ -3,21 +3,24 @@
   <title>Sciter 帮助</title>
   <style>
     @import url(styles/main.css);
+    @import url(styles/lib_search.css);
   </style>
   <script type="text/tiscript">
-    include "toc.tis";
-    include "indexer.tis";
+    include "scripts/toc.tis";
+    include "scripts/indexer.tis";
+    include "scripts/lib_search.tis";
     var back      = self.$(#toolbar>button.back);
     var forward   = self.$(#toolbar>button.forward);
     var frameset  = self.$(frameset#body);
     var contentFrame = self.$(frame#content);
     var toc = self.$(#toc);
+    var firstLoad = true;
     back.onClick    = :: frameset.goBack();  
     forward.onClick = :: frameset.goForward();  
 
     function generateToc()
     {
-      var cbody = contentFrame[0].$(body);
+      var cbody = contentFrame[0] && contentFrame[0].$(body);
       if( cbody ) makeToc(cbody,toc);
       else toc.clear();
     }
@@ -35,12 +38,15 @@
     contentFrame.onControlEvent = function(evt)
     {
       if( evt.type == Event.DOCUMENT_COMPLETE )
-	  {
-		  generateToc();
-		  if(afterTocEvent)
-			afterTocEvent();
-		  afterTocEvent = undefined;
-	  }
+      {
+        if (firstLoad) {
+          firstLoad = false;
+          generateToc();
+        }
+        if(afterTocEvent)
+        afterTocEvent();
+        afterTocEvent = undefined;
+      }
         
       else if(evt.type == (Event.HYPERLINK_CLICK | Event.SINKING))
       {
@@ -77,7 +83,7 @@
       </include>
     </div>
     <splitter/>
-    <frame #content src="" src="content/preface.htm" content-style="styles/content.css"/>
+    <frame .search_target #content src="" src="content/preface.htm" content-style="styles/content.css"/>
     <splitter/>    
     <div #toc />
   </frameset>

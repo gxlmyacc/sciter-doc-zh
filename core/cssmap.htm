@@ -2454,13 +2454,13 @@
        </div> 
        <div>
         定义修改元素状态时的过渡效果。例如:
-       </div> <p>.mybutton:hover { color: red; <em>transition:blend</em> }</p> 
-       <div>
-        将会通过不断地融合(混合)原始状态和悬停状态来实现过渡效果。
        </div> 
-       <div>
-        当前，transition仅支持block、inline-block元素和table元素。
-       </div></td>
+       <p>.mybutton:hover { color: red; <em>transition:blend</em> }</p> 
+       <p>.mybutton:hover { color: red; <em>transition: width(linear,0.5s)</em> }</p>
+       <p>将会通过不断地融合(混合)原始状态和悬停状态来实现过渡效果。</p> 
+       <p>当前，transition仅支持block、inline-block元素和table元素。cubic-in、cubic-out、cubic-in-out、</p>
+       <p>当前，transition指定的过渡函数有：linear、quad-in、quad-out、quad-in-out、quart-in、quart-out、quart-in-out、quint-in、quint-out、quint-in-out、sine-in、sine-out、sine-in-out、expo-in、expo-out、expo-in-out、circ-in、circ-out、circ-in-out、elastic-in、elastic-out、elastic-in-out、back-in、back-out、back-in-out、bounce-in、bounce-out、bounce-in-out。</p>
+      </td>
      </tr> 
      <tr> 
       <td rowspan="2" valign="top"> 

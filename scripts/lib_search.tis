@@ -1,0 +1,233 @@
+// Find search target: first element with .search_target class
+var el_search_target = $(.search_target);
+assert(el_search_target);
+
+// create the #search-box element
+self.$append(
+   <div #search-box disabled>
+    <label>搜索：</label><input.search-input />
+    <div.btn-seek-prev>3</div>
+    <div.btn-seek-next>4</div>
+    <div.btn-close>r</div>
+  </div>
+  );
+
+// Private
+var arr_marks = [];
+var actual_needle;
+var actual_mark_idx;
+
+function InternalReset()
+{
+  actual_needle = undefined;
+  actual_mark_idx = 0;
+  
+  //this method is faster but have problem with <frames>
+  if(arr_marks)
+  {
+    for(var v in arr_marks)
+      Selection.clearMark(v[0], v[1], undefined);
+  }
+
+  // optionally use the method bellow, but it is slow, be aware
+  //Selection.clearMark(self.firstCaretPos, self.lastCaretPos, undefined);
+
+  arr_marks = [];
+}
+
+function InternalShowCurrent()
+{
+  assert(arr_marks.length);
+
+  var mark = arr_marks[actual_mark_idx];
+  Selection.applyMark(mark[0], mark[1], "hiactual");
+
+  var nd = mark[0][0];
+  var el = nd.isElement ? nd : nd.parent;
+  assert(typeof el == #Element);
+
+  el.scrollToView(false, true);
+}
+
+// Public interface
+function DoSearch()
+{
+  var needle = $(#search-box input).value
+  needle = needle.toLowerCase();
+
+//  console.time();
+  InternalReset();
+//  console.timeEnd();
+    
+  function SearchTextNode(nd)
+  {      
+    var txt = nd.text.toLowerCase();
+    var isearch = 0;
+    while(true)
+    {
+      isearch = txt.indexOf(needle, isearch);
+      if(isearch==-1)
+        break;
+
+      var start = [bookmark: nd, isearch, false];
+      var end   = [bookmark: nd, isearch+needle.length, false];
+      Selection.applyMark(start, end, "hilite");
+
+      var el;
+      if(nd.isElement)
+        el = nd;
+      else
+        el = nd.parent;
+
+      arr_marks.push([start, end]);
+      isearch++;
+    }
+  }
+  function DeepSearch(el)
+  {
+    assert(typeof el == #Element);
+
+    if(!el.isVisible)
+      return;
+
+    var nd = el.firstNode;
+    while(nd)
+    {
+      if(nd.isElement)
+        DeepSearch(nd);
+      else if(nd.isText)
+        SearchTextNode(nd);
+      nd = nd.nextNode;
+    }
+  }
+
+  if(needle.length)
+  {
+    DeepSearch(el_search_target);
+    if(arr_marks.length)
+      InternalShowCurrent();
+
+    self.$(#search-box > .search-input).@#reddish = arr_marks.length==0 ? true : undefined;
+    //view.update();
+  } else {
+    self.$(#search-box > .search-input).@#reddish = undefined;
+  }
+}
+
+
+function SearchShow(select=false)
+{
+  if(self#search-box.state.disabled)
+  {
+    self#search-box.state.disabled = false;
+    DoSearch();
+  }
+
+  if(select)
+  {
+    self.$(#search-box > .search-input).state.focus = true;
+    self.$(#search-box > .search-input).setSelection(0, 99999);
+  }
+}
+function SearchClose()
+{
+  if(self#search-box.state.disabled==false)
+  {
+    self.state.focusable = true;
+    self.state.focus = true;
+
+    InternalReset();
+    self#search-box.state.disabled = true;
+    return true;
+  }
+}
+function SearchSeek(next)
+{
+  SearchShow();
+  
+  if(arr_marks.length)
+  {
+    Selection.clearMark(arr_marks[actual_mark_idx][0], arr_marks[actual_mark_idx][1], undefined);
+    Selection.applyMark(arr_marks[actual_mark_idx][0], arr_marks[actual_mark_idx][1], "hilite");
+
+    if(next)
+      actual_mark_idx = (actual_mark_idx+1) % arr_marks.length;
+    else
+      actual_mark_idx = actual_mark_idx==0 ? arr_marks.length-1 : actual_mark_idx-1;
+
+    InternalShowCurrent();
+  }
+}
+
+self.on("~keydown", function(evt) {
+  if(evt.ctrlKey)
+  {
+    if(evt.keyCode=='F')
+    {
+      SearchShow(true);
+      return true;
+    }
+    else if(evt.keyCode=='G')
+    {
+      SearchSeek(true);
+      return true;
+    }
+  } else if(evt.shiftKey) {
+    if(evt.keyCode==Event.VK_F3)
+    {
+      SearchSeek(false);
+      return true;
+    }
+  } else {
+    if(evt.keyCode==Event.VK_F3)
+    {
+      SearchSeek(true);
+      return true;
+    }
+    if(evt.keyCode==Event.VK_ESCAPE)
+    {
+      return SearchClose();
+    }
+  }
+});
+
+function search_debounce(func, milliseconds, immediate = false) {
+  var running = false, args, context, timestamp, result;
+  milliseconds = milliseconds.toInteger();
+  return function(arguments..) {
+    context = this;
+    args = arguments;
+    timestamp = Date.ticks();
+    var later = function() 
+    {
+      var last = Date.ticks() - timestamp;
+      if (last < milliseconds) {
+        running = true;
+        self.timer(milliseconds - last, later, true);
+      } else {
+        running = false;
+        if (!immediate) result = func.apply(context, args);
+      }
+    };
+    var callNow = immediate && !running;
+    if (!running) {
+      running = true;
+      self.timer(milliseconds, later, true);
+    }
+    if (callNow) result = func.apply(context, args);
+    return result;
+  };
+}
+
+$(#search-box > .search-input).onValueChanged = search_debounce(DoSearch, 500);
+
+$(#search-box > .btn-seek-prev).on("click", function() {
+  SearchSeek(false);
+});
+$(#search-box > .btn-seek-next).on("click", function() {
+  SearchSeek(true);
+});
+
+$(#search-box > .btn-close).on("click", function() {
+  SearchClose();
+});
