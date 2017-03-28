@@ -1,5 +1,5 @@
-::mark(hilite) { background-color: lime; }
-::mark(hiactual) { background-color: blue; }
+::mark(hilite) { background-color: #FFFF00; }
+::mark(hiactual) { background-color: #FF9632; }
 
 #search-box
 {
@@ -13,7 +13,7 @@
   flow: horizontal;
   vertical-align: middle;
 
-  bottom: 0px;
+  bottom: 1px;
   transition: bottom(linear, 200ms);
 }
 #search-box > .search-input { height: 18px; margin-right: 3px; }

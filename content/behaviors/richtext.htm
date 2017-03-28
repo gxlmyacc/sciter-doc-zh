@@ -55,6 +55,17 @@
     <li>CTRL+V</li>
     <li>CTRL+Z</li>
     <li>CTRL+(LEFT)SHIFT 和 CTRL+(RIGHT)SHIFT - 这两个快捷键在形式上相当于在<code>dir</code>属性上切换<code>dir=&quot;ltr&quot;</code>和<code>dir=&quot;rtl&quot;</code>。</li></ul>
+		<p>格式化命令:</p>
+		<li><code>CTRL+D</code> - 封装当前文本块到<code>&lt;code&gt;text&lt;/code&gt;</code>;</li>
+    <li><code>CTRL+NUMPAD1...6</code> - 封装当前文本块到<code>&lt;h1&gt;</code>...<code>&lt;h6&gt;</code>;</li>
+		<li><code>CTRL+NUMPAD7</code>&nbsp;- 封装当前文本或块到<code>&lt;pre&gt;</code>;</li>
+		<li><code>CTRL+NUMPAD0 </code>- 封装当前文本或块到<code>&lt;p&gt;</code>;</li>
+		<li><code>CTRL+NUMPAD+</code> - 缩进当前选择内容;</li>
+		<li><code>CTRL+NUMPAD-</code> - 反缩进当前选择内容;</li>
+		<li><code>CTRL+NUMPAD.</code> - 转换当前选择内容到顺序列表&nbsp;<code>&lt;ol&gt;</code><code>/&lt;li&gt;</code>;</li>
+		<li><code>CTRL+NUMPAD*</code> - 转换当前选择内容到无序列表&nbsp;<code>&lt;ul&gt;</code><code>/&lt;li&gt;</code>;</li>
+		<li><code>CTRL+NUMPAD/</code> - 转换当前选择内容到无限列表&nbsp;<code>&lt;dl&gt;</code><code>/&lt;dt&gt;/&lt;dd&gt;</code>;</li>
+		</ul>
 	<h2>命令</h2>
 	<p><code>htmlarea.execCommand(command,attributes)</code>麻烦执行科撤销的编辑命令。<em>command</em>参数指示要执行的命令。</p>
   <p>编辑命令对所有可编辑元素都是通用的( &lt;input|text&gt;, &lt;textarea&gt;, &lt;plaintext&gt;, &lt;htmlarea&gt; ):</p>
@@ -91,7 +102,7 @@
     <li><code>&quot;format:toggle-pre&quot;</code> - 转换选择内容到<code>&lt;pre&gt;</code>块中，或移除<code>&lt;pre&gt;</code>。</li>
     <li><code>&quot;format:indent&quot;</code> - 保存选择的段落到<code>&lt;blockquote&gt;</code> 或 sub-list。</li>
     <li><code>&quot;format:unindent&quot;</code> - 将选择内容从<code>&lt;blockquote&gt;</code>中卸载，或移动子列表到上一层级。</li>
-    <li><code>&quot;format:morph-block:{tag}&quot;</code> - 改变选择块内容的标签。比如可以通过它将当前的<code>&lt;blockquote&gt;</code>标签改成<code>&lt;div&gt;</code>。</li>
+    <li><code>&quot;format:morph-block:{tag}&quot;</code> - 改变选择块内容的标签。比如可以通过它将当前的<code>&lt;blockquote&gt;</code>标签改成<code>&lt;div&gt;</code>。仅块元素(且不包含其他<code>display:block</code>元素)可以被morphed。</li>
   <li><code>&quot;format:unwrap-element:{tag}&quot;</code> - 将元素的内容移到它的父元素中，并且从DOM中移除该元素。</li>
   </ul>
   <h2>方法</h2>

@@ -27,8 +27,8 @@
   <p>form的值总是一个复合(聚合、映射)的JSON值。</p>
   <p>示例, 下面是一个form:</p>
   <pre>&lt;form&gt;
-   First name: &lt;input}text name=&quot;first&quot; value=&quot;Foo&quot;&gt; 
-   Last name: &lt;input}text name=&quot;last&quot; value=&quot;Bar&quot;&gt;
+   First name: &lt;input|text name=&quot;first&quot; value=&quot;Foo&quot;&gt; 
+   Last name: &lt;input|text name=&quot;last&quot; value=&quot;Bar&quot;&gt;
 &lt;/form&gt;
 </pre>
   <p>的值是:</p>
@@ -103,9 +103,8 @@
 frm.on(&quot;change&quot;, function() { var formValue = this.value; ... });
 self.on(&quot;change&quot;, &quot;form#some&quot;, function() { var formValue = this.value; ... });
 </pre>
-  <h3>decorators.tis 装饰器</h3>
-  <pre>include &quot;decorators.tis&quot;;
-@change @on &quot;form#some&quot; :: ... 事件处理代码 ...;
+  <h3>事件处理</h3>
+  <pre>event change $(form#some) { ... 事件处理代码 ... }
 </pre>
 </body>
 </html>

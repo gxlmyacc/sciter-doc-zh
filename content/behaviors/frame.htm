@@ -69,9 +69,8 @@ btn.onControlEvent = function(evt)
   }
 }
 </pre>
-  <h3>decorators.tis 装饰器</h3>
-  <pre>include &quot;decorators.tis&quot;;
-@when Event.DOCUMENT_COMPLETE @on &quot;frame#some&quot; :: ... 事件处理代码 ...;
+  <h3>事件处理</h3>
+  <pre>event complete $(frame#some) { ... 事件处理代码 ... }
 </pre>
 </body>
 </html>

@@ -287,10 +287,19 @@
       <p>刷新该元素在屏幕上占据的区域。如果<em>x</em>、<em>y</em>、<em>width</em>、<em>height </em>(元素内部的区域坐标)被指定，则只会刷新该部分区域。这个方法用在当你使用Graphics对象渲染了元素表面区域时。</p></dd>
     <dt>animate</dt>
     <dd>
-      <div><strong>( nextStep</strong>: function [, whenEnded: function] [, <strong>duration</strong>: diration | integer]<strong> )</strong> : undefined</div>
-      <p>启动该元素的动画。<em>nextStep</em>为动画的步骤函数(修改尺寸、透明度等)。这个函数调用时包含<em>this</em>变量(指向该元素对象)，且它应该返回一个整数——下一个步骤等待的毫秒数。如果返回0或非整数则动画终止。</p>
+      <div><strong>( nextStep</strong>: function [, <b>whenEnded</b>: function] [, <strong>duration</strong>: duration | integer]<strong> )</strong> : undefined</div>
+      <p>在元素上开始一段动画。<em>nextStep</em>为动画的步骤函数(修改尺寸、透明度等)。这个函数调用时包含<em>this</em>变量(指向该元素对象)，且它应该返回：</p>
+			<ul><li><i>true</i> - 继续动画，以系统定义的FPS;</li>
+				<li><i>integer</i>- 毫秒数, 下一步动画执行的延时, 如果为<code>0</code>则将停止动画;</li>
+				<li><i>duration</i> - 下一步动画执行的延时, 如果duration为0则将停止动画;</li>
+				<li>false - 停止动画;</li></ul>
       <p>如果<em>whenEnded</em>函数被提供，则它会在动画结束时被调用。</p>
-      <p><em>duration</em>为动画持续的时间。如果提供了该参数则<em>nextStep</em>函数的声明应该为：<br/> <code>function nextStep(progress: float) {}</code> <br/>progress为0.0至1.0的浮点数——动画的进度。nextStep总是以接收到progress == 1.0作为最后一步。</p></dd>
+      <p><em>duration</em>为动画持续的总时间(毫秒)。如果提供了该参数则<em>nextStep</em>函数的声明应该为：</p> 
+      <pre>function nextStep(progress: float) {} </pre> 
+      <p>其中，progress为0.0至1.0的浮点数——动画的进度。nextStep总是以接收到progress == 1.0作为最后一步。</p></dd>
+一个整数——下一个步骤等待的毫秒数。如果返回0或非整数则动画终止。</p>
+      <p>否则step回调函数期待为无参数函数:</p>
+			<pre>function nextStep() {} </pre></dd>
     <dt>box</dt>
     <dd>
       <div><strong>( part</strong> [, <strong>edge</strong> [, <strong>relativeTo</strong> ]] <strong>) </strong>returns: integer, 设备像素</div>

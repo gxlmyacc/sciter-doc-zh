@@ -5,7 +5,7 @@ assert(el_search_target);
 // create the #search-box element
 self.$append(
    <div #search-box disabled>
-    <label>搜索：</label><input.search-input />
+    <label.search-label>搜索：</label><input.search-input />
     <div.btn-seek-prev>3</div>
     <div.btn-seek-next>4</div>
     <div.btn-close>r</div>
@@ -114,7 +114,6 @@ function DoSearch()
   }
 }
 
-
 function SearchShow(select=false)
 {
   if(self#search-box.state.disabled)
@@ -127,6 +126,22 @@ function SearchShow(select=false)
   {
     self.$(#search-box > .search-input).state.focus = true;
     self.$(#search-box > .search-input).setSelection(0, 99999);
+
+    $(#search-box > .search-input).onValueChanged = DoSearch.debounce(500);
+    $(#search-box > .search-input).on("keydown", function(evt) {
+      if(evt.keyCode==Event.VK_ENTER)
+        SearchSeek(true);
+    });
+    $(#search-box > .btn-seek-prev).on("click", function() {
+      SearchSeek(false);
+    });
+    $(#search-box > .btn-seek-next).on("click", function() {
+      SearchSeek(true);
+    });
+
+    $(#search-box > .btn-close).on("click", function() {
+      SearchClose();
+    });
   }
 }
 function SearchClose()
@@ -189,45 +204,4 @@ self.on("~keydown", function(evt) {
       return SearchClose();
     }
   }
-});
-
-function search_debounce(func, milliseconds, immediate = false) {
-  var running = false, args, context, timestamp, result;
-  milliseconds = milliseconds.toInteger();
-  return function(arguments..) {
-    context = this;
-    args = arguments;
-    timestamp = Date.ticks();
-    var later = function() 
-    {
-      var last = Date.ticks() - timestamp;
-      if (last < milliseconds) {
-        running = true;
-        self.timer(milliseconds - last, later, true);
-      } else {
-        running = false;
-        if (!immediate) result = func.apply(context, args);
-      }
-    };
-    var callNow = immediate && !running;
-    if (!running) {
-      running = true;
-      self.timer(milliseconds, later, true);
-    }
-    if (callNow) result = func.apply(context, args);
-    return result;
-  };
-}
-
-$(#search-box > .search-input).onValueChanged = search_debounce(DoSearch, 500);
-
-$(#search-box > .btn-seek-prev).on("click", function() {
-  SearchSeek(false);
-});
-$(#search-box > .btn-seek-next).on("click", function() {
-  SearchSeek(true);
-});
-
-$(#search-box > .btn-close).on("click", function() {
-  SearchClose();
 });
