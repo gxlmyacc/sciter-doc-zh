@@ -87,6 +87,8 @@
     <dd><code>(): string</code> - 返回选择文本，如果没有选择内容则返回空字符串。</dd>
     <dt><code>setSelection</code></dt>
     <dd><code>(anchorPos: integer, caretPos: integer)</code> - 选择编辑框中的文本。如果<code>anchorPos == caretPos</code>，则编辑框不会包含任何选择内容，并且光标会设置在该位置。</dd>
+    <dt><code>clearSelection</code></dt>
+    <dd><code>()</code> - 清除选择内容(如果存在的话)。</dd>
     <dt><code>insertText</code></dt>
     <dd><code>(text:string)</code> - 在当前光标位置处插入text文本，移动光标到text的结尾处。</dd>
     <dt><code>appendText</code></dt>

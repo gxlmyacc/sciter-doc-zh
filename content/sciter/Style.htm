@@ -94,6 +94,9 @@ elem.style.height = ... ;
           <li><em>properties</em> - <code>function(props:object) : null | object</code> , 属性访问器函数, 这个函数将接受到规则中定义的CSS属性。如果该函数返回一个对象，则属性中的CSS规则将会被更新到对应的CSS规则对象中。</li></ul></ul>
       <p>因此，<em>documentRules</em>函数可以对文档关联的CSS规则表进行检查和应对突变。</p>
 	</dd>
+  <dt>variable</dt>
+  <dd>(  <i>varName</i>: string, [<i>varToSet</i>:value] ) : value | undefined
+  <p>该方法用于获取或设置(如果提供了<i>varsToSet</i>的话)定义在元素上的单个CSS变量。</p></dd>
   <dt>variables</dt>
   <dd>(  [<i>varsToSet</i>:object] ) : object | undefined
   <p>该方法获取或设置(如果提供了<i>varsToSet</i>的话)在元素上定义的CSS变量。</p></dd>

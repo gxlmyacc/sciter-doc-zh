@@ -49,7 +49,17 @@
     <li><code>size=integer</code> - 列表中可见元素的数量。注意：select元素的高度可以被CSS覆盖掉。</li>
     <li><code>name=&quot;name&quot;</code> - 标准的<em>name</em>属性 - from表单上一个input元素的名称。</li>
     <li><code>novalue=&quot;text&quot;</code> - 如果select中没有使用<code>&lt;option selected&gt;</code>初始化它，则将会使用该显示该文本。novalue属性使select可为空(<strong>nullable</strong>)，即如果没有选项被选择，则该select的value值为<em>undefined</em>。</li>
-    <li><code>editable</code> - 该属性会将<code>behavior:edit</code>行为应用到<code>&lt;caption&gt;</code>元素上，使它可编辑。</li></ul>
+    <li><code>editable</code> - 该属性会将<code>behavior:edit</code>行为应用到<code>&lt;caption&gt;</code>元素上，使它可编辑。</li>
+    <li><code>as=&quot;type&quot;</code> - 定义<code>&lt;option value=&quot;...&quot;&gt;</code>的解析规则，接收:
+      <ul>
+        <li><code>as=&quot;auto&quot;</code>, 默认值, 尝试翻译option的 value值为integer、float、boolean或length值。如果解析失败，则将value作为字符串。</li>
+				<li><code>as=&quot;integer&quot;</code>, 尝试翻译option的value值为integer。如果解析失败，则将value作为字符串。</li>
+				<li><code>as=&quot;float&quot;</code>, 尝试翻译option的value值为float。如果解析失败，则将value作为字符串。</li>
+				<li><code>as=&quot;numeric&quot;</code>, 尝试翻译option的value值为integer或float。如果解析失败，则将value作为字符串。</li>
+				<li><code>as=&quot;string&quot;</code>, 不解析option的value。将value作为字符串返回。</li>
+      </ul>
+    </li>
+  </ul>
   <h2>事件</h2>
   <p>除了标准事件集(鼠标、按键、聚焦)外，该行为还生成:</p>
   <ul>

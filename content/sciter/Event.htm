@@ -287,7 +287,7 @@ VK_F20      VK_F21      VK_F22      VK_F23      VK_F24
       <p><code>#picture</code> - 如果拖拽数据中包含一个图像，则返回Image对象;</p>
       <p><code>#json</code> - 返回一个值 - json值。</p></dd></dl>
   <h2 id="symbolic-event-names">符号事件名称</h2>
-  <p>符号事件名称被<code>Element.subscribe(&quot;name&quot;, ...)</code>、<code>Element.on(&quot;name&quot;, ...)</code>、<code>Event.match(&quot;name&quot;, ...)</code>以及<code>event &quot;name&quot; () {}</code>方法使用。</p>
+  <p>符号事件名称被<code>Element.subscribe(&quot;name&quot;, ...)</code>、<code>Element.on(&quot;name&quot;, ...)</code>、<code>Event.match(&quot;name&quot;, ...)</code>以及<code>event &quot;name&quot; (evt) {}</code>方法使用。</p>
   <dl>
     <dt>&quot;click&quot;</dt>
     <dd>- 按钮和超链接点击;</dd>
@@ -317,6 +317,7 @@ VK_F20      VK_F21      VK_F22      VK_F23      VK_F24
     <dd>- Event.CONTENT_CHANGED, 当元素的内容发生改变(增加或移除)时接收到这个事件;</dd>
     <dt>&quot;inputlangchange&quot;</dt>
     <dd>- Event.INPUT_LANGUAGE_CHANGED, 当用户改变了输入语言时，当前的聚焦元素收到这个事件。event.data是一个字符串 - ISO语言国家代码。</dd>
+    <h4>鼠标(Mouse)事件</h4>
     <dt>&quot;mousedown&quot;</dt>
     <dd>- Event.MOUSE_DOWN 事件; </dd>
     <dt>&quot;mouseup&quot;</dt>
@@ -329,6 +330,7 @@ VK_F20      VK_F21      VK_F22      VK_F23      VK_F24
     <dd>- Event.MOUSE_LEAVE 事件, 鼠标离开该元素。</dd>
     <dt>&quot;mousedragrequest&quot;</dt>
     <dd>- Event.MOUSE_DRAG_REQUEST 事件, 拖动操作(鼠标按下并且移动)被检查到时触发。</dd>
+    <h4>焦点(Focus)事件</h4>
     <dt>&quot;focusin&quot;</dt>
     <dd>- Event.FOCUS_IN, 焦点进入事件，当元素或它内部的元素获取到焦点时触发该事件。如果焦点依然停留在容器元素内部，则容器元素不会接收到这个事件。</dd>
     <dt>&quot;focusout&quot;</dt>
@@ -337,14 +339,17 @@ VK_F20      VK_F21      VK_F22      VK_F23      VK_F24
     <dd>- Event.GOT_FOCUS, 获得焦点事件，当元素获取焦点时触发该事件， Event.target是获取焦点的元素。</dd>
     <dt>&quot;blur&quot;</dt>
     <dd>- Event.LOST_FOCUS, 失去焦点事件，当元素失去焦点时触发该事件， Event.target是失去焦点的元素。</dd>
+    <h4>键盘事件</h4>
     <dt>&quot;keydown&quot;</dt>
     <dd>- Event.KEY_DOWN, 键盘按下键事件，当有一个键被按下时触发。Event.keyCode是虚拟键代码 - Event.VK_****值之一。</dd>
     <dt>&quot;keyup&quot;</dt>
     <dd>- Event.KEY_UP, 键盘按起键事件，当一个按键松开时触发。Event.keyCode是虚拟键代码 - Event.VK_****值之一。</dd>
     <dt>&quot;keypress&quot;</dt>
     <dd>- Event.KEY_CHAR, 键盘按键事件，当鼠标接收到字符值时被触发。Event.keyCode是字符的UNICODE代码值。</dd>
+    <h4>滚动事件</h4>
     <dt>&quot;scroll&quot;</dt>
     <dd>- 滚动事件;</dd>
+    <h4>弹出和tooltip事件</h4>
     <dt>&quot;popuprequest&quot;</dt>
     <dd>- Event.POPUP_REQUEST, 当popup元素被创建的第一时间被触发, 这时弹出窗口尚未创建。event.source为弹出popup元素。可以使用这个事件来填充popup的内容。</dd>
     <dt>&quot;popupready&quot;</dt>
@@ -353,6 +358,7 @@ VK_F20      VK_F21      VK_F22      VK_F23      VK_F24
     <dd>- Event.POPUP_DISMISSED, 这个事件在弹出窗口从屏幕上移除后被触发。</dd>
 		<dt>&quot;tooltiprequest&quot;</dt>
 		<dd>- Event.TOOLTIP_REQUEST, 该事件用于响应Event.MOUSE_IDLE。</dd>
+    <h4>文档生命周期事件</h4>
     <dt>&quot;close&quot;</dt>
     <dd>- Event.DOCUMENT_CLOSE, 这个事件在文档从它的容器(view或frame)中移除时被触发。仅文档元素和它的容器可以接收这个事件。</dd>
     <dt>&quot;closerequest&quot;</dt>
@@ -361,10 +367,20 @@ VK_F20      VK_F21      VK_F22      VK_F23      VK_F24
     <dd>- Event.DOCUMENT_READY, 当文档被解析完毕并且它的DOM已经创建好时被触发。仅文档元素和它的容器可以接收这个事件。</dd>
     <dt>&quot;complete&quot;</dt>
     <dd>- Event.DOCUMENT_COMPLETE, 当文档下载完毕它请求的所有资源(图片、样式、脚本)之后被触发。仅文档元素和它的容器可以接收这个事件。</dd>
+    <h4>Command命令事件</h4>
     <dt>&quot;query:{command}&quot;</dt>
     <dd>- 这个事件在查询准备执行{command}时被触发。比如当准备从剪切板粘贴到元素上时，&quot;query:edit:paste&quot;事件被发送给该元素以检查是否可以接收粘贴的内容。这个元素可以设置event.result字段来反馈是否支持这个command。Command在event.data字段中有一个额外的command参数。</dd>
     <dt>&quot;exec:{command}&quot;</dt>
-    <dd>- 这个事件在执行{command}时被触发。比如当元素执行从剪切板粘贴命令时会触发&quot;exec:edit:paste&quot;事件。</dd></dl>
+    <dd>- 这个事件在执行{command}时被触发。比如当元素执行从剪切板粘贴命令时会触发&quot;exec:edit:paste&quot;事件。</dd>
+    <h4>系统拖拽事件</h4>
+    <dt>drag</dt>
+		<dd>- 当被拖拽数据经过元素时被触发。</dd>
+		<dt>dragenter</dt>
+		<dd>-当数据被拖拽进入元素时被触发。</dd>
+		<dt>dragleave</dt>
+		<dd>-当数据被拖拽离开元素时被触发。</dd>
+		<dt>drop</dt>
+		<dd>- 当数据被拖拽到目标元素时被触发。</dd></dl>
     <p>任何其他字符串都会被认为是自定义事件, 要post/send这样的事件，需要使用<code>Element.postEvent</code>/<code>sendEvent(name,...)</code>方法。</p>      
 </body>
 </html>
