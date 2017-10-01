@@ -63,8 +63,8 @@
       <p>使用当前的lineColor/lineGradient和fillColor/fillGradient来画一个<strong>圆形</strong>或<strong>椭圆</strong>。</p></dd>
     <dt>arc</dt>
     <dd>
-      <div>( x1:<em>float</em>, y1:<em>float</em>, rx:<em>float</em>, ry:<em>float</em>, startAngle:<em>float</em>, endAngle:<em>float</em> ) : Graphics</div>
-      <p>使用当前的lineColor/lineGradient和fillColor/fillGradient来画一个<strong>闭合圆弧</strong>。</p></dd>
+      <div>( x1:<em>float</em>, y1:<em>float</em>, rx:<em>float</em>, ry:<em>float</em>, startAngle:<em>float</em>, swipeAngle:<em>float</em> ) : Graphics</div>
+      <p>使用当前的lineColor/lineGradient和fillColor/fillGradient来画一个<strong>圆弧</strong>或<strong>圆饼</strong>(如果设置了填充的话)。</p></dd>
     <dt>star</dt>
     <dd>
       <div>( x1:<em>float</em>, y1:<em>float</em>, r1:<em>float</em>, r2:<em>float</em>, startAngle:<em>float</em>, numRays:<em>integer</em> ) : Graphics</div>
@@ -266,8 +266,9 @@
       <p>绘制垂直线条，同时将当前绘制路径位置移动到x(当前),y。如果<em>relative</em>为<em>true</em>，则<em>y</em>被理解成从当前路径位置的增量。</p></dd>
     <dt>arcTo</dt>
     <dd>
-      <div>( x:<em>float</em>, y:<em>float,</em> angle:<em>float, </em>rx:<em>float</em>, ry:<em>float, </em>largeArc:<em>bool, </em>sweep: <em>bool </em>[, relative <em>= false</em> ] ) : Graphics.Path</div>
-      <p>(tbd)</p></dd>
+      <div>( x1:<em>float</em>, y1:<em>float,</em> x2:<em>float</em>, y2:<em>float</em>, radius: <em>float&nbsp;</em><em> </em>[, relative <em>= false</em> ] ) : Graphics.Path</div>
+      <p>在[(x0,y0) - (x1,y1)]和[(x1,y1) - (x2,y2)]的两条线之间的(x1,y1)点的角落处会在弧线。参见: <a onmousedown="return rwt(this,'','','','3','AFQjCNEYwX0AEYPgDi7lZpmT-fu-hkXZDg','','0ahUKEwiIlomZyu7UAhUL4WMKHUIGC24QFgg1MAI','','',event)" href="https://www.google.ca/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=3&amp;ved=0ahUKEwiIlomZyu7UAhUL4WMKHUIGC24QFgg1MAI&amp;url=http%3A%2F%2Fwww.dbp-consulting.com%2Ftutorials%2Fcanvas%2FCanvasArcTo.html&amp;usg=AFQjCNEYwX0AEYPgDi7lZpmT-fu-hkXZDg" data-ctbtn="0" data-cthref="/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=3&amp;ved=0ahUKEwiIlomZyu7UAhUL4WMKHUIGC24QFgg1MAI&amp;url=http%3A%2F%2Fwww.dbp-consulting.com%2Ftutorials%2Fcanvas%2FCanvasArcTo.html&amp;usg=AFQjCNEYwX0AEYPgDi7lZpmT-fu-hkXZDg">Canvas 
+ArcTo教程</a></p></dd>
     <dt>quadraticCurveTo</dt>
     <dd>
       <div>( xc:<em>float</em>, yc:<em>float</em> , x:<em>float</em>, y:<em>float</em> [, relative <em>= false</em> ] ) : Graphics.Path</div>

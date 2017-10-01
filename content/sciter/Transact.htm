@@ -37,7 +37,7 @@
     
       <dt>split</dt>
       <dd>
-        <div><strong>( pos</strong>:bookmark, <strong>until</strong>: Element <strong>)</strong> : <em>Transact</em></div>
+        <div><strong>( pos</strong>:bookmark, <strong>until</strong>: Element <strong>)</strong> : <em>Bookmark</em></div>
         <p>´Ó<em>pos</em>Î»ÖÃ¿ªÊ¼·Ö¸ôDOMÔªËØ£¬Ö±µ½<em>until</em>ÔªËØ¡£ÀıÈç£º</p>
         <pre>&lt;p id=test&gt;123&lt;b&gt;456&lt;/b&gt;789&lt;/p&gt;
 </pre>
@@ -49,9 +49,9 @@ var pos = [bookmark: b.nodes()[0], 1, false]; //´Ó&lt;b&gt;ÔªËØµÄµÚÒ»¸öÎÄ±¾½ÚµãÖ
 transact.split( pos, p );
 </pre>
         <p>½«»á½«DOMĞŞ¸Ä³É£º</p>
-        <pre>&lt;p id=test&gt;123&lt;b&gt;4&lt;/b&gt;&lt;b&gt;56&lt;/b&gt;789&lt;/p&gt;
-</pre></dd>
-    
+        <pre>&lt;p id=test&gt;123&lt;b&gt;4&lt;/b&gt;&lt;b&gt;56&lt;/b&gt;789&lt;/p&gt;</pre>
+        <p>Õâ¸öº¯Êı·µ»ØÉèÖÃµ½<i>until</i>ÔªËØÄÚ²¿µÄÎ»ÖÃµÄÊéÇ©¡£</dd>
+
       <dt>wrap</dt>
       <dd>
         <div><strong>( from</strong>:bookmark, <strong>to</strong>:bookmark, <strong>into</strong>: Element <strong>)</strong> : <em>Transact</em></div>

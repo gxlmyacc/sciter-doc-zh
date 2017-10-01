@@ -104,15 +104,20 @@ view.<u>eventsRoot</u> = null;
       <div><strong>( </strong><em>x</em>:int, <em>y</em>:int, <em>width</em>:int, <em>height</em>:int [, <em>clientCoordinates</em>: true | false] <strong> ) </strong>:void</div>
       <p>调整屏幕上的视图(对话框或框架)的窗口位置和尺寸。该方法仅适用于Sciter。</p>
       <p>如果<em>clientCoordinates</em>为<em>true</em>，则x、y、<em>width</em>、<em>height</em>被理解成期望的屏幕上客户区域的位置/尺寸。</p></dd>
+    <dt>mediaVar</dt>
+    <dd>
+      <div><strong>(</strong><i>name</i>:string [, <i>valueToSet</i>: any]<strong>)</strong> : value | undefined</div>
+      <p>返回或设置指定的媒体变量。</p>
+		</dd>
     <dt>mediaVars</dt>
     <dd>
-      <div><strong>(</strong>[ newVars:object]<strong>)</strong> : Object | undefined</div>
+      <div><strong>(</strong>[ <i>newVars</i>:object]<strong>)</strong> : Object | undefined</div>
       <p>如果没有<i>newVars</i>参数，则该方法返回当前视图使用的媒体变量集合。</p>
 			<p>如果<i>newVars</i>参数是一个对象，则该方法将会根据该对象的属性来更新视图中的媒体变量。</p>
     </dd>
     <dt>selectFile</dt>
     <dd>
-      <div><strong>(</strong> <em>#save</em> | <em>#open</em>, <em>filter</em>:string , <em>ext</em>: string  [,<em>initialPath</em>:string[, <em>dialogCaption</em>:string]] <strong> ) </strong>: string | null</div>
+      <div><strong>(</strong> <em>#save</em> | <em>#open</em>| #open-multiple, <em>filter</em>:string , <em>ext</em>: string  [,<em>initialPath</em>:string[, <em>dialogCaption</em>:string]] <strong> ) </strong>: string | array(string) | null</div>
       <p>该方法显示系统的文件选择模态对话框，并且返回选择文件的全名，如果用户选择了取消则返回null。</p>
       <ul>
         <li>第一个参数为#save或#open标识符。如果为#save则对话框的标题为<em>保存</em>，如果为#open则对话框的标题为<em>打开</em>。</li>
@@ -304,6 +309,12 @@ function retrieveDataFromDB(recordSet)
         <li><strong>proxyHost</strong>, <strong>proxyPort</strong> - <em>string</em>, <em>integer</em>.如果定义了这两个参数，则请求将会通过定义的代理主机发送。</li>
         <li><strong>output</strong> - symbol, 值可以是<strong>#string</strong> | <strong>#stream</strong> | <strong>#bytes</strong> | <strong>#json</strong>其中之一。如果指定了该参数，则强制报告<em>data</em>为String、Stream、Bytes或任意已解析的JSON的实例。</li></ul>
       <div>示例: <u>sdk/samples/communication/file-download.htm</u>和<u>sdk/samples/communication/http.tis</u></div></dd></dl>
+  <h2>通知事件</h2>
+	<dl>
+    <dt>onRequest(rq: <a href="Request.htm">Request</a>)</dt>
+		  <dd>当在view上定义了该方法后，它将在请求执行前被调用。这个处理器可以调用<code>rq.fulfill()</code>来为请求提供数据;</dd>
+		<dt>onRequestResponse(rq: <a href="Request.htm">Request</a>)</dt>
+		  <dd>这个方法在请求完成(成功或失败)时被调用。</dd></dl>
   <h2>视图事件</h2>
   <p>视图对象可使用<code>view.on(eventname, handler)</code>将事件绑定到视图:</p>
   <ul>

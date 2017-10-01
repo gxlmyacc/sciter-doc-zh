@@ -73,6 +73,10 @@
     <dd><font color="#999999">只读</font> - integer, 元素渲染时的屏幕(监视器)的数量。注意：它可能与弹出元素中的view.screen的值不一样。</dd>
     <dt>awaitsDraw</dt>
     <dd><font color="#999999">读写</font> - boolean, 该标志用于指示元素正在等待调用<code>Element.refresh()</code>后的重绘。Sciter会自动设置这个标志。当元素被绘制到屏幕上时，该标志也会被重置。你也可以在代码中设置/重置该标志。</dd>
+		<dt>flowType</dt>
+		<dd>r - symbol, 返回元素使用的flow类型, 它是以下值之一: 
+      <p>#vertical, #horizontal, #horizontal-flow, #vertical-flow, #grid, #table, #table-fixed, #stack, #text, #table-row, #table-body, #columns, #null, #image, #svg, #svg-child 或 <code>undefined</code>(如果元素是inline或display-none)。</p>
+    </dd>
     <h2>方法</h2>
     <dt>get</dt>
     <dd>

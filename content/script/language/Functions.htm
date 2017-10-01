@@ -31,9 +31,24 @@
   <pre><code>:</code> &lt;parameters&gt; <code>{</code> &lt;statements&gt; <code>}</code>
 </pre>
   <p>嵌套函数(其他函数内部的函数)是允许的。</p>
+	<h2>异步方法</h2>
+	<pre><b>async function </b>( &lt;parameters&gt; ) 
+{ 
+  (&lt;statement&gt; | &lt;await-expression&gt;)* 
+}
+</pre>
+	<p>异步方法是异步执行的，并且可以在函数体中使用<b>await</b>表达式。</p>
+	
+	<h2>生成器方法</h2>
+	<pre><b>function* </b>( &lt;parameters&gt; ) 
+{ 
+  (&lt;statement&gt; | &lt;yield-statement&gt;)* 
+}
+</pre>
+	<p>生成器方法用在<code>for(var x in <i>generator</i>)</code>语句中。生成器使用<b>yield</b>来发送值。</p>
   <h2><a name="event-functions" id="event-functions">事件函数</a></h2>
   <p>事件处理函数是一种函数名称是字符串的正常函数。它不是使用<code>function</code>来声明，而是使用<code>event</code>关键字:</p>
-  <pre><code>event</code> <em>name</em>[<code>.</code><em>namespace</em>] [<code>$(</code>selector<code>)</code>]  [<code>(</code> [eventObj [,element] <code>)</code>]
+  <pre>event name[.namespace] [$(selector)]  [( [eventObj [,element] ) ]
 </code>{
   //... 事件处理函数体
 }

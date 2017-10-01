@@ -230,6 +230,13 @@
       <p>返回在子/父链上满足CSS选择器的的第一个元素。</p>
 	  <p>注意1：该选择器写的时候不需要用&quot;&quot;括住。</p>
       <p>注意2：该方法也会检查本元素(<em>this</em>)是否满足CSS条件。</p></dd>
+    <dt>$o</dt>
+    <dd>
+      <div><strong>( </strong><em>CSSselector</em><strong> )</strong> returns: <em>Element</em></div>
+      <p>返回在子/父链上满足CSS选择器的的第一个拥有者(owner)元素。</p>
+      <p>注意 1: 这是一个字符串器方法 - <em>CSSselector</em>是一个字面值</p>
+      <p>注意 2: 这个方法也会检查<em>this</em>元素</p></dd>
+      <p>注意 3: 除了弹出菜单的拥有者是请求弹出的元素外，元素的拥有者大部分时间是它的父元素。</p></dd>
     <dt>selectParent</dt>
     <dd>
       <div><strong>(func , CSSselector</strong>: string<strong> [, argument1 [, argument2, ... ]])</strong> returns: <em>integer</em></div>
@@ -553,11 +560,15 @@ el.$content(This is item number <b>{ num }</b>);
         <li><code>7 &lt;&lt; 16</code> - popup元素的top-left在锚点上;</li>
         <li><code>8 &lt;&lt; 16</code> - popup元素的top-center在锚点上;</li>
         <li><code>9 &lt;&lt; 16</code> - popup元素的top-right在锚点上;</li></ul>
-      <div>( 见小键盘上的数字 )。</div>      
-      <div></div>
-      <p class="MsoNormal"><em>placement</em>参数是可省略的。弹出位置也可以在CSS中通过<code>popup-position</code>属性来定义。</p>
-      <div></div>
-     </dd>
+      <div>( 见小键盘上的数字 )。</div>
+			<p>另外你也可以使用&quot;popup auto flip&quot;定位模式:</p>
+			<ul>
+        <li>0x19 - 弹窗默认出现在锚点的左边，如果屏幕的空间不够则弹窗将在锚点的右边(0x17)。垂直方向上，弹窗的顶部对应锚点的顶部。</li>
+				<li>0x17- 弹窗默认出现在锚点的右边，否则出现在左边。 垂直方向上，弹窗的顶部对应锚点的顶部。</li>
+				<li>0x16- 弹窗默认出现在锚点的左边，如果屏幕的空间不够则弹窗将在锚点的右边(0x14)。垂直方向上，弹窗的中部对应锚点的中部。</li>
+				<li>0x14- 弹窗默认出现在锚点的右边，否则出现在左边。垂直方向上，弹窗的中部对应锚点的中部。</li>
+      </ul>
+      <p><em>placement</em>参数是可省略的。弹窗的位置也可以通过在CSS中定义<i>popup-position</i>属性来实现。</p></dd>
     <dt>popup</dt>
     <dd>
       <div><strong>( el</strong>: Element, <strong>x</strong>:int, <strong>y</strong>:int ) :void</div>
@@ -764,7 +775,9 @@ el.$content(This is item number <b>{ num }</b>);
         <li><code>&quot;edit:delete-next&quot;</code> - 如果有选择内容，则删除选择的内容，否则删除下一个字符;</li>
         <li><code>&quot;edit:delete-prev&quot;</code> - 如果有选择内容，则删除选择的内容，否则删除前一个字符;</li>
         <li><code>&quot;edit:delete-word-next&quot;</code> - 如果有选择内容，则删除选择的内容，否则删除下一个单词;</li>
-        <li><code>&quot;edit:delete-word-prev&quot;</code> - 如果有选择内容，则删除选择的内容，否则删除上一个单词;</li></ul>
+        <li><code>&quot;edit:delete-word-prev&quot;</code> - 如果有选择内容，则删除选择的内容，否则删除上一个单词;</li>
+        <li><code>&quot;edit:insert-break&quot;</code> - 实际上它是&quot;ENTER&quot; (VK_RETURN)命令, 真正的DOM修改取决于当前的上下文;</li>
+				<li><code>&quot;edit:insert-text&quot;</code> - 在当前光标处插入文本, <i>attributes</i>参数应该包含插入的字符串;</li></ul>
       <p>富文本(richtext)元素(如&lt;htmlarea&gt;)支持的编辑命令:</p>
       <ul>
         <li><code>&quot;edit:insert-break&quot;</code> - 本质上这个相当于&quot;ENTER&quot;(VK_RETURN)命令, 准确地说，DOM的修改取决于上下文;</li>
@@ -913,6 +926,10 @@ el.$content(This is item number <b>{ num }</b>);
     <dd>计时器脉冲事件。使用<em>element.timer(milliseconds)</em>来启动计时器。若返回<em>false</em>则终止计时器。</dd>
     <dt>onSize()</dt>
     <dd>元素尺寸改变事件。若想获取元素尺寸，请使用<em>this.box()</em>函数。</dd>
+		<dt>onRequest(rq: <a href="Request.htm">Request</a>)</dt>
+		<dd><code>&lt;frame&gt;</code>和<code>&lt;htmlarea&gt;</code>独有的回调方法。当定义了该方法后，它将在请求执行前被调用。这个处理器可以调用<code>rq.fulfill()</code>来为请求提供数据;</dd>
+		<dt>onRequestResponse(rq: <a href="Request.htm">Request</a>)</dt>
+		<dd><code>&lt;frame&gt;</code>和<code>&lt;htmlarea&gt;</code>独有的回调方法。这个方法在请求完成(成功或失败)时被调用。</dd>
     <h4>根元素(Root)特有事件</h4>
     <dt>self.ready()</dt>
     <dd>文档加载的最后一步生成该事件。</dd>

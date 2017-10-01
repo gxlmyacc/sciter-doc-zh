@@ -86,7 +86,7 @@
    <table border="1" bordercolor="#fff2cc" cellspacing="0"> 
     <tbody>
      <tr> 
-      <td rowspan="20" valign="top"><strong>字体和段落属性</strong></td> 
+      <td rowspan="23" valign="top"><strong>字体和段落属性</strong></td> 
       <td nowrap="" valign="top" align="right"><strong>font</strong></td> 
       <td> <p>font是一个简写属性，在一个声明中设置所有字体属性，用于一次设置元素字体的两个或更多方面。</p> <p class="note"><span>注释：</span>此属性也有第六个值：&quot;line-height&quot;，可设置行间距。</p> <p>可以按顺序设置如下属性：</p> 
        <ul> 
@@ -272,7 +272,7 @@
         <p>
           该属性定义了在文本字符框之间插入多少空间。由于字符字形通常比其字符框要窄，指定长度值时，会调整字母之间通常的间隔。因此，normal 就相当于值为 0。<br/>
           注释：允许使用负值，这会让字母之间挤得更紧。</p>
-        <div>可指定下面中的值之一：</div> 
+        <div>可<strong>指定</strong>下面中的值之一：</div> 
        <table> 
         <tbody>
          <tr> 
@@ -327,7 +327,7 @@
       <td nowrap="" valign="top" align="right"><strong>text-align</strong></td> 
       <td> 
        <div>
-        指定下面中的值之一：
+        <strong>指定</strong>下面中的值之一：
        </div> 
        <table> 
         <tbody>
@@ -355,33 +355,36 @@
        </div></td>
      </tr> 
      <tr> 
-      <td nowrap="" valign="top" align="right"><strong>text-decoration</strong></td> 
-      <td> 
-       <div>
-        指定下面中的值之一：
-       </div> 
-       <table> 
-        <tbody>
-         <tr> 
-          <td nowrap="" valign="middle">none</td> 
-          <td>默认。文本不做装饰。</td>
-         </tr> 
-         <tr> 
-          <td nowrap="" valign="middle">underline</td> 
-          <td>文本有下划线。</td>
-         </tr> 
-         <tr> 
-          <td nowrap="" valign="middle">overline</td> 
-          <td>文本有上划线。</td>
-         </tr> 
-         <tr> 
-          <td nowrap="" valign="middle">line-through</td> 
-          <td>文本有删除线(一条线穿过文本)。</td>
-         </tr> 
-         <tr> 
-          <td nowrap="" valign="middle">blink</td> 
-          <td>没有实现。</td>
-         </tr>
+      <td nowrap="" valign="top" align="right"><strong>text-decoration</strong></td>
+      <td>
+        text-decoration-line、text-decoration-style和text-decoration-color的组合值</td></tr>
+     <tr><td nowrap="" align="right"><b>text-decoration-line</b></td>
+      <td>
+        文本修饰的位置:
+        <ul>  
+         <li><i>none</i> - 默认, 文本没有下划线;</li>
+         <li><i>underline</i> -文本有下划线;</li>
+         <li><i>overline</i> - 文本有上划线text has a line over it;</li>
+         <li><i>line-through</i> - 文本有删除线。</li></ul>
+      </td>
+     </tr>
+     <tr>
+      <td nowrap="" align="right"><b>text-decoration-style</b></td>
+      <td>
+        文本修饰的样式:
+        <ul>
+          <li><i>solid</i> - 默认, 实线;</li>
+          <li><i>double</i> - 双划线;</li>
+          <li><i>dotted</i> - dotted line;</li>
+          <li><i>dashed</i> - dashed line;</li>
+          <li><i>wavy</i> - wavy line</li>
+        </ul>
+      </td>
+     </tr>
+     <tr>
+      <td nowrap="" align="right"><b>text-decoration-color</b></td>
+      <td>指定文本修饰的颜色。<p>值为：color值或<i>currentcolor</i>(默认, 当前文本颜色)。</p></td>
+     </tr>
         </tbody>
        </table> 
        <div>

@@ -29,7 +29,7 @@
       <p>示例： <code>var str = bytes.toString(&quot;UTF-8&quot;);</code> 返回UTF-8编码的字符串。</p></dd>
     <dt>fromString</dt>
     <dd>
-      <p><strong>( </strong><em>str</em>: string<strong> </strong>[, <em>encoding</em>:string] <strong>)</strong> returns: <em>Bytes</em></p>
+      <p><strong>( </strong><em>str</em>: string[, <em>encoding</em>:string] <strong>)</strong> returns: <em>Bytes</em></p>
       <p>静态方法, 从<em>str</em>字符串根据<em>encoding</em>编码创建一个Bytes对象(字节数组)。</p>
       <p>如果encoding未指定或是&quot;base64&quot;时，则认为是&quot;base64&quot;。否则如果编码是IANA字符集列表<a href="http://www.iana.org/assignments/character-sets">http://www.iana.org/assignments/character-sets</a>支持的一种，则返回对应的编码格式字符串。</p>
       <p>示例：<code>var bytes = Bytes.fromString(&quot;Привет, мир!&quot;, &quot;utf-8&quot;);</code> 返回UTF-8编码的字符串。</p></dd>
@@ -40,7 +40,11 @@
     <dt>crc32</dt>
     <dd>
       <p><strong>( </strong>&nbsp;<strong>)</strong> returns: <em>integer</em></p>
-      <p>返回该字节数组的CRC32技术结果的整数值。</p></dd>
+      <p>返回该字节数组的CRC32技术结果的整数值。</p>
+	  </dd>
+    <dt>compare</dt>
+		<dd>( other: Bytes&nbsp;) returns : integer, -1,0,1
+    <p>比较两个Bytes对象的内容是否相等, 返回-1,0或1，其中当两个对象的内容相等时返回0。</p></dd>
     <dt>save</dt>
     <dd>
       <div><strong>( </strong><em>filename</em>:string <strong>)</strong> returns: <em>true|false</em></div>
@@ -48,6 +52,15 @@
     <dt>load</dt>
     <dd>
       <div><strong>( </strong><em>filename</em>:string <strong>)</strong> returns: <em>Bytes</em></div>
-      <p>静态方法。创建一个新的Bytes对象，并将filename文件加载到它，并返回该对象。</p></dd></dl>
+      <p>静态方法。创建一个新的Bytes对象，并将filename文件加载到它，并返回该对象。</p></dd>
+    <dt>compress</dt>
+    <dd>
+      <div><strong>( </strong><strong>)</strong> returns: <em>Bytes</em></div>
+      <p>创建一个新的Bytes对象 - 原始字节数组的压缩版本。</p></dd>
+    <dt>decompress</dt>
+    <dd>
+      <div><strong>( </strong><strong>)</strong> returns: <em>Bytes | null</em></div>
+      <p>创建一个新的Bytes对象, 恢复先前压缩的字节数组。如果数组之前为压缩则返回<i>null</i>。</p></dd>
+  </dl>
 </body>
 </html>

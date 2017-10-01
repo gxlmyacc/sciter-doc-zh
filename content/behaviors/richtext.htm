@@ -103,7 +103,16 @@
     <li><code>&quot;format:indent&quot;</code> - 保存选择的段落到<code>&lt;blockquote&gt;</code> 或 sub-list。</li>
     <li><code>&quot;format:unindent&quot;</code> - 将选择内容从<code>&lt;blockquote&gt;</code>中卸载，或移动子列表到上一层级。</li>
     <li><code>&quot;format:morph-block:{tag}&quot;</code> - 改变选择块内容的标签。比如可以通过它将当前的<code>&lt;blockquote&gt;</code>标签改成<code>&lt;div&gt;</code>。仅块元素(且不包含其他<code>display:block</code>元素)可以被morphed。</li>
-  <li><code>&quot;format:unwrap-element:{tag}&quot;</code> - 将元素的内容移到它的父元素中，并且从DOM中移除该元素。</li>
+    <li><code>&quot;format:unwrap-element:{tag}&quot;</code> - 将元素的内容移到它的父元素中，并且从DOM中移除该元素。</li>
+  </ul>
+	<p>表格编辑操作。下面这些操作仅在选择内容在一个表格中时才有效:</p>
+	<ul>
+    <li><code>edit:insert-table-row:{before|after}</code> - 在选择单元格后面一行之前插入一行;</li>
+		<li><code>edit:insert-table-column:{before|after}</code> - 在选择单元格后面一列之前插入一列;</li>
+		<li><code>edit:merge-table-cells</code> - 将选择的单元格范围合并成一个单元格(将为单元格添加rowspan/colspan);</li>
+		<li><code>edit:delete-table-rows</code> - 删除选择的行;</li>
+		<li><code>edit:delete-table-columns</code> - 删除选择的列;</li>
+		<li><code>edit:split-table-cells</code> - 拆分已合并的单元格。</li>
   </ul>
   <h2>方法</h2>
   <dl>
