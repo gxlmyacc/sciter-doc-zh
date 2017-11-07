@@ -33,7 +33,7 @@ otherwise
   <h2>数据声明</h2>
   <h3>整数类型</h3>
   <table cellspacing="1" cellpadding="3" border="0" bgcolor="black">
-    <tr valign="top">
+    <tbody><tr valign="top">
       <td bgcolor="white"><b>模式</b></td>
       <td bgcolor="white"><b>示例</b></td>
       <td bgcolor="white"><b>说明</b></td></tr>
@@ -52,10 +52,10 @@ otherwise
     <tr valign="top">
       <td bgcolor="white"><code>'.'</code></td>
       <td bgcolor="white">'A'</td>
-      <td bgcolor="white">字符代码(整数)</td></tr></table>
+      <td bgcolor="white">字符代码(整数)</td></tr></tbody></table>
   <h3>浮点类型</h3>
   <table cellspacing="1" cellpadding="3" border="0" bgcolor="black">
-    <tr valign="top">
+    <tbody<tr valign="top">
       <td bgcolor="white"><b>模式</b></td>
       <td bgcolor="white"><b>示例</b></td>
       <td bgcolor="white"><b>说明</b></td></tr>
@@ -70,13 +70,13 @@ otherwise
     <tr valign="top">
       <td bgcolor="white"><code>-?[0-9]*\.[0-9]+[eE]-?[0-9]+</code></td>
       <td bgcolor="white">.22e-2</td>
-      <td bgcolor="white">0.0022</td></tr></table>
+      <td bgcolor="white">0.0022</td></tr></tbody></table>
   <h3>字符串类型</h3>
   <p>字符串是一个使用双引号<code>&quot;</code>或单引号<code>`</code>(字符代码为0x60)括起来的字符列表。</p>
   <p><code>&quot;Hello world&quot;</code>和<code>`Hello world`</code>都是有效的字符串。在字符串中以反斜杠(<code>\</code>)开始的字符是转义字符。</p>
   <p>转义规则:</p>
   <table bgcolor="#000000" border="0" cellpadding="3" cellspacing="1">
-    <tr valign="top">
+    <tbody><tr valign="top">
       <td bgcolor="#ffffff"><strong>转移字符</strong></td>
       <td bgcolor="#ffffff"><strong>意义</strong></td></tr>
     <tr valign="top">
@@ -111,7 +111,7 @@ otherwise
       <td bgcolor="#ffffff">\4e - 16进制字符代码</td></tr>
     <tr valign="top">
       <td bgcolor="#ffffff"><code>\u[0-9a-fA-F]{4}</code></td>
-      <td bgcolor="#ffffff">\u004E - unicode字符代码</td></tr></table>
+      <td bgcolor="#ffffff">\u004E - unicode字符代码</td></tr></tbody></table>
   <p>以空格或EOL字符分隔的两个或多个字符串，会被当做一个字符串。因此下面的字符串：</p>
   <pre>var str1 = &quot;The quick brown &quot;
            &quot;fox jumps over &quot;
@@ -129,7 +129,7 @@ var symBorder = #border;
 </pre>
   <h3>特殊字符</h3>
   <table bgcolor="#000000" border="0" cellpadding="3" cellspacing="1">
-    <tr valign="top">
+    <tbody><tr valign="top">
       <td bgcolor="#ffffff"><strong>字符</strong></td>
       <td bgcolor="#ffffff"><strong>说明</strong></td></tr>
     <tr valign="top">
@@ -144,7 +144,7 @@ var symBorder = #border;
       <td bgcolor="#ffffff">逻辑操作中的'真'值。使用typeof判断<em>true</em>的类型为#boolean。</td></tr>
     <tr valign="top">
       <td bgcolor="#ffffff"><code>false</code></td>
-      <td bgcolor="#ffffff">逻辑操作中的'假'值。使用typeof判断<em>false</em>的类型为#boolean。</td></tr></table>
+      <td bgcolor="#ffffff">逻辑操作中的'假'值。使用typeof判断<em>false</em>的类型为#boolean。</td></tr></tbody></table>
   <h3>数组声明</h3>
   <p>数组声明允许定义(创建)一个内联数组。数组的声明是以逗号分隔，以<code>[</code>、<code>]</code>(方括号)闭合的表达式初始化列表:</p>
   <pre>var a = [ 1, 2, 3, &quot;four&quot;, 5 ];
@@ -190,7 +190,8 @@ var symBorder = #border;
   <h3>宏(Macro)变量</h3>
   <p>有3个宏变量可以用于日志和调试目的:</p>
   <ul>
-    <li><code>__FILE__</code> - 当前文件的名称;</li>
+    <li><code>__FILE__</code> - 当前文件的全路径;</li>
+    <li><code>__FOLDER__</code> - 当前目录的全路径;</li>
     <li><code>__LINE__</code> - 当前文件中的行号;</li>
     <li><code>__TRACE__</code> - 准确地说是一个说明，它创建了一个当前调用轨迹的快照作为一个三元向量。每个三元是一个有三个元素的向量:</li>
     <ul>

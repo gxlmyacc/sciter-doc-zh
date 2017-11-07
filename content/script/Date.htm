@@ -89,10 +89,12 @@
       <p>静态方法, 根据year、month、day等构造一个新的date对象。</p>
       <p>注意: 值是<strong>本地时区</strong>。</p>
       <p>使用示例：<code>var date = Date.local(1999,1,1);</code></p></dd>      
-        <dt>toString<br/></dt>
+        <dt>toString</dt>
         <dd>
-          <div><strong>()</strong> : string</div>
-          <p>返回该日期对象RFC-822形式的日期/时间字符串。</p></dd>
+          <div><b>(</b> <code/>[<i/><i>format</i>:string [, <i/><i>utc</i>:bool ]]<b/><b>)</b> : string</div>
+          <p>默认情况下，它返回该日期对象的RFC-822字符串格式。</p>
+          <p>如果提供了<i>format</i>参数，这它使用<a href="http://www.cplusplus.com/reference/ctime/strftime/">strftime rules</a>规则解析。</p>
+          <p>如果提供了<i>utc</i>参数，并且为true，则格式化将使用格林尼治天文台时区的时间。</p></dd>
       
         <dt>toUTCString</dt>
         <dd>
@@ -106,9 +108,10 @@
       
         <dt>toLocaleString</dt>
         <dd>
-          <p><strong>( </strong>[<em>longFormat</em>]<strong> )</strong> returns: string</p>
-          <p>返回当前操作系统设置的日期字符串。本地事件。<br/>
-		  如果<em>longFormat</em>参数为<em>true</em>，则使用系统长格式形式的日期。</p></dd>
+          <p><strong>( </strong>[<em>longFormat:</em>false|true[, <i>andTime</i>:false|true]]<strong> )</strong> returns: string</p>
+          <p>返回该日期的当前系统设置的字符串表示形式。</p>
+          <p>如果<em>longFormat</em> 值为<em>true</em>，则格式化日期将使用长日期格式。</p>
+          <p>如果<i>andTime</i>为true，则结果字符串中将包含时间。</p></dd>
       
         <dt>valueOf</dt>
         <dd>

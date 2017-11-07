@@ -133,10 +133,12 @@ if( fn ) view.<strong>load</strong>(fn);
 </pre></dd>
     <dt>selectFolder</dt>
     <dd>
-    <div><strong>(</strong> [ <em>dialogCaption</em>:string] <strong>) </strong>: string | null</div>
+    <div><strong>(</strong> [ <em>dialogCaption</em>:string, [<i>defaultFolder</i>:string]] <strong>) </strong>: string | null</div>
     <p>该方法显示系统的目录选择模态对话框，并且返回选择目录的全名，如果用户选择了取消则返回null。</p>
       <ul>
-        <li><em>dialogCaption</em>设置选择对话框的标题</li></ul>
+        <li><em>dialogCaption</em>设置选择对话框的标题</li>
+        <li><i>defaultFolder</i> - string, 显示对话框时的默认目录</li>
+      </ul>
         <div>注意：在不同的系统中，selectFolder有不同的UI。</div>
     </dd>
     <dt>selectPrinter</dt>

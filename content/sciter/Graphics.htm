@@ -145,12 +145,19 @@
     <dt>fillLinearGradient</dt>
     <dd>
       <div>( x1: float, y1: float, x2: float, y2: float, color1: rgba, color2: rgba [, p: float] ) : Graphics</div>
-      <p>设置线性渐变填充的参数。</p></dd>
+      <p>设置线性渐变填充的参数，填充颜色使用color2。</p></dd>
+    <dt>fillLinearGradient</dt>
+    <dd>
+      <div>( x1: float, y1: float, x2: float, y2: float, colors: Array [, stops: Array] ) : Graphics</div>
+      <p>设置辐射渐变填充的参数，填充颜色使用<i>colors</i>数组，另外你也可以提供<i>stop</i>位置 - 0.0 ... 1.0之间的值组成的数组。</p></dd>
     <dt>lineRadialGradient</dt>
     <dd>
       <div>( x1: float, y1: float, r: float, color1: rgba, color2: rgba [, p: float] ) : Graphics</div>
       <p>设置辐射渐变填充的参数。</p></dd>
-    <dd></dd>
+    <dt>fillRadialGradient</dt>
+    <dd>
+      <div>( x1: float, y1: float, r: float, colors: Array [, stops: Array] ) : Graphics</div>
+      <p>设置辐射渐变填充的参数，填充颜色使用<i>colors</i>数组，另外你也可以提供<i>stop</i>位置 - 0.0 ... 1.0之间的值组成的数组。</p></dd>
     <dt>noFill</dt>
     <dd>
       <div>( ) : Graphics</div>
