@@ -224,7 +224,7 @@
     <h4>层</h4>
     <dt>pushLayer</dt>
     <dd>
-      <div>( <strong>x</strong>: float, <strong>y</strong>: float, <strong>width</strong>: float, <strong>height</strong>: float [, <strong>opacity</strong>: 0.0... 1.0] ) : Graphics</div>
+      <div>( <strong>x</strong>: float, <strong>y</strong>: float, <strong>width</strong>: float, <strong>height</strong>: float [, <strong>opacity</strong>: 0.0... 1.0 | <b>filter</b>] ) : Graphics</div>
       <p>设置矩形裁剪区域，可设置不透明度。</p></dd>
     <dt>pushLayer</dt>
     <dd>
@@ -236,7 +236,7 @@
       <p>设置image的剪辑掩码。 如果<em>mask1a</em>为true，则所有alpha == 0的像素点将<strong>不会</strong>被渲染。如果<em>mask1a</em>为false，则它是一个相反的掩码 - 所有alpha == 0的像素点将被渲染。</p></dd>
     <dt>pushLayer</dt>
     <dd>
-      <div>( <strong>area</strong>: Symbol ) : Graphics</div>
+      <div>( <strong>area</strong>: Symbol [, <b>filter</b>] ) : Graphics</div>
       <p>设置矩形裁剪区域。area参数可设置一下值之一:</p>
       <ul>
         <li><code>#background-area</code> - 元素的背景区域，包括圆角边框(如果为该元素声明了的话);</li>
@@ -244,7 +244,22 @@
         <li><code>#margin-box</code> - 元素的外边距盒;</li>
         <li><code>#border-box</code> - 元素的边框盒;</li>
         <li><code>#padding-box</code> - 元素的内边距盒;</li>
-        <li><code>#inner-box</code> - 元素的内部/内容盒;</li></ul></dd>
+        <li><code>#inner-box</code> - 元素的内部/内容盒;</li>
+			</ul>
+			<p><i>filter</i>是以下CSS过滤器之一(表示为元组):</p>
+			<ul>
+        <li><code>[blur:</code> radius<code>]</code> - radius这里是一个长度单位;</li>
+        <li><code>[brightness:</code> 0.0...1.0<code>]</code></li>
+        <li><code>[contrast:</code> 0.0...1.0<code>]</code></li>
+        <li><code>[grayscale:</code> 0.0...1.0<code>]</code></li>
+        <li><code>[hue-rotate:</code> 0...360<code>]</code></li>
+        <li><code>[invert:]</code></li>
+        <li><code>[opacity:</code> 0.0...1.0<code>]</code></li>
+        <li><code>[saturate:</code> 0.0...1.0<code>]</code></li>
+        <li><code>[sepia:</code> 0.0...1.0<code>]</code></li>
+        <li><code>[drop-shadow:</code> color, dx, dy, radius, spread<code>]</code> - dx,dy,radius和spread都是长度单位。</li>
+      </ul>
+    </dd>
     <dt>popLayer</dt>
     <dd>
       <div>( ): Graphics</div>
