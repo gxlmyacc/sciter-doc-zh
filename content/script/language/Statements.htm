@@ -7,11 +7,15 @@
     <meta name="generator" content="h-smile:richtext"/>
   </head>
 <body>
-  <h1>语句</h1><input type="checkbox"  checked=""  id="show-defintions" />&nbsp;显示/隐藏 定义信息。
+  <h1>语句</h1>
   <dl class="flat">
     <dt><strong><code>{</code></strong> &lt;语句&gt; <strong><code>}</code></strong></dt>
     <dd>一个语句序列，由花括号'{'和'}'分隔，被称作<strong>块</strong>。一个块本身就是一个语句。每个块为它内部的<strong>var</strong>和<strong>const</strong>语句声明的变量建立自己的名称空间。</dd>
     <br />
+		<dt>&lt;表达式&gt; <code>(</code> [&lt;参数-表达式&gt;[&nbsp;<code>,</code> &lt;参数-表达式&gt;[ <code>,</code> ... &lt;参数-表达式&gt;]]] <code>)</code> </dt>
+		<dd>函数/方法调用。左侧的&lt;表达式&gt;的值应该为一个函数引用。&lt;参数-表达式&gt;列表(如果存在)的求值结果将被作为函数的参数传递给函数。
+      <p>&lt;参数-表达式&gt;可以是一个正常表达式，也可以是一个展开操作<code>..</code>&lt;iterable&gt;，其中<i>iterable</i>是一个数组、元组或生成器实例。Iterable将展开成参数序列。</p>
+     </dd>
     <dt><strong><code>if</code></strong> <strong><code>(</code></strong> &lt;表达式&gt; <strong><code>)</code></strong> &lt;语句&gt; [ <strong><code>else</code></strong> &lt;语句&gt; ]</dt>
     <dd>根据条件执行一个语句，具体执行哪个语句依赖于&lt;表达式&gt;的结果。</dd>
     <br /> 

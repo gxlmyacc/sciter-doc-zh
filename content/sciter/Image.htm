@@ -30,9 +30,9 @@
       <p>销毁底层的本地位图。该方法用于在它不在需要时强制Image对象释放它的位图(可能是相当大的)。</p></dd>
     <dt>toBytes</dt>
     <dd>
-      <div>( [<strong>compressionLevel</strong>:integer] &nbsp;) : <a href="../script/Bytes.htm">Bytes</a></div>
+      <div>([ <b>packaging</b>: #png | #jpeg | #webp | #raw] [, <strong>compressionLevel</strong>:integer]) : <a href="../script/Bytes.htm">Bytes</a></div>
       <p>保存图像的图像的内容为一个可被使用的字节向量，比如可以上传到服务器上。</p>
-      <p><em>compressionLevel</em>是10..100中的一个值  - JPEG压缩层级。如果它被省略或者为0则该图像会保存为PNG编码。</p></dd>
+      <p><em>compressionLevel</em>是10..100中的一个值  - JPEG/WebP压缩层级。如果<i>compressionLevel</i>被省略或者为0并且未指定packaging参数，则该图像会保存为PNG编码。</p></dd>
     <dt>fromBytes</dt>
       <dd>
         <div>( bytes : <a href="../script/Bytes.htm">Bytes</a> ) : Image</div>

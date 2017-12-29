@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>即将来临的Sciter 4.1.*.*的变化</title></head>
+  
+  <body>
+    <h1 class="article-title">即将来临的Sciter 4.1.*.*的变化</h1>
+    <div class="article-content">
+      <p>我正在使用<a href="https://github.com/libuv/libuv">libuv</a>库来重构现在的异步I/O代码，这将包括修改现有功能以及添加新功能。</p>
+      <h2><em>Net</em>(new)名称空间</h2>
+      <p>它包含:</p>
+      <ul>
+        <li>
+           Net.Socket – 异步原始(raw)TCP socket和管道。管道在Windows上指<a href="https://msdn.microsoft.com/en-us/library/windows/desktop/aa365590(v=vs.85).aspx" target="_blank" rel="noopener">命名管道</a>，在其他平台叫local sockets。Socket用于发送字符串和二进制数据。</li>
+        <li>
+           Net.DataSocket – 异步原始TCP socket和管道，用于发送结构化数据 – JSON++数据子集。</li>
+        <li>
+           Net.WebSocket – 异步WebSockets</li>
+      </ul>
+      <h2><em>System</em>(extended)名称空间</h2>
+      <p>新增的函数:</p>
+      <ul>
+        <li>
+          System.watch(path: string): FileMonitor – 文件和目录的变化监视器。</li>
+        <li>
+          System.dir(path: string, callback: Function) – 它本质上是<a href="https://linux.die.net/man/3/scandir">scandir()</a>的封装。</li>
+        <li>
+          System.unlink(path: string): Thenable – 异步<a href="https://linux.die.net/man/2/unlink" target="_blank" rel="noopener">unlink()</a>, 即移除文件。</li>
+        <li>
+          System.rmdir(path: string): Thenable – 异步<a href="https://linux.die.net/man/2/rmdir" target="_blank" rel="noopener">rmdir()</a>, 即移除目录。</li>
+        <li>
+          System.mkdir(path: string [, mode]): Thenable – 异步<a href="https://linux.die.net/man/2/mkdir" target="_blank" rel="noopener">mkdir()</a>, 即创建目录。</li>
+        <li>
+          System.rename(oldpath: string, newpath: string): Thenable – 异步<a href="https://linux.die.net/man/2/rename" target="_blank" rel="noopener">rename()</a>, 即重命名或移动文件(目录)。</li>
+        <li>
+          System.copyFile(oldpath: string, newpath: string [, #overwrite]) : Thenable – 异步文件复制。</li>
+        <li>
+          System.stat(path: string): Thenable – 异步<a href="https://linux.die.net/man/2/stat" target="_blank" rel="noopener">stat()</a>调用。</li>
+        <li>
+          System.utime(path: string, atime: Date, mtime: Date): Thenable – 异步<a href="https://linux.die.net/man/2/utime" target="_blank" rel="noopener">utime()</a>调用。</li>
+        <li>
+          System.chmod(path: string, mode: integer): Thenable – 异步<a href="https://linux.die.net/man/2/chmod" target="_blank" rel="noopener">chmod()</a>调用。</li></ul>
+      <p>变更的函数:</p>
+      <ul>
+        <li>
+          System.Process.exec(path [, arguments: Array]): System.Process – 异步执行进程, 可以接收来自它的<em>stdout</em>/<em>stderr</em>的输出，并且发送文本到它的<em>stdin</em>。</li></ul>
+      <p>移除的函数:</p>
+      <ul>
+        <li>
+          Stream.openSocket() 被移除，由Net.Socket替代。
+        </li>
+      </ul>
+    </div>
+  </body>
+
+</html>

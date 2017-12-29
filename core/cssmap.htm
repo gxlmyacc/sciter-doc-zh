@@ -45,43 +45,10 @@
     </div></li>
   </ul> 
   <p align="left">Sciter支持所有的CSS1 <a href="http://www.w3.org/TR/CSS1#basic-concepts">基本概念</a>和<a href="http://www.w3.org/TR/CSS1#cascading-order">层叠顺序</a>。 Sciter也支持CSS 2.1的<a href="http://www.w3.org/TR/CSS21/selector.html#attribute-selectors">属性选择器</a>和一些基本的CSS3选择器。</p> 
-  <h3 align="left">自定义CSS属性</h3> 
-  <p align="left">Sciter(h-smile core)支持自定义CSS属性。所有的自定义属性名称以'-'字符开头。自定义属性不会从父元素继承到子元素。 下面是一个自定义属性的声明:</p> 
-  <p align="left">p { border: 1px solid red; <strong>-custom: &quot;value&quot;;</strong> &nbsp;&nbsp;}</p> 
-  <p align="left">在上面的这个声明后，所有的<strong>&lt;p&gt;</strong>元素都会有值为&quot;value&quot;的<strong>-custom</strong>样式属性。</p> 
-  <p align="left">自定义属性的值可以为下面的值之一:</p> 
-  <ul> 
-   <li> 
-    <div align="left">
-     字符串 (使用&quot;&quot;括起来), 示例: 
-     <em>&quot;string&quot;</em> ;
-    </div></li> 
-   <li> 
-    <div align="left">
-     nmtoken(Name Token的缩写，中文意思就是名称记号，它表示由一个或多个字母、数字、句点、连字号或底线所组成的一个名称), 示例: 
-     <em>some-token</em> ;
-    </div></li> 
-   <li> 
-    <div align="left">
-     数字值, 示例: 
-     <em>3.1415</em> ;
-    </div></li> 
-   <li> 
-    <div align="left">
-     url, 示例: 
-     <em>url(http://something.com)</em>; &nbsp;
-    </div></li> 
-   <li> 
-    <div align="left">
-     CSS选择器, 示例: 
-     <em>selector(#id &gt; .cls)</em>;
-    </div></li>
-  </ul> 
   <div align="left">
    宿主程序可以使用自定义属性来实现任何目的。 引擎内部不会翻译解释这些属性。
-  </div> 
-  <h3 align="left">标准CSS属性</h3> 
-  <p align="left">h-smile支持的CSS属性列表:</p> 
+  </div>  
+  <h3 align="left">Sciter支持的CSS属性列表:</h3> 
   <div align="left"> 
    <table border="1" bordercolor="#fff2cc" cellspacing="0"> 
     <tbody>
@@ -2641,29 +2608,91 @@ p.status[state=&quot;warning&quot;] { content: &quot;Warning!&quot;; foreground-
   <h3>颜色</h3> 
   <p>引擎支持以下几种颜色常量的定义:</p> 
   <ul> 
-   <li><font face="monospace">color: <strong>#f00</strong>; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- #rgb形式。</font></li> 
-   <li><font face="monospace">color: <strong>#ff0000</strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- #rrggbb 形式。</font></li> 
-   <li><font face="monospace">color: <strong>rgb</strong>(255,0,0) &nbsp;&nbsp;&nbsp;- rgb(0..255,0..255,0..255) 形式。</font></li> 
-   <li><font face="monospace">color: <strong>rgb</strong>(100%,0%,0%) - rgb(0..100%,0..100%,0..100%) 形式。</font></li> 
-    <li><code>color: <strong>rgba</strong>(255,0,0,0.5) - rgba(0..255,0..255,0..255,0..1) 形式。</code></li>    
-   <li><font face="monospace">color: <strong>hsl</strong>(300,0%,0%) &nbsp;- hsl(0..360,0..100%,0..100%) 形式 - HSL色彩空间。</font></li> 
-   <li><font face="monospace" color="#990033">color: <strong>tint</strong>(@base-color, 50%, 0%) - tint(base-color, -1.0..1.0 [, -1.0..1.0]) 形式。</font></li>
+   <li><code>color: <strong>#f00</strong>; - #rgb形式。</code></li> 
+   <li><code>color: <strong>#ff0000</strong> - #rrggbb 形式。</code></li>
+   <li><code>color: <strong>#aaff0000</strong> - #aarrggbb 形式。</code></li>
+   <li><code>color: <strong>rgb</strong>(255,0,0) - rgb(0..255,0..255,0..255) 形式。</code></li> 
+   <li><code>color: <strong>rgb</strong>(100%,0%,0%) - rgb(0..100%,0..100%,0..100%) 形式。</code></li> 
+   <li><code>color: <strong>rgba</strong>(255,0,0,0.5) - rgba(0..255,0..255,0..255,0..1) 形式。</code></li>    
+   <li><code>color: <strong>hsl</strong>(300,0%,0%) - hsl(0..360,0..100%,0..100%) 形式 - HSL色彩空间。</code></li> 
+   <li><code>color: <strong>tint</strong>(@base-color, 50%, 0%) - tint(base-color, -1.0..1.0 [, -1.0..1.0]) 形式。</code></li>
+   <li>
+     <code>color: <b>morph</b>(basecolor, ...)</code> - 色彩morphing/transformation函数
+     <p><i>basecolor</i>可以是颜色常量或变量。</p>
+     <p>该函数可以接受以下参数之一:</p>
+     <ul>
+    <li><code>hue:Adeg</code> - 通过修改HSL色彩空间基色(basecolor)的H(色调)分量来创建一个新色彩值。A是角度值，值范围为0...360 - 即H分量的绝对值。</li>
+    <li><code>rotate:Adeg</code> - 通过相对角度来修改基色的H分量值, A是旋转的角度 : -360deg ... +360deg。</li>
+    <li><code>lightness:p%</code> - 通过修改HSL色彩空间基色(basecolor)的L(亮度)分量来创建一个新色彩值。<i>p</i>的范围为0...100 - 即L分量的绝对值。</li>
+    <li><code>lighten:p%</code> - 通过增加HSL色彩空间基色(basecolor)的L(亮度)分量来创建一个新色彩值。<i>p</i>的范围为0...100 - 即L分量的相对增加值。</li>
+    <li><code>darken:p%</code> - 通过减少HSL色彩空间基色(basecolor)的L(亮度)分量来创建一个新色彩值。<i>p</i>的范围为0...100 - 即L分量的相对减少值。</li>
+    <li><code>saturation:p%</code> - 通过修改HSL色彩空间基色(basecolor)的S(饱和度)分量来创建一个新色彩值。<i>p</i>的值范围为0...100 - 即S分量的绝对值。</li>
+    <li><code>saturate:p%</code> - 通过增加HSL色彩空间基色(basecolor)的S(饱和度)分量来创建一个新色彩值。<i>p</i>的范围为0...100 - 即S分量的相对增加值。</li>
+    <li><code>desaturate:p%</code> - 通过减少HSL色彩空间基色(basecolor)的S(亮度)分量来创建一个新色彩值。<i>p</i>的范围为0...100 - 即S分量的相对减少值。</li>
+    <li><code>opacity:p%</code> - 通过修改RGBG色彩空间基色(basecolor)的A(透明度)分量来创建一个新色彩值。<i>p</i>的值范围为0...100 - 即A分量的绝对值, 如果是<code>100%</code>，则色彩是不透明的，如果是<code>0%</code>，则色彩是纯透明的。</li>
+    <li><code>opacify:p%</code> - 通过增加/减少基色的当前A(透明度)值来创建一个新的颜色值。<i>p</i>的值范围 -100%...100% - relative 即A分量的增加/减少值。</li>
+    <li><code>color2,mix:p%</code> - 创建基色与color2的混合色彩, <i>p</i>的值范围为0%...100% - 即混合的比例。如果p == 0%则结果是基色，如果是100%则结果是color2。</li>
+    <li><code>grayscale:p%</code> - 将基色转换为灰度值。如果p是100%则结果是纯灰度色彩(R == G == B)。如果p是0%则结果是原始基色。</li>
+    <li><code>sepia:p%</code> - 将基色转换为褐色值. 如果p是100%，则结果是纯褐色, 如果p是0%则结果是原始基色。</li>
+    </ul>
+  </li></ul>
+  
+  <h3 align="left">自定义CSS属性</h3> 
+  <p align="left">Sciter支持自定义CSS属性。所有的自定义属性名称以'-'字符开头。自定义属性不会从父元素继承到子元素。 下面是一个自定义属性的声明:</p> 
+  <p align="left">p { border: 1px solid red; <strong>-custom: &quot;value&quot;;</strong> &nbsp;&nbsp;}</p> 
+  <p align="left">在上面的这个声明后，所有的<strong>&lt;p&gt;</strong>元素都会有值为&quot;value&quot;的<strong>-custom</strong>样式属性。</p> 
+  <p align="left">自定义属性的值可以为下面的值之一:</p> 
+  <ul> 
+   <li> 
+    <div align="left">
+     字符串 (使用&quot;&quot;括起来), 示例: 
+     <em>&quot;string&quot;</em> ;
+    </div></li> 
+   <li> 
+    <div align="left">
+     nmtoken(Name Token的缩写，中文意思就是名称记号，它表示由一个或多个字母、数字、句点、连字号或底线所组成的一个名称), 示例: 
+     <em>some-token</em> ;
+    </div></li> 
+   <li> 
+    <div align="left">
+     数字值, 示例: 
+     <em>3.1415</em> ;
+    </div></li> 
+   <li> 
+    <div align="left">
+     url, 示例: 
+     <em>url(http://something.com)</em>; &nbsp;
+    </div></li> 
+   <li> 
+    <div align="left">
+     CSS选择器, 示例: 
+     <em>selector(#id &gt; .cls)</em>;
+    </div></li>
   </ul> 
-  <div>
-   <font face="monospace">tint(src-color, luminance-delta, saturation-delta)</font>允许基于基础色定义颜色。参数:
-  </div> 
-  <ol> 
-   <li><font face="monospace">src-color</font>是一个颜色描述或者一些预定义的颜色常量。</li> 
-   <li><font face="monospace">luminance-delta</font>是范围-1.0 .. +1.0的浮点值 - 对原始颜色亮度的相对增加值:<br />
-   <u><font face="monospace">如果</font></u><font face="monospace"> luminance-delta &lt; 0 <u>则</u> final-luminance = src-luminance * abs(luminance-delta)<br /><u>如果</u> luminance-delta &gt; 0 <u>则</u> final-luminance = (1.0 - src-luminance) * luminance-delta</font></li> 
-   <li><font face="monospace">saturation-delta, 可选参数, </font>是范围-1.0 .. +1.0的浮点值 - 对原始颜色色彩饱和度的相对增加值:<font face="monospace"><br />
-   <u>如果</u> luminance-delta &lt; 0 <u>则</u> final-luminance = src-luminance * abs(luminance-delta)<br /><u>如果</u> luminance-delta &gt; 0 <u>则</u> final-luminance = (1.0 - src-luminance) * luminance-delta</font></li>
-  </ol> 
-  <p>示例，请看下面的声明:</p> 
-  <p><font face="monospace">@const <strong>BASE_COLOR</strong>: #FF0000; /*红色*/<br />
-  li { border:1px solid tint( <strong>@BASE_COLOR</strong>, -0.5); }</font></p> 
-  <p>&lt;li&gt;元素的边框将会是暗红色 - #7F0000。</p> 
-  <pre>
-</pre>  
+
+  <h3>CSS变量</h3>
+
+  <p>CSS变量是一个变量名包裹在<code>var(...)</code>结构中的一个声明, 示例:</p>
+
+    <pre>body {
+  var(back-color): #ccc;
+  var(text-color): #000;
+
+  var(base-width) : 100dip; 
+}</pre>
+
+    <p>变量会从父元素继承给子元素。例如: 如果变量声明在&lt;body&gt;上，则它将影响body的所有子元素。</p>
+    <p>变量可以使用在一些CSS样式值中 - 所有颜色值或长度单位:</p>
+    <ul>
+       <li><code>var(name,defaultValue)</code> - 使用name的值替换声明的变量,。如果未声明该变量，则使用defaultValue替换。</li> 
+       <li><code>length(name)</code> - 使用name的值替换声明的变量。如果未声明该变量，或值不为长度单位，则是undefined。</li> 
+       <li><code>color(name)</code> - 使用name的值替换声明的变量。如果未声明该变量，或值不为颜色值，则是undefined。</li></ul>
+
+      <p>下面是一个变量的使用示例:</p>
+  <pre>div {
+  background-color: color(back-color); /* #ccc */
+  width: length(base-width); /* 100dip */
+  height: var(base-height,80dip); /* 80dip as base-height was not defined */
+}</pre>
  </body>
 </html>

@@ -151,8 +151,12 @@ var symBorder = #border;
 </pre>
   <p>在上面的语句中，<em>a</em>变量获取了一个新定义地有5个元素的数组。</p>
   <p>任何在最后一个元素和<code>]</code>(闭合方括号)间的<code>,</code> (逗号)都将会被忽略。因此，下面的声明是一个有效的数组声明：</p>
-  <pre>var a = [ 1, 2, 3, &quot;four&quot;, 5, ];
-</pre>
+  <pre>var a = [ 1, 2, 3, &quot;four&quot;, 5, ];</pre>
+	<h4>数组声明中的展开操作符</h4>
+	<p>数组声明中可以包含所谓的“展开表达式”：<code>.. &lt;iterable&gt;</code>，其中<code>&lt;iterable&gt;</code>可以是一个数组、元组或生成器实例。展开操作符可以使数组名称从其他数组或生成序列中组合成新数组。所以以下代码结果将为<code>true</code>:</p>
+	<pre>var a1 = [0,1,2];
+var a2 = [..a1, 3, 4];
+a2 == [0, 1, 2, 3, 4];</pre>
   <p>声明数组类型的格式定义：</p>
   <p><code>[</code> ( <code>&lt;rs-expr&gt;</code> <code>,</code> )* &nbsp;<code>]</code></p>
   <p>其中，&lt;rs-expr&gt;是所谓的右侧表达式 - 该表达式可以出现在<code>=</code>(赋值)操作符的右侧。</p>

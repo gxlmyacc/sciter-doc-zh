@@ -138,7 +138,8 @@
     <dd>返回&lt;表达式&gt;在&lt;索引-表达式&gt;位置的元素值。&lt;表达式&gt;可能是一个对象、数组或类。如果该元素不存在，则返回<em>undefined</em>。</dd>
     <dt><strong><code>[</code></strong>idx1<strong><code>..</code></strong>idx2<strong><code>]</code></strong></dt>
     <dd>&lt;数组-或-字符串&gt; <strong><code>[</code></strong> [&lt;整数-表达式-起始&gt;] <strong><code>..</code></strong> [&lt;整数-表达式-结束&gt;] <strong><code>]</code></strong><br />
-	数组或字符串的一个片段。返回从&lt;整数-表达式-起始&gt;开始(包含)到&lt;整数-表达式-结束&gt;结束(不包含)的子数组或子字符串。如果&lt;整数-表达式-起始&gt;省略了，则它默认为<em>0</em>；如果&lt;整数-表达式-结束&gt;省略，则它默认为<em>.length</em>的值。例如，下面的语句将会输出&quot;Spain&quot;:<br/><code>var str = &quot;The rain in Spain&quot;;<br/>stdout.println( str[12..] );</code></dd></dl>
+	数组或字符串的一个片段。返回从&lt;整数-表达式-起始&gt;开始(包含)到&lt;整数-表达式-结束&gt;结束(不包含)的子数组或子字符串。如果&lt;整数-表达式-起始&gt;省略了，则它默认为<em>0</em>；如果&lt;整数-表达式-结束&gt;省略，则它默认为<em>.length</em>的值。例如，下面的语句将会输出&quot;Spain&quot;:<pre>var str = &quot;The rain in Spain&quot;;
+stdout.println( str[12..] );</pre></dd></dl>
   <dt><strong><code>like</code></strong> <strong><code>!like</code></strong></dt>
   <dd>&lt;表达式&gt; <strong><code>like</code></strong> &lt;模式-表达式&gt;<br/>
   &lt;表达式&gt; <strong><code>!like</code></strong> &lt;模式-表达式&gt; (not like)<br/>
