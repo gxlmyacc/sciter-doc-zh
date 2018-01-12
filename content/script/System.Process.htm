@@ -1,24 +1,20 @@
 ﻿<html>
   <head>
-    <title>Process对象</title>
+    <title>System.Process对象</title>
     <meta name="generator" content="h-smile:richtext"/>
   </head>
 <body>
-  <h1>Process对象</h1>
+  <h1>System.Process对象</h1>
   <p>通过使用Process类, 你的程序可以允许另外一个程序作为子进程, 并且可以接收来自该子进程的<i>stdout</i>和<i>stderr</i>的输出，以及通过<i>stdin</i>流向它传递数据。</p>
   <dl>
     <h2>属性</h2>
     <dt>running</dt>
     <dd>- <em>boolean</em>, 进程运行状态, true - 进程正在运行。</dd>
     <h2>方法</h2>
-    <dt>proxy</dt>
-    <dd>
-      <div><strong>( </strong><strong>)</strong> : Process</div>
-      <p>创建一个新的子进程代理对象。</p></dd>
     <dt>exec</dt>
     <dd>
-      <div><strong>( exepath</strong>: string&nbsp;[, <b>arg1</b>: string, <b>arg2</b>: string, ...] <strong>)</strong> : self (该子进程实例)</div>
-      <p>启动exepath路径指定的可执行程序，启动时也可以传递命令行参数(可选)。</p></dd>
+      <div><strong>( exepath</strong>: string [, <b>arg1</b>: string, <b>arg2</b>: string, ...] <strong>)</strong> : Process</div>
+      <p>静态方法, 创建一个新的子进程代理对象，并根据指定的进程路径和命令行参数(可选)启动进程。</p></dd>
     <dt>on</dt>
     <dd>
       <div><strong>( event</strong>: string<strong>, callback</strong>: function<strong> )</strong> : this</div>

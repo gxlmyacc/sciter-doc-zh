@@ -60,7 +60,7 @@
     <dt><u>attributes</u></dt>
     <dd><font color="#999999">类 - </font><a href="Attributes.htm"><em>Attributes</em></a>, 该元素的html属性集合。</dd>
     <dt><u>@</u></dt>
-    <dd><font color="#999999">类 -</font> 访问<font color="#999999"> </font><a href="Attributes.htm"><em>Attributes</em></a>属性的简短格式, 该元素的html属性集合。它只是上面的<em>attributes</em>的别名。<br/>示例：<br/><code>this.@[&quot;selected&quot;] = true</code> // 或者<br/><code>this.@#selected = true</code><br/>等价于<br/><code>this.attributes[&quot;selected&quot;] = true</code></dd>
+    <dd><font color="#999999">类 -</font> 访问<font color="#999999" /><a href="Attributes.htm"><em>Attributes</em></a>属性的简短格式, 该元素的html属性集合。它只是上面的<em>attributes</em>的别名。<br/>示例：<br/><code>this.@[&quot;selected&quot;] = true</code> // 或者<br/><code>this.@#selected = true</code><br/>等价于<br/><code>this.attributes[&quot;selected&quot;] = true</code></dd>
     <dt><u>style</u></dt>
     <dd><font color="#999999">类 - </font><a href="Style.htm">Style</a>, 该DOM元素的CSS样式属性集合。</dd>
     <dt><u>state</u></dt>
@@ -359,7 +359,7 @@
       <p>返回元素在给定<em>forWidth</em>宽度情况下的最小内在(min-intrinsic)高度。最小内在高度是指显示元素没有垂直滚动条时的高度。</p></dd>
     <dt>toPixels</dt>
     <dd>
-      <div><strong>( length : </strong>length | string | symbol<strong> </strong>[, <strong>#width</strong> | <strong>#height</strong> ]<strong> ) :</strong> integer, 设备像素</div>
+      <div><strong>( length : </strong>length | string | symbol[, <strong>#width</strong> | <strong>#height</strong> ]<strong> ) :</strong> integer, 设备像素</div>
       <p>返回length转换为设备像素后的值。该转换是基于当前元素样式的上下文，所以<code>el.toPixels( em(1.4) )</code>将会当前元素中字体尺寸的1.4em对应的像素值。</p>
       <p>如果length是一个字符串或标识，则它会被当做一个CSS长度字符，所以length的值可以是<code>el.toPixels(#xx-small)</code>或<code>el.toPixels(#system-scrollbar-width)</code>。</p>
       <p>第二个symbol参数用在百分比长度的转换时：<br/><code>var h50p = el.toPixels( pr(50.0), #height );</code> - 将会和下面的CSS声明计算出相同的值: <code>height:50%</code>.</p></dd>
@@ -571,9 +571,9 @@ el.$content(This is item number <b>{ num }</b>);
       <p><em>placement</em>参数是可省略的。弹窗的位置也可以通过在CSS中定义<i>popup-position</i>属性来实现。</p></dd>
     <dt>popup</dt>
     <dd>
-      <div><strong>( el</strong>: Element, <strong>x</strong>:int, <strong>y</strong>:int ) :void</div>
-      <p>将el元素作为弹出窗口在x、y(相对于视图的坐标)坐标位置显示。<em>Placement</em>是7。</p>
-      <div>( 见小键盘上的数字 )。</div></dd>
+      <div><strong>( el</strong>: Element, [ <b>placement</b>: 1..9,] <strong>x</strong>:int, <strong>y</strong>:int ) :void</div>
+      <p>将el元素作为弹出窗口在x、y(相对于视图的坐标)坐标位置显示。<em>Placement</em>定义<i>el</i>相对x,y的弹出点，默认是7 (左/上角)。</p>
+      <p>( 见小键盘上的数字 )。</p></dd>
     <dt>closePopup</dt>
     <dd>
       <div><strong>()</strong> :void</div>

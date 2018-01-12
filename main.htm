@@ -32,7 +32,7 @@
       generateToc();
     }
 
-    event complete $(frame#content)
+    contentFrame << event complete
     {
       if (firstLoad) {
         firstLoad = false;

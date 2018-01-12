@@ -42,7 +42,7 @@
     <li><strong>view.request(</strong> <strong>params</strong>: map &nbsp;<strong>) </strong>: <strong>promise</strong>,<br/>- 异步请求，服务器的响应信息传递到promise调用<code>.then(onsuccess,onfailure)</code>注册的onsuccess回调函数上。</li></ol>
   <h2>promise() 与 await</h2>
   <p><code>await</code>操作符可以避免使用诺言方式的回调，而是使用线性的方式来写异步代码:</p>
-  <pre>function getRemoteTexts(url)
+  <pre>async function getRemoteTexts(url)
 {
   try {
     var text = <u>await</u> view.request { url: url, output: #string };
