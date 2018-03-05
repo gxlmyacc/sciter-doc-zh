@@ -1,5 +1,6 @@
   BEHAVIOR: windowCommand
-     goal: 窗口行为(最大化、最小化、标题拖动等)的实现
+  goal: 
+     窗口行为(最大化、最小化、标题拖动等)的实现
   引用：
      在CSS中添加 { behavior: windowCommand; }
   VIEWS:

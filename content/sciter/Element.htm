@@ -303,7 +303,7 @@
       <p>如果<em>whenEnded</em>函数被提供，则它会在动画结束时被调用。</p>
       <p><em>duration</em>为动画持续的总时间(毫秒)。如果提供了该参数则<em>nextStep</em>函数的声明应该为：</p> 
       <pre>function nextStep(progress: float) {} </pre> 
-      <p>其中，progress为0.0至1.0的浮点数——动画的进度。nextStep总是以接收到progress == 1.0作为最后一步。</p></dd>
+      <p>其中，progress为0.0至1.0的浮点数——动画的进度。nextStep总是以接收到progress == 1.0作为最后一步。</p>
 一个整数——下一个步骤等待的毫秒数。如果返回0或非整数则动画终止。</p>
       <p>否则step回调函数期待为无参数函数:</p>
 			<pre>function nextStep() {} </pre></dd>

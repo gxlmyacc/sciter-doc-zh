@@ -1,5 +1,6 @@
   BEHAVIOR: menutab
-     goal: menutab行为的实现，类似一个Tab标签页行为
+  goal: 
+     menutab行为的实现，类似一个Tab标签页行为
   引用：
      在CSS中添加 { behavior: menutab; }
   VIEWS:

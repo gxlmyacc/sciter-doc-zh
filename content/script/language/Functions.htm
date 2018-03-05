@@ -20,15 +20,23 @@
 	简单的<em>&lt;nmtoken&gt;</em> , 或<br/>组合名称: <em>&lt;nmtoken1&gt;</em> [ <code>.</code> <em>&lt;nmtoken2&gt;</em> [ . <em>&lt;nmtoken3&gt;</em> [ . <em>&lt;nmtokenN&gt;</em> ]]] <sup><a href="#fn__1" name="fnt__1" id="fnt__1" class="fn_top">1)</a></sup><br/><em>&lt;参数&gt;</em>是一个函数参数列表:<br/>
 	[<em>&lt;参数名1&gt;</em> [ <code>,</code> <em>&lt;参数名2&gt;</em> [ <code>,</code> ... <em>&lt;参数名N&gt;</em> ]]]</dd></dl>
   <h2><a name="anonymous-functions" id="anonymous-functions">匿名函数</a></h2>
-  <p>匿名函数可以使用以下语句来声明:</p>
+  <p>匿名函数(又名lambda表达式)可以使用以下语句来声明:</p>
   <p>经典的JavaScript格式:</p>
   <pre class="code tiscript"><code>function</code> <code>(</code> &lt;parameters&gt; <code>)</code> <code>{</code> &lt;statements&gt; <code>}</code>
 </pre>
   <p>单表达式lambda格式:</p>
-  <pre><code>:</code> &lt;parameters&gt; <code>:</code> &lt;statement&gt;
+  <pre><b>:</b> &lt;parameters&gt; <b>:</b> &lt;statement&gt;
 </pre>
   <p>块表达式lambda函数格式:</p>
-  <pre><code>:</code> &lt;parameters&gt; <code>{</code> &lt;statements&gt; <code>}</code>
+  <pre><b>:</b> &lt;parameters&gt; <b>:</b> &lt;statements&gt; <b>:</b>
+</pre>
+	<h3>&quot;That&quot; lambda函数声明:</h3>
+	<p>这种声明的函数没有自己的<i>this</i>环境变量。<i>this</i>环境变量取自它外部调用它的函数<i>this</i>，类似于 
+  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions">ES6中的箭头函数</a>。</p>
+	<p>单表达式lambda格式::</p>
+  <pre><b>|</b> &lt;parameters&gt; <b>|</b> &lt;statement&gt;</pre>
+  <p>块表达式lambda函数格式:</p>
+  <pre><b>|</b> &lt;parameters&gt; <b>{</b> &lt;statements&gt; <b>}</b> 
 </pre>
   <p>嵌套函数(其他函数内部的函数)是允许的。</p>
 	<h2>异步方法</h2>

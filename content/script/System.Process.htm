@@ -13,8 +13,9 @@
     <h2>方法</h2>
     <dt>exec</dt>
     <dd>
-      <div><strong>( exepath</strong>: string [, <b>arg1</b>: string, <b>arg2</b>: string, ...] <strong>)</strong> : Process</div>
-      <p>静态方法, 创建一个新的子进程代理对象，并根据指定的进程路径和命令行参数(可选)启动进程。</p></dd>
+      <div><strong>( exepath</strong>: string [, <b>arg1</b>: string, <b>arg2</b>: string, ...] [,<b>#detached</b>] <strong>)</strong> : Process</div>
+      <p>静态方法, 创建一个新的子进程代理对象，并根据指定的进程路径和命令行参数(可选)启动进程。</p>
+			<p>默认情况下，启动的新进场属于相同的进程组 - 它将会在本进程关闭时结束。但是如果设置了<b>#detached</b>参数，则子进程4父进程结束。</p></dd>
     <dt>on</dt>
     <dd>
       <div><strong>( event</strong>: string<strong>, callback</strong>: function<strong> )</strong> : this</div>

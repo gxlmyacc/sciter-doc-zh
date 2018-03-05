@@ -169,31 +169,38 @@
       <p>旋转<em>radians</em>角度的系统坐标系。</p></dd>
     <dt>scale</dt>
     <dd>
-      <div>( xsc: float, ysc: float ) : Graphics</div>
-      <p>缩放系统坐标系。<code>xsc</code>是水平方向上的缩放比例，<code>ysc</code>是垂直方向上的缩放比例。 两个参数都必须是正数。当值小于<code>1.0</code>时进行缩放，当值大于<code>1.0</code>时进行放大。</p></dd>
+      <div>( sx: float, sy: float ) : Graphics</div>
+      <p>缩放系统坐标系。<code>sx</code>是水平方向上的缩放比例，<code>sy</code>是垂直方向上的缩放比例。 两个参数都必须是正数。当值小于<code>1.0</code>时进行缩放，当值大于<code>1.0</code>时进行放大。</p></dd>
     <dt>translate</dt>
     <dd>
-      <div>( x: float, y: float ) : Graphics</div>
-      <p>将系统坐标的原点移动到(x,y)点。</p></dd>
+      <div>( tx: float, ty: float ) : Graphics</div>
+      <p>将系统坐标的原点移动到(tx,ty)点。</p></dd>
     <dt>skew</dt>
     <dd>
-      <div>( sx: float, sy: float ) : Graphics</div>
+      <div>( shx: float, shy: float ) : Graphics</div>
       <div>
         <div>设置倾斜变换。</div></div></dd>
+    <dt>transform</dt>
+		<dd>
+      <div>( sx : float, shy : float, shx : float, sy : float, tx : float, ty : float&nbsp;) : Graphics</div>
+      <p>设置变换矩阵：</p>
+			<pre>  sx  shy tx
+[ shx sy  ty ]
+  0   0   1 </pre></dd>
     <dt>screenToWorld</dt>
     <dd>
       <div>(r: number) : float</div></dd>
     <dt>screenToWorld</dt>
     <dd>
       <div>(x: number, y: number) : (float, float)</div>
-      <p>这两个函数将系统屏幕坐标系转换到一个rotate()、scale()、translate()、skew()定义的坐标系。</p></dd>
+      <p>这两个函数将系统屏幕坐标系转换到一个rotate()、scale()、translate()、skew()、transform()定义的坐标系。</p></dd>
     <dt>worldToScreen</dt>
     <dd>
       <div>(r: number) : float</div></dd>
     <dt>worldToScreen</dt>
     <dd>
       <div>(x: number, y: number) : (float, float)</div>
-      <p>这两个函数将一个rotate()、scale()、translate()、skew()定义的坐标系转换到系统屏幕坐标系。</p></dd>
+      <p>这两个函数将一个rotate()、scale()、translate()、skew()、transform()定义的坐标系转换到系统屏幕坐标系。</p></dd>
     <h4>文本输出</h4>
     <dt>drawText</dt>
     <dd>
@@ -291,6 +298,10 @@
       <div>( x1:<em>float</em>, y1:<em>float,</em> x2:<em>float</em>, y2:<em>float</em>, radius: <em>float&nbsp;</em><em> </em>[, relative <em>= false</em> ] ) : Graphics.Path</div>
       <p>在[(x0,y0) - (x1,y1)]和[(x1,y1) - (x2,y2)]的两条线之间的(x1,y1)点的角落处会在弧线。参见: <a onmousedown="return rwt(this,'','','','3','AFQjCNEYwX0AEYPgDi7lZpmT-fu-hkXZDg','','0ahUKEwiIlomZyu7UAhUL4WMKHUIGC24QFgg1MAI','','',event)" href="https://www.google.ca/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=3&amp;ved=0ahUKEwiIlomZyu7UAhUL4WMKHUIGC24QFgg1MAI&amp;url=http%3A%2F%2Fwww.dbp-consulting.com%2Ftutorials%2Fcanvas%2FCanvasArcTo.html&amp;usg=AFQjCNEYwX0AEYPgDi7lZpmT-fu-hkXZDg" data-ctbtn="0" data-cthref="/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=3&amp;ved=0ahUKEwiIlomZyu7UAhUL4WMKHUIGC24QFgg1MAI&amp;url=http%3A%2F%2Fwww.dbp-consulting.com%2Ftutorials%2Fcanvas%2FCanvasArcTo.html&amp;usg=AFQjCNEYwX0AEYPgDi7lZpmT-fu-hkXZDg">Canvas 
 ArcTo教程</a></p></dd>
+    <dt>arc</dt>
+    <dd>
+      <div>( cx:<em>float</em>, cy:<em>float,</em> radius:<em>float</em>[, radiusy:<em>float</em>], start: <em>float | angle&nbsp;</em><em/>, swipe : <i>float | angle</i> ) : Graphics.Path</div>
+      <p>以(<i>cx</i>,<i>cy</i>)为中心点，以<i>radius</i>为半径，从<i>start</i>开始画<i>swipe</i>角度的弧线。Swipe 为旋转角度 - 当它为正时为顺时针，反之为逆时针。</p></dd>
     <dt>quadraticCurveTo</dt>
     <dd>
       <div>( xc:<em>float</em>, yc:<em>float</em> , x:<em>float</em>, y:<em>float</em> [, relative <em>= false</em> ] ) : Graphics.Path</div>

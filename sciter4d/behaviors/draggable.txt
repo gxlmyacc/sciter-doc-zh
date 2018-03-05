@@ -1,5 +1,6 @@
   BEHAVIOR: draggable
-     goal: 元素可拖动行为
+  goal: 
+     元素可拖动行为
   引用：
      在CSS中添加 { behavior: draggable; }
   VIEWS:

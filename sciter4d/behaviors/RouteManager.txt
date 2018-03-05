@@ -1,5 +1,6 @@
   BEHAVIOR: RouteManager
-     goal: 在Frame中实现路由切换功能
+  goal: 
+     在Frame中实现路由切换功能
   引用：
      在CSS中添加 { prototype: RouteManager url(sciter4d:route.tis); }
   COMMENTS:
