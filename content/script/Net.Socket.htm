@@ -32,7 +32,7 @@
       <p>将下面的Socket事件之一绑定到callback回调函数:</p>
       <ul>
         <li><strong>&quot;connect&quot;</strong> -&gt; <code>function()</code>, socket连接到主机;</li>
-        <li><strong>&quot;data&quot;</strong> -&gt; <code>function(data:any)</code>, 已经接收到数据;</li>
+        <li><strong>&quot;data&quot;</strong> -&gt; <code>function(data:string)</code>, 已经接收到数据;</li>
         <li><strong>&quot;sent&quot;</strong> -&gt; <code>function()</code>, 上一次<code>send()</code>操作完成;</li>
         <li><strong>&quot;error&quot;</strong> -&gt; <code>function(err: Error)</code>, 发生错误, 错误对象会传递给该回调函数;</li>
         <li><strong>&quot;close&quot;</strong> -&gt; <code>function()</code>, socket被关闭;</li></ul>

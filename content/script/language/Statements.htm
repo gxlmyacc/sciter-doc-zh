@@ -82,8 +82,6 @@
     <dt><code><strong>yield</strong></code> &lt;表达式&gt;;</dt>
     <dd><strong>yield</strong>语句将暂停当前生成器函数的执行，并返回表达式的值。如果一个函数中出现了<strong>yield</strong>语句，则这个函数会被当做生成器函数——内部包含一个状态来进行协程。</dd>
     <br />
-    <dt><strong><code>assert</code></strong> &lt;测试-表达式&gt; [ <strong><code>:</code></strong> &lt;信息-表达式&gt; ] <strong><code>;</code></strong></dt>
-    <dd><strong>assert</strong>语句允许你测试你的程序中的断言。当&lt;测试-表达式&gt;在运行期为<em>false</em>时，将会抛出一个异常，该异常包含源码文本中的&lt;测试-表达式&gt;和&lt;信息-表达式&gt;。 </dd>
     <br />
     <dt><code><strong>include</strong></code> &lt;字符串-表达式&gt; | &lt;stream-表达式&gt; | &lt;bytes-表达式&gt; <code>;</code></dt>
     <dd>include语句定义被引入(加载和求值)到当前名称空间的脚本。表达式可以是以下值之一: 
@@ -93,6 +91,24 @@
       <li>求值为Bytes数组的表达式。</li>
     </ul>
     </dd>
+    <dt><strong><code>assert</code></strong> &lt;测试-表达式&gt; [ <strong><code>:</code></strong> &lt;信息-表达式&gt; ] <strong><code>;</code></strong></dt>
+    <dd><strong>assert</strong>
+    <p>语句允许你测试你的程序中的断言。当&lt;测试-表达式&gt;在运行期为<em>false</em>时，将会抛出一个异常，该异常包含源码文本中的&lt;测试-表达式&gt;和&lt;信息-表达式&gt;。</p>
+    <p>注意: 当没有打开调试器时, 该语句将没有作用(NOP - 空语句)。</p></dd>
+    <dt><code><strong>debug break;</strong></code></dt>
+    <dd>在源代码中定义显性的断点, 当调试器打开时，代码执行到该位置时将自动停在该行。当调试器没打开时，该语句将没有作用(NOP - 空语句)。</dd>
+		<dt><code><strong>debug namespace;</strong></code></dt>
+
+    <dd>输出当前名称空间链到调试控制台;</dd>
+    <dt><code><strong>debug stacktrace;</strong></code></dt>
+    <dd>输出当前位置的调用堆栈到调试控制台;</dd>
+
+    <dt><code><strong>debug [log | info | warning | alert] :</strong></code> &lt;space-separated-list-of-expressions&gt; <code><strong>;<br/>
+    debug [log | info | warning | alert] (</strong></code> &lt;stringizer-function-parameters&gt;&nbsp;<code><strong>)</strong></code></dt>
+    <dd>
+      <p>日志输出: 将表达式的执行结果输出到调试控制台。第二种格式支持字符串器参数，比如:</p>
+			<pre>debug info ( object data {obj} );</pre>
+      <p>注意: 当调试器没打开时，该语句将没有作用(NOP - 空语句);</p></dd>
     <dt>&lt;表达式&gt;<strong> <code>;</code></strong></dt>
     <dd>表达式以 ';'结尾作为一个语句。&lt;表达式&gt;的结果是可变的。</dd></dl>
 </body>

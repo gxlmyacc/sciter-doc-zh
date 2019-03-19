@@ -30,6 +30,10 @@
         <div><strong>( element</strong>:Element, <strong>name</strong>: string, <strong>value</strong>: undefined | string <strong>)</strong> : <em>Transact</em></div>
         <p>通过名称添加或移除属性。要移除属性则只需将它赋值为<em>undefined</em>。</p></dd>
     
+			</dd><dt>text</dt>
+		  <dd> <strong>( element</strong>:Element | Node, <b>newText</b>: string&nbsp;<strong>)</strong> : <em>Transact</em>
+      <p>修改元素或文本节点的文本。</p></dd>
+    
       <dt>tag</dt>
       <dd>
         <div><strong>( element</strong>:Element, <strong>tag</strong>: string<strong> ) </strong>: <em>Transact</em></div>
@@ -55,17 +59,19 @@ transact.split( pos, p );
       <dt>wrap</dt>
       <dd>
         <div><strong>( from</strong>:bookmark, <strong>to</strong>:bookmark, <strong>into</strong>: Element <strong>)</strong> : <em>Transact</em></div>
-        <p>TBD (将该范围的元素封装到into元素中)</p></dd>
+        <p>将from..to元素包装到into元素中</p>
+			<p>返回两个书签(bookmarks) - 返回该包装内容的起始和结束位置。</p></dd>
     
       <dt>unwrap</dt>
       <dd>
-        <div><strong>( el</strong>: Element <strong>)</strong> : <em>Transact</em></div>
-        <p>TBD (将元素的内容移到它的父元素中，同时移除该元素。</p></dd>
+        <div><strong>( el</strong>: Element <strong>)</strong> : <em>[bookmark,bookmark]</em></div>
+        <p>将元素的内容移到它的父元素中，同时移除该元素。</p>
+			  <p>返回两个书签(bookmarks) - 返回合并到父元素中的内容的起始和结束位置。</p></dd>
     
       <dt>insertNode</dt>
       <dd>
         <div><strong>( node</strong>: Node,<strong> el</strong>: Element, <strong>at</strong>: index [, <strong>after</strong>: true] <strong>)</strong> : <em>Transact</em></div>
-        <p>TBD (将node节点或元素插入到<em>el</em>元素中的<em>index</em>位置。</p></dd>
+        <p>将node节点或元素插入到DOM中<em>at</em>位置。</p></dd>
     
       <dt>removeNode</dt>
       <dd>

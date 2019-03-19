@@ -86,13 +86,21 @@ view.<u>eventsRoot</u> = null;
       <div><strong>( </strong>[<strong>screenNo:</strong> integer,]<em> </em><strong>area</strong> [, <strong>part</strong> ] <strong>) </strong>returns: integer, device pixels</div>
       <p>返回在累计桌面空间(cumulative desktop space)上的屏幕(监视器)投影。参数：</p>
       <ul>
-        <li><strong>area</strong> - 符号常量：<strong>#frame</strong>-监视器屏幕尺寸，<strong>#workarea</strong>-监视器工作区域(除去任务/菜单栏后的尺寸)。设备像素。</li>
+        <li><strong>area</strong>，以下值之一：
+          <ul>
+            <li><strong>#frame </strong>- 显示器屏幕尺寸, </li>
+            <li><strong>#workarea</strong> - 显示器工作区域(除去任务/菜单栏后的尺寸)。设备像素。</li>
+            <li><b>#snapshot</b> - 返回<i>Image</i> - 显示器指定部分的截图;</li>
+            <li><b>#isPrimary</b> - 返回<i>true</i> 当显示器为主显示器时;</li>
+            <li><b>#device</b> - 返回<i>string</i> - 显示器的名称;</li>
+          </ul>
+        </li>
         <li><strong>part</strong>, 以下值之一:</li>
         <ul>
           <li><strong>#rect</strong> - (x1,y1,x2,y2);</li>
           <li><strong>#rectw</strong> - (x,y,width,height), <em>默认</em>;</li>
-          <li><strong>#position</strong> - (x,y)<em>,</em></li>
-          <li><strong>#dimension</strong> - (width,height)<em>,</em></li></ul>
+          <li><strong>#position</strong> - (x,y)<em>,</em> 屏幕在所有显示器合并的区域内的位置;</li>
+          <li><strong>#dimension</strong> - (width,height)<em>,屏幕的宽高；</em></li></ul>
         <li><strong>screenNo - </strong>integer, 可选参数。如果提供者提供指定屏幕的度量。如果省略则提供这个窗口的屏幕的度量。</li></ul></dd>
     <dt>move</dt>
     <dd>
@@ -251,10 +259,22 @@ function retrieveDataFromDB(recordSet)
     <dt>clipboard</dt>
     <dd>
       <div><strong>(#put</strong>, data: string | object | Image <strong>)</strong> : undefined;</div>
-      <p>将数据存储到剪切板。</p></dd>
+      <p>将数据存储到剪切板。当data是一个对象时，它应该具有以下结构，其中除任何属性外，所有属性都是可选的: </p>
+			<pre>{
+   text: &quot;some text&quot;,
+   html: &quot;&lt;b&gt;some html&lt;/b&gt;&quot;,
+   link: { caption: &quot;some text&quot;, url: &quot;file://some ...&quot; },
+   file: [ &quot;path1&quot;,  &quot;path2&quot;, ...],
+   json: someData
+}  </pre>
+    <p>请注意：<i>json</i>剪切板格式是Sciter独有的。你可以将它在Sciter应用程序之前进行传递。</p>
+		<p>你可以一次设置多种数据项(比如一起设置<i>text</i>和<i>html</i>格式)。目标程序将会根据当前上下文情况从中选择最适合的格式。</p></dd>
+    <dt>focusable</dt>
+		<dd>(<b>#next | #prior | #first | #last</b>, [<b>from</b>:Element]) : Element
+    <p>该方法返回TAB序列中next/previous/first/last焦点元素, 既可以从<i>from</i>元素，也可以从当前焦点元素开始查找。</p></dd>
     <dt>performDrag</dt>
     <dd>
-        (<strong>element</strong>:Element, <strong>data</strong>:Object, ddMode: <strong>#any</strong> | <strong>#copy</strong> | <strong>#move</strong>) : <strong>null</strong> | <strong>#copy</strong> | <strong>#move</strong>
+        （(<strong>element</strong>:Element | <b>img</b>: Image, <b>xOffset</b>: integer, <b>yOffset</b>: integer), <strong>data</strong>:Object, ddMode: <strong>#any</strong> | <strong>#copy</strong> | <strong>#move</strong>) : <strong>null</strong> | <strong>#copy</strong> | <strong>#move</strong>
         <p>执行系统拖拽操作。</p>
         <p><em>element</em> 是一个DOM元素，它用于作为一个拖拽图像。</p>
         <p><em>data</em> 是一个对象，它包含以下属性：</p>
@@ -262,7 +282,7 @@ function retrieveDataFromDB(recordSet)
             <li><code>{text: String}</code> - 纯文本字符串;</li>
             <li><code>{html: String | Element}</code> - html, 可以是一个字符串或指元素的外部HTML(outer HTML);</li>
             <li><code>{file: String | [String, String, ...]}</code> - 拖拽的单个文件名或文件名列表;</li>
-            <li><code>{link: String}</code> - 一个url字符串;</li>
+            <li><code>{link: String | { caption: &quot;some text&quot;, url: &quot;file://some ...&quot; } }</code> - 一个url字符串或caption/url对;</li>
             <li><code>{json: value}</code> - 可以序列化为JSON字符串的任意的值。JSON可以用于在不同的Sciter窗口之间传递数据。</li>
         </ul>
         <p><em>data</em>对象可以包含多个属性, 目标会根据场景选择不同的数据。</p>
@@ -309,7 +329,8 @@ function retrieveDataFromDB(recordSet)
         <li><strong>progress</strong> - <em>function(bytesReceived, totalBytes)</em>, 在每次接收到数据块时被调用。<em>bytesReceived</em>是一个整数 - 到目前为止接收到的字节数量。<em>totalBytes</em>是一个整数 - 从HTTP的&quot;content-length&quot;字段获取的服务端总大小，如果服务器没有报告它，<em>totalBytes</em>可以为<em>undefined</em>。</li>
         <li><strong>toFile - </strong><em>string</em>, 响应的保存文件名，该文件名应该包含路径。可用于文件下载。</li>
         <li><strong>proxyHost</strong>, <strong>proxyPort</strong> - <em>string</em>, <em>integer</em>.如果定义了这两个参数，则请求将会通过定义的代理主机发送。</li>
-        <li><strong>output</strong> - symbol, 值可以是<strong>#string</strong> | <strong>#stream</strong> | <strong>#bytes</strong> | <strong>#json</strong>其中之一。如果指定了该参数，则强制报告<em>data</em>为String、Stream、Bytes或任意已解析的JSON的实例。</li></ul>
+        <li><strong>output</strong> - symbol, 值可以是<strong>#string</strong> | <strong>#stream</strong> | <strong>#bytes</strong> | <strong>#json</strong>其中之一。如果指定了该参数，则强制报告<em>data</em>为String、Stream、Bytes或任意已解析的JSON的实例。</li>
+        <li><b>noCache</b> - true | false, 如果为<i>true</i>，则请求将不会从缓存中读取，也不会将请求响应结果写到缓存中。</li></ul>
       <div>示例: <u>sdk/samples/communication/file-download.htm</u>和<u>sdk/samples/communication/http.tis</u></div></dd></dl>
   <h2>通知事件</h2>
 	<dl>

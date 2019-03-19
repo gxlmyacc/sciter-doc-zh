@@ -6,6 +6,7 @@
   <h1>全局(Global)名称空间</h1>
   <p>下面的函数和变量&quot;存在&quot;于全局名称空间，所以调用这些方法时无需指定任何名称空间指示器:</p>
   <pre>var r = <em>eval</em>( <font color="#990099">&quot; 348.0 / 23.7 &quot;</font> );<br/><em>stdout</em>.printf( <font color="#990099">&quot;%f&quot;</font> , r );
+stdout</em>.printf( <font color="#990099">&quot;%f&quot;</font> , r );
 </pre>
   <p>如果某个函数内存在与全局函数同名的函数时，如果想方法全局换上，可以给全局函数加上<em>self.ns.</em>前缀。</p>
   <dl>
@@ -20,13 +21,13 @@
     <h2>全局函数</h2>
     <dt>eval</dt>
     <dd>
-      <div><strong>( </strong><em>input</em><strong> : </strong>string|stream [, <em>env</em> :object ]<strong> ) </strong>: <em>value</em></div>
+      <div><strong>( </strong><em>input</em><strong> : </strong>string|stream [, <em>namespace</em>&nbsp;:object | <i>namespaces</i>: array of objects&nbsp;]<strong> ) </strong>: <em>value</em></div>
       <p>对<em>input</em>求值(解释执行)，并返回它的值。如果<em>input</em>是一个字符串，则该函数尝试将它作为脚本源代码进行解释执行。如果<em>input</em>是一个<em>流对象</em>，则它会从该流中编译和执行源代码。</p>
       <p>示例: 在下面的语句执行后:</p>
       <pre>var obj = eval( <font color="#990099">&quot; ({ one:1, two:2 }) &quot;</font> );
 </pre>
       <p><em>obj</em>变量将会包含一个对象，它有两个字段: <em>one</em>和<em>two</em>。</p>
-      <p><em>env</em>是一个环境对象 - 如果该参数被提供，则脚本在该对象的名称空间中执行。</p>
+      <p><em>environment</em>是一个环境对象 - 如果该参数被提供，则脚本在该对象的名称空间中执行。</p>
       <pre>var env = { one:1, two:2 };
 var res = eval( <font color="#990099">&quot;one + two&quot;, </font>env);
 </pre>
@@ -55,12 +56,11 @@ var res = eval( <font color="#990099">&quot;one + two&quot;, </font>env);
     <dd>
       <div><strong>( </strong><em>source</em> [, <em>asServerScript</em>]<strong> )</strong> :true|false</div>
       <p>加载(编译和执行)<em>source</em>。Source这里可以是字符串(<strong>文件名</strong>)或<strong>流对象</strong>。如果参数<em>asServerScript</em>被提供且为<em>true</em>，则source会被当做一个包含嵌入脚本(类似PHP或ASP网页)的文本进行解释:</p>
-      <p>&lt;html&gt; ... <font color="#990099">&lt;%</font> =some_script_function(); <font color="#990099">%&gt;</font>... &lt;/html&gt;</p>
-      <p>这是两个代码片段:</p>
-      <pre><strong>load</strong>( <font color="#990099">&quot;c:/myscripts/test.js&quot;</font> );
-</pre>
+      <pre>&lt;html&gt; ... &lt;% =some_script_function(); %&gt;... &lt;/html&gt;</pre>
+      <p>这两段代码:</p>
+      <pre><strong>load</strong>( <font color="#990099">&quot;c:/myscripts/test.tis&quot;</font> );</pre>
       <p>和</p>
-      <pre>var s = Stream.openFile(<font color="#990099">&quot;c:/myscripts/test.js&quot;</font>,<font color="#990099">&quot;r&quot;</font>); <strong>load</strong>( s );
+      <pre>var s = Stream.openFile(<font color="#990099">&quot;c:/myscripts/test.tis&quot;</font>,<font color="#990099">&quot;r&quot;</font>); <strong>load</strong>( s );
 </pre>
       <p>是等价的。</p>
       <p>该脚本执行取调用者所在的名称空间。</p></dd>
@@ -194,5 +194,11 @@ for(var (k,v) in Foo )
     <dt>URL.decode</dt>
 		<dd>( str: string&nbsp;) : string
     <p>该函数对URL字符串进行解码。</p></dd></dl><p></p>
+		<dt>URL.toPath</dt>
+		<dd>( <b>fileUrl</b>: string ) : string
+    <p>该函数转换<code>&quot;file://...&quot;</code>字符串为文件路径 - 适用于目标平台的路径字符串。</p></dd>
+		<dt>URL.fromPath</dt>
+		<dd>( <b>path</b>: string ) : string
+    <p>该函数将目标平台的路径字符串(如<code>C:\User\Desktop</code>)转换为文件URL (如<code>file://C:/User/Desktop</code>).</p></dd></dl><p></p>
 </body>
 </html>

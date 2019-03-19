@@ -61,6 +61,18 @@
         <div><strong>( el</strong>:<em>element</em> [<strong> , how</strong>: #content | #element ]<strong> ) </strong>returns: <em>true | false</em></div>
         <p>设置选择内容到<i>el</i>元素的(<i>what</i>是<code>#element</code>)它的本身或它的内容 - 它的第一个或最后光标位置。</p></dd>
       
+      <dt>contains</dt>
+      <dd><b>(</b> <b>selector</b>: string <b>)</b> returns: true | false
+      <p>如果选择内容中包含最少一个元素匹配了指定的CSS选择器时返回true。</p></dd>
+      
+      <dt>elements</dt>
+		  <dd><b>(</b> <b>selector</b>: string <b>)</b> returns: Array of elements 
+      <p>返回选择内容中包含的DOM元素列表。仅返回满足选择器的元素列表。注意：selector可以包含以逗号分隔的多个选择器。</p>
+			<p>示例:</p>
+			
+			<pre>var paragraphs = editor.selection.elements(&quot;p,div&quot;);</pre>
+      <p>其中，<i>paragraphs</i>将包含当前选择内容中所有的&lt;p&gt; and &lt;div&gt;元素。</p></dd>
+      
       <dt>advance</dt>
       <dd>
         <div><strong>( step</strong>:symbol [, <strong>target</strong>:symbol] <strong>)</strong> returns: <em>true | false</em>.</div>
@@ -91,9 +103,31 @@
 		<p>清除指定区域内的标记(mark)名称。<br/>
 		 该函数返回修改的数量。</p>
 	  </dd>
+	  <dt>box</dt>
+		<dd>(<b>part</b>: <i>symbol</i>)
+		<p>返回相对于view的坐标。</p>
+    <p> <strong>part</strong> - <strong>#left</strong>、<strong>#top</strong>、<strong>#right</strong>、<strong>#bottom</strong>、<strong>#width</strong>或<strong>#height</strong>。指定要返回的盒的哪一部分。</p>
+    <ul>
+      <li>
+        如果<em>part</em>是<strong>#rect</strong>，则该函数返回4个值 - left, top, right, bottom。 示例：
+        <pre> var (x1,y1,x2,y2) = this.box(#rect);</pre>
+      </li>
+      <li>
+        如果<em>part</em> 是<strong>#rect</strong>w，则该函数返回4个值 - left, top, width, height。 示例：
+        <pre>var (x,y,w,h) = this.box(#rectw);</pre>
+      </li>
+      <li>
+        如果part是<strong>#dimension</strong>，则该函数返回2个值 - width, height。 示例： 
+        <pre>var (w,h) = this.box(#dimension);</pre>
+      </li>
+      <li>
+        如果part是<strong>#position</strong>，则该函数返回2个值 - left, top。 示例：
+        <pre>var (x,y) = this.box(#position);</pre>
+      </li>
+    </ul></dd>
 	</dl>
 
-  <h3 id="bookmark">书签</h3>
+  <h2 id="bookmark">书签</h2>
   <p>上面的一些方法使用到了叫做书签(bookmark)的对象，它是一个有#bookmark标签的数组(长度为3)。通常，你需要先从上面的各个属性或方法中获取书签，不过书签也可以使用下面的语句创建：</p>
   <pre>var bm = [bookmark: node, index, after];
 </pre>

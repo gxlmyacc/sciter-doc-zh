@@ -344,7 +344,7 @@
             <li><strong>#inner</strong> - 内部盒边缘；</li>
             <p>该函数将返回相应部分累积宽度，例：</p>
             <p><code>var (mx1,my1,mx2,my2) = this.box(#rect, #margin, #inner)</code>;<br/>这里的每个mx*值将是外边距、边框、内边距在左、上、右、下方向上的总和。或者说，这个调用会返回元素内部(内容)盒的外边距的距离。而且这个调用：<code>var (mx1,my1,mx2,my2) = this.box(#rect, #margin, #border)</code>; 将只会CSS属性中margin-left、margin-top、margin-right、margin-bottom的计算值。</p></ul></ul></ul>
-      <p>若想获取更多信息，请看<em>CSS</em>的<a name="box-model"><em>ox model</em></a>规范: <a href="http://www.w3.org/TR/CSS2/box.html">http://www.w3.org/TR/CSS2/box.html</a></p></dd>
+      <p>若想获取更多信息，请看<a name="box-model"><em>CSS box model</em></a>规范: <a href="http://www.w3.org/TR/CSS2/box.html">http://www.w3.org/TR/CSS2/box.html</a></p></dd>
     <dt>intrinsicWidthMin</dt>
     <dd>
       <div>( ) : integer, 设备像素</div>
@@ -468,6 +468,16 @@ el.$content(This is item number <b>{ num }</b>);
     <dd>
       <div><strong>( html</strong>: string, <strong>url</strong>:string<strong> ) </strong>returns: <em>true/false</em></div>
       <p>从<em>html</em>字符串中加载文档的内容作为该元素的内容。对于设置了<em>behavior:frame</em>的元素会加载html参数中的html、样式和执行脚本。指定behavior:frame的元素在加载完成后会发送DOCUMENT_COMPLETE事件。而对于其他元素则只会加载文档的Body部分，且不会加载样式和脚本。</p></dd>
+    <dt>parseHtml</dt>
+    <dd>( <b>html</b>: string | Stream ) : Element | Array (nodes)
+    <p>该函数解析指定的HTML(或SVG)字符串或stream流，并且返回:</p>
+    <ul>
+      <li>如果输入内容以<code>&quot;&lt;html&gt;...&quot;</code>或<code>&quot;&lt;svg&gt;...&quot;</code>开始，则返回根节点；</li>
+      <li>如果输入内容是类似<code>&quot;&lt;i&gt;Some&lt;/i&gt;&lt;b&gt;text&lt;/b&gt;这样的HTML片段，则返回解析后的html元素或节点列表</code></li>
+    </ul>
+    <p>如果<i>html</i>字符串以<code>file://</code>开头，则它将被认为是一个文件url去解析。</p>
+    <p>注意：该函数解析后的DOM元素/节点并不会被链接到宿主文档中。</p>
+    </dd>
     <dt>loadImage</dt>
     <dd>
       <div><strong>( url</strong>: string [, <strong>callback</strong>: function [, useCache: true|<em>false</em> ] ]<strong>) </strong>returns: <em>Image | null</em></div>
@@ -940,7 +950,7 @@ el.$content(This is item number <b>{ num }</b>);
 	  <strong>- #by-load</strong> - 文档加载新文档时导致旧文档被卸载。
 	</dd>
   </dl>
-  <h2 align="left"><a name="object-template">Element.create和Element.insert方法中的 对象模板微格式</a></h2>
+  <h2 align="left" id="object-template">Element.create和Element.insert方法中的 对象模板微格式</h2>
   <div>对象模板是用于生成新元素的对象文本。它应当遵循以下规则：</div>
   <pre>{
   div, <font face="monospace" color="#336600">//强制，第一个属性，它没有值——DOM元素的标签名，如<em>div</em>、<em>p</em>、<em>option</em>、<em>select</em>等。</font>

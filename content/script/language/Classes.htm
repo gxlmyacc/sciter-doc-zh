@@ -130,6 +130,17 @@ var n2 = rs.secondName;
   <pre class="code tiscript">Toz.all.push(&quot;anything&quot;);
 Toz.counter += 1;
 </pre>
+	<h2>实例变量</h2>
+	
+	<p>类可能预先定义了所谓的实例变量。实例变量对于类的每个实例都是唯一的-不与其他实例共享。</p>
+  <p>实例变量是通过使用<em>this var</em>关键字组合在类上下文中定义的。示例:</p>
+	
+	<pre>class Recordset {
+  this var currentRecord = []; // note, these are
+  this var dbCursor = null;    // instance variables
+  
+  function next() { this.currentRecord = DB.advanceNext(this.dbCursor); }
+}</pre>
   <h2><a name="constants" id="constants">常量</a></h2>
   <p>名称空间常量(又名 常量) 是只读变量，它使用<code>const</code>关键字定义。示例:</p>
   <pre class="code tiscript">namespace Toz

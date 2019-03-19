@@ -25,6 +25,9 @@
 	<p>上面的代码也报告代码值在字符串中的索引位置。</p>
   <dl>
     <h2>方法</h2>
+		<dt>new String</dt>
+    <dd>(<b>len</b>:integer [, <b>initCharCode</b> = ' '])
+    <p>创建一个新的字符串，并且指定长度以及填充内容。</p></dd>
     <dt>toInteger</dt>
     <dd>
       <p><strong>([defaultValue[, radix:integer]])</strong> : integer | defaultValue | (undefined)</p>
@@ -103,6 +106,9 @@
     <dd>
       <p><strong>( what , </strong>[<strong> caseInsensitive:</strong> <em>true</em> | <em>false</em> ] <strong>)</strong> : integer</p>
       <p>将该字符串与<em>what</em>字符串使用词典字符顺序进行比较。例如: <code>&quot;ABC&quot; &lt; &quot;abc&quot;</code>将为true, 但是<code>&quot;ABC&quot;.lexicalCompare(&quot;abc&quot;)</code> 的值 &gt;= 1。如果caseInsensitive被提供且为true，则该比较将是大小写不敏感的。默认比较是大小写敏感的。</p></dd>
+		<dt>distance</dt>
+		<dd>( <b>other</b>: string ) : integer
+      <p>该函数返回当前字符串与other字符串之间的<a href="https://en.wikipedia.org/wiki/Levenshtein_distance">编辑距离</a>。该值为一个非负整数。</p></dd>
     <dt>match</dt>
     <dd>
       <p><strong>( regexp )</strong> : string | array of strings | null value</p>

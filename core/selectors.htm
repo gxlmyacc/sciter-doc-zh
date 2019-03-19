@@ -341,6 +341,20 @@
     </td>
     <td valign="middle"><html>非标准, h-smile core独有的。</html></td>
   </tr>
+  <tr>
+    <td nowrap valign="top"> <b>::shade</b></td>
+    <td valign="middle"> 
+      <code>::shade</code>相当于一个隐藏DOM跟节点 - 一个可以选择在数组元素内容的上面、下面的特殊的伪元素。
+		  <p>shade元素放置在元素的padding盒内部，并且可以使用flex单位。例如:</p>
+      <pre>div::marker {
+  size:1em;
+  margin:*;
+  background:red; 
+  border-radius:0.5em;
+}</pre>
+  <p>将会在div的中心位置上渲染一个1em的圆。可以用于向元素添加外观内容。默认情况下，它是块元素。</p></td>
+   <td valign="middle"></td>
+  </tr>
 </TABLE>
 </BODY>
 </HTML>

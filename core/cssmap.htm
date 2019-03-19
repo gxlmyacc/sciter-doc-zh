@@ -259,6 +259,15 @@
       </td>
      </tr> 
      </tr> 
+     <tr>
+       <td nowrap="" align="right" bgcolor="#ffffdd"><b>font-rendering-mode</b></td>
+       <td>定义字体定位和抗锯齿模式:
+       <ul>
+        <li><i>inherit</i> - 默认值;</li>
+        <li><i>sub-pixel</i> - 字体可以放在&quot;像素之间&quot;;</li>
+        <li><i>snap-pixel</i> - 字体位置应该定位到像素表格中, 该模式的目的值使输入光标不会覆盖在字体之上。</li>
+       </ul>
+     </td></tr>
      <tr> 
       <td nowrap="" valign="top" align="right"><strong>line-height</strong></td> 
       <td> 
@@ -1020,7 +1029,7 @@
        </div></td>
      </tr> 
      <tr> 
-      <td rowspan="35" valign="top"><strong>布局属性</strong></td> 
+      <td rowspan="36" valign="top"><strong>布局属性</strong></td> 
       <td nowrap="" valign="top" align="right"><strong>border</strong></td> 
       <td> 
        <div>
@@ -1213,6 +1222,17 @@
       <td nowrap="" valign="top" align="right"><strong>border-width</strong></td> 
       <td>as per CSS</td>
      </tr> 
+     <tr>
+       <td nowrap="" align="right"><b>border-radius</b></td>
+       <td>	
+         <p>as per CSS:</p>
+         <ul>
+           <li>1、2、3、4个&lt;长度&gt;或&lt;百分比&gt;值。用于指定4个角的弧度值。</li>
+           <li>followed optionally by &quot;/&quot; and one, two, three, or four &lt;length&gt; or &lt;percentage&gt; values. This is used to set an additional radius, so you can have elliptical corners.</li>
+         </ul>
+        <p>当前限制: 所以边框的非零边弧度边框的颜色值应该相同。</p>
+      </td>
+     </tr>
      <tr> 
       <td nowrap="" valign="top" align="right"><strong>box-shadow</strong></td> 
       <td>
@@ -2298,18 +2318,8 @@
 </tr>
 
 <tr>
-<td>run-in</td>
-<td>此元素会根据上下文作为块级元素或内联元素显示。</td>
-</tr>
-
-<tr>
-<td>compact</td>
-<td>CSS 中有值 compact，不过由于缺乏广泛支持，已经从 CSS2.1 中删除。</td>
-</tr>
-
-<tr>
-<td>marker</td>
-<td>CSS 中有值 marker，不过由于缺乏广泛支持，已经从 CSS2.1 中删除。</td>
+<td>contents</td>
+<td>此元素会作为文本内容。</td>
 </tr>
 
 <tr>
@@ -2323,33 +2333,8 @@
 </tr>
 
 <tr>
-<td>table-row-group</td>
-<td>此元素会作为一个或多个行的分组来显示（类似 &lt;tbody&gt;）。</td>
-</tr>
-
-<tr>
-<td>table-header-group</td>
-<td>此元素会作为一个或多个行的分组来显示（类似 &lt;thead&gt;）。</td>
-</tr>
-
-<tr>
-<td>table-footer-group</td>
-<td>此元素会作为一个或多个行的分组来显示（类似 &lt;tfoot&gt;）。</td>
-</tr>
-
-<tr>
 <td>table-row</td>
 <td>此元素会作为一个表格行显示（类似 &lt;tr&gt;）。</td>
-</tr>
-
-<tr>
-<td>table-column-group</td>
-<td>此元素会作为一个或多个列的分组来显示（类似 &lt;colgroup&gt;）。</td>
-</tr>
-
-<tr>
-<td>table-column </td>
-<td>此元素会作为一个单元格列显示（类似 &lt;col&gt;）</td>
 </tr>
 
 <tr>
@@ -2358,8 +2343,8 @@
 </tr>
 
 <tr>
-<td>table-caption</td>
-<td>此元素会作为一个表格标题显示（类似 &lt;caption&gt;）</td>
+<td>table-body</td>
+<td>此元素会作为一个表格体</td>
 </tr>
 
 <tr>
@@ -2425,19 +2410,29 @@
      <tr> 
       <td bgcolor="#ffffdd" valign="top" align="right"><strong>transition</strong></td> 
       <td bgcolor="#ffffdd"> 
-       <div>
-        none | blend | slide | image
-       </div> 
-       <div>
-        定义修改元素状态时的过渡效果。例如:
-       </div> 
-       <p>.mybutton:hover { color: red; <em>transition:blend</em> }</p> 
-       <p>.mybutton:hover { color: red; <em>transition: width(linear,0.5s)</em> }</p>
-       <p>将会通过不断地融合(混合)原始状态和悬停状态来实现过渡效果。</p> 
-       <p>当前，transition仅支持block、inline-block元素和table元素。cubic-in、cubic-out、cubic-in-out、</p>
-       <p>当前，transition指定的过渡函数有：linear、quad-in、quad-out、quad-in-out、quart-in、quart-out、quart-in-out、quint-in、quint-out、quint-in-out、sine-in、sine-out、sine-in-out、expo-in、expo-out、expo-in-out、circ-in、circ-out、circ-in-out、elastic-in、elastic-out、elastic-in-out、back-in、back-out、back-in-out、bounce-in、bounce-out、bounce-in-out。</p>
-      </td>
-     </tr> 
+        <div>定义修改元素状态时的过渡效果。 值的格式如下:</div>
+        <pre>propname(easeFunc,duration[,easeFuncRollback,durationRollback])</pre> 
+        <div>其中 <i>propname</i> 是一个可做动画的CSS属性名称，<i>easeFunc</i> 是一个动画擦除函数, 为下面的值之一:</div> 
+        <pre>none 
+linear 
+quad-in    quad-out    quad-in-out
+cubic-in   cubic-out   cubic-in-out
+quart-in   quart-out   quart-in-out
+quint-in   quint-out   quint-in-out
+sine-in    sine-out    sine-in-out
+expo-in    expo-out    expo-in-out
+circ-in    circ-out    circ-in-out
+elastic-in elastic-out elastic-in-out
+back-in    back-out    back-in-out
+x-back-in  x-back-out  x-back-in-out
+xx-back-in xx-back-out xx-back-in-out
+bounce-in  bounce-out  bounce-in-out</pre>
+        <div>示例:</div>
+        <pre>.mybutton:hover { color:red; border-color: white;
+                transition: color(linear,200ms) border-color(linear,100ms); }</pre>
+        <div>注意：transition是在很久之前基于H-SMILE core实现的，所以它的语法和W3C有些区别。</div>
+       </td>
+     </tr>
      <tr> 
       <td rowspan="2" valign="top"> 
        <div>

@@ -5,7 +5,7 @@
   </head>
 <body>
   <h1>图像(Graphics)、路径(Path)、文本(Text)对象</h1>
-  <h2>图像(Graphics)对象</h2>
+  <h2 id="graphics">图像(Graphics)对象</h2>
   <p>代表元素的图形表面。</p>
   <p>几乎所有的绘图方法都会返回Graphic对象，以便支持层叠调用。所有下面的代码：<font face="Courier New">gfx.lineWidth(2).line(0,0,100,100)</font>将会画从(0,0)到(100,100)的2px宽的线。</p>
   <dl>
@@ -275,8 +275,9 @@
   <dl>
     <dt>this</dt>
     <dd>
-      <div>( ) : Graphics</div>
-      <p>构造函数, 开始一个新路径。请使用<code>var path = new Graphics.Path();</code>来创建一个新的路径对象。</p></dd>
+      <div>([<b>d</b>:string]) : Graphics</div>
+      <p>构造函数, 开始一个新路径。请使用<code>var path = new Graphics.Path();</code>来创建一个新的路径对象。</p>
+      <p> <i>d</i>是一个<code>&lt;path d=...&gt;</code>格式的SVG属性值, 如果指定了该值，则会初始化该路径。</p></dd>
     <dt>moveTo</dt>
     <dd>
       <div>( x:<em>float</em>, y:<em>float </em>[, relative <em>= false</em> ] ) : Graphics.Path</div>

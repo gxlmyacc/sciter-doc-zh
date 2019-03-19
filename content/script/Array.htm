@@ -144,6 +144,50 @@ var squares = numbers.map(:el:el*el); // 创建一个新数组
       <pre>var filtered = [12, 5, 8, 130, 44].filter(:el: el &gt; 10);
 // filtered此时为[12, 130, 44]
 </pre></dd>
+    <dt>find</dt>
+    <dd><strong>( </strong><b>predicate</b>:function [, <b>thisArg</b>: object]<strong> )</strong> : (index:integer, element: any)
+      <p>为数组中的每个元素调用predicate<i>函数</i>指导返回&quot;truthy&quot;值。返回值为找到的元素。</p>
+			<p>predicate的函数签名如下: </p>
+			<p><code>function (element:any [, index:integer [, arr: array ]] ) : true | false</code></p>
+			<p>其中: </p>
+			<ul>
+        <li><i>element</i> - 数组中的当前元素;</li>
+        <li><i>index</i> - 数组中的当前元素的索引</li>
+        <li><i>arr</i> - 该数组的引用。</li>
+			</ul>
+			<p>如果指定了<i>thisArg</i>参数，则它将作为predicate函数中的<i>this</i>变量。</p>
+			<p>该函数返回找到的索引及元素，所以你可以这样用:</p>
+			
+			<pre>var (i,v) = someArr.find(:el: el.id == &quot;foo&quot; ); // value and index, or
+var v = someArr.find(:el: el.id == &quot;foo&quot; ); // just value</pre>
+			
+			</dd>
+    <dt>some</dt>
+    <dd><strong>( </strong><b>predicate</b>:function [, <b>thisArg</b>: object]<strong> )</strong> :  true | false 
+      <p>为数组中的每个元素调用predicate<i>函数</i>指导返回&quot;truthy&quot;值。当找到元素时返回值为<i>true</i>。如果没有找到，则返回<i>false</i>。</p>
+			<p>predicate的函数签名如下: </p>
+			<p><code>function (element:any [, index:integer [, arr: array ]] ) : true | false</code></p>
+			<p>其中: </p>
+			<ul>
+        <li><i>element</i> - 数组中的当前元素;</li>
+        <li><i>index</i> - 数组中的当前元素的索引</li>
+        <li><i>arr</i> - 该数组的引用。</li>
+			</ul>
+			<p>如果指定了<i>thisArg</i>参数，则它将作为predicate函数中的<i>this</i>变量。</p>
+    </dd>
+    <dt>every</dt>
+    <dd><strong>( </strong><b>predicate</b>:function [, <b>thisArg</b>: object]<strong> )</strong> :  true | false 
+    <p> 为数组中的每个元素调用predicate<i>函数</i>指导返回&quot;truthy&quot;值。，当所有元素调用predicate都返回true时，则返回值为true，否则返回值为false。</p>
+			<p>predicate的函数签名如下: </p>
+			<p><code>function (element:any [, index:integer [, arr: array ]] ) : true | false</code></p>
+			<p>其中: </p>
+			<ul>
+        <li><i>element</i> - 数组中的当前元素;</li>
+        <li><i>index</i> - 数组中的当前元素的索引</li>
+        <li><i>arr</i> - 该数组的引用。</li>
+			</ul>
+			<p>如果指定了<i>thisArg</i>参数，则它将作为predicate函数中的<i>this</i>变量。</p>
+    </dd>
     <dt>addObserver</dt>
     <dd><strong>( observer</strong>:function<strong> )</strong> : undefined
       <p>为该数组添加观察器(observer) - 观察器是一个函数，当数组修改时会调用该函数。该观察器函数的签名应该为:</p>

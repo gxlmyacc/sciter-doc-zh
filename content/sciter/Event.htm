@@ -226,7 +226,7 @@ VK_F20      VK_F21      VK_F22      VK_F23      VK_F24
     <dt>reason</dt>
     <dd>读写 - <em>integer</em>, 控制事件代码的reason字段。</dd>
     <dt>keyCode</dt>
-    <dd>只读 - integer, KEY_DOWN/KEY_UP事件的按键代码。KEY_CHAR事件的按下字符的代码点(codepoint)。</dd>
+    <dd>读写 - integer, KEY_DOWN/KEY_UP事件的按键代码。KEY_CHAR事件的按下字符的代码点(codepoint)。</dd>
     <dt>group</dt>
     <dd>只读 - <em>symbol</em>, 事件组标识符，这里它是事件处理函数的标识符: #onMouse, #onKey, #onFocus等.</dd>
     <dt>wheelDelta</dt>
@@ -262,11 +262,11 @@ VK_F20      VK_F21      VK_F22      VK_F23      VK_F24
     <dt>draggingDataType</dt>
     <dd>只读 - symbol, &nbsp;<em>onExchange(evt)</em>事件函数中有效。以下值之一:
       <ul>
-        <li><code>#text</code> -</li>
-        <li><code>#html</code></li>
-        <li><code>#url</code></li>
-        <li><code>#file</code></li>
-        <li><code>#json</code></li></ul></dd>
+        <li><code>#text</code> - 纯文本</li>
+        <li><code>#html</code> - html</li>
+        <li><code>#url</code> - 超链接</li>
+        <li><code>#file</code> - 文件列表</li>
+        <li><code>#json</code> - JSON数据（符合sciter规范的JSON数据）</li></ul></dd>
     <dt>deltaV, deltaX, deltaY, flags</dt>
     <dd>- onGesture()事件函数中的特有字段。将上面的GESTURE_****值的说明。</dd></dl>
     <h2>Methods</h2>

@@ -1,6 +1,9 @@
 html { 
   behavior:sticky-scroll; /* keep position of viewed element */
   overflow:scroll-indicator;
+  //text-selection-caret-color: transparent;
+  background:#fff;
+  color:#000;
 }
 
 body 
