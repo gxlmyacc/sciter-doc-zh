@@ -60,7 +60,7 @@
     <dt><u>attributes</u></dt>
     <dd><font color="#999999">类 - </font><a href="Attributes.htm"><em>Attributes</em></a>, 该元素的html属性集合。</dd>
     <dt><u>@</u></dt>
-    <dd><font color="#999999">类 -</font> 访问<font color="#999999" /><a href="Attributes.htm"><em>Attributes</em></a>属性的简短格式, 该元素的html属性集合。它只是上面的<em>attributes</em>的别名。<br/>示例：<br/><code>this.@[&quot;selected&quot;] = true</code> // 或者<br/><code>this.@#selected = true</code><br/>等价于<br/><code>this.attributes[&quot;selected&quot;] = true</code></dd>
+    <dd><font color="#999999">类 -</font> 访问<a href="Attributes.htm"><em>Attributes</em></a>属性的简短格式, 该元素的html属性集合。它只是上面的<em>attributes</em>的别名。<br/>示例：<br/><code>this.@[&quot;selected&quot;] = true</code> // 或者<br/><code>this.@#selected = true</code><br/>等价于<br/><code>this.attributes[&quot;selected&quot;] = true</code></dd>
     <dt><u>style</u></dt>
     <dd><font color="#999999">类 - </font><a href="Style.htm">Style</a>, 该DOM元素的CSS样式属性集合。</dd>
     <dt><u>state</u></dt>
@@ -161,13 +161,13 @@
       <p>元素创建后处于 未连接 状态。为了连接到DOM中，可以使用父元素的<em>insert</em>方法。</p></dd>
     <dt>create</dt>
     <dd>
-      <div><strong>(object)</strong> : <em>Element</em></div>
-      <p>DOM元素的静态构造函数。这里的<em>object</em>是一个用下面的微格式(<a href="#object-template">microformat</a>)定义的字符。</p>
+      <div><strong>(tuple)</strong> : <em>Element</em></div>
+      <p>DOM元素的静态构造函数。这里的<em>tuple</em>是一个用下面的微格式(<a href="#object-template">microformat</a>)定义的字符。</p>
       <p>示例：下面的代码片段相当于创建一个元素，该元素包含标记：<code>&lt;p&gt;before &lt;button&gt;Hi!&lt;/button&gt; after&lt;/p&gt;</code>:</p>
       <pre>
-  var para = Element.create { p, &quot;paragraph text&quot; }; 
+  var para = Element.create( [p:&quot;paragraph text&quot;] ); 
   //或者文本是变量: 
-  var para = Element.create { p, [paragraphText] };
+  var para = Element.create( [p: paragraphText] );
 </pre></dd>
     <dt>clear</dt>
     <dd>
@@ -392,25 +392,25 @@
       <p>映射视图的xView/yViewl点到xLocal/yLocal (element)坐标，它会随着CSS的变化而改变。</p></dd>
     <dt>insert</dt>
     <dd>
-      <div><strong>( element</strong> | <strong>html</strong> | <strong>object </strong>| <strong>array</strong> [,<strong>index</strong> = Integer.MAX]<strong>)</strong> returns: true | false.</div>
+      <div><strong>( element</strong> | <strong>html</strong> | <strong>tuple</strong>| <strong>array</strong> [,<strong>index</strong> = Integer.MAX]<strong>)</strong> returns: true | false.</div>
       <p><em>element</em>为将被插入到该元素中<em>index</em>位置的子DOM元素。如果index大于该元素当前的子元素数量，则新元素将会被添加到最后。<em>Index</em>为可选参数，如果省略则元素会被添加到最后。如果<em>element</em>已经是其他元素的子元素，则它将会立即取消与之前元素的连接。</p>
       <p>如果第一个参数是字符串(<em>html</em>文本)，则将试图将它插入到给定位置。</p>
-      <p>如果第一个参数是一个对象，则它会被当做创建新DOM元素的模板。参考该对象的<a href="#object-template">微格式</a>定义</p>
+      <p>如果第一个参数是一个tuple，则它会被当做创建新DOM元素的模板。参考该tuple的<a href="#object-template">微格式</a>定义</p>
       <p>如果第一个参数是一个数组，则它将包含DOM节点的引用(元素 和/或 文本 节点)。</p></dd>
     <dt>append</dt>
     <dd>
-      <div><strong>( element</strong> | <strong>html</strong> | <strong>object</strong> | <strong>array )</strong> returns: true | false.</div>
+      <div><strong>( element</strong> | <strong>html</strong> | <strong>tuple</strong> | <strong>array )</strong> returns: true | false.</div>
       <p>等价于<code>insert ( ... , Integer.MAX )</code>;</p></dd>
     <dt>prepend</dt>
     <dd>
-      <div><strong>( element</strong> | <strong>html</strong> | <strong>object </strong>| <strong>array )</strong> returns: true | false.</div>
+      <div><strong>( element</strong> | <strong>html</strong> | <strong>tuple</strong>| <strong>array )</strong> returns: true | false.</div>
       <p>等价于<code>insert ( ... , 0 )</code>;</p></dd>
     <dt>content</dt>
     <dd>
       <div><strong>( element</strong> | <strong>array</strong> [, <strong>element</strong>2 [, <strong>element</strong>3, ... ]]<strong> )</strong> returns: true | false.</div>
       <p>替换元素的内容。该函数是el.clear(); el.append(element1); el.append(element2); ...的短格式。</p>
       <p><em>该方法可以用在设置&lt;tr&gt;中的单元格。它会妥善处理col/rowspans。</em></p>
-      <p>对于其他所有元素，<em>elementN</em>可以是DOM元素、字符串、对象(使用<a href="#object-template">微格式</a>定义的元素模板)或者元素/节点数组。</p></dd>
+      <p>对于其他所有元素，<em>elementN</em>可以是DOM元素、字符串、tuple(使用<a href="#object-template">微格式</a>定义的元素模板)或者元素/节点数组。</p></dd>
     <dt>$content</dt>
     <dd>
       <div><strong>(</strong> .. inline html .. <strong>)</strong> : Element</div>
@@ -950,37 +950,35 @@ el.$content(This is item number <b>{ num }</b>);
 	  <strong>- #by-load</strong> - 文档加载新文档时导致旧文档被卸载。
 	</dd>
   </dl>
-  <h2 align="left" id="object-template">Element.create和Element.insert方法中的 对象模板微格式</h2>
-  <div>对象模板是用于生成新元素的对象文本。它应当遵循以下规则：</div>
-  <pre>{
-  div, <font face="monospace" color="#336600">//强制，第一个属性，它没有值——DOM元素的标签名，如<em>div</em>、<em>p</em>、<em>option</em>、<em>select</em>等。</font>
-  attr1name : <font face="monospace" color="#cc00cc">&quot;attr1value&quot;</font><font face="monospace">, </font><font face="monospace" color="#336600">//可选, 创建DOM元素的属性attr1name
-</font>
-  attrNname : <font face="monospace" color="#cc00cc">&quot;attrNvalue&quot;</font><font face="monospace">, </font><font face="monospace" color="#336600">//可选, 创建DOM元素的属性attrNname
-  </font><font face="monospace" color="#cc00cc"> 
-  &quot;some text&quot;</font><font face="monospace">, </font><font face="monospace" color="#336600">//可选字符串，DOM元素的文本(当该元素是文本容器，如<em>p</em>、<em> text</em>、<em>span</em>等时)。
-</font>
-  [ object-1, <font face="monospace" color="#cc00cc">&quot;text&quot;</font>, ... object-N ] <font face="monospace" color="#336600">//可选数组模板——定义元素的子元素和文本
+
+  <h2 align="left" id="object-template">Element.create和Element.insert|append, tuple模板微格式</h2>
+  <div>tuple模板是一个tuple字面值，用于生成一个新的元素。<code>tuple.tag</code>属性作为被创建的新元素的标签tag。该元组应该是以下格式:</div>
+  <pre>[div: <font face="monospace" color="#336600">// 必须, 元组标签 - DOM元素的tag名称。比如<em>div</em>、<em>p</em>、<em>option</em>、<em>select</em>等。
+
+   // 对象字面值 - 元素的属性列表
+   {
+</font>     attr1name : <font face="monospace" color="#cc00cc">&quot;attr1value&quot;</font><font face="monospace">, </font><font face="monospace" color="#336600">// optional, attribute #1 of created dom element.
+</font>     attrNname : <font face="monospace" color="#cc00cc">&quot;attrNvalue&quot;</font><font face="monospace"> </font><font face="monospace" color="#336600">// optional, attribute #N of created dom element.
+   }
+   // 内容，可以是文本，也可以是元组模板数组
+  </font><font face="monospace" color="#cc00cc"> &quot;some text&quot;</font><font face="monospace">, </font><font face="monospace" color="#336600">// optional string, text node of the DOM element
+</font>   [ tuple1, <font face="monospace" color="#cc00cc">&quot;text&quot;</font>, ... tupleN ] <font face="monospace" color="#336600">// optional array of templates - definitions
+                                  // of text and child elements of the element.
 </font>}
 </pre>
   <p>&quot;文本&quot;和[ 子元素数组 ]是互斥的，只能定义其中一个。</p>
   <p>示例, 请看下面的脚本:</p>
-  <pre> sb.insert
- {
-    div, class:&quot;dyn&quot;,
-     [
-      {p, &quot;文本1&quot; },
-      {p, [&quot;文本2 前&quot;, {button, &quot;Hi!&quot;}, &quot; 后&quot;] }
-     ]
- };
+  <pre> sb.insertsb.append (
+  [div: { class:&quot;dyn&quot; },
+    [p: &quot;Text1&quot; ],
+    [p: &quot;Text2 before &quot;, [button:&quot;Hi!&quot;], &quot; after&quot;]
+  ]);
 </pre>
   <p>等价于:</p>
-  <pre>sb.insert(
-   &quot;&quot;
-   &quot;文本1&quot;
-   &quot;文本2 Hi! 后&quot;
-   &quot;&quot;
-);
+  <pre>sb.$append(&lt;div.dyn&gt;
+  &lt;p&gt;Text1&lt;/p&gt;
+  &lt;p&gt;Text2 before &lt;button&gt;Hi!&lt;/button&gt; after&lt;/p&gt;
+&lt;/div&gt;);
 </pre>
 </body>
 </html>
