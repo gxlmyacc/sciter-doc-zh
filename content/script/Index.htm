@@ -1,60 +1,60 @@
 <html>
   <head>
-    <title>Index(Ë÷Òı)¶ÔÏó</title>
+    <title>Index(ç´¢å¼•)å¯¹è±¡</title>
     <meta name="generator" content="h-smile:richtext"/>
   </head>
 <body>
-  <h1>Index(Ë÷Òı)¶ÔÏó</h1>
-  <p>³Ö¾Ã»¯µÄstorage¶ÔÏóÖĞµÄIndex¶ÔÏó¡£</p>
+  <h1>Index(ç´¢å¼•)å¯¹è±¡</h1>
+  <p>æŒä¹…åŒ–çš„storageå¯¹è±¡ä¸­çš„Indexå¯¹è±¡ã€‚</p>
   
     <dl>
       
         
-        <h2>ÊôĞÔ</h2>
+        <h2>å±æ€§</h2>
       
         <dt>length</dt>
-        <dd>- <em>integer</em>, Ö»¶ÁÊôĞÔ¡£indexµÄ³¤¶È, ¸Ãindex±íÊ¾µÄ¹ØÁª¶ÔÏóµÄÊıÁ¿¡£</dd>
+        <dd>- <em>integer</em>, åªè¯»å±æ€§ã€‚indexçš„é•¿åº¦, è¯¥indexè¡¨ç¤ºçš„å…³è”å¯¹è±¡çš„æ•°é‡ã€‚</dd>
       
         <dt>asc</dt>
-        <dd>- <em>boolean</em>, Ö»Ğ´ÊôĞÔ¡£indexÖĞµÄ¶ÔÏóµÄ·ÃÎÊ·½Ïò¡£</dd>
+        <dd>- <em>boolean</em>, åªå†™å±æ€§ã€‚indexä¸­çš„å¯¹è±¡çš„è®¿é—®æ–¹å‘ã€‚</dd>
       
         <dt>[key]</dt>
-        <dd><strong>- </strong><em>value</em>, ¶ÁĞ´ÊôĞÔ¡£ÔÚ<em>key</em>Î»ÖÃµÄDbIndexµÄÔªËØ¡£<em>key</em>±ØĞëÊÇºÍ<em>DbIndex</em>¶ÔÏóÏàÍ¬µÄÀàĞÍ¡£<br/>
-        Èç¹ûindex·ÇÎ¨Ò»£¬Ôò·µ»ØÖµ½«ÊÇ<em>undefined</em>»òÒ»¸öÊı×é<em>array</em> - Æ¥Åä¸Ã¼üµÄËùÓĞÏîÁĞ±í¡£</dd>
+        <dd><strong>- </strong><em>value</em>, è¯»å†™å±æ€§ã€‚åœ¨<em>key</em>ä½ç½®çš„DbIndexçš„å…ƒç´ ã€‚<em>key</em>å¿…é¡»æ˜¯å’Œ<em>DbIndex</em>å¯¹è±¡ç›¸åŒçš„ç±»å‹ã€‚<br/>
+        å¦‚æœindexéå”¯ä¸€ï¼Œåˆ™è¿”å›å€¼å°†æ˜¯<em>undefined</em>æˆ–ä¸€ä¸ªæ•°ç»„<em>array</em> - åŒ¹é…è¯¥é”®çš„æ‰€æœ‰é¡¹åˆ—è¡¨ã€‚</dd>
       
         <dt>[begin..end]</dt>
-        <dd><strong>- </strong><em>keys</em>, firstºÍlastÔªËØ·¶Î§Ö¸¶¨µÄ¼ü¼¯ºÏ¡£·µ»ØDbIndex´Ó<em>start</em>¼üµ½<em>end</em>¼üµÄÔªËØÆ¬¶Î¡£<br/>
-		<em>beginÊÇkeyµÄµÍ±ß½çµÄ¼üÖµ(Èç¹ûÎªnull, ÔòÃ»ÓĞµÍ±ß½ç)</em>¡£<br/>
-		<em>endÊÇkeyµÄ¸ß±ß½çµÄ¼üÖµ(Èç¹ûÎªnull, ÔòÃ»ÓĞ¸ß±ß½ç)</em>¡£</dd>
+        <dd><strong>- </strong><em>keys</em>, firstå’Œlastå…ƒç´ èŒƒå›´æŒ‡å®šçš„é”®é›†åˆã€‚è¿”å›DbIndexä»<em>start</em>é”®åˆ°<em>end</em>é”®çš„å…ƒç´ ç‰‡æ®µã€‚<br/>
+		<em>beginæ˜¯keyçš„ä½è¾¹ç•Œçš„é”®å€¼(å¦‚æœä¸ºnull, åˆ™æ²¡æœ‰ä½è¾¹ç•Œ)</em>ã€‚<br/>
+		<em>endæ˜¯keyçš„é«˜è¾¹ç•Œçš„é”®å€¼(å¦‚æœä¸ºnull, åˆ™æ²¡æœ‰é«˜è¾¹ç•Œ)</em>ã€‚</dd>
       
         
-          <h2>·½·¨</h2>
+          <h2>æ–¹æ³•</h2>
       
         <dt>add</dt>
         <dd>
           <p>( key, val [, replace: true|false ] ) : true|false</p>
-          <p>½«<em>val</em>¶ÔÏó²åÈëµ½<em>Index</em>ÖĞ£¬²¢ÇÒ½«ËüÓë<em>key</em>¼üÖµ¹ØÁª¡£replace²ÎÊıÖ¸¶¨µ±¶ÔÏóÒÑ¾­´æÔÚÊ±ÊÇ·ñÌæ»»Ëü¡£</p></dd>
+          <p>å°†<em>val</em>å¯¹è±¡æ’å…¥åˆ°<em>Index</em>ä¸­ï¼Œå¹¶ä¸”å°†å®ƒä¸<em>key</em>é”®å€¼å…³è”ã€‚replaceå‚æ•°æŒ‡å®šå½“å¯¹è±¡å·²ç»å­˜åœ¨æ—¶æ˜¯å¦æ›¿æ¢å®ƒã€‚</p></dd>
       
         <dt>remove</dt>
         <dd>
           <div>( key [,obj] ) returns: true | false</div>
-          <p>´ÓindexÖĞ¸ù¾İ<em>key</em>ÒÆ³ı<em>obj</em>¶ÔÏó¡£Èç¹û³É¹¦Ôò·µ»Ø<em>true</em>£¬·ñÔò·µ»Ø<em>false</em>¡£<br/>
-		  Èç¹û<em>Index</em>ÊÇÎ¨Ò»µÄ, Ôò<em>obj</em>²ÎÊıÊ±¿ÉÑ¡µÄ¡£</p></dd>
+          <p>ä»indexä¸­æ ¹æ®<em>key</em>ç§»é™¤<em>obj</em>å¯¹è±¡ã€‚å¦‚æœæˆåŠŸåˆ™è¿”å›<em>true</em>ï¼Œå¦åˆ™è¿”å›<em>false</em>ã€‚<br/>
+		  å¦‚æœ<em>Index</em>æ˜¯å”¯ä¸€çš„, åˆ™<em>obj</em>å‚æ•°æ—¶å¯é€‰çš„ã€‚</p></dd>
       
         <dt>select</dt>
         <dd>
           <p>( min-key, max-key [, ascent [, start-inclusive [, end-inclusive]]] ) returns: selection object.</p>
-          <p>·µ»Ø<em>Index</em>ÖĞµÄselection¶ÔÏó¡£¸Ã¶ÔÏó»ùÓÚ <em>min-key¡¢max-key¡¢ascent»òdescentË³Ğò¡¢start-inclusive¡¢end-inclusive</em>Ìõ¼ş¡£Ä¬ÈÏÖµÎª:</p>
+          <p>è¿”å›<em>Index</em>ä¸­çš„selectionå¯¹è±¡ã€‚è¯¥å¯¹è±¡åŸºäº <em>min-keyã€max-keyã€ascentæˆ–descenté¡ºåºã€start-inclusiveã€end-inclusive</em>æ¡ä»¶ã€‚é»˜è®¤å€¼ä¸º:</p>
           <ul>
             <li><em>ascent = true</em></li>
             <li><em>start-inclusive = true</em></li>
             <li><em>end-inclusive = true</em></li></ul>
-          <p>Ê¾Àı:<br/>
+          <p>ç¤ºä¾‹:<br/>
 		  var sel = index.select(minVal, maxVal, true);<br/>
 		  for( var obj in sel ) { ... }</p></dd>
 		</dd>
     <dt>clear</dt>
 		<dd>( ) : undefined
-    <p>´Óindex¶ÔÏóÖĞÒÆ³ıËùÓĞÏî¡£</p></dd></dl>
+    <p>ä»indexå¯¹è±¡ä¸­ç§»é™¤æ‰€æœ‰é¡¹ã€‚</p></dd></dl>
 </body>
 </html>

@@ -3,95 +3,95 @@
     <meta name="generator" content="h-smile:richtext"/>
   </head>
 <body>
-  <h1>ÊÂÎñ(Transaction)¶ÔÏó</h1>
-  <p>ÊÂÎñ¶ÔÏó(½Ó¿Ú)×÷ÎªµÚÒ»¸ö²ÎÊıÓÃÔÚ<code>Element.transact(callback,name)</code>·½·¨ÖĞ¡£</p>
-  <p><code>Element.transact</code>·½·¨Ìá¹©ÁË½«Ö´ĞĞÒ»¸ö»ò¶à¸ö±à¼­ĞĞÎª×÷Îªµ¥Ò»ÊÂÎñ¡ª¡ª¿ÉÒÔÖØ×ö/³·Ïú»ò»Ø¹ö¡£ </p>
-  <p>ËùÓĞÊ¹ÓÃÆäËû·½·¨Ëù×öµÄDOMĞŞ¸Ä²»ÊÇ¿ÉÊÂÎñµÄ¡£</p>
+  <h1>äº‹åŠ¡(Transaction)å¯¹è±¡</h1>
+  <p>äº‹åŠ¡å¯¹è±¡(æ¥å£)ä½œä¸ºç¬¬ä¸€ä¸ªå‚æ•°ç”¨åœ¨<code>Element.transact(callback,name)</code>æ–¹æ³•ä¸­ã€‚</p>
+  <p><code>Element.transact</code>æ–¹æ³•æä¾›äº†å°†æ‰§è¡Œä¸€ä¸ªæˆ–å¤šä¸ªç¼–è¾‘è¡Œä¸ºä½œä¸ºå•ä¸€äº‹åŠ¡â€”â€”å¯ä»¥é‡åš/æ’¤é”€æˆ–å›æ»šã€‚ </p>
+  <p>æ‰€æœ‰ä½¿ç”¨å…¶ä»–æ–¹æ³•æ‰€åšçš„DOMä¿®æ”¹ä¸æ˜¯å¯äº‹åŠ¡çš„ã€‚</p>
   <dl>
     
       
-        <h2>ÊôĞÔ</h2>
+        <h2>å±æ€§</h2>
     
       <dt/>
       <dd>N/A</dd>
     
       
-        <h2>Ã¶¾Ù/±éÀú</h2>
+        <h2>æšä¸¾/éå†</h2>
     
       <dt/>
       <dd>
         <div>N/A</div></dd>
     
       
-        <h2>·½·¨</h2>
+        <h2>æ–¹æ³•</h2>
     
       <dt>attr</dt>
       <dd>
         <div><strong>( element</strong>:Element, <strong>name</strong>: string, <strong>value</strong>: undefined | string <strong>)</strong> : <em>Transact</em></div>
-        <p>Í¨¹ıÃû³ÆÌí¼Ó»òÒÆ³ıÊôĞÔ¡£ÒªÒÆ³ıÊôĞÔÔòÖ»Ğè½«Ëü¸³ÖµÎª<em>undefined</em>¡£</p></dd>
+        <p>é€šè¿‡åç§°æ·»åŠ æˆ–ç§»é™¤å±æ€§ã€‚è¦ç§»é™¤å±æ€§åˆ™åªéœ€å°†å®ƒèµ‹å€¼ä¸º<em>undefined</em>ã€‚</p></dd>
     
 			</dd><dt>text</dt>
 		  <dd> <strong>( element</strong>:Element | Node, <b>newText</b>: string&nbsp;<strong>)</strong> : <em>Transact</em>
-      <p>ĞŞ¸ÄÔªËØ»òÎÄ±¾½ÚµãµÄÎÄ±¾¡£</p></dd>
+      <p>ä¿®æ”¹å…ƒç´ æˆ–æ–‡æœ¬èŠ‚ç‚¹çš„æ–‡æœ¬ã€‚</p></dd>
     
       <dt>tag</dt>
       <dd>
         <div><strong>( element</strong>:Element, <strong>tag</strong>: string<strong> ) </strong>: <em>Transact</em></div>
-        <p>ĞŞ¸ÄÔªËØµÄ±êÇ©¡£ÀıÈç£¬Ä³Ğ©Çé¿öÏÂÄã¿ÉÄÜÏëÔÚ²»ÖØĞÂ´´½¨ÔªËØµÄÇé¿öÏÂ½«<code>&lt;p&gt;</code>ÔªËØ¸Ä³É<code>&lt;li&gt;</code>¡£</p></dd>
+        <p>ä¿®æ”¹å…ƒç´ çš„æ ‡ç­¾ã€‚ä¾‹å¦‚ï¼ŒæŸäº›æƒ…å†µä¸‹ä½ å¯èƒ½æƒ³åœ¨ä¸é‡æ–°åˆ›å»ºå…ƒç´ çš„æƒ…å†µä¸‹å°†<code>&lt;p&gt;</code>å…ƒç´ æ”¹æˆ<code>&lt;li&gt;</code>ã€‚</p></dd>
     
       <dt>split</dt>
       <dd>
         <div><strong>( pos</strong>:bookmark, <strong>until</strong>: Element <strong>)</strong> : <em>Bookmark</em></div>
-        <p>´Ó<em>pos</em>Î»ÖÃ¿ªÊ¼·Ö¸ôDOMÔªËØ£¬Ö±µ½<em>until</em>ÔªËØ¡£ÀıÈç£º</p>
+        <p>ä»<em>pos</em>ä½ç½®å¼€å§‹åˆ†éš”DOMå…ƒç´ ï¼Œç›´åˆ°<em>until</em>å…ƒç´ ã€‚ä¾‹å¦‚ï¼š</p>
         <pre>&lt;p id=test&gt;123&lt;b&gt;456&lt;/b&gt;789&lt;/p&gt;
 </pre>
-        <p>ÏÂÃæµÄ´úÂë:</p>
+        <p>ä¸‹é¢çš„ä»£ç :</p>
         <pre>
 var p = $(p#test);
 var b = p.$(b);
-var pos = [bookmark: b.nodes()[0], 1, false]; //´Ó&lt;b&gt;ÔªËØµÄµÚÒ»¸öÎÄ±¾½ÚµãÖĞµÄ×Ö·û'5'µÄÆğÊ¼±ßÔµ¡£
+var pos = [bookmark: b.nodes()[0], 1, false]; //ä»&lt;b&gt;å…ƒç´ çš„ç¬¬ä¸€ä¸ªæ–‡æœ¬èŠ‚ç‚¹ä¸­çš„å­—ç¬¦'5'çš„èµ·å§‹è¾¹ç¼˜ã€‚
 transact.split( pos, p );
 </pre>
-        <p>½«»á½«DOMĞŞ¸Ä³É£º</p>
+        <p>å°†ä¼šå°†DOMä¿®æ”¹æˆï¼š</p>
         <pre>&lt;p id=test&gt;123&lt;b&gt;4&lt;/b&gt;&lt;b&gt;56&lt;/b&gt;789&lt;/p&gt;</pre>
-        <p>Õâ¸öº¯Êı·µ»ØÉèÖÃµ½<i>until</i>ÔªËØÄÚ²¿µÄÎ»ÖÃµÄÊéÇ©¡£</dd>
+        <p>è¿™ä¸ªå‡½æ•°è¿”å›è®¾ç½®åˆ°<i>until</i>å…ƒç´ å†…éƒ¨çš„ä½ç½®çš„ä¹¦ç­¾ã€‚</dd>
 
       <dt>wrap</dt>
       <dd>
         <div><strong>( from</strong>:bookmark, <strong>to</strong>:bookmark, <strong>into</strong>: Element <strong>)</strong> : <em>Transact</em></div>
-        <p>½«from..toÔªËØ°ü×°µ½intoÔªËØÖĞ</p>
-			<p>·µ»ØÁ½¸öÊéÇ©(bookmarks) - ·µ»Ø¸Ã°ü×°ÄÚÈİµÄÆğÊ¼ºÍ½áÊøÎ»ÖÃ¡£</p></dd>
+        <p>å°†from..toå…ƒç´ åŒ…è£…åˆ°intoå…ƒç´ ä¸­</p>
+			<p>è¿”å›ä¸¤ä¸ªä¹¦ç­¾(bookmarks) - è¿”å›è¯¥åŒ…è£…å†…å®¹çš„èµ·å§‹å’Œç»“æŸä½ç½®ã€‚</p></dd>
     
       <dt>unwrap</dt>
       <dd>
         <div><strong>( el</strong>: Element <strong>)</strong> : <em>[bookmark,bookmark]</em></div>
-        <p>½«ÔªËØµÄÄÚÈİÒÆµ½ËüµÄ¸¸ÔªËØÖĞ£¬Í¬Ê±ÒÆ³ı¸ÃÔªËØ¡£</p>
-			  <p>·µ»ØÁ½¸öÊéÇ©(bookmarks) - ·µ»ØºÏ²¢µ½¸¸ÔªËØÖĞµÄÄÚÈİµÄÆğÊ¼ºÍ½áÊøÎ»ÖÃ¡£</p></dd>
+        <p>å°†å…ƒç´ çš„å†…å®¹ç§»åˆ°å®ƒçš„çˆ¶å…ƒç´ ä¸­ï¼ŒåŒæ—¶ç§»é™¤è¯¥å…ƒç´ ã€‚</p>
+			  <p>è¿”å›ä¸¤ä¸ªä¹¦ç­¾(bookmarks) - è¿”å›åˆå¹¶åˆ°çˆ¶å…ƒç´ ä¸­çš„å†…å®¹çš„èµ·å§‹å’Œç»“æŸä½ç½®ã€‚</p></dd>
     
       <dt>insertNode</dt>
       <dd>
         <div><strong>( node</strong>: Node,<strong> el</strong>: Element, <strong>at</strong>: index [, <strong>after</strong>: true] <strong>)</strong> : <em>Transact</em></div>
-        <p>½«node½Úµã»òÔªËØ²åÈëµ½DOMÖĞ<em>at</em>Î»ÖÃ¡£</p></dd>
+        <p>å°†nodeèŠ‚ç‚¹æˆ–å…ƒç´ æ’å…¥åˆ°DOMä¸­<em>at</em>ä½ç½®ã€‚</p></dd>
     
       <dt>removeNode</dt>
       <dd>
         <div><strong>( node</strong>: Node <strong>)</strong> : <em>Transact</em></div>
-        <p>TBD (´ÓDOMÊ÷ÖĞÒÆ³ınode½Úµã»òÔªËØ).</p></dd>
+        <p>TBD (ä»DOMæ ‘ä¸­ç§»é™¤nodeèŠ‚ç‚¹æˆ–å…ƒç´ ).</p></dd>
     
       <dt>insertHtml</dt>
       <dd>
         <div><strong>( at</strong>:bookmark, <strong>html</strong>:string <strong>)</strong> : <em>[nodes]</em></div>
-        <p>½«HTMLÆ¬¶Î²åÈëµ½atÎ»ÖÃ¡£·µ»Ø²åÈëµÄ×î¶¥²ã½ÚµãÊı×é¡£</p></dd>
+        <p>å°†HTMLç‰‡æ®µæ’å…¥åˆ°atä½ç½®ã€‚è¿”å›æ’å…¥çš„æœ€é¡¶å±‚èŠ‚ç‚¹æ•°ç»„ã€‚</p></dd>
     
       <dt>insertText</dt>
       <dd>
         <div><strong>( at</strong>:bookmark, <strong>text</strong>:string <strong>)</strong> : <em>bookmark</em></div>
-        <p>ÔÚatÎ»ÖÃ´¦²åÈëÎÄ±¾¡£·µ»Ø²åÈëµÄ×îºóÒ»¸ö×Ö·ûµÄÊéÇ©¡£</p></dd>
+        <p>åœ¨atä½ç½®å¤„æ’å…¥æ–‡æœ¬ã€‚è¿”å›æ’å…¥çš„æœ€åä¸€ä¸ªå­—ç¬¦çš„ä¹¦ç­¾ã€‚</p></dd>
     
       <dt>removeRange</dt>
       <dd>
         <div><strong>( from</strong>:bookmark, <strong>to</strong>:bookmark <strong>)</strong> : <em>Transact</em></div>
-        <p>TBD (´ÓDOMÊ÷ÖĞÒÆ³ı¸Ã·¶Î§).</p></dd></dl>
+        <p>TBD (ä»DOMæ ‘ä¸­ç§»é™¤è¯¥èŒƒå›´).</p></dd></dl>
   <p/>
 </body>
 </html>

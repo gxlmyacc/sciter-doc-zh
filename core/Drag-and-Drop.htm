@@ -1,64 +1,64 @@
 <html>
  <head> 
-  <title>SciterÖÐµÄÄÚ½¨µÄÍÏ×§²Ù×÷(Drag&Drop)</title> 
+  <title>Sciterä¸­çš„å†…å»ºçš„æ‹–æ‹½æ“ä½œ(Drag&Drop)</title> 
  </head> 
  <body> 
       <div class="post" id="post-89"> 
-       <h1 class="storytitle">SciterÖÐµÄÄÚ½¨µÄÍÏ×§²Ù×÷(Drag&Drop)</h1> 
+       <h1 class="storytitle">Sciterä¸­çš„å†…å»ºçš„æ‹–æ‹½æ“ä½œ(Drag&Drop)</h1> 
        <div class="storycontent"> 
-        <p>¾ÝÎÒËùÖª£¬ÓÐÁ½ÖÖ²»Í¬µÄÍÏ×§(drag-n-drop)»úÖÆ:</p> 
+        <p>æ®æˆ‘æ‰€çŸ¥ï¼Œæœ‰ä¸¤ç§ä¸åŒçš„æ‹–æ‹½(drag-n-drop)æœºåˆ¶:</p> 
         <ul> 
-         <li><strong>È«¾ÖÍÏ×§</strong> ½«¶ÔÏó´Ó×ÀÃæÉÏµÄÒ»¸ö´°¿Ú/³ÌÐòÍÏ×§µ½ÁíÒ»¸ö´°¿Ú/³ÌÐòÉÏ¡£ÔÚ´ó¶àÊýÇé¿öÏÂ£¬³ýÁË¶îÍâµÄÊÓ¾õÐ§¹û£¬Õâ¸ö²Ù×÷·Ç³£½Ó½ü¼ôÇÐ°åµÄ'¼ôÇÐ-Õ³Ìù'²Ù×÷¡£</li> 
-         <li><strong>´°¿Ú¾Ö²¿ÍÏ×§</strong> ½«¶ÔÏóÔÚÒ»¸ö´°¿Ú/±íµ¥ÉÏÍÏ×§¡£ÀýÈçÒ»Ð©<a href="http://demo.script.aculo.us/shop">¹ºÎï³µ</a>µÄÊµÏÖ¡£</li> 
+         <li><strong>å…¨å±€æ‹–æ‹½</strong> å°†å¯¹è±¡ä»Žæ¡Œé¢ä¸Šçš„ä¸€ä¸ªçª—å£/ç¨‹åºæ‹–æ‹½åˆ°å¦ä¸€ä¸ªçª—å£/ç¨‹åºä¸Šã€‚åœ¨å¤§å¤šæ•°æƒ…å†µä¸‹ï¼Œé™¤äº†é¢å¤–çš„è§†è§‰æ•ˆæžœï¼Œè¿™ä¸ªæ“ä½œéžå¸¸æŽ¥è¿‘å‰ªåˆ‡æ¿çš„'å‰ªåˆ‡-ç²˜è´´'æ“ä½œã€‚</li> 
+         <li><strong>çª—å£å±€éƒ¨æ‹–æ‹½</strong> å°†å¯¹è±¡åœ¨ä¸€ä¸ªçª—å£/è¡¨å•ä¸Šæ‹–æ‹½ã€‚ä¾‹å¦‚ä¸€äº›<a href="http://demo.script.aculo.us/shop">è´­ç‰©è½¦</a>çš„å®žçŽ°ã€‚</li> 
         </ul> 
-        <p>ÎÒÒÑ¾­ÎªSciterÌí¼ÓÖ§³ÖÁËºóÒ»ÖÖÍÏ×§²Ù×÷ ¨C DOMÔªËØµÄ¾Ö²¿ÍÏ×§¡£ÏêÏ¸ÄÚÈÝ¼û<a href="http://www.terrainformatica.com/wiki/doku.php?id=h-smile:drag-n-drop">ÕâÀï</a>¡£</p> 
-        <p>Çë¿¼ÂÇÏÂµÄÕâ¸öÈÎÎñ:</p> 
-        <p>ÏÂÃæµÄÁ½¸öselectÔªËØ:</p> 
+        <p>æˆ‘å·²ç»ä¸ºSciteræ·»åŠ æ”¯æŒäº†åŽä¸€ç§æ‹–æ‹½æ“ä½œ â€“ DOMå…ƒç´ çš„å±€éƒ¨æ‹–æ‹½ã€‚è¯¦ç»†å†…å®¹è§<a href="http://www.terrainformatica.com/wiki/doku.php?id=h-smile:drag-n-drop">è¿™é‡Œ</a>ã€‚</p> 
+        <p>è¯·è€ƒè™‘ä¸‹çš„è¿™ä¸ªä»»åŠ¡:</p> 
+        <p>ä¸‹é¢çš„ä¸¤ä¸ªselectå…ƒç´ :</p> 
         <pre>&lt;select id=&quot;source&quot; size=&quot;5&quot;&gt;
-  &lt;option&gt;Ò»&lt;&lt;/option&gt;  
-  &lt;option&gt;¶þ&lt;&lt;/option&gt;  
-  &lt;option&gt;Èý&lt;&lt;/option&gt;  
+  &lt;option&gt;ä¸€&lt;&lt;/option&gt;  
+  &lt;option&gt;äºŒ&lt;&lt;/option&gt;  
+  &lt;option&gt;ä¸‰&lt;&lt;/option&gt;  
 &lt;/select&gt;
 &lt;select id=&quot;destination&quot; size=&quot;5&quot;&gt;&lt;/select&gt;</pre> 
-        <p>Èç¹ûÎÒÃÇÒªÈÃËüÃÇÖ§³Ö½«&lt;option&gt;ÔªËØ´Ó#sourceÖÐÍÏ×§µ½#destination£¬¶ÔÓÚ<em>htmlayout</em>»ò<em>the Sciter</em>(¶¼ÊÇ»ùÓÚh-smile core)£¬¿ÉÒÔÐ´ÏÂÒÔÏÂ´úÂë: </p> 
+        <p>å¦‚æžœæˆ‘ä»¬è¦è®©å®ƒä»¬æ”¯æŒå°†&lt;option&gt;å…ƒç´ ä»Ž#sourceä¸­æ‹–æ‹½åˆ°#destinationï¼Œå¯¹äºŽ<em>htmlayout</em>æˆ–<em>the Sciter</em>(éƒ½æ˜¯åŸºäºŽh-smile core)ï¼Œå¯ä»¥å†™ä¸‹ä»¥ä¸‹ä»£ç : </p> 
         <pre>
    select#source &gt; option
    {
-      dragging: only-move; /* ÕâÀïÎÒÃÇÖ»ÄÜÒÆ¶¯optionÔªËØ */ 
+      dragging: only-move; /* è¿™é‡Œæˆ‘ä»¬åªèƒ½ç§»åŠ¨optionå…ƒç´  */ 
    }
    select#destination
    {
       accept-drag: selector( select#source &gt; option ); 
-                  /* ÎÒÃÇÖ»½ÓÊÜselect#sourceÖÐµÄoptionÔªËØ */ 
+                  /* æˆ‘ä»¬åªæŽ¥å—select#sourceä¸­çš„optionå…ƒç´  */ 
       drop: append; 
-                 /* optionµÄË³Ðò²»ÊÇÏà¹ØÁªµÄ£¬ÐÂÔªËØ×ÜÊÇÌí¼Óµ½×îºó */
+                 /* optionçš„é¡ºåºä¸æ˜¯ç›¸å…³è”çš„ï¼Œæ–°å…ƒç´ æ€»æ˜¯æ·»åŠ åˆ°æœ€åŽ */
    }
 </pre> 
-        <p>ÕâÑù¾Í¿ÉÒÔ½²optionÔªËØ´ÓµÚÒ»¸ö&lt;select&gt;ÖÐÍÏ×§µ½µÚ¶þ¸ö¡£</p> 
-        <p>µ«ÊÇÒ»¸öºÃµÄUIÉè¼ÆµÄÖ÷ÒªÔ­ÔòÊÇÊ²Ã´ ¨C ¡°discoverability¡±? µ±ÍÏ×§Ê±Ó¦¸ÃÓÐÒ»¸öÊÓ¾õÏßË÷: ÓÃ»§Ê²Ã´Ê±ºòÒÔ¼°ÄÄÀï¿ÉÒÔ½øÐÐÍÏ×§¡£ÏÂÃæµÄÎ±Àà½«»á°ïÖúÎÒÃÇ´¦ÀíÕâÖÖÇé¿ö:</p> 
+        <p>è¿™æ ·å°±å¯ä»¥è®²optionå…ƒç´ ä»Žç¬¬ä¸€ä¸ª&lt;select&gt;ä¸­æ‹–æ‹½åˆ°ç¬¬äºŒä¸ªã€‚</p> 
+        <p>ä½†æ˜¯ä¸€ä¸ªå¥½çš„UIè®¾è®¡çš„ä¸»è¦åŽŸåˆ™æ˜¯ä»€ä¹ˆ â€“ â€œdiscoverabilityâ€? å½“æ‹–æ‹½æ—¶åº”è¯¥æœ‰ä¸€ä¸ªè§†è§‰çº¿ç´¢: ç”¨æˆ·ä»€ä¹ˆæ—¶å€™ä»¥åŠå“ªé‡Œå¯ä»¥è¿›è¡Œæ‹–æ‹½ã€‚ä¸‹é¢çš„ä¼ªç±»å°†ä¼šå¸®åŠ©æˆ‘ä»¬å¤„ç†è¿™ç§æƒ…å†µ:</p> 
         <pre>
-   option:moving /* ÕýÔÚÒÆ¶¯(ÍÏ×§)µÄoption */
+   option:moving /* æ­£åœ¨ç§»åŠ¨(æ‹–æ‹½)çš„option */
    {
       background:blue; color:white;
       opacity:0.5;
    }
 
-   select:drop-target /* µ±Ç°¼¤»îµÄÍÏ×§Ä¿±êÔªËØ */
+   select:drop-target /* å½“å‰æ¿€æ´»çš„æ‹–æ‹½ç›®æ ‡å…ƒç´  */
    {
       background: yellow; 
-      /* ÔÚÍÏ×§(D&amp;D)²Ù×÷¿ªÊ¼ºó£¬ËùÓÐ¿ÉÓÃµÄÍÏ×§Ä¿±êÔªËØ½«»á¸ßÁÁÏÔÊ¾³É»ÆÉ« */ 
+      /* åœ¨æ‹–æ‹½(D&amp;D)æ“ä½œå¼€å§‹åŽï¼Œæ‰€æœ‰å¯ç”¨çš„æ‹–æ‹½ç›®æ ‡å…ƒç´ å°†ä¼šé«˜äº®æ˜¾ç¤ºæˆé»„è‰² */ 
    }
 
-   select:drag-over /* ÍÏ×§Ïîµ±Ç°ÐüÍ£µÄÍÏ×§Ä¿±êÔªËØ*/
+   select:drag-over /* æ‹–æ‹½é¡¹å½“å‰æ‚¬åœçš„æ‹–æ‹½ç›®æ ‡å…ƒç´ */
    {
       outline: 1px solid green; 
-      /* ÔÚµ±Ç°Êó±êÎ»ÖÃµÄÍÏ×§Ä¿±êÔªËØÏÔÊ¾ÂÌÉ«µÄÂÖÀª
-          ±»ÍÏ×§ÔªËØ¿ÉÒÔ·ÅÖÃÔÚÕâ¸öÄ¿±êÔªËØÉÏ */ 
+      /* åœ¨å½“å‰é¼ æ ‡ä½ç½®çš„æ‹–æ‹½ç›®æ ‡å…ƒç´ æ˜¾ç¤ºç»¿è‰²çš„è½®å»“
+          è¢«æ‹–æ‹½å…ƒç´ å¯ä»¥æ”¾ç½®åœ¨è¿™ä¸ªç›®æ ‡å…ƒç´ ä¸Š */ 
    }
 
 </pre> 
-        <p>ÒÔÉÏÊÇÔÚÎÒÃÇµÄ³ÌÐòÖÐÌí¼ÓÍÏ×§¹¦ÄÜËùÒª×öµÄËùÓÐÊÂÇé¡£</p> 
-        <p>Å¶, »¹ÓÐÒ»Ìõ: Èç¹ûÐèÒª½øÐÐË«ÏòÍÏ×§£¬ÄÇÎÒÃÇÒªÔõÃ´×ö ¨C ´Ó#destinationÍÏ×§µ½#source? ·½·¨ÊÇÒ»ÑùµÄ:</p> 
+        <p>ä»¥ä¸Šæ˜¯åœ¨æˆ‘ä»¬çš„ç¨‹åºä¸­æ·»åŠ æ‹–æ‹½åŠŸèƒ½æ‰€è¦åšçš„æ‰€æœ‰äº‹æƒ…ã€‚</p> 
+        <p>å“¦, è¿˜æœ‰ä¸€æ¡: å¦‚æžœéœ€è¦è¿›è¡ŒåŒå‘æ‹–æ‹½ï¼Œé‚£æˆ‘ä»¬è¦æ€Žä¹ˆåš â€“ ä»Ž#destinationæ‹–æ‹½åˆ°#source? æ–¹æ³•æ˜¯ä¸€æ ·çš„:</p> 
         <pre>
 
    select#destination &gt; option
@@ -72,7 +72,7 @@
       drop: append; 
    }
 </pre> 
-        <p>»¹ÓÐÒ»Ð¡¿éÄÚÈÝ: Èô½«ÉùÃ÷ÁË<code>drop:recycle</code>µÄÔªËØ×÷ÎªÍÏ×§Ä¿±ê£¬Ôò·ÅÖÃÔÚËüÉùÃ÷µÄÔªËØ¶¼½«»á±»É¾³ýµô¡£</p> 
+        <p>è¿˜æœ‰ä¸€å°å—å†…å®¹: è‹¥å°†å£°æ˜Žäº†<code>drop:recycle</code>çš„å…ƒç´ ä½œä¸ºæ‹–æ‹½ç›®æ ‡ï¼Œåˆ™æ”¾ç½®åœ¨å®ƒå£°æ˜Žçš„å…ƒç´ éƒ½å°†ä¼šè¢«åˆ é™¤æŽ‰ã€‚</p> 
        </div> 
       </div>  
  </body>

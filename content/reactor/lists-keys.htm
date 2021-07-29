@@ -1,0 +1,23 @@
+﻿<html><body> <h2>列表和键</h2>
+	<p>我们可以构建元素集合并使用花括号将它们包含在 SSX <code>{}</code> 当中.</p><p>下面，我们使用  <code>map()</code> 函数循环遍历 numbers 数组. 为每个项目返回一个  <code>&lt;li&gt;</code> 元素. 最后，我们将生成的元素数组分配给 listItems:</p>
+  <pre>const numbers = [1, 2, 3, 4, 5];
+const listItems = numbers.map((number) =&gt;
+  &lt;li&gt;{number}&lt;/li&gt;
+);</pre><p>然后我们将整个 <code>listItems</code> 数组包含在一个 <code>&lt;ul&gt;</code> 元素中, 并将其渲染到 DOM:</p><pre>$(body).content(&lt;ul&gt;{listItems}&lt;/ul&gt;);</pre>
+	<p>上面的代码, 我们用 <code>Element.content(vnodes)</code> 将有效地用于函数呈现的静态 list.</p>
+	<p>但是，如果我们计划使用 <code>Element.merge()</code>  更新 list,  我们需要为 list 元素添加 keys. 在这种情况下 <code>merge()</code> 可以有效地执行 DOM and its virtual representation.</p>
+	<p>使用 key 最佳方法是使用于字符串, 该字符串在其 item 中是唯一标识, 大多数情况下 key.:</p><pre>const todoItems = todos.map((todo) =&gt;
+  &lt;li key={todo.id} status={todo.status}&gt;
+    {todo.text}
+  &lt;/li&gt;);</pre>
+	<p>注意:如果项目的顺序可能发生变化，不建议使用 key 做为索引. 这会对性能产生负面影响, 并可能导致组件状态出现问题. &nbsp;</p>
+	<h4>key 只能在兄弟 item 中唯一</h4><p>数组中使用的 key 需要在它们的兄弟中应该是唯一的. 但是, 它们不需要是全局唯一的.&nbsp;</p>
+	<h4><a href="https://reactjs.org/docs/lists-and-keys.html#embedding-map-in-jsx"></a> map() 嵌入到 SSX 表达式中</h4>
+	<p>SSX 允许在花括号中嵌入任何表达式, 以便我们也可以内联 <code>map()</code> </p><pre>function NumberList(props) {
+  const numbers = props.numbers;
+  return
+    &lt;ul&gt;
+     { numbers.map((number) =&gt; &lt;li key={number.toString()} /&gt;) }
+    &lt;/ul&gt;;
+}</pre>
+	<p></p></body></html>

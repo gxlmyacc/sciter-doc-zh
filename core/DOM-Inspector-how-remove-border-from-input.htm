@@ -1,32 +1,32 @@
 <html>
 
 <head>
-	<title>DOM������(Inspector), ����Ƴ�����Ԫ�صı߿�</title>
+	<title>DOM检视器(Inspector), 如果移除输入元素的边框</title>
 </head>
 
 <body>
 <div class="post" id="post-41898">
-	 <h1 class="storytitle">DOM������(Inspector), ����Ƴ�����Ԫ�صı߿�</h1>
+	 <h1 class="storytitle">DOM检视器(Inspector), 如果移除输入元素的边框</h1>
  </div>
 	
 	<div class="storycontent">
-		<p>�������µ��û�����<q>����ô�Ƴ�����Ԫ�صı߿�</q>��<br />
-Ҳ����<q>������ѡ��ť��</q>��<q>��������Ԫ��</q>��<q>�������Ĳ˵���</q>�ġ��߿��������ġ�</p>
-<p>����ƪ�����У�������ͽ�����������ͬ�������������ǻش𡰶������¡���������䡣</p>
-<p>Sciter�е�����Ԫ��Ҫô��һ����DOMԪ�أ�Ҫô�Ƕ����DOMԪ����ɵĸ���Ԫ�ء�</p>
-<p>����Ԫ��(��֧������Ԫ��)���Դ�Sciter�ڲ���&#8220;master.css&#8221;��ʽ���л�ȡ���ǵ�&#8220;ԭʼ&#8221;��ʽģ�͡�Ҫ����ĳ�����Ԫ�ص���ʽ��������Sciter.exe������DOM��������Ȼ���ڸ�Ԫ�ص�ͼ���ϵ����</p>
-<p>ҪʹĳԪ�ظ�����ʾ��ֻ���ڸ�Ԫ���ϰ�סCTRL+SHIFT������ͬʱ�����꣬�����ڼ����������д�DOM����ѡ���Ԫ��:</p>
+		<p>经常有新的用户问我<q>“怎么移除输入元素的边框”</q>。<br />
+也有问<q>“下拉选择按钮”</q>、<q>“日历单元格”</q>、<q>“上下文菜单”</q>的“边框”相关问题的。</p>
+<p>在这篇文章中，我想解释解决这类问题的同样方法，而不是回答“定义以下……”等语句。</p>
+<p>Sciter中的输入元素要么是一个纯DOM元素，要么是多个纯DOM元素组成的复合元素。</p>
+<p>输入元素(不支持输入元素)可以从Sciter内部的&#8220;master.css&#8221;样式表中获取它们的&#8220;原始&#8221;样式模型。要查找某个组成元素的样式，可以在Sciter.exe中启动DOM检视器，然后在该元素的图标上点击。</p>
+<p>要使某元素高亮显示，只需在该元素上按住CTRL+SHIFT按键的同时点击鼠标，或者在检视器窗口中从DOM树中选择该元素:</p>
 <p><a href="images/dom-inspector.png"><img src="images/dom-inspector.png" alt="dom inspector" width="697" height="800" class="aligncenter size-full wp-image-41899" /></a></p>
-<p>������������ʾӦ�õ���Ԫ���ϵ���ʽ�����Ѿ���������(ʹ��)��ʽ��</p>
-<p>�������������ģ�&lt;input>Ԫ����û�б߿�ģ�����ͨ��<br />
-<code>background-image: url(theme:edit-normal); background-repeat:stretch;</code>����ͼ����������Ԫ��������ʵ�ֱ߿�Ч����</p>
-<p><code>theme:....</code>��һ������ͼ�� &#8211; ���ǵ���Ⱦί�и�����������ϵͳ��UI����������&lt;input>Ԫ�صı߿�������������ϵͳ���Ƶġ�</p>
-<p>��������������ô�Ƴ�����Ԫ�صı߿򡱵Ĵ𰸡�</p>
-<p>Ҫ���Ʊ߿���κα����Ļ��ƣ�����������������:</p>
+<p>检视器可以显示应用到该元素上的样式规则，已经它的最终(使用)样式。</p>
+<p>正如你所看到的，&lt;input>元素是没有边框的，而是通过<br />
+<code>background-image: url(theme:edit-normal); background-repeat:stretch;</code>背景图像拉伸铺满元素区域来实现边框效果。</p>
+<p><code>theme:....</code>是一种虚拟图像 &#8211; 它们的渲染委托给了宿主操作系统的UI主题服务。因此&lt;input>元素的边框是由宿主操作系统绘制的。</p>
+<p>最后，这里给出“怎么移除输入元素的边框”的答案。</p>
+<p>要抑制边框和任何背景的绘制，可以声明以下内容:</p>
 <pre class="brush: css;"> 
 input#my {
-  border: none;  /* �Ƴ��κα߿� */
-  background: none; /* �Ƴ��κ�(Ĭ��)���� */
+  border: none;  /* 移除任何边框 */
+  background: none; /* 移除任何(默认)背景 */
 }
 </pre>
 	</div>

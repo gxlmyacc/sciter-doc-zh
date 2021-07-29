@@ -1,0 +1,29 @@
+﻿<html><body> 
+	<h2>什么是 Reactor</h2>
+	<p>Reactor 只有这三个特性:</p>
+	<ul><li>编译器原生支持 <a href="../script/language/ssx.htm">SSX</a>&nbsp;. SSX 语法与表达式是 Sciter's Script 中的组成部分. SSX 的概念非常的接近 <a href="https://reactjs.org/docs/introducing-jsx.html">JSX</a></li>
+		<li>原生的实现了真实 DOM / 虚拟 DOM 的协调. <code>Element.merge(velement)</code> 就是这个 .</li>
+		<li> 这个 <code>class Reactor.Component</code> 是由 <u>sciter:reactor.tis</u> 实现. 你可以在这看到源代码 <a href="lifecycle.htm#reactor-component">here</a>.</li>
+		
+		</ul>
+	<h2>Reactor 不是什么</h2>
+	<ul><li>Reactor 不是框架或库.</li></ul><h2>Hello World</h2>
+	<p>最小的 Sciter's Reactor 示例:</p>
+	<pre>$(body).content( &lt;h1&gt;Hello, world!&lt;/h1&gt; );</pre>
+	<p>如您所料，执行此行将生成以下 DOM 结构:</p>
+	
+	
+	
+	<pre>&lt;body&gt;
+  &lt;h1&gt;Hello, world!&lt;/h1&gt;
+&lt;/body&gt;</pre>
+	
+	<p>脚本表达式 &nbsp;<code>&lt;h1&gt;Hello, world!&lt;/h1&gt;</code> 是一个 SSX 原语.</p>
+	<p>注意：您不需要任何外部预编译器来运行此代码 - <a href="ssx.htm">SSX</a>&nbsp; 是 Sciter 脚本的一个组成部分，从 sciter4.4.0.0 开始支持。解析、DOM 更新和协调也是原生实现的，不需要任何额外的库。 </p>
+	<p>这意味着, 就象上面的例子一样, 你在不引用 <a href="https://reactjs.org/">ReactJS</a> 的时候, 就能使用这些特性.</p> 
+	<p>例如，JSX 可用于需要填充现有 DOM 的情况, 你可以使用<code>Element.create()</code> or <code> Element.append() </code>  </p>
+	<p>并且你可以使用 <code>Element.merge()</code> 来从虚拟 dom 定义中来更新真实 DOM , 你可以使用这个例子用于需要比例和合并二个真实 dom 树的时候. </p>
+	<h2>Sciter::Reactor 与 Facebook::ReactJS </h2>
+	<p>Sciter's Reactor 使用了大体上类似 ReactJS 的语法与想法. </p>
+	<p>Facebook::ReactJS 是一个 JavaScript 库,  Sciter::Reactor 是原生实现了这二个事情 : <b>SSX</b> 与 <b>Element.merge()</b>. </p>
+	<p></p></body></html>
