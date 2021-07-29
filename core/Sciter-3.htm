@@ -14,47 +14,47 @@
 	
   <div class="storycontent">
 		
-    <p><a href="/sciter/" title="Sciter main page">Sciter 3</a>�Ѿ���ʽ����</p>
+    <p><a href="/sciter/" title="Sciter main page">Sciter 3</a>已经正式发布</p>
 
-	<p>�μ�<a href="/sciter/logfile.htm" title="Sciter log file" target="_blank">��־�ļ�</a>��</p>
+	<p>参见<a href="/sciter/logfile.htm" title="Sciter log file" target="_blank">日志文件</a>。</p>
 
 	<ul>
 
-	  <li>��Windows Vista/7�ϣ�ʹ��Direct2D��ͼ</li>
+	  <li>在Windows Vista/7上，使用Direct2D绘图</li>
 
-	  <li>��Windows XP�ϣ�ʹ��GDI+��ͼ</li>
+	  <li>在Windows XP上，使用GDI+绘图</li>
 	
 </ul>
 
-	<p>Windows XP�ϵ���֪����: GDI+�����Ժͷ��佥�䲻ͬ��Direct2D����û��&#8220;open gradients&#8221�ĸ���Ժ��һ᳢���޸�����</p>
+	<p>Windows XP上的已知问题: GDI+的线性和辐射渐变不同于Direct2D，它没有&#8220;open gradients&#8221的概念，稍后我会尝试修复它。</p>
 
-	<p>��Ӧ���뵽��GDI+��Ⱦ��Ч�ʲ�����Direct2D��ȣ�����Ӧ�þ��������Χʹ�ö��������������ý������������岻ͬ�Ļ���ģʽ: </p>
+	<p>你应该想到，GDI+渲染的效率不能与Direct2D相比，所以应该尽量避免大范围使用动画。下面的两种媒体规则允许定义不同的绘制模式: </p>
 
 	<pre class="brush: css;"> 
   @media graphics-layer == 1 {
-    /* GDI+ ���� �������ö��� */
+    /* GDI+ 规则 尽量少用动画 */
   }
   @media graphics-layer == 2 {
-    /* Direct2D WARP ģʽ (��������)        
+    /* Direct2D WARP 模式 (软件加速)        
      */
   }
   @media graphics-layer >= 3 {
-    /* Direct2D Ӳ������ģʽ��������� */
+    /* Direct2D 硬件加速模式，最大性能 */
   }
 </pre>
 
-<p>��Ȼ�����������£�������������Ҳ���㹻��:</p>
+<p>当然，大多少情况下，下面两个规则也是足够的:</p>
 
 <pre class="brush: css;"> 
   @media graphics-layer == 1 {
-    /* GDI+ ���� �������ö��� */
+    /* GDI+ 规则 尽量少用动画 */
   }
   @media graphics-layer > 1 {
-    /* Direct2D, ������ģʽ */
+    /* Direct2D, 高性能模式 */
   }
 </pre>
   
-<p>�ڽű��У������ͨ����ȡ<code>view.backend</code> (:integer)���������gfx����ģʽ��</p>
+<p>在脚本中，你可以通过读取<code>view.backend</code> (:integer)属性来检查gfx绘制模式。</p>
 	
 </div>
 	

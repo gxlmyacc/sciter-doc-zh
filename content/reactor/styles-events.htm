@@ -1,0 +1,136 @@
+﻿<html><body> <h2>定义组件的默认样式</h2>
+  <p>通常，您在应用程序中全局定义样式. 但是某些组件可能需要一些对其操作至关重要的样式(例如特定布局).</p>
+	<p>Reactor (实际上是 Sciter 的内部代码) 提供了使用 <i>styleset</i> 属性定义组件样式的简单方法<code>[&quot;stylesetname&quot;, &quot;file.css&quot;]</code>.&nbsp;</p>
+	<p>让我们重新定义我们之前使用的 <code>Clock</code> 类:</p>
+	
+	<pre>include &quot;sciter:reactor.tis&quot;;
+
+class Clock: Reactor.Component 
+{
+  const styleset = [&quot;clock&quot;, $url(clock.css)]; // style set declaration
+
+  this var data = { time: new Date() }; // setting initial state 
+
+  function attached() { // a.k.a. React::componentDidMount
+    this.timer(1s, function() {
+      this.update { time:new Date() };
+      return true; // to keep the timer ticking
+    });
+  }
+
+  function render() {
+    return
+     &lt;clock&gt;
+      &lt;div.greeting&gt;Hello, world!&lt;/div&gt;
+      &lt;div&gt;It is {this.data.time.toLocaleString(#time)} now.&lt;/div&gt;
+     &lt;/clock&gt;;
+  } 
+}</pre><p> 这 <a href="../script/Globals.htm#url"><code>$url()</code></a> 是传入字符串的函数
+  它使用此脚本会引用当前文件位置作为基础, 来解析为绝对 URL 地址引入文件.</p>
+	<p>这是 clock.css 文件的内容:&nbsp;</p>
+	
+	<pre>@set clock 
+{
+  :root {
+    display: block;
+    flow:vertical;
+  }
+  span.time { 
+    display:inline-block; 
+    white-space:nowrap; 
+  }
+}</pre>
+	<p>样例 <u>{sdk}/samples/+reactor/doc-samples/styles-events/clock.htm</u></p><p>如您所见，它定义了一组独立的 CSS 规则, 这些规则定义了我们的时钟组件及其内部的内容 (并且仅是内容).</p>
+	<p>通常: 如果组件被设计用于许多应用程序, 那么其默认样式集应仅包含布局所需的基本规则, 并且这些规则对操作至关重要. 每个应用程序都可以在这些默认样式之上添加自己的样式.&nbsp;</p>
+	<p>样式在&nbsp;<code>const styleset</code> 会应用到 <b>之前</b> 文件中已经定义的样式之上. 如果你想 &nbsp;<code>const styleset</code> 样式覆盖 document 样式你可以使用 <code>#important</code> 标记:</p>
+	
+	<pre>const styleset = [&quot;clock&quot;, $url(clock.css), #important]; // styles applied on top of doc styles</pre>
+  <p>请注意，Sciter 中的样式集不会污染全局样式规则列表，因此非常高效 - 减少了 DOM 元素样式解析所需的时间.&nbsp;</p>
+	<h2>组件中的事件处理</h2>
+	<p>与 ReactJS 相比，Sciter 不需要任何特殊的构造来处理事件 -我们可以在类中使用普通的（对于 Sciter）事件处理定义.</p>
+	<p>这是一个简单的组件实例, 用于封装封闭的搜索块 &nbsp;&lt;input&gt; 和 &lt;button&gt; : &nbsp;&nbsp;</p>
+	
+	
+	
+	<pre>class Search : Reactor.Component {
+
+  this var elInput;
+
+  function render() {
+    return &lt;search&gt;
+        &lt;input|text @(this.elInput) /&gt;
+        &lt;button.do/&gt;
+    &lt;/search&gt;;
+  }
+
+  event click $(button.do) { 
+    this.postEvent(&quot;do-search&quot;, this.elInput.value ); 
+  }
+  event change $(input) { 
+    this.showSuggestionsFor( this.elInput.value ); 
+  }
+
+  property value(v) 
+  {
+     get return this.elInput.value;
+     set this.elInput.value = v;
+  }
+}</pre>
+	<p>在本例中，我们处理两个事件: 单击按钮和更改输入.</p>
+	<h2>HTML Resident Mounting Points</h2>
+	<p>Reactor 组件是可执行的实体，即使它们看起来像 HTML. </p>
+	<p>通常在 ReactJS 中, 您只能在 <code>&lt;script&gt;</code> 中和 JS 代码文件中使用. 如下所示:</p>
+	
+	<pre>function App() {
+  return
+    &lt;main&gt;
+       &lt;Welcome name=&quot;Ivan&quot; /&gt;
+       &lt;Welcome name=&quot;Olga&quot; /&gt;
+       &lt;Welcome name=&quot;Andrew&quot; /&gt;
+    &lt;/main&gt;;
+}
+
+$(main).merge( &lt;App /&gt; );</pre><p>虽然这在通常情况下有效，但对某人来说可能看起来不自然或不方便.&nbsp;</p>
+	<p>但 Sciter 提供特殊的 <code>&lt;reactor&gt;</code> HTML 元素作为组件的安装点:</p>
+	
+	
+	
+	
+	<pre>&lt;body&gt;
+   &lt;p&gt;Test of Tabs component.&lt;/p&gt;
+      
+   &lt;reactor(Tabs) src=&quot;tabs.tis&quot;&gt;
+     &lt;tab(first) label=&quot;First tab&quot;&gt;First tab content&lt;/tab&gt;
+     &lt;tab(second) label=&quot;Second tab&quot;&gt;Second tab content&lt;/tab&gt;
+     &lt;tab(third) label=&quot;Third tab&quot; src=&quot;tab-content.htm&quot;&gt;&lt;/tab&gt;
+   &lt;/reactor&gt;
+
+&lt;/body&gt;</pre><p>The &lt;reactor&gt; 该元素需要两个属性: </p>
+	<ul><li><i>name</i> - 组件类的名称和 </li><li><i>src</i> - 定义该组件的脚本文件的 url.</li>
+		</ul>
+	<p>请注意, 虽然它看起来像 HTML,但 <code>&lt;reactor&gt;</code> 和 <code>&lt;/reactor&gt;</code> 由脚本规则（在本例中为 SSX）解析. 基本上你可能认为整个 <code>&lt;reactor&gt;</code> 部分只是 <code>&lt;script&gt;</code> 元素:</p>
+	
+	
+	
+	
+	<pre>&lt;body&gt;
+    &lt;p&gt;Test of Tabs component.&lt;/p&gt;
+      
+   &lt;script type=&quot;text/tiscript+ssx&quot; component=&quot;Tabs&quot; src=&quot;tabs.tis&quot;&gt;
+     &lt;tab(first) label=&quot;First tab&quot;&gt;First tab content&lt;/tab&gt;
+     &lt;tab(second) label=&quot;Second tab&quot;&gt;Second tab content&lt;/tab&gt;
+     &lt;tab(third) label=&quot;Third tab&quot; src=&quot;tab-content.htm&quot;&gt;&lt;/tab&gt;
+   &lt;/script&gt;
+
+&lt;/body&gt;</pre><p>的唯一的主要区别 <code>&lt;reactor&gt;</code>: 它是一个占位符元素 -只要组件被实例化, 它 <i> 取代 </i>  <code>&lt;reactor&gt;</code>DOM 元素. 因此, 执行之后 <code>&lt;reactor&gt;</code> 最终 DOM  将如下所示:</p>
+	<pre>&lt;body&gt;
+    &lt;p&gt;Test of Tabs component.&lt;/p&gt;
+      
+   &lt;tabs&gt;
+     &lt;tab(first) label=&quot;First tab&quot;&gt;First tab content&lt;/tab&gt;
+     &lt;tab(second) label=&quot;Second tab&quot;&gt;Second tab content&lt;/tab&gt;
+     &lt;tab(third) label=&quot;Third tab&quot; src=&quot;tab-content.htm&quot;&gt;&lt;/tab&gt;
+   &lt;/tabs&gt;
+
+&lt;/body&gt;</pre>
+	<p>样例 <u>{sdk}/samples/+reactor/components/tabs/test.htm</u></p></body></html>

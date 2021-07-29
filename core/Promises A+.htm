@@ -1,39 +1,39 @@
 <html>
 <head>
-	<title>Sciter2ÖĞµÄPromises/A+ ÊµÏÖ</title>
+	<title>Sciter2ä¸­çš„Promises/A+ å®ç°</title>
 </head>
 
 <body>
   <div class="post" id="post-41779">
 	 
-    <h1 class="storytitle">Sciter2ÖĞµÄPromises/A+ ÊµÏÖ</h1>
+    <h1 class="storytitle">Sciter2ä¸­çš„Promises/A+ å®ç°</h1>
   
 </div>
 	
 	
   <div class="storycontent">
 		
-    <p>Promises(ÅµÑÔ), ×÷ÎªÒ»¸ö¸ÅÄî£¬ËüÊÇÒ»ÖÖÍ¨ÓÃµÄ»Øµ÷»úÖÆ¡£ÏÖÔÚ£¬ÕâÖÖÄ£Ê½ÊÇ·Ç³£Á÷ĞĞµÄ£¬ËùÒÔSciter2µÄSDKÖĞÒ²°üº¬(sdk/samples/+promise/)ÁËÒ»¸ö·Ç³£¼òµ¥(60ĞĞ´úÂë)µÄPromisesÊµÏÖ¡£</p>
+    <p>Promises(è¯ºè¨€), ä½œä¸ºä¸€ä¸ªæ¦‚å¿µï¼Œå®ƒæ˜¯ä¸€ç§é€šç”¨çš„å›è°ƒæœºåˆ¶ã€‚ç°åœ¨ï¼Œè¿™ç§æ¨¡å¼æ˜¯éå¸¸æµè¡Œçš„ï¼Œæ‰€ä»¥Sciter2çš„SDKä¸­ä¹ŸåŒ…å«(sdk/samples/+promise/)äº†ä¸€ä¸ªéå¸¸ç®€å•(60è¡Œä»£ç )çš„Promiseså®ç°ã€‚</p>
 	
-<p>promiseÊÇÒ»¸ö¶ÔÏó:</p>
+<p>promiseæ˜¯ä¸€ä¸ªå¯¹è±¡:</p>
 	
 <ol>
 
-	  <li>Í¨¹ı<code>.then(onsuccess, onfailure)</code>·½·¨Î¬³ÖÁËÒ»¶Ô[onsuccess:function, onfailure:function]»Øµ÷º¯ÊıÁĞ/Á´±í;</li>
+	  <li>é€šè¿‡<code>.then(onsuccess, onfailure)</code>æ–¹æ³•ç»´æŒäº†ä¸€å¯¹[onsuccess:function, onfailure:function]å›è°ƒå‡½æ•°åˆ—/é“¾è¡¨;</li>
 	  
-<li>promiseÌá¹©ÁËÒ»ÖÖ·½Ê½À´&quot;execute&quot(Ö´ĞĞ)Õâ¸öÁ´±í - »òÕßÊÇsucces£¬»òÕßÊÇfailure»Øµ÷(Èç¹û·¢Éú´íÎó);</li>
+<li>promiseæä¾›äº†ä¸€ç§æ–¹å¼æ¥&quot;execute&quot(æ‰§è¡Œ)è¿™ä¸ªé“¾è¡¨ - æˆ–è€…æ˜¯succesï¼Œæˆ–è€…æ˜¯failureå›è°ƒ(å¦‚æœå‘ç”Ÿé”™è¯¯);</li>
 	  
-<li>Á´±íÖĞµÄÃ¿¸ö»Øµ÷º¯Êı»á½«ÉÏÒ»¸ö»Øµ÷º¯ÊıµÄÊä³ö((return [values]))×÷ÎªÒ»¸öÊäÈë²ÎÊı(parameters)¡£</li>
+<li>é“¾è¡¨ä¸­çš„æ¯ä¸ªå›è°ƒå‡½æ•°ä¼šå°†ä¸Šä¸€ä¸ªå›è°ƒå‡½æ•°çš„è¾“å‡º((return [values]))ä½œä¸ºä¸€ä¸ªè¾“å…¥å‚æ•°(parameters)ã€‚</li>
 	
 </ol>
 
-	<p>ÔÚSciterÖĞ£¬Òª´´½¨Ò»¸öpromise£¬Ö»Ğè:</p>
+	<p>åœ¨Sciterä¸­ï¼Œè¦åˆ›å»ºä¸€ä¸ªpromiseï¼Œåªéœ€:</p>
 
 	<pre class="brush: js;">var oath = promise();</pre>
 
-	<h3>promise()º¯Êı Óë promise ¶ÔÏó</h3>
+	<h3>promise()å‡½æ•° ä¸ promise å¯¹è±¡</h3>
 	
-<p>ÔÚÎÒµÄÊµÏÖÖĞ£¬promise()º¯Êı·µ»ØÒ»¸öº¯Êı/¶ÔÏó£¬ËüÓµÓĞÒ»¸ö<code>.then()</code>·½·¨¡£ËùÒÔÒªÎªpromise¸½¼Ó»Øµ÷º¯Êı£¬Äã¿ÉÒÔ:</p>
+<p>åœ¨æˆ‘çš„å®ç°ä¸­ï¼Œpromise()å‡½æ•°è¿”å›ä¸€ä¸ªå‡½æ•°/å¯¹è±¡ï¼Œå®ƒæ‹¥æœ‰ä¸€ä¸ª<code>.then()</code>æ–¹æ³•ã€‚æ‰€ä»¥è¦ä¸ºpromiseé™„åŠ å›è°ƒå‡½æ•°ï¼Œä½ å¯ä»¥:</p>
 	
 <pre class="brush: js;">oath.then( function( data ) { return [data+1] } ) // #1
     .then( function( data ) { return [data+2] } ) // #2
@@ -41,29 +41,29 @@
            function( reason ) { stderr.println(&quot;error:&quot;, reason)} );
 </pre>
     
-<p>ÏÖÔÚ£¬ÎÒÃÇÓĞÒ»¸öÃû³ÆÎª<em>oath</em>µÄpromise±äÁ¿£¬ËüÓĞÈı¸ö<em>onsuccess</em>º¯Êı¡£</p>
+<p>ç°åœ¨ï¼Œæˆ‘ä»¬æœ‰ä¸€ä¸ªåç§°ä¸º<em>oath</em>çš„promiseå˜é‡ï¼Œå®ƒæœ‰ä¸‰ä¸ª<em>onsuccess</em>å‡½æ•°ã€‚</p>
 
-	<p>ÒªÂÄĞĞpromise(³ĞÅµ)Ê±, ÎÒÃÇÖ»Ğèµ÷ÓÃpromise(½«Ëü×÷ÎªÒ»¸öº¯Êı)£¬½«ËüµÄµÚÒ»¸ö²ÎÊıÉèÖÃ<em>true</em>£¬ÆäËû²ÎÊı½«»á´«µİµ½Á´ÖĞµÄµÚÒ»¸ö»Øµ÷º¯Êı:</p>
+	<p>è¦å±¥è¡Œpromise(æ‰¿è¯º)æ—¶, æˆ‘ä»¬åªéœ€è°ƒç”¨promise(å°†å®ƒä½œä¸ºä¸€ä¸ªå‡½æ•°)ï¼Œå°†å®ƒçš„ç¬¬ä¸€ä¸ªå‚æ•°è®¾ç½®<em>true</em>ï¼Œå…¶ä»–å‚æ•°å°†ä¼šä¼ é€’åˆ°é“¾ä¸­çš„ç¬¬ä¸€ä¸ªå›è°ƒå‡½æ•°:</p>
 
 	<pre class="brush: js;">oath(true, 1);</pre>
 
-	<p>½«»áµ÷ÓÃµÚÒ»¸ö»Øµ÷º¯Êı£¬ÇÒ<em>data</em>²ÎÊıÖµÎª1£¬²¢ÇÒ¸Ã»Øµ÷º¯Êı·µ»Ø<code>1 + 1 -&gt; 2</code>¡£<br />
-	Öµ<code>2</code>½«»á´«µİµ½µÚ¶ş¸ö»Øµ÷º¯ÊıÉÏ£¬²¢ÇÒ·µ»Ø<code>2 + 2 -&gt; 4</code>¡£<br />
-	×îÖÕµÄ»Øµ÷º¯Êı·µ»Ø:</p>
+	<p>å°†ä¼šè°ƒç”¨ç¬¬ä¸€ä¸ªå›è°ƒå‡½æ•°ï¼Œä¸”<em>data</em>å‚æ•°å€¼ä¸º1ï¼Œå¹¶ä¸”è¯¥å›è°ƒå‡½æ•°è¿”å›<code>1 + 1 -&gt; 2</code>ã€‚<br />
+	å€¼<code>2</code>å°†ä¼šä¼ é€’åˆ°ç¬¬äºŒä¸ªå›è°ƒå‡½æ•°ä¸Šï¼Œå¹¶ä¸”è¿”å›<code>2 + 2 -&gt; 4</code>ã€‚<br />
+	æœ€ç»ˆçš„å›è°ƒå‡½æ•°è¿”å›:</p>
 	
 <pre>success:4</pre>
 	
-<p>Òª¾Ü¾øpromise(³ĞÅµ)Ê±£¬ÎÒÃÇÖ»Ğèµ÷ÓÃpromise(½«Ëü×÷ÎªÒ»¸öº¯Êı)£¬½«ËüµÄµÚÒ»¸ö²ÎÊıÉèÖÃ<em>false</em>:</p>
+<p>è¦æ‹’ç»promise(æ‰¿è¯º)æ—¶ï¼Œæˆ‘ä»¬åªéœ€è°ƒç”¨promise(å°†å®ƒä½œä¸ºä¸€ä¸ªå‡½æ•°)ï¼Œå°†å®ƒçš„ç¬¬ä¸€ä¸ªå‚æ•°è®¾ç½®<em>false</em>:</p>
 
 	<pre class="brush: js;">oath(false, &quot;something went wrong!&quot;);</pre>
     
-<p>ÕâÑù½²µ÷ÓÃÎÒÃÇµÄonerror»Øµ÷º¯Êı£¬½á¹ûÎª:</p>
+<p>è¿™æ ·è®²è°ƒç”¨æˆ‘ä»¬çš„onerrorå›è°ƒå‡½æ•°ï¼Œç»“æœä¸º:</p>
 
 	<pre>error: something went wrong!</pre>
 
-	<h3>promise.when()º¯Êı, ²¢ĞĞÖ´ĞĞ</h3>
+	<h3>promise.when()å‡½æ•°, å¹¶è¡Œæ‰§è¡Œ</h3>
 
-	<p>promiseÒ²¶¨ÒåÁËÒ»¸ö<code>promise.when(...)</code>¾²Ì¬º¯Êı£¬Ëü½ÓÊÜÒ»¸öpromiseÁĞ±í£¬²¢ÇÒ·µ»ØÁíÒ»¸öpromise£¬µ±ËùÓĞÊäÈëpromise½«Íê³ÉÊ±£¬¸Ãpromise½«±»ÂÄĞĞ/¾Ü¾ø¡£</p>
+	<p>promiseä¹Ÿå®šä¹‰äº†ä¸€ä¸ª<code>promise.when(...)</code>é™æ€å‡½æ•°ï¼Œå®ƒæ¥å—ä¸€ä¸ªpromiseåˆ—è¡¨ï¼Œå¹¶ä¸”è¿”å›å¦ä¸€ä¸ªpromiseï¼Œå½“æ‰€æœ‰è¾“å…¥promiseå°†å®Œæˆæ—¶ï¼Œè¯¥promiseå°†è¢«å±¥è¡Œ/æ‹’ç»ã€‚</p>
 	
 <pre class="brush: js;">function printBandC(b,c) { stdout.println(b,c) }
 
@@ -72,14 +72,14 @@ var BandC =
                   self.request(#get-json, urlC)).then(printBandC);
 </pre>
     
-<p>¹ØÓÚÕâ¸öÄÚÈİÓĞºÜ¶àÎÄÕÂ, Ö»ĞèÒªÔÚ¹È¸èÖĞËÑË÷&#8220;Promises JavaScript&#8221;</p>
+<p>å…³äºè¿™ä¸ªå†…å®¹æœ‰å¾ˆå¤šæ–‡ç« , åªéœ€è¦åœ¨è°·æ­Œä¸­æœç´¢&#8220;Promises JavaScript&#8221;</p>
 
-	<p>ÕâÀïÊÇpromise.tisÄ£¿éµÄÈ«²¿Ô´´úÂë:</p>
+	<p>è¿™é‡Œæ˜¯promise.tisæ¨¡å—çš„å…¨éƒ¨æºä»£ç :</p>
 
 	<p><span id="more-41779"></span></p>
 
 	<pre class="brush: js;">//|   
-//| Promises/A+ ¹æ·¶µÄÊµÏÖ: http://promises-aplus.github.io/promises-spec/
+//| Promises/A+ è§„èŒƒçš„å®ç°: http://promises-aplus.github.io/promises-spec/
 //| 
 
 function promise() 

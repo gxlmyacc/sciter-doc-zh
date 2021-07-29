@@ -1,28 +1,28 @@
 <html>
 
 <head>
-	<title>Sciter 2.0.2.0 ·¢²¼ÁËTIScriptµÄÒ»Ğ©ĞÂÌØĞÔ</title>
+	<title>Sciter 2.0.2.0 å‘å¸ƒäº†TIScriptçš„ä¸€äº›æ–°ç‰¹æ€§</title>
 </head>
 
 <body>
 <div class="post" id="post-41756">
 	 
-  <h1 class="storytitle">Sciter 2.0.2.0 ·¢²¼ÁËTIScriptµÄÒ»Ğ©ĞÂÌØĞÔ</h1>
+  <h1 class="storytitle">Sciter 2.0.2.0 å‘å¸ƒäº†TIScriptçš„ä¸€äº›æ–°ç‰¹æ€§</h1>
 
   </div>
 	
 	
     <div class="storycontent">
 		
-	  <p>2.0.2.0Ìí¼ÓµÄÌØĞÔÖ®Ò»ÊÇÖ§³ÖÔÚÀàÖĞÉùÃ÷³ÉÔ±±äÁ¿¡£</p>
+	  <p>2.0.2.0æ·»åŠ çš„ç‰¹æ€§ä¹‹ä¸€æ˜¯æ”¯æŒåœ¨ç±»ä¸­å£°æ˜æˆå‘˜å˜é‡ã€‚</p>
 
-	  <p>Í¨¹ıÊ¹ÓÃ<code>this var name = value</code>¹¹ÔìÆ÷£¬Äã¿ÉÒÔ¶¨Òå³ÉÔ±(ÊµÀı)±äÁ¿:</p>
+	  <p>é€šè¿‡ä½¿ç”¨<code>this var name = value</code>æ„é€ å™¨ï¼Œä½ å¯ä»¥å®šä¹‰æˆå‘˜(å®ä¾‹)å˜é‡:</p>
 	  
-<p>Õâ¶Î´úÂë:</p>
+<p>è¿™æ®µä»£ç :</p>
 
 	  <pre class="brush: js;">class Foo {
-  this var one = 1, // ³ÉÔ±±äÁ¿
-           two = 2; // ³ÉÔ±±äÁ¿
+  this var one = 1, // æˆå‘˜å˜é‡
+           two = 2; // æˆå‘˜å˜é‡
 
   function sum() { return this.one + this.two; }
 }
@@ -31,15 +31,15 @@ var foo = new Foo();
 stdout &lt;&lt; foo.sum() &lt;&lt; &quot;\n&quot;;
 </pre>
 
-<p>¼´Ê¹¸ÃÀàÃ»ÓĞ¶¨Òå¹¹ÔìÆ÷£¬ÉÏÃæÕâ¶Î´úÂëÒ²»áÊä³ö&#8216;3&#8217;¡£<br/>
-Ã¿¸öFooÀàµÄÊµÀı¶¼»áÓµÓĞ<code>this.one</code>ºÍ<code>this.two</code>±äÁ¿£¬²¢ÇÒÓµÓĞËüÃÇµÄ³õÊ¼Öµ¡£</p>
+<p>å³ä½¿è¯¥ç±»æ²¡æœ‰å®šä¹‰æ„é€ å™¨ï¼Œä¸Šé¢è¿™æ®µä»£ç ä¹Ÿä¼šè¾“å‡º&#8216;3&#8217;ã€‚<br/>
+æ¯ä¸ªFooç±»çš„å®ä¾‹éƒ½ä¼šæ‹¥æœ‰<code>this.one</code>å’Œ<code>this.two</code>å˜é‡ï¼Œå¹¶ä¸”æ‹¥æœ‰å®ƒä»¬çš„åˆå§‹å€¼ã€‚</p>
 
-<p>Èç¹ûÓĞÆäËûÀà¼Ì³ĞÁËÕâ¸öFooÀà£¬ËüÒ²½«ÓµÓĞ¸¸ÀàÉùÃ÷µÄ³ÉÔ±±äÁ¿¡£ </p>
+<p>å¦‚æœæœ‰å…¶ä»–ç±»ç»§æ‰¿äº†è¿™ä¸ªFooç±»ï¼Œå®ƒä¹Ÿå°†æ‹¥æœ‰çˆ¶ç±»å£°æ˜çš„æˆå‘˜å˜é‡ã€‚ </p>
 
-<p>Õâ¶Î´úÂë:</p>
+<p>è¿™æ®µä»£ç :</p>
 
 <pre class="brush: js;">class Bar: Foo {
-  this var three = 3; // ³ÉÔ±±äÁ¿
+  this var three = 3; // æˆå‘˜å˜é‡
 
   function sum() { return this.three + super.sum(); }
 }
@@ -48,7 +48,7 @@ var bar = new Bar();
 stdout &lt;&lt; bar.sum() &lt;&lt; &quot;\n&quot;;
 </pre>
 
-<p>½«»áÊä³ö&#8216;6&#8217;¡£<em>bar</em>ÊµÀı½«»áÓµÓĞthis.one¡¢this.two¡¢this.three³ÉÔ±±äÁ¿¡£</p>
+<p>å°†ä¼šè¾“å‡º&#8216;6&#8217;ã€‚<em>bar</em>å®ä¾‹å°†ä¼šæ‹¥æœ‰this.oneã€this.twoã€this.threeæˆå‘˜å˜é‡ã€‚</p>
 </div>
 	
     </div>

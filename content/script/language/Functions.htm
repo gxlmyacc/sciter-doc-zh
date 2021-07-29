@@ -1,100 +1,100 @@
 <html>
   <head>
-    <title>TIScript 3.2²Ù×÷Ö¸ÄÏ¡ª¡ªº¯Êý</title>
+    <title>TIScript 3.2æ“ä½œæŒ‡å—â€”â€”å‡½æ•°</title>
     <link rel="stylesheet" href="for-screen.css"/>
     <meta name="generator" content="h-smile:richtext"/>
   </head>
 <body>
-  <h1>º¯Êý</h1>
-  <p>TIScriptÖ§³ÖÃüÃûºÍÄäÃû(lambda)µÚÒ»Ààº¯Êý¡£º¯ÊýÊÇFunctionÀàµÄ¶ÔÏó¡£</p>
-  <h2><a name="named-functions" id="named-functions">ÃüÃûº¯Êý</a></h2>
-  <p>ÃüÃûº¯ÊýÊ¹ÓÃÏÂÃæµÄÓï¾äÀ´ÉùÃ÷:</p>
-  <pre class="code tiscript">function &lt;º¯ÊýÃû&gt; ( &lt;²ÎÊý&gt; )
+  <h1>å‡½æ•°</h1>
+  <p>TIScriptæ”¯æŒå‘½åå’ŒåŒ¿å(lambda)ç¬¬ä¸€ç±»å‡½æ•°ã€‚å‡½æ•°æ˜¯Functionç±»çš„å¯¹è±¡ã€‚</p>
+  <h2><a name="named-functions" id="named-functions">å‘½åå‡½æ•°</a></h2>
+  <p>å‘½åå‡½æ•°ä½¿ç”¨ä¸‹é¢çš„è¯­å¥æ¥å£°æ˜Ž:</p>
+  <pre class="code tiscript">function &lt;å‡½æ•°å&gt; ( &lt;å‚æ•°&gt; )
 {
-  //...º¯ÊýÌå
+  //...å‡½æ•°ä½“
 }
 </pre>
   <dl>
-    <dt>ÆäÖÐ:</dt>
-    <dd><em>&lt;º¯ÊýÃû&gt;</em>ÊÇÒ»¸öº¯ÊýµÄÃû³Æ, »òÕßÊÇ: <br/>
-	¼òµ¥µÄ<em>&lt;nmtoken&gt;</em> , »ò<br/>×éºÏÃû³Æ: <em>&lt;nmtoken1&gt;</em> [ <code>.</code> <em>&lt;nmtoken2&gt;</em> [ . <em>&lt;nmtoken3&gt;</em> [ . <em>&lt;nmtokenN&gt;</em> ]]] <sup><a href="#fn__1" name="fnt__1" id="fnt__1" class="fn_top">1)</a></sup><br/><em>&lt;²ÎÊý&gt;</em>ÊÇÒ»¸öº¯Êý²ÎÊýÁÐ±í:<br/>
-	[<em>&lt;²ÎÊýÃû1&gt;</em> [ <code>,</code> <em>&lt;²ÎÊýÃû2&gt;</em> [ <code>,</code> ... <em>&lt;²ÎÊýÃûN&gt;</em> ]]]</dd></dl>
-  <h2><a name="anonymous-functions" id="anonymous-functions">ÄäÃûº¯Êý</a></h2>
-  <p>ÄäÃûº¯Êý(ÓÖÃûlambda±í´ïÊ½)¿ÉÒÔÊ¹ÓÃÒÔÏÂÓï¾äÀ´ÉùÃ÷:</p>
-  <p>¾­µäµÄJavaScript¸ñÊ½:</p>
+    <dt>å…¶ä¸­:</dt>
+    <dd><em>&lt;å‡½æ•°å&gt;</em>æ˜¯ä¸€ä¸ªå‡½æ•°çš„åç§°, æˆ–è€…æ˜¯: <br/>
+	ç®€å•çš„<em>&lt;nmtoken&gt;</em> , æˆ–<br/>ç»„åˆåç§°: <em>&lt;nmtoken1&gt;</em> [ <code>.</code> <em>&lt;nmtoken2&gt;</em> [ . <em>&lt;nmtoken3&gt;</em> [ . <em>&lt;nmtokenN&gt;</em> ]]] <sup><a href="#fn__1" name="fnt__1" id="fnt__1" class="fn_top">1)</a></sup><br/><em>&lt;å‚æ•°&gt;</em>æ˜¯ä¸€ä¸ªå‡½æ•°å‚æ•°åˆ—è¡¨:<br/>
+	[<em>&lt;å‚æ•°å1&gt;</em> [ <code>,</code> <em>&lt;å‚æ•°å2&gt;</em> [ <code>,</code> ... <em>&lt;å‚æ•°åN&gt;</em> ]]]</dd></dl>
+  <h2><a name="anonymous-functions" id="anonymous-functions">åŒ¿åå‡½æ•°</a></h2>
+  <p>åŒ¿åå‡½æ•°(åˆålambdaè¡¨è¾¾å¼)å¯ä»¥ä½¿ç”¨ä»¥ä¸‹è¯­å¥æ¥å£°æ˜Ž:</p>
+  <p>ç»å…¸çš„JavaScriptæ ¼å¼:</p>
   <pre class="code tiscript"><code>function</code> <code>(</code> &lt;parameters&gt; <code>)</code> <code>{</code> &lt;statements&gt; <code>}</code>
 </pre>
-  <p>µ¥±í´ïÊ½lambda¸ñÊ½:</p>
+  <p>å•è¡¨è¾¾å¼lambdaæ ¼å¼:</p>
   <pre><b>:</b> &lt;parameters&gt; <b>:</b> &lt;statement&gt;
 </pre>
-  <p>¿é±í´ïÊ½lambdaº¯Êý¸ñÊ½:</p>
+  <p>å—è¡¨è¾¾å¼lambdaå‡½æ•°æ ¼å¼:</p>
   <pre><b>:</b> &lt;parameters&gt; <b>:</b> &lt;statements&gt; <b>:</b>
 </pre>
-	<h3>&quot;That&quot; lambdaº¯ÊýÉùÃ÷:</h3>
-	<p>ÕâÖÖÉùÃ÷µÄº¯ÊýÃ»ÓÐ×Ô¼ºµÄ<i>this</i>»·¾³±äÁ¿¡£<i>this</i>»·¾³±äÁ¿È¡×ÔËüÍâ²¿µ÷ÓÃËüµÄº¯Êý<i>this</i>£¬ÀàËÆÓÚ 
-  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions">ES6ÖÐµÄ¼ýÍ·º¯Êý</a>¡£</p>
-	<p>µ¥±í´ïÊ½lambda¸ñÊ½::</p>
+	<h3>&quot;That&quot; lambdaå‡½æ•°å£°æ˜Ž:</h3>
+	<p>è¿™ç§å£°æ˜Žçš„å‡½æ•°æ²¡æœ‰è‡ªå·±çš„<i>this</i>çŽ¯å¢ƒå˜é‡ã€‚<i>this</i>çŽ¯å¢ƒå˜é‡å–è‡ªå®ƒå¤–éƒ¨è°ƒç”¨å®ƒçš„å‡½æ•°<i>this</i>ï¼Œç±»ä¼¼äºŽ 
+  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions">ES6ä¸­çš„ç®­å¤´å‡½æ•°</a>ã€‚</p>
+	<p>å•è¡¨è¾¾å¼lambdaæ ¼å¼::</p>
   <pre><b>|</b> &lt;parameters&gt; <b>|</b> &lt;statement&gt;</pre>
-  <p>¿é±í´ïÊ½lambdaº¯Êý¸ñÊ½:</p>
+  <p>å—è¡¨è¾¾å¼lambdaå‡½æ•°æ ¼å¼:</p>
   <pre><b>|</b> &lt;parameters&gt; <b>{</b> &lt;statements&gt; <b>}</b> 
 </pre>
-  <p>Ç¶Ì×º¯Êý(ÆäËûº¯ÊýÄÚ²¿µÄº¯Êý)ÊÇÔÊÐíµÄ¡£</p>
-	<h2>Òì²½·½·¨</h2>
+  <p>åµŒå¥—å‡½æ•°(å…¶ä»–å‡½æ•°å†…éƒ¨çš„å‡½æ•°)æ˜¯å…è®¸çš„ã€‚</p>
+	<h2>å¼‚æ­¥æ–¹æ³•</h2>
 	<pre><b>async function </b>( &lt;parameters&gt; ) 
 { 
   (&lt;statement&gt; | &lt;await-expression&gt;)* 
 }
 </pre>
-	<p>Òì²½·½·¨ÊÇÒì²½Ö´ÐÐµÄ£¬²¢ÇÒ¿ÉÒÔÔÚº¯ÊýÌåÖÐÊ¹ÓÃ<b>await</b>±í´ïÊ½¡£</p>
+	<p>å¼‚æ­¥æ–¹æ³•æ˜¯å¼‚æ­¥æ‰§è¡Œçš„ï¼Œå¹¶ä¸”å¯ä»¥åœ¨å‡½æ•°ä½“ä¸­ä½¿ç”¨<b>await</b>è¡¨è¾¾å¼ã€‚</p>
 	
-	<h2>Éú³ÉÆ÷·½·¨</h2>
+	<h2>ç”Ÿæˆå™¨æ–¹æ³•</h2>
 	<pre><b>function* </b>( &lt;parameters&gt; ) 
 { 
   (&lt;statement&gt; | &lt;yield-statement&gt;)* 
 }
 </pre>
-	<p>Éú³ÉÆ÷·½·¨ÓÃÔÚ<code>for(var x in <i>generator</i>)</code>Óï¾äÖÐ¡£Éú³ÉÆ÷Ê¹ÓÃ<b>yield</b>À´·¢ËÍÖµ¡£</p>
-  <h2><a name="event-functions" id="event-functions">ÊÂ¼þº¯Êý</a></h2>
-  <p>ÊÂ¼þ´¦Àíº¯ÊýÊÇÒ»ÖÖº¯ÊýÃû³ÆÊÇ×Ö·û´®µÄÕý³£º¯Êý¡£Ëü²»ÊÇÊ¹ÓÃ<code>function</code>À´ÉùÃ÷£¬¶øÊÇÊ¹ÓÃ<code>event</code>¹Ø¼ü×Ö:</p>
+	<p>ç”Ÿæˆå™¨æ–¹æ³•ç”¨åœ¨<code>for(var x in <i>generator</i>)</code>è¯­å¥ä¸­ã€‚ç”Ÿæˆå™¨ä½¿ç”¨<b>yield</b>æ¥å‘é€å€¼ã€‚</p>
+  <h2><a name="event-functions" id="event-functions">äº‹ä»¶å‡½æ•°</a></h2>
+  <p>äº‹ä»¶å¤„ç†å‡½æ•°æ˜¯ä¸€ç§å‡½æ•°åç§°æ˜¯å­—ç¬¦ä¸²çš„æ­£å¸¸å‡½æ•°ã€‚å®ƒä¸æ˜¯ä½¿ç”¨<code>function</code>æ¥å£°æ˜Žï¼Œè€Œæ˜¯ä½¿ç”¨<code>event</code>å…³é”®å­—:</p>
   <pre>event name[.namespace] [$(selector)]  [( [eventObj [,element] ) ]
 </code>{
-  //... ÊÂ¼þ´¦Àíº¯ÊýÌå
+  //... äº‹ä»¶å¤„ç†å‡½æ•°ä½“
 }
 </pre>
-  <p>ÆäÖÐ:</p>
+  <p>å…¶ä¸­:</p>
   <ul>
-    <li><em>name</em>ÊÇÒ»¸öÒÑÖªÊÂ¼þ»ò×Ô¶¨ÒåÊÂ¼þµÄÃû³Æ;</li>
-    <li><em><code>.</code> namespace</em>ÊÇÀàËÆjQueryÖÐµÄÈÎÒâµÄÊÂ¼þnamespaceµÄÃû³Æ, ¿ÉÊ¡ÂÔ;</li>
-    <li><em>selector</em>ÊÇÒ»¸öCSSÑ¡ÔñÆ÷¡£Èç¹ûÌá¹©ÁË£¬Ôò½öÓÐÂú×ãÌõ¼þµÄDOMÔªËØÉÏ²ÅÄÜ½ÓÊÕµ½ÊÂ¼þ, ¿ÉÊ¡ÂÔ¡£</li>
+    <li><em>name</em>æ˜¯ä¸€ä¸ªå·²çŸ¥äº‹ä»¶æˆ–è‡ªå®šä¹‰äº‹ä»¶çš„åç§°;</li>
+    <li><em><code>.</code> namespace</em>æ˜¯ç±»ä¼¼jQueryä¸­çš„ä»»æ„çš„äº‹ä»¶namespaceçš„åç§°, å¯çœç•¥;</li>
+    <li><em>selector</em>æ˜¯ä¸€ä¸ªCSSé€‰æ‹©å™¨ã€‚å¦‚æžœæä¾›äº†ï¼Œåˆ™ä»…æœ‰æ»¡è¶³æ¡ä»¶çš„DOMå…ƒç´ ä¸Šæ‰èƒ½æŽ¥æ”¶åˆ°äº‹ä»¶, å¯çœç•¥ã€‚</li>
    </ul>
   <ul>
     <li />
-    <li>µ÷ÓÃ²ÎÊýÊÇ¿ÉÊ¡ÂÔµÄ, Èç¹ûÌá¹©ÁË£¬ÔòËü¿ÉÒÔ°üº¬Ò»¸ö»òÁ½¸ö²ÎÊý:
+    <li>è°ƒç”¨å‚æ•°æ˜¯å¯çœç•¥çš„, å¦‚æžœæä¾›äº†ï¼Œåˆ™å®ƒå¯ä»¥åŒ…å«ä¸€ä¸ªæˆ–ä¸¤ä¸ªå‚æ•°:
       <ol>
-        <li><code>eventObj</code>ÊÇ½ÓÊÕµ½µÄÊÂ¼þ¶ÔÏóÊµÀý²ÎÊýÃû³Æ¡£Ëü¿ÉÒÔÊÇÈÎÒâÓÐÐ§µÄÃû³Æ£¬±ÈÈç: <em>evt</em>, <em>eo</em> »ò<em>event</em>¡£</li>
-        <li><code>element</code> ÊÇ½ÓÊÕµ½ÏûÏ¢µÄDOMÔªËØµÄ²ÎÊýÃû³Æ¡£</li>
+        <li><code>eventObj</code>æ˜¯æŽ¥æ”¶åˆ°çš„äº‹ä»¶å¯¹è±¡å®žä¾‹å‚æ•°åç§°ã€‚å®ƒå¯ä»¥æ˜¯ä»»æ„æœ‰æ•ˆçš„åç§°ï¼Œæ¯”å¦‚: <em>evt</em>, <em>eo</em> æˆ–<em>event</em>ã€‚</li>
+        <li><code>element</code> æ˜¯æŽ¥æ”¶åˆ°æ¶ˆæ¯çš„DOMå…ƒç´ çš„å‚æ•°åç§°ã€‚</li>
       </ol>
      </li>
    </ul>
-  <h2><a name="optional-parameters" id="optional-parameters">¿ÉÑ¡²ÎÊý</a></h2>
-  <p>TIScriptÔÚº¯ÊýÉùÃ÷ÖÐÖ§³Ö¿ÉÑ¡²ÎÊý:</p>
-  <h3><a name="parameters-with-default-values" id="parameters-with-default-values">ÓÐÄ¬ÈÏÖµµÄ²ÎÊý</a></h3>
-  <p>ÔÚº¯ÊýÖÐµÄÒ»Ð©²ÎÊý¿ÉÒÔ¶¨ÒåËüµÄÄ¬ÈÏÖµ£¬Èç:</p>
+  <h2><a name="optional-parameters" id="optional-parameters">å¯é€‰å‚æ•°</a></h2>
+  <p>TIScriptåœ¨å‡½æ•°å£°æ˜Žä¸­æ”¯æŒå¯é€‰å‚æ•°:</p>
+  <h3><a name="parameters-with-default-values" id="parameters-with-default-values">æœ‰é»˜è®¤å€¼çš„å‚æ•°</a></h3>
+  <p>åœ¨å‡½æ•°ä¸­çš„ä¸€äº›å‚æ•°å¯ä»¥å®šä¹‰å®ƒçš„é»˜è®¤å€¼ï¼Œå¦‚:</p>
   <pre class="code tiscript">function Foo(a, b, c = 12)
 {
   return a + b + c;
 }
 </pre>
-  <p>Õâ¸öº¯Êý¿ÉÒÔÊ¹ÓÃÁ½¸ö²ÎÊýÀ´µ÷ÓÃ:</p>
+  <p>è¿™ä¸ªå‡½æ•°å¯ä»¥ä½¿ç”¨ä¸¤ä¸ªå‚æ•°æ¥è°ƒç”¨:</p>
   <pre class="code tiscript">var r1 = Foo(1, 2);    // r1 = 15
 </pre>
-  <p>Ò²¿ÉÒÔÊ¹ÓÃÈý¸ö²ÎÊýÀ´µ÷ÓÃ:</p>
+  <p>ä¹Ÿå¯ä»¥ä½¿ç”¨ä¸‰ä¸ªå‚æ•°æ¥è°ƒç”¨:</p>
   <pre class="code tiscript">var r2 = Foo(1, 2, 3); // r2 = 6
 </pre>
-  <p>ÔÚ²ÎÊýÁÐ±íÖÐ£¬ÓÐÄ¬ÈÏÖµµÄ²ÎÊýÓÒ±ß²»ÄÜÓÐ·Ç¿ÉÑ¡²ÎÊý£¬¼´Ö»ÓÐ×îºóÃæ(»òËùÓÐ)µÄ²ÎÊý²Å¿ÉÒÔÓÐÄ¬ÈÏÖµ¡£</p>
-  <h3><a name="varargs" id="varargs">±ä³¤²ÎÊý</a></h3>
-  <p>ÓÖÃû ²ÎÊýÏòÁ¿</p>
-  <p>ÓÐÐ©Çé¿öÏÂ£¬µ±¶¨Òåº¯ÊýÊ±£¬Äã²¢²»ÖªµÀ²ÎÊýµÄÊýÁ¿£¬ÕâÊ±Äã¿ÉÒÔÊ¹ÓÃÏÂÃæµÄÉùÃ÷:</p>
+  <p>åœ¨å‚æ•°åˆ—è¡¨ä¸­ï¼Œæœ‰é»˜è®¤å€¼çš„å‚æ•°å³è¾¹ä¸èƒ½æœ‰éžå¯é€‰å‚æ•°ï¼Œå³åªæœ‰æœ€åŽé¢(æˆ–æ‰€æœ‰)çš„å‚æ•°æ‰å¯ä»¥æœ‰é»˜è®¤å€¼ã€‚</p>
+  <h3><a name="varargs" id="varargs">å˜é•¿å‚æ•°</a></h3>
+  <p>åˆå å‚æ•°å‘é‡</p>
+  <p>æœ‰äº›æƒ…å†µä¸‹ï¼Œå½“å®šä¹‰å‡½æ•°æ—¶ï¼Œä½ å¹¶ä¸çŸ¥é“å‚æ•°çš„æ•°é‡ï¼Œè¿™æ—¶ä½ å¯ä»¥ä½¿ç”¨ä¸‹é¢çš„å£°æ˜Ž:</p>
   <pre class="code tiscript"><code>function</code> Bar(a, b, rest..)
 {
   <code>var</code> total = a + b;
@@ -102,55 +102,55 @@
   <code>return</code> total;
 }
 </pre>
-  <p>ÔÚÔËÐÐÆÚ£¬<code>rest</code>±äÁ¿½«°üº¬Ò»¸öÈ·¶¨ÊýÁ¿²ÎÊýµÄÊý×é¡£ËùÒÔÔÚ</p>
+  <p>åœ¨è¿è¡ŒæœŸï¼Œ<code>rest</code>å˜é‡å°†åŒ…å«ä¸€ä¸ªç¡®å®šæ•°é‡å‚æ•°çš„æ•°ç»„ã€‚æ‰€ä»¥åœ¨</p>
   <pre class="code tiscript"><code>var</code> r1 = Bar(1, 2, 3, 4);
 </pre>
-  <p>Óï¾äÖ´ÐÐºó£¬<code>r1</code>µÄÖµ½«Îª<code>10</code>, ÔÚ</p>
+  <p>è¯­å¥æ‰§è¡ŒåŽï¼Œ<code>r1</code>çš„å€¼å°†ä¸º<code>10</code>, åœ¨</p>
   <pre class="code tiscript"><code>var</code> r2 = Bar(1, 2);
 </pre>
-  <p>Óï¾äºó£¬<code>r2</code>µÄÖµ½«Îª<code>3</code>¡£</p>
-  <h2>×Ö·û´®Æ÷º¯Êý</h2>
-  <p>×Ö·û´®Æ÷º¯ÊýÊÇÒ»¸öÃû³ÆÒÔ'<code>$</code>'¿ªÍ·µÄÕý³£º¯Êý»ò·½·¨¡£</p>
-  <p>µ±½âÎöµ÷ÓÃÕâ¸öº¯ÊýÊ±£¬tiscript½«»á½«'<code>(</code>'ºÍ'<code>)</code>'ÄÚ²¿µÄÈÎºÎ×Ö·û¶¼µ±×ö×Ö·û´®¡£Ê¾Àý:</p>
+  <p>è¯­å¥åŽï¼Œ<code>r2</code>çš„å€¼å°†ä¸º<code>3</code>ã€‚</p>
+  <h2>å­—ç¬¦ä¸²å™¨å‡½æ•°</h2>
+  <p>å­—ç¬¦ä¸²å™¨å‡½æ•°æ˜¯ä¸€ä¸ªåç§°ä»¥'<code>$</code>'å¼€å¤´çš„æ­£å¸¸å‡½æ•°æˆ–æ–¹æ³•ã€‚</p>
+  <p>å½“è§£æžè°ƒç”¨è¿™ä¸ªå‡½æ•°æ—¶ï¼Œtiscriptå°†ä¼šå°†'<code>(</code>'å’Œ'<code>)</code>'å†…éƒ¨çš„ä»»ä½•å­—ç¬¦éƒ½å½“åšå­—ç¬¦ä¸²ã€‚ç¤ºä¾‹:</p>
   <pre><code>var</code> bodyDiv = self.$( div#body );
 </pre>
-  <p>Õâ¸öµ÷ÓÃµÈ¼ÛÓÚ:</p>
+  <p>è¿™ä¸ªè°ƒç”¨ç­‰ä»·äºŽ:</p>
   <pre><code>var</code> bodyDiv = self.$( &quot;div#body&quot; );
 </pre>
-  <p>Èç¹û'<code>(</code>'ºÍ'<code>)</code>'ÖÐµÄÎÄ±¾°üº¬Èç'<code>)</code>'»ò'<code>}</code>'µÈ±êÊ¶·ûÊ±£¬ÐèÒª×ªÒå³É<code>\)</code>»ò<code>\}</code>.</p>
-  <h3>×Ö·û´®Æ÷²ÎÊý</h3>
-  <p>'<code>(</code>'ºÍ'<code>)</code>'ÖÐµÄÎÄ±¾¿ÉÒÔ°üº¬ËùÎ½µÄtiscriptÄÚÇ¶´úÂë - ÐèÒª±»Ö´ÐÐµÄtiscriptÐòÁÐ²¢ÇÒ×Ö·û´®Ö´ÐÐ½á¹û»á±»²åÈëµ½ÎÄ±¾ÖÐ¡£ÈôÒªÔÚ×Ö·û´®ÖÐ°üº¬ÕâÑùµÄ´úÂë£¬ÐèÒªÊ¹ÓÃ'<code>{</code>' ºÍ'<code>}</code>'½«ËüÀ¨ÆðÀ´¡£Ê¾Àý:</p>
+  <p>å¦‚æžœ'<code>(</code>'å’Œ'<code>)</code>'ä¸­çš„æ–‡æœ¬åŒ…å«å¦‚'<code>)</code>'æˆ–'<code>}</code>'ç­‰æ ‡è¯†ç¬¦æ—¶ï¼Œéœ€è¦è½¬ä¹‰æˆ<code>\)</code>æˆ–<code>\}</code>.</p>
+  <h3>å­—ç¬¦ä¸²å™¨å‚æ•°</h3>
+  <p>'<code>(</code>'å’Œ'<code>)</code>'ä¸­çš„æ–‡æœ¬å¯ä»¥åŒ…å«æ‰€è°“çš„tiscriptå†…åµŒä»£ç  - éœ€è¦è¢«æ‰§è¡Œçš„tiscriptåºåˆ—å¹¶ä¸”å­—ç¬¦ä¸²æ‰§è¡Œç»“æžœä¼šè¢«æ’å…¥åˆ°æ–‡æœ¬ä¸­ã€‚è‹¥è¦åœ¨å­—ç¬¦ä¸²ä¸­åŒ…å«è¿™æ ·çš„ä»£ç ï¼Œéœ€è¦ä½¿ç”¨'<code>{</code>' å’Œ'<code>}</code>'å°†å®ƒæ‹¬èµ·æ¥ã€‚ç¤ºä¾‹:</p>
   <pre>var n = 3;
 <code>var</code> nthDiv = self.$( div:nth-child(<code>{ n }</code>) );
 </pre>
-  <p>ÉÏÃæµÄ$()µ÷ÓÃ½«»á±»½âÎö³ÉÏÂÃæµÄÓï¾ä:</p>
+  <p>ä¸Šé¢çš„$()è°ƒç”¨å°†ä¼šè¢«è§£æžæˆä¸‹é¢çš„è¯­å¥:</p>
   <pre><code>var</code> nthDiv = self.$( <code>&quot;div:nth-child(&quot; </code>, n , <code>&quot;)&quot;</code> );
 </pre>
-  <h3>×Ô¶¨Òå×Ö·û´®Æ÷º¯Êý</h3>
-  <p>ÕâÊÇÒ»¸öÔÚSciterÖÐÕæÊµÊ¹ÓÃµÄÒ»¸ö×Ö·û´®Æ÷º¯Êý£¬Ëü±»ÓÃÓÚ²åÈëHTMLÆ¬¶Î:</p>
-  <pre>function Element.$append( params.. ) // ½ÓÊÜHTMLÅÐ¶Ï£¬×÷Îª²ÎÊýÏòÁ¿
+  <h3>è‡ªå®šä¹‰å­—ç¬¦ä¸²å™¨å‡½æ•°</h3>
+  <p>è¿™æ˜¯ä¸€ä¸ªåœ¨Sciterä¸­çœŸå®žä½¿ç”¨çš„ä¸€ä¸ªå­—ç¬¦ä¸²å™¨å‡½æ•°ï¼Œå®ƒè¢«ç”¨äºŽæ’å…¥HTMLç‰‡æ®µ:</p>
+  <pre>function Element.$append( params.. ) // æŽ¥å—HTMLåˆ¤æ–­ï¼Œä½œä¸ºå‚æ•°å‘é‡
 {
   for( var i = 1; i &lt; params.length; i += 2 ) // each odd parameter is an inclusion - result of the correspondent { ... } expression.
     params[i] = params[i].toHtmlString();     // convert our inclusion into escaped HTML string for safety.
-  this.insert( params.join(&quot;&quot;) );             // ºÏ²¢ËùÓÐ²ÎÊýµ½Ò»¸ö×Ö·û´®²¢ÇÒµ÷ÓÃElement.insert(html)
-                                              // SciterÖÐµÄDOMÔªËØµÄ·½·¨
+  this.insert( params.join(&quot;&quot;) );             // åˆå¹¶æ‰€æœ‰å‚æ•°åˆ°ä¸€ä¸ªå­—ç¬¦ä¸²å¹¶ä¸”è°ƒç”¨Element.insert(html)
+                                              // Sciterä¸­çš„DOMå…ƒç´ çš„æ–¹æ³•
 }
 </pre>
-  <p>ÓÐÁËÕâ¸öº¯Êý£¬ÎÒÃÇ¿ÉÒÔÕâÑùÊ¹ÓÃËü:</p>
+  <p>æœ‰äº†è¿™ä¸ªå‡½æ•°ï¼Œæˆ‘ä»¬å¯ä»¥è¿™æ ·ä½¿ç”¨å®ƒ:</p>
   <pre>var arr = [1,2,3];
 var table = self.$( table#some );
 for( var n in arr ) 
   table.$append ( &lt;tr&gt;&lt;td&gt;Cell #{n}&lt;/td&gt;&lt;/td&gt; );
 </pre>
-  <p>ÉÏÃæµÄ´úÂë½«»áÏò±íÖÐ²åÈë°üº¬&quot;Cell #1&quot;, &quot;Cell #2&quot; and &quot;Cell #3&quot;ÎÄ±¾µÄ ÈýÐÐ/µ¥Ôª¸ñ¡£ÊÇ²»ÊÇºÜ·½±ã?</p>
-  <h2>Ê¹ÓÃ¶ÔÏóÉùÃ÷µÄº¯Êýµ÷ÓÃ</h2>
-  <p>Èç¹ûÒ»Ð©º¯Êý½ÓÊÜÒ»¸ö¶ÔÏó²ÎÊý£¬ÔòËüµ÷ÓÃÊ±¿ÉÒÔÊ¡ÂÔ'(' ºÍ ')'£¬Èç:</p>
+  <p>ä¸Šé¢çš„ä»£ç å°†ä¼šå‘è¡¨ä¸­æ’å…¥åŒ…å«&quot;Cell #1&quot;, &quot;Cell #2&quot; and &quot;Cell #3&quot;æ–‡æœ¬çš„ ä¸‰è¡Œ/å•å…ƒæ ¼ã€‚æ˜¯ä¸æ˜¯å¾ˆæ–¹ä¾¿?</p>
+  <h2>ä½¿ç”¨å¯¹è±¡å£°æ˜Žçš„å‡½æ•°è°ƒç”¨</h2>
+  <p>å¦‚æžœä¸€äº›å‡½æ•°æŽ¥å—ä¸€ä¸ªå¯¹è±¡å‚æ•°ï¼Œåˆ™å®ƒè°ƒç”¨æ—¶å¯ä»¥çœç•¥'(' å’Œ ')'ï¼Œå¦‚:</p>
   <pre>  foo { one:1, two:2 } 
 </pre>
-  <p>ËüµÈ¼ÛÓÚ JavaScriptµ÷ÓÃ:</p>
+  <p>å®ƒç­‰ä»·äºŽ JavaScriptè°ƒç”¨:</p>
   <pre>  foo ({ one:1, two:2 })
 </pre>
   <hr/>
-  <p><sup><a href="#fnt__1" id="fn__1" name="fn__1">1)</a></sup> Ê¹ÓÃ¸´ºÏÃû³ÆµÄº¯ÊýÉùÃ÷ÊÇÏÂÃæµÄ¸ñÊ½µÄ¼òÐ´ÐÎÊ½:<br/><code>name1.name2.name3. ... .nameN = function( &lt;²ÎÊý&gt; ) { &lt;Óï¾ä&gt; }</code></p>
+  <p><sup><a href="#fnt__1" id="fn__1" name="fn__1">1)</a></sup> ä½¿ç”¨å¤åˆåç§°çš„å‡½æ•°å£°æ˜Žæ˜¯ä¸‹é¢çš„æ ¼å¼çš„ç®€å†™å½¢å¼:<br/><code>name1.name2.name3. ... .nameN = function( &lt;å‚æ•°&gt; ) { &lt;è¯­å¥&gt; }</code></p>
 </body>
 </html>

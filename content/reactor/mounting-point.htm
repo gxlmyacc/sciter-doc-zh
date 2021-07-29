@@ -1,0 +1,59 @@
+﻿<html><body> <h2>&lt;reactor&gt;&nbsp;element as HTML mounting point</h2>
+	<p>考虑这个 HTML 文档:</p>
+	
+	<pre>&lt;html&gt;
+    &lt;head&gt;
+        &lt;script type=&quot;text/tiscript&quot;&gt;
+          var items = [&quot;Veni&quot;,&quot;Vidi&quot;,&quot;Vici&quot;];
+        &lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+       &lt;reactor(ol)&gt;
+         {items.map((item) =&gt; &lt;li&gt;{item}&lt;/li&gt;)}
+       &lt;/reactor&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</pre><p>你要注意这 <code>&lt;reactor&gt;</code> 元素在这 . 这个  &lt;reactor&gt; 元素是调用 Reactor's 的 mount 点.</p>
+	<p>当这个<code>&lt;reactor&gt;</code> 元素出现在 DOM 中，它作为包进 SSX 的脚本进行运算, 该 html 的最终结果如下:</p>
+	<pre>&lt;html&gt;
+    &lt;body&gt;
+       &lt;ol&gt;
+         &lt;li&gt;Veni&lt;/li&gt;
+         &lt;li&gt;Vidi&lt;/li&gt;
+         &lt;li&gt;Vici&lt;/li&gt;
+       &lt;/ol&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</pre>
+	<h2>&lt;reactor&gt; 元素</h2>
+	<p>The <code>&lt;reactor&gt;</code>元素, 会解释输入的两种 DOM 属性:</p>
+	
+	<ul><li><code>type</code> - string, 接受以下内容:<ul></ul><ol><li>如果是从 <i>小写字母</i> 然后它被视为 <i>DOM 元素</i> 标签, 例如: div, section, ol, li, etc.&nbsp;</li>
+    <li>如果是<i> 大写字母 </i> 然后它被视为组件的名字 - Reactor's 的功能或声明的类的代码 .</li><li>如果它是 <i>省略</i> 这个内容会被替换成  &lt;reactor&gt;元素它自身的内容.</li></ol></li>
+		<li><code>src</code> - url. 当 <i>name</i> 定义 Reactor 的组件  (case #2 above). 如果 <i>src</i> 它是提供了的话引擎将尝试从 url 加载的脚本文件中加载组件.</li>
+		
+		
+		</ul>
+	<p>例如这个 document:</p>
+	<pre>&lt;html&gt;
+    &lt;head&gt;
+        &lt;script type=&quot;text/tiscript&quot;&gt;
+          var name = &quot;World&quot;;
+        &lt;/script&gt;
+    &lt;/head&gt;
+    &lt;reactor<b>|body</b>&gt;
+         &lt;h1&gt;Hello {name}&lt;/h1&gt;
+    &lt;/reactor&gt;
+&lt;/html&gt;</pre>
+
+	<p>&nbsp;加载后会变成如下:</p>
+	<pre>&lt;html&gt;
+    &lt;head&gt;
+        &lt;script type=&quot;text/tiscript&quot;&gt;
+          var name = &quot;World&quot;;
+        &lt;/script&gt;
+    &lt;/head&gt;
+    &lt;<b>body</b>&gt;
+         &lt;h1&gt;Hello world&lt;/h1&gt;
+    &lt;/<b>body</b>&gt;
+&lt;/html&gt;</pre>
+
+	<p></p></body></html>

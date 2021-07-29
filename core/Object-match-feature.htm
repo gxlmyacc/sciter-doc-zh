@@ -1,48 +1,48 @@
 <html>
  <head> 
-  <title>Sciter 3.2.0.3ĞÂÔöµÄ¶ÔÏóÆ¥ÅäÌØĞÔ</title> 
+  <title>Sciter 3.2.0.3æ–°å¢çš„å¯¹è±¡åŒ¹é…ç‰¹æ€§</title> 
  </head> 
  <body> 
     <div class="post" id="post-41991"> 
-       <h1 class="storytitle">Sciter 3.2.0.3ĞÂÔöµÄ¶ÔÏóÆ¥ÅäÌØĞÔ</h1> 
+       <h1 class="storytitle">Sciter 3.2.0.3æ–°å¢çš„å¯¹è±¡åŒ¹é…ç‰¹æ€§</h1> 
        <div class="storycontent"> 
-        <p>ÔÚSciter 3.2.0.3ÖĞ£¬ÎÒÎªÄÚ½¨µÄ<code>like</code>²Ù×÷·ûºÍ<code>switch/like</code>Óï¾äÌí¼ÓÁËËùÎ½µÄ'¶ÔÏóÆ¥Åä'ÌØĞÔ¡£</p> 
-        <p>ÉèÏëÎÒÃÇÓĞÒ»¸öÀàËÆÏÂÃæµÄ¶ÔÏó/Êı¾İÁĞ±í:</p> 
+        <p>åœ¨Sciter 3.2.0.3ä¸­ï¼Œæˆ‘ä¸ºå†…å»ºçš„<code>like</code>æ“ä½œç¬¦å’Œ<code>switch/like</code>è¯­å¥æ·»åŠ äº†æ‰€è°“çš„'å¯¹è±¡åŒ¹é…'ç‰¹æ€§ã€‚</p> 
+        <p>è®¾æƒ³æˆ‘ä»¬æœ‰ä¸€ä¸ªç±»ä¼¼ä¸‹é¢çš„å¯¹è±¡/æ•°æ®åˆ—è¡¨:</p> 
         <pre class="brush: js;">      var shoppingCartData = [
-        { product:&quot;Æ»¹û&quot;, price: 0.95, calories:52 },
-        { product:&quot;éÙ×Ó&quot;, price: 0.75, calories:47 },
-        { product:&quot;ÑÀË¢&quot;, price: 1.75 },
+        { product:&quot;è‹¹æœ&quot;, price: 0.95, calories:52 },
+        { product:&quot;æ©˜å­&quot;, price: 0.75, calories:47 },
+        { product:&quot;ç‰™åˆ·&quot;, price: 1.75 },
         &quot;deleted&quot;,
         { product:&quot;Pear&quot;, price: 1.25, calories:57 },      
-        { product:&quot;·ÊÔí&quot;, price: 2.75 },
+        { product:&quot;è‚¥çš‚&quot;, price: 2.75 },
       ];
 </pre> 
-        <p>ÎÒÃÇÒª½«ÆäÖĞµÄÊÂÎñÓÚÆäËûÎïÆ··ÖÀë¿ª£¬ÈôÊ¹ÓÃĞÂµÄswitch/likeÌØĞÔ£¬Óï¾äÈçÏÂ:</p> 
+        <p>æˆ‘ä»¬è¦å°†å…¶ä¸­çš„äº‹åŠ¡äºå…¶ä»–ç‰©å“åˆ†ç¦»å¼€ï¼Œè‹¥ä½¿ç”¨æ–°çš„switch/likeç‰¹æ€§ï¼Œè¯­å¥å¦‚ä¸‹:</p> 
         <pre class="brush: js;">for( var item in shoppingCartData ) 
   switch(item) 
   {
      like { price: Float, calories: Integer } :  
-           // Ò»¸öÊ³ÎïÏî
+           // ä¸€ä¸ªé£Ÿç‰©é¡¹
            ...
            break; 
      like { price: Float } : 
-           // ²»ÊÇÊ³ÎïÏî
+           // ä¸æ˜¯é£Ÿç‰©é¡¹
            ...
            break;            
      case &quot;deleted&quot; :
-           // ±»É¾³ıÏî£¬Ìø¹ıËü 
+           // è¢«åˆ é™¤é¡¹ï¼Œè·³è¿‡å®ƒ 
            break;
      default:
-           // Î´ÖªÏî£¬ÕâÊÇÒ»¸ö²Êµ°? 
+           // æœªçŸ¥é¡¹ï¼Œè¿™æ˜¯ä¸€ä¸ªå½©è›‹? 
            break; 
   }
 
 </pre> 
-<p>Îª<code>like</code>Ìí¼ÓµÄÄ£Ê½Æ¥Åä±í´ïÊ½:</p> 
+<p>ä¸º<code>like</code>æ·»åŠ çš„æ¨¡å¼åŒ¹é…è¡¨è¾¾å¼:</p> 
 <pre class="brush: js;">if( item like { product: String, price: Float } )
     stdout.println( item, &quot;is a pricey product&quot; );
 </pre> 
-        <p>Ï£ÍûÕâ¸öĞÂÌØĞÔ»áÎªÄãÃÇµÄ¹¤×÷´øÀ´±ãÀû¡£</p> 
+        <p>å¸Œæœ›è¿™ä¸ªæ–°ç‰¹æ€§ä¼šä¸ºä½ ä»¬çš„å·¥ä½œå¸¦æ¥ä¾¿åˆ©ã€‚</p> 
        </div> 
       </div> 
  </body>

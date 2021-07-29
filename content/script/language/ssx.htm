@@ -1,0 +1,117 @@
+﻿<html><body>  
+	<p>注意：本文档是按 <a href="https://reactjs.org/docs/introducing-jsx.html">ReactJS/JSX introduction</a>风格来写的.&nbsp;</p><h2>介绍 SSX</h2>
+	
+	<p>注意这个变量在 Sciter's script中的声明:</p>
+
+<pre>const velement = &lt;h1 id=&quot;hw&quot;&gt;Hello, world!&lt;/h1&gt;;</pre>
+	<p>它会调用 SSX，它是 SciterJS 语法的一个组成部分 —— 解析此类 SSX 语法不需要调用任何预处理器，就像在浏览器的 JS 中一样原生的执行。</p>
+	<p>上面的既不是字符串也不是 HTML，而是一个 <a href="../Tuple.htm">tuple 元组</a>&nbsp; 声明（JavaScript 术语中的数组）：</p>
+	
+<pre>const velement = [h1: { id:&quot;hw&quot;}, [&quot;Hello, world!&quot;] ];</pre><p>从技术上讲 SSX 不是严格要求的——我们可以直接使用这样的元组文字。只是这样的 HTML-ish 语法让人更熟悉.</p>
+	<h2>SSX 的表达式</h2>
+	<p>这里我们声明一个变量 <i>name</i> 并在元组构造中使用它:</p>
+	<pre>const name = &quot;Alice&quot;;
+const velement = &lt;h1&gt;Hello, {name}&lt;/h1&gt;;</pre>
+
+	<p>上面的可以完全写成这样：:&nbsp;</p>
+	<pre>const velement = [h1: {}, [name] ];</pre>
+	<p>您可以将任何有效的 JS 表达式放在这些花括号中:</p>
+	
+	<pre>const velement = &lt;div&gt;1 + 1 is { 1 + 1 }&lt;/div&gt;;
+</pre>
+	<h2>SSX 本身也是一个表达式</h2>
+	<p>由于 SSX 文字实际上是一个元组文字, 由于 SSX 文字实际上是一个元组文字:</p>
+	
+	<pre>function getGreeting(user) {
+  if (user)
+    return &lt;h1&gt;Hello, {formatName(user)}!&lt;/h1&gt;;
+  else
+    return &lt;h1&gt;Hello, Stranger.&lt;/h1&gt;;
+}</pre><p>上面的函数返回在定义的两个元组其中之一.&nbsp;</p>
+	<h2><a href="https://reactjs.org/docs/introducing-jsx.html#specifying-attributes-with-jsx"></a>在 SSX 中指定属性</h2>
+	<p>您可以使用引号将字符串文字指定为属性:</p>
+	
+	<pre>const velement = &lt;div tabindex=&quot;0&quot;&gt;&lt;/div&gt;;</pre><p>您还可以从变量或表达式中来提供属性值:</p>
+	
+	<pre>const velement = &lt;img src={user.avatarUrl}&gt;&lt;/img&gt;;</pre><p>注意：您应该使用引号(用于字符串值)或大括号(用于表达式),但不能在同一属性中同时使用.</p>
+	<h2><a href="https://reactjs.org/docs/introducing-jsx.html#specifying-children-with-jsx"></a>使用 SSX 指定Children子级 </h2>
+	<p>如果 <code>/&gt;</code> 标签为空，那么会立即关闭它:</p>
+	
+	<pre>const velement = &lt;img src={user.avatarUrl} /&gt;;</pre><p>Note: SSX 不支持没有结束符 &quot;tail-less&quot; 的 HTML 标签, 象 : <code>&lt;img&gt;</code>, <code>&lt;input&gt;</code> 与 <code>&lt;br&gt;</code>. &nbsp;这些必须显式的加上结束标签: <code>&lt;img /&gt;</code>, <code>&lt;input /&gt;</code> 与 <code>&lt;br /&gt;</code>.</p>
+	<p>使用 SSX 包含Children:</p>
+	
+	<pre>const velement = 
+  &lt;div&gt; 
+    &lt;h1&gt;Hello!&lt;/h1&gt;
+    &lt;h2&gt;Good to see you here.&lt;/h2&gt; 
+  &lt;/div&gt;;</pre>
+	
+	<h2> SSX 指定运行时状态</h2>
+	<p>除了属性，您可能还想定义元素的运行时状态:</p>
+	<pre>const velement = 
+  &lt;li :expanded={ isOpen(item) } &gt; 
+    &lt;caption&gt;Hello!&lt;/caption&gt;
+    &lt;div&gt;&lt;/div&gt; 
+  &lt;/div&gt;;</pre>
+	
+	<p>状态这里对应于所谓的 CSS 中的伪类 pseudo-classes:  <code>:active</code>, <code>:hover</code>, <code>:checked</code> .</p>
+	
+	<h3>指定输入元素的运行时值</h3>
+	<p>要指定当前 &lt;input&gt; 元素使用的值, 使用  <code>:value</code> 运行时状态属性 state attribute - 它反映了运行时输入的当前值:</p>
+	<pre>&lt;input|text(firstname) :value=&quot;John&quot; /&gt;</pre>
+	<p>请注意，仅 <i>value</i> 属性: <code>&lt;input|text(firstname) value=&quot;Initial value&quot; /&gt;</code> 这个是指定元素在创建时设置 <i>初始值</i> .</p>
+	<h2> Sciter 的 SSX 支持的 HTML 解析风格</h2>
+	<p>Sciter 中支持的 SSX 解析快捷规则有:</p>
+	<ul><li><code>&lt;input(firstName) /&gt;</code> 相当于 <i>name</i> 属性声明: <code>&lt;input name=&quot;firstName&quot; /&gt;</code>&nbsp;</li>
+		<li><code>&lt;input|text /&gt;</code> 相当于 <i>type</i> 属性声明: <code>&lt;input type=&quot;text&quot; /&gt;</code>&nbsp; </li>
+		<li><code>&lt;input .search /&gt;</code> 相当于 <i>class</i> 属性声明: <code>&lt;input class=&quot;search&quot; /&gt;</code>&nbsp; </li>
+		<li><code>&lt;input #lookup /&gt;</code> 相当于 <i>id</i> 属性声明: <code>&lt;input id=&quot;lookup&quot; /&gt;</code>  </li>
+		</ul>
+	<h2>SSX 中的引用</h2>
+	<p>定义 DOM 元素的属性、状态和内容的时候, 我们通常使用 SSX 来声明这些. 但在某些情况下, 您可能希望 &quot; 直接与DOM元素对话&quot;, 以便获取对物理 DOM 元素的引用并从脚本中调用其运行时方法。</p>
+	<p>为了获得对 DOM 元素的引用，您可以使用</p>
+	
+	<pre>this.elLookup = container.select(&quot;input#lookup&quot;); </pre><p>或者 &quot;stringizer&quot; form: </p>
+	
+	<pre>this.elLookup = container.$(input#lookup); </pre><p>或者，您可以要求 SSX 向您提供 <b>到元素的引用</b>:</p>
+	
+	<pre>&lt;input #lookup @{this.lookup} /&gt;</pre><p>这个 <code>@{variable location expression}</code>, 当用在属性当中时, 表示以下请求: &quot;当你的 (运行时) 从 vnode 中创建物理的 DOM 元素时, 这个 DOM 元素会引用设置给定的变量&quot;.</p>
+	<h2>VNODE: SSX 元组文本的另一种形式</h2>
+	<p>SSX 生成具有预定义结构的元组文本. 这种结构的元组称为 <i>VNODE</i>s - 虚拟 DOM 节点:</p>
+	
+	
+	<pre>[tag: {attributes}, [children] ] //or 
+[tag: {attributes}, [children], {states} ]</pre><p>在这:</p>
+	<ul><li><i>tag</i> -  HTML 标签的字符串匹配: <code>div</code>, <code>p</code>, <code>section</code>, 等.</li>
+		<li><i>attributes</i> - 索引 0 处的元组元素, 是 <i>null</i> 或普通脚本对象 - 映射的 name/&quot;value&quot; 键值对. 属性值在注入 DOM 之前被转换为字符串.</li>
+		<li><i>children</i> -&nbsp;索引 1 处的元组元素, 是 <i>null</i> 或包含字符串(表示 DOM 文本节点)或其他 vnode (表示 DOM 元素)的纯脚本数组&nbsp;</li>
+		<li><i>states</i> - optional,&nbsp;索引 2 处的元组元素, 是普通脚本对象 -&nbsp; 你想给元素设置的用于运行时的状态 name/value 键值对.</li></ul>
+	<h2>VNODE:&nbsp;的使用, a.k.a. 渲染</h2>
+	
+ <p id="dom-methods-vdom">Element 类的一些方法允许通过 vnode 定义填充 DOM:</p>
+ <pre>container.content(&lt;div&gt;Hello wonderful world&lt;/div&gt;);</pre><p>之后容器包含单个子元素: <code>&lt;div&gt;</code></p>
+	
+	
+	
+	<pre>var arr = [1,2,3];
+var children = arr.map( (n) =&gt; &lt;li&gt;item #{n}&lt;/li&gt; );
+container.content(children);</pre><p>容器将有三个 <code>&lt;li&gt;</code> 子项, 文本为 &quot;item #1&quot;, &quot;item #3&quot; 和 &quot;item #3&quot;.</p>
+	<p>元素类中的函数列表可以通过  SSX 声明: 文本为 &quot;item #1&quot;, &quot;item #3&quot; and &quot;item #3&quot; 的三个子项.</p>
+	<ul><li><code>element.content(vnode | array of vnodes)</code> - 元素的内容被这些元素替换;</li>
+		<li><code>element.append(vnode | array of vnodes)</code>  - 这些 元素[s] 将被添加到元素内容的末尾;</li>
+		<li><code>element.prepend(vnode | array of vnodes)</code> - 这些 元素[s] 将被添加到元素内容的末尾;</li>
+		<li><code>element.insert(vnode | array of vnodes, atIndex)</code> - 这些 元素[s] 被添加到 <i>atIndex</i> 位置;</li>
+		<li><code>element.merge(vnode)</code> - 通过 vnode 定义修补现有的 DOM 元素，更多细节见下文;</li>
+		</ul>
+	<h3><code>Element.merge(vnode)</code> -  vnode 的 DOM 协调(又名补丁)</h3>
+	<p>这个 <code>element.merge(vnode)</code><i>element</i></p>
+	<ul><li>通过删除、创建或更改 DOM 属性来更新 vnode 对象的属性 <code>atts</code> .&nbsp;</li><li>对每一个 child:<ul><li>如果特定 vnode 的子节点与真实 DOM 子节点不匹配，则从该 vnode 子节点创建新的 DOM 元素;</li>
+				<li>否则，如果特定 DOM 子节点与任何 vnode 的子节点不匹配，则删除现有的 DOM 元素;</li>
+				<li>否则（DOM 子节点和 vnode 子节点相互匹配）然后递归调用 &nbsp;<code>merge()</code> .&nbsp;</li></ul></li></ul>
+	<p>这个 <code>merge()</code> 函数使用以下 <b>匹配条件</b>. 在以下情况下，特定 元素/vnode 对被视为匹配:</p>
+	<ul><li>它们都具有相同的 <b>key</b> 属性值;</li>
+		<li>或者如果它们具有相同的<b>id</b> 属性值;&nbsp;</li>
+		<li>或者如果它们具有相同的<b></b><b>name</b> 属性值; </li>
+		<li>或者如果他们有相同的<b>tag</b>;</li>
+		</ul>
+	<p>否则 DOM 元素和 vnode 被视为不匹配. </p></body></html>

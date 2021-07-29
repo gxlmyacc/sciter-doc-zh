@@ -1,0 +1,121 @@
+﻿<html><body> 
+	<p>注意：本章以 <a href="https://reactjs.org/docs/state-and-lifecycle.html">RectJS/State and Lifecycle</a> 文章为蓝本 。它在概念上很接近，但 <b>使用了不同的术语</b>.</p>
+	<h2>数据 [Model] 和组件生命周期</h2>
+	<p>一般来说，Sciter 的 Reactor 都是关于采用&nbsp;Model-View-Controller 组件.</p>
+	<p>有一些 <i>数据</i> 要呈现给用户. 用户能够 <i>view</i> 数据并对其进行操作. 数据操作是一组代码函数和事件处理程序，它们作为一个组被命名为 <i>Controller</i>.</p>
+	<h3>组件类</h3><p>让我们将 <a href="rendering.htm##updating-the-rendered-element">ticking clock sample</a> 转换为可重用的时钟组件.</p>
+	<p>每个基于 Reactor 类的组件都应具有 <code>render()</code> 方法:</p>
+	
+	<pre>class Clock : Element {
+  function render() {
+    return 
+      &lt;div&gt;
+        &lt;h1&gt;Hello, world!&lt;/h1&gt;
+        &lt;h2&gt;It is {this.time.toLocaleString(#time)}.&lt;/h2&gt;
+      &lt;/div&gt;;
+  }
+}</pre><p>每次有更新时都会自动调用该 <code>render()</code> 方法, 但只要我们 <code>&lt;Clock /&gt;</code> 是操作同一个 DOM 节点的, 就只会使用 <code>Clock</code> 该类的单例模式. 这让我们可以实现很多其它功能，例如本地状态和生命周期方法.</p>
+	<h2>将本地数据存储添加到类 </h2>
+	<p>按照惯例，组件的本地数据存储位于实例的 <code>this.data</code> 字段中: &nbsp;</p>
+	<pre>class Clock: Element 
+{
+  // declaring local data storage with initial value 
+  <u>this var time</u> = new Date(); 
+
+  function render() {
+    return
+      &lt;div&gt;
+        &lt;h1&gt;Hello, world!&lt;/h1&gt;
+        &lt;h2&gt;It is {<u>this.</u>time.toLocaleString(#time)} now.&lt;/h2&gt;
+      &lt;/div&gt;;
+  } 
+} </pre>
+	<p>我们的 <code>render()</code> 方法现在呈现新的 <code>this</code> 属性的内容.</p>
+	<p>在当前版本中 Clock 类仅呈现在其创建时确定的静态时间, 让我们将其转换为运行时钟.</p>
+	<h2>向类添加生命周期方法</h2>
+	<p>我们想在  <code>Clock</code> 真正的 DOM 元素被创建时设置一个计时器.  ReactJS 中，这称为 “挂载”. Sciter 使用 &quot;attached&quot; 术语表示，当类的实例附加到 DOM 元素时，调用 attached() 功能:</p>
+	
+	<pre>include &quot;sciter:reactor.tis&quot;;
+
+class Clock: Reactor.Component 
+{
+  this var time = new Date(); // setting initial state 
+
+  function attached() { // a.k.a. React::componentDidMount
+    this.timer(1s, function() {
+      this.update { time:new Date() };
+      return true; // to keep the timer ticking
+    });
+  }
+
+  function render() {
+    return
+     &lt;div&gt;
+      &lt;h1&gt;Hello, world!&lt;/h1&gt;
+      &lt;h2&gt;It is {this.time.toLocaleString(#time)} now.&lt;/h2&gt;
+     &lt;/div&gt;;
+  } 
+} </pre><p>您在此处看到新实体 :</p>
+	<ol><li>使用&nbsp;<code>Reactor.Component </code> 类由 sciter:reactor.tis 脚本.</li>
+		<li>并且实现  <code>attached()</code> 方法, 在启动 ticking timer 的时候.</li>
+		</ol>
+	<p>这个 timer callback 计时器回调函数是神奇发生的地方:</p>
+	<pre>function() {
+  this.update { time:new Date() };
+  return true; // to keep the timer ticking
+}</pre>
+	<p>在每次计时器 timer tick 它会调用内部的 &nbsp;<code>Reactor.Component.update(newdata) </code> 方法来产生新的数据.&nbsp;</p>
+	<p>注意: Sciter开箱即用提供了两种生命周期方法: </p>
+	<ul><li><code>attached()</code> - 当元素附加到 DOM 树时由运行时调用，并且</li>
+		<li><code>detached()</code> - 当元素从 DOM 树中删除时。在这个特定的示例中，如果将我们的 Clock 与 <a href="https://reactjs.org/docs/state-and-lifecycle.html#adding-lifecycle-methods-to-a-class">React's one</a> Clock 进行比较. 在 Sciter 中为具体的 DOM 元素创建计时器，一旦元素被销毁，它的所有计时器也会被释放.</li></ul>
+	<p>现在是检查 <code>Reactor.Component</code> 类.</p>
+	<h2 id="reactor-component"> Reactor.Component  类</h2>
+	<p>这个 <code>Reactor.Component</code> 类是在 &quot;sciter:reactor.tis&quot; 资源中定义, 它是 Sciter 引擎不可分割的一部分，因此它总是可用的</p>
+	<p>这个类非常简单 - 它只引入了一个方法 <code>update(newdata)</code>:</p>
+	<pre>namespace Reactor 
+{
+  class Component : Element
+  {
+    function update(newdata = null) {
+      assert !newdata || typeof newdata == #object; 
+      if(newdata) this.extend(newdata);
+      this.post(() =&gt; this.merge(this.render()),true);
+    }
+  }
+}</pre>
+	<p>如您所见 <code>update(newdata)</code> 执行以下操作:</p>
+	<ol><li><code>this.extend(newdata)</code> - 将 newdata 与该对象的属性合并;</li>
+		<li><code>function updater() { this.merge(this.render()); }</code> - 定义本地更新方法 <ol></ol><ul><li> 调用 <code>this.render()</code> 调用生成虚拟 DOM 元素;</li>
+				<li> 调用原生的 <code>Element.merge(velement)</code> 该方法使用 velement 定义合并到现有 DOM元素;</li>
+				</ul></li>
+		<li><code>this.post(updater)</code> - 定期调用 <code>updater()</code> 调用安排到下一个事件处理周期.</li>
+		
+		</ol>
+	<p>延迟呈现逻辑确保将多个 <code>updater()</code> 执行请求合并 <code>updater()</code>  请求到事件队列. </p>
+	<h2>正确使用数据</h2>
+	<p>您应该知道三件事有关 <code>update(newdata)</code>.</p>
+	
+	<h3>不要直接修改数据字段</h3>
+	<p>例如，这不会重新渲染组件:</p>
+	<pre>// WRONG!
+this.comment = &quot;Hello&quot;;</pre>
+	<p>相反，使用 update():</p><pre>// Correct
+this.update {comment: &quot;Hello&quot;};</pre>
+	<p>唯一应该直接分配属性值的地方是构造函数。.</p>
+	
+	<h3>数据更新被合并</h3>
+	<p>当您调用 <code>update(newdata)</code>, <code>Reactor.Component</code> 会给您提供的对象的字段将合并到 DOM 元素的当前属性集中.</p>
+	<p>因此，您的代码可能会针对数据的不同部分发出 <code>update()</code> 请求, 并且它们最终会在真实 DOM 元素和  <code>render()</code> 调用结果之间进行协调操作:</p>
+	
+	<pre>clock.update { time:new Date() };
+...
+clock.update { greeting: &quot;Вася&quot; };</pre>
+	<p>将最终以单次调用<code>clock.render()</code>  返回结果并更新屏幕显示.</p>
+	
+	
+	<blockquote><p>对 Sciter 的以上 commit 更新. 这个 :&nbsp;</p><pre>obj.method { name:val };</pre><p>是简短形式调用:</p><pre>obj.method({ name:val });</pre><p>这只是让我们的开发人员的生活更轻松的语法糖.</p></blockquote>
+	
+	
+	
+
+	</body></html>

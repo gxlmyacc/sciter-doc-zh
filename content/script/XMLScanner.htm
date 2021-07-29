@@ -4,87 +4,87 @@
     <meta name="generator" content="h-smile:richtext"/>
   </head>
 <body>
-  <h1>XMLScanner¶ÔÏó</h1>
-  <p>XMLScanner - XML/HTML tokenzier¡£Ò²±»³ÆÎªXML½âÎöÆ÷¡£</p>
+  <h1>XMLScannerå¯¹è±¡</h1>
+  <p>XMLScanner - XML/HTML tokenzierã€‚ä¹Ÿè¢«ç§°ä¸ºXMLè§£æå™¨ã€‚</p>
   
     <dl>
       
         
-      <h2>³£Á¿</h2>
-      <p>token()·½·¨µÄ·µ»ØÖµ¡£</p>
+      <h2>å¸¸é‡</h2>
+      <p>token()æ–¹æ³•çš„è¿”å›å€¼ã€‚</p>
       
         <dt>ERROR</dt>
-        <dd>- ÔÚÊäÈëÁ÷ÖĞµÄ±ê¼Ç´íÎó¡£</dd>
+        <dd>- åœ¨è¾“å…¥æµä¸­çš„æ ‡è®°é”™è¯¯ã€‚</dd>
       
         <dt>EOF</dt>
-        <dd>- µ½´ïÁ÷µÄÄ©Î²¡£</dd>
+        <dd>- åˆ°è¾¾æµçš„æœ«å°¾ã€‚</dd>
       
         <dt>HEAD</dt>
         <dd>
-          <div>- ½âÎöµ½±êÇ©ÔªËØÍ·¿ªÊ¼:</div>
-          <pre>&lt;tag ...<br/> &nbsp;^-- ¸Ã³£Á¿²úÉú×ÔÕâÀï¡£</pre></dd>
+          <div>- è§£æåˆ°æ ‡ç­¾å…ƒç´ å¤´å¼€å§‹:</div>
+          <pre>&lt;tag ...<br/> &nbsp;^-- è¯¥å¸¸é‡äº§ç”Ÿè‡ªè¿™é‡Œã€‚</pre></dd>
       
         <dt>HEAD_END</dt>
         <dd>
-          <div>- ½âÎöµ½·Ç¿Õ±êÇ©ÔªËØÍ·½áÊø:</div>
-          <pre>&lt;tag ... &gt;<br/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;^-- ¸Ã³£Á¿²úÉú×ÔÕâÀï¡£</pre></dd>
+          <div>- è§£æåˆ°éç©ºæ ‡ç­¾å…ƒç´ å¤´ç»“æŸ:</div>
+          <pre>&lt;tag ... &gt;<br/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;^-- è¯¥å¸¸é‡äº§ç”Ÿè‡ªè¿™é‡Œã€‚</pre></dd>
       
         <dt>EMPTY_HEAD_END</dt>
         <dd>
-          <div>- ½âÎöµ½¿Õ±êÇ©ÔªËØÍ·½áÊø:</div>
-          <pre>&lt;tag ... /&gt;<br/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;^-- ¸Ã³£Á¿²úÉú×ÔÕâÀï¡£</pre></dd>
+          <div>- è§£æåˆ°ç©ºæ ‡ç­¾å…ƒç´ å¤´ç»“æŸ:</div>
+          <pre>&lt;tag ... /&gt;<br/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;^-- è¯¥å¸¸é‡äº§ç”Ÿè‡ªè¿™é‡Œã€‚</pre></dd>
       
         <dt>TAIL</dt>
         <dd>
-          <div>- ½âÎöµ½¿Õ±êÇ©ÔªËØÎ²¿ªÊ¼:</div>
-          <pre>&lt;/tag&gt;<br/> ^-- ¸Ã³£Á¿²úÉú×ÔÕâÀï¡£</pre></dd>
+          <div>- è§£æåˆ°ç©ºæ ‡ç­¾å…ƒç´ å°¾å¼€å§‹:</div>
+          <pre>&lt;/tag&gt;<br/> ^-- è¯¥å¸¸é‡äº§ç”Ÿè‡ªè¿™é‡Œã€‚</pre></dd>
       
         <dt>ATTR</dt>
         <dd>
-          <div>- ½âÎöµ½ÊôĞÔ:</div>
-          <pre>&lt;tag attr=&quot;value&quot; &gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;^-- ¸Ã³£Á¿²úÉú×ÔÕâÀï¡£</pre>
-          <p>ÊôĞÔ¿ÉÒÔÓĞ»òÃ»ÓĞ(htmlÑùÊ½)Öµ¡£<em>scanner.attribute</em>ÊÇÊôĞÔµÄÃû£¬<em>scanner.value</em>ÊÇÊôĞÔµÄÖµ¡£</p></dd>
+          <div>- è§£æåˆ°å±æ€§:</div>
+          <pre>&lt;tag attr=&quot;value&quot; &gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;^-- è¯¥å¸¸é‡äº§ç”Ÿè‡ªè¿™é‡Œã€‚</pre>
+          <p>å±æ€§å¯ä»¥æœ‰æˆ–æ²¡æœ‰(htmlæ ·å¼)å€¼ã€‚<em>scanner.attribute</em>æ˜¯å±æ€§çš„åï¼Œ<em>scanner.value</em>æ˜¯å±æ€§çš„å€¼ã€‚</p></dd>
       
         <dt>TEXT</dt>
         <dd>
-          <div>-½âÎöµ½ÎÄ±¾.</div>
-          <p><em>scanner.value</em>°üº¬¸ÃÎÄ±¾¡£</p></dd>
+          <div>-è§£æåˆ°æ–‡æœ¬.</div>
+          <p><em>scanner.value</em>åŒ…å«è¯¥æ–‡æœ¬ã€‚</p></dd>
       
         <dt>CDATA</dt>
         <dd>
-          <div>- ½âÎöµ½cdata:</div>
-          <pre>&lt;![CDATA[ ...value... ]]&gt;<br/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;^-- ¸Ã³£Á¿²úÉú×ÔÕâÀï¡£</pre>
-          <p><em>scanner.value</em>°üº¬cdataµÄÎÄ±¾¡£</p></dd>
+          <div>- è§£æåˆ°cdata:</div>
+          <pre>&lt;![CDATA[ ...value... ]]&gt;<br/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;^-- è¯¥å¸¸é‡äº§ç”Ÿè‡ªè¿™é‡Œã€‚</pre>
+          <p><em>scanner.value</em>åŒ…å«cdataçš„æ–‡æœ¬ã€‚</p></dd>
       
         <dt>PI</dt>
         <dd>
-          <div>- ½âÎöµ½´¦ÀíÖ¸Áî:</div>
+          <div>- è§£æåˆ°å¤„ç†æŒ‡ä»¤:</div>
           <pre>&lt;? ...value... ?&gt;<br/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;^-- happens here</pre>
-          <p><em>scanner.value</em> °üº¬Ö¸ÁîµÄÎÄ±¾¡£</p></dd>
+          <p><em>scanner.value</em> åŒ…å«æŒ‡ä»¤çš„æ–‡æœ¬ã€‚</p></dd>
       
         <dt>DOCTYPE</dt>
-        <dd>- ½âÎöµ½doctypeÉùÃ÷:
-          <pre>&lt;!DOCTYPE ...value... &gt;<br/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;^-- ¸Ã³£Á¿²úÉú×ÔÕâÀï¡£</pre>
-          <p><em>scanner.value</em> °üº¬doctypeµÄÉùÃ÷ÎÄ±¾: <font face="Courier New">&lt;!DOCTYPE</font> ºóÃæµÄºÍ '<code>&gt;</code>' Ç°ÃæµÄ×Ö·û´®¡£</p></dd>
+        <dd>- è§£æåˆ°doctypeå£°æ˜:
+          <pre>&lt;!DOCTYPE ...value... &gt;<br/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;^-- è¯¥å¸¸é‡äº§ç”Ÿè‡ªè¿™é‡Œã€‚</pre>
+          <p><em>scanner.value</em> åŒ…å«doctypeçš„å£°æ˜æ–‡æœ¬: <font face="Courier New">&lt;!DOCTYPE</font> åé¢çš„å’Œ '<code>&gt;</code>' å‰é¢çš„å­—ç¬¦ä¸²ã€‚</p></dd>
       
         
-          <h2>ÊôĞÔ</h2>
+          <h2>å±æ€§</h2>
       
         <dt>value</dt>
-        <dd>- <em>string</em>, ÊôĞÔµÄÖµ¡¢ÎÄ±¾¡¢cdata»òÖ¸ÁîÎÄ±¾µÈ¡£</dd>
+        <dd>- <em>string</em>, å±æ€§çš„å€¼ã€æ–‡æœ¬ã€cdataæˆ–æŒ‡ä»¤æ–‡æœ¬ç­‰ã€‚</dd>
       
         <dt>attribute</dt>
-        <dd>- <em>string</em>, ÊôĞÔÃû¡£µ±<font face="Courier New">token == XMLScanner.ATTR</font>Ê±ÓĞĞ§¡£</dd>
+        <dd>- <em>string</em>, å±æ€§åã€‚å½“<font face="Courier New">token == XMLScanner.ATTR</font>æ—¶æœ‰æ•ˆã€‚</dd>
       
         <dt>tag</dt>
-        <dd>- <em>string</em>, ±êÇ©Ãû¡£µ±<font face="Courier New">token</font>Îª<font face="Courier New">XMLScanner.HEAD</font>¡¢<font face="Courier New">XMLScanner.TAIL»òXMLScanner.HEAD_END</font>Ê±ÓĞĞ§¡£</dd>
+        <dd>- <em>string</em>, æ ‡ç­¾åã€‚å½“<font face="Courier New">token</font>ä¸º<font face="Courier New">XMLScanner.HEAD</font>ã€<font face="Courier New">XMLScanner.TAILæˆ–XMLScanner.HEAD_END</font>æ—¶æœ‰æ•ˆã€‚</dd>
       
         
-          <h2>·½·¨</h2>
+          <h2>æ–¹æ³•</h2>
       
         <dt>token</dt>
         <dd>
           <p><strong>( </strong>&nbsp;<strong>)</strong> returns: <em>int</em></p>
-          <p>·µ»ØÒ»¸öÉÏÃæµÄ³£Á¿¡£ÇëÊ¹ÓÃËüÃÇµÄÈ«¸ñÊ½£¬Èç<font face="Courier New">XMLScanner.HEAD¡¢XMLScanner.TAIL</font>µÈ¡£</p></dd></dl>
+          <p>è¿”å›ä¸€ä¸ªä¸Šé¢çš„å¸¸é‡ã€‚è¯·ä½¿ç”¨å®ƒä»¬çš„å…¨æ ¼å¼ï¼Œå¦‚<font face="Courier New">XMLScanner.HEADã€XMLScanner.TAIL</font>ç­‰ã€‚</p></dd></dl>
 </body>
 </html>

@@ -1,13 +1,13 @@
 <html>
  <head> 
-  <title>ÔÚ½Å±¾ÖĞÊ¹ÓÃCSS³£Á¿</title> 
+  <title>åœ¨è„šæœ¬ä¸­ä½¿ç”¨CSSå¸¸é‡</title> 
  </head> 
  <body> 
   <div class="post" id="post-41728"> 
-   <h1 class="storytitle">ÔÚ½Å±¾ÖĞÊ¹ÓÃCSS³£Á¿</h1> 
+   <h1 class="storytitle">åœ¨è„šæœ¬ä¸­ä½¿ç”¨CSSå¸¸é‡</h1> 
   </div> 
   <div class="storycontent"> 
-   <p>ÔÚSciterÖĞ£¬Äã¿ÉÒÔÊ¹ÓÃ@constÀ´¶¨ÒåCSS³£Á¿£¬±ÈÈç:</p> 
+   <p>åœ¨Sciterä¸­ï¼Œä½ å¯ä»¥ä½¿ç”¨@constæ¥å®šä¹‰CSSå¸¸é‡ï¼Œæ¯”å¦‚:</p> 
    <pre class="brush: css;">
 &lt;style&gt;
   @const TEST_STR:&quot;test&quot;;
@@ -15,19 +15,19 @@
   @const TEST_NUMBER: 128;
 &lt;/style&gt;
 </pre> 
-   <p>ÕâĞ©³£Á¿²»½ö¿ÉÒÔÔÚCSSÖĞÊ¹ÓÃ(±ÈÈç@TEST_COLOR)£¬Ò²¿ÉÒÔÔÚ½Å±¾ÖĞÊ¹ÓÃ:</p> 
+   <p>è¿™äº›å¸¸é‡ä¸ä»…å¯ä»¥åœ¨CSSä¸­ä½¿ç”¨(æ¯”å¦‚@TEST_COLOR)ï¼Œä¹Ÿå¯ä»¥åœ¨è„šæœ¬ä¸­ä½¿ç”¨:</p> 
    <pre class="brush: js;">
 var test_str = self.style.constant(&quot;TEST_STR&quot;);
 </pre> 
-   <p>Èç¹ûÄã¾õµÃ<code>self.style.constant</code>Ì«·±Ëö£¬Äã¿ÉÒÔÎªËü¶¨ÒåÒ»¸ö"×Ö·û´®Æ÷"º¯Êı: </p> 
+   <p>å¦‚æœä½ è§‰å¾—<code>self.style.constant</code>å¤ªç¹çï¼Œä½ å¯ä»¥ä¸ºå®ƒå®šä¹‰ä¸€ä¸ª"å­—ç¬¦ä¸²å™¨"å‡½æ•°: </p> 
    <pre class="brush: js;">
   function $const( name ) { return self.style.constant(name) || &quot;&quot;; }
 </pre> 
-   <p>ÕâÑùÄã¾Í¿ÉÒÔÕâÑùÊ¹ÓÃÁË:</p> 
+   <p>è¿™æ ·ä½ å°±å¯ä»¥è¿™æ ·ä½¿ç”¨äº†:</p> 
    <pre class="brush: js;">
-var t1 = $const(TEST_STR);    // ×Ö·û´®, &quot;test&quot; 
-var t2 = $const(TEST_COLOR);  // ÑÕÉ«ÀàĞÍ, color(128,0,0)
-var t3 = $const(TEST_NUMBER); // ÕûÊı, 128
+var t1 = $const(TEST_STR);    // å­—ç¬¦ä¸², &quot;test&quot; 
+var t2 = $const(TEST_COLOR);  // é¢œè‰²ç±»å‹, color(128,0,0)
+var t3 = $const(TEST_NUMBER); // æ•´æ•°, 128
 </pre> 
   </div>   
  </body>

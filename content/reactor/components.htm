@@ -1,0 +1,134 @@
+﻿<html><body> 
+	<p>注意：本文档有意与 <a href="https://reactjs.org/docs/components-and-props.html">ReactJS/Components and Props</a>&nbsp;文章接近, 以突出与 ReactJS 的异同.</p>
+	<h2>组件 Components 与 Props</h2>
+	<p>从概念上讲, 组件(components) 是脚本函数. T它们接受任意输入 (称为 “props”) 返回描述应该出现在屏幕上的虚拟元素 virtual elements .</p>
+	<h2><a href="https://reactjs.org/docs/components-and-props.html#function-and-class-components"></a>Function and Class Components</h2>
+	<p>定义 component 组件最简单的方法是编写脚本函数:</p>
+	<pre>function Welcome(props) {
+  return &lt;h1&gt;Hello, {props.name}&lt;/h1&gt;;
+}</pre>
+	<p>这个函数是一个有效的 Reactor component, 因为它接受一个带有数据的 &quot;props&quot; 对象参数并返回一个虚拟元素. 们称这些组件为 &quot;function components&quot; 因为它们实际上是脚本函数.</p>
+	<p>您还可以使用类来定义组件:</p>
+	<pre>class Welcome : Element {
+  function this(props) { 
+    this.props = props; 
+  }
+  function render() {
+    return &lt;h1&gt;Hello, {this.props.name}&lt;/h1&gt;;
+  }
+}</pre>
+	<p>这两个组件在使用时将完全相同.</p>
+	<p>Class-based components 有一些额外的特性, 我们将在下一节中讨论. 在那之前, 我们将使用函数组件 function components 因为它们更加简洁性.</p>
+	<h4>注意：组件名称(功能或基于类)应以大写字母开头.</h4>
+	<h3>Component-functions 和 component 构造函数签名</h3>
+	
+	<p>组件函数和构造函数的完整声明可能如下所示:&nbsp;</p><pre>function FunctionComponent(props,kids,states) {} </pre>
+	<p>在这:</p>
+	<ul><li><i>props</i> 是传递的属性;</li>
+		<li><i>kids</i> 是内容为 VNode 的子元素;</li>
+		<li>和 <i>states</i> 是状态的标记 ( 通过 <code>:</code> name 来声明).</li>
+		</ul>
+	<p>例如, 这个声明:</p>
+	
+	
+	
+	<pre>&lt;FunctionComponent mode=&quot;start&quot; :value=&quot;foo&quot;&gt;
+   &lt;div&gt;bar&lt;/div&gt;
+&lt;/FunctionComponent&gt;</pre>
+<p>将使用以下参数调用 FunctionComponent() :</p>
+	<ul><li><i>props</i> -&gt; <code>{ mode: &quot;start&quot; }</code></li>
+		<li><i>kids</i> -&gt; <code>[ &lt;div&gt;bar&lt;/div&gt; ]</code></li>
+		<li>states -&gt; <code>{ value: &quot;foo&quot; }</code></li>
+		</ul>
+	<p>类组件的构造函数遵循相同的约定, 只有  <i>parent</i> 参数不同 </p>
+	
+	
+	
+	<pre>class ClassComponent: Reactor.Component {
+   function ClassComponent(props,kids,states,parent) {} 
+}</pre><p>这个 <i>parent</i> 参数接收 DOM 元素 - 未来的或现有已经在容器中的 DOM 元素.</p>
+	<h2><a href="https://reactjs.org/docs/components-and-props.html#rendering-a-component"></a> 渲染 Component</h2>
+	<p>之前，我们只遇到过代表 DOM 标签的 Reactor 虚拟元素:</p>
+	
+	<pre>const velement = &lt;div /&gt;;</pre><p>但是, 元素也可以表示用户定义的组件 components:</p>
+	
+	<pre>const velement = &lt;Welcome name=&quot;John&quot; /&gt;;</pre><p>当 Sciter script 脚本编译器看到表示用户定义组件的元素时, 它会将其"属性值"作为单个对象传递给该组件. 我们称这个对象为“props”.</p>
+	<p>例如，此代码在页面上呈现 “Hello, Ivan!” :</p>
+	
+	<pre>function Welcome(props) {
+  return &lt;h1&gt;Hello, {props.name}!&lt;/h1&gt;;
+}
+
+const velement = &lt;Welcome name=&quot;Ivan&quot; /&gt;;
+
+$(body).content(velement);
+</pre>
+	<p>样例: <u>{sdk}/samples/+reactor/doc-samples/components/1-welcome.htm</u>&nbsp;</p>
+	<p>让我们回顾一下上面例子中发生的事情:</p>
+<ol>
+<li>我们调用 <code>element.content(velement)</code> 中间虚元素包含 <code>&lt;Welcome name=&quot;Ivan&quot; /&gt;</code> .&nbsp;</li>
+<li>Sciter 运行时调用 <code>Welcome</code> 组件并传 <code>{name: &quot;Ivan&quot;}</code> 做为 props 对象.</li>
+<li>我们的 <code>Welcome</code> 组件返回 <code>&lt;h1&gt;Hello, Sara&lt;/h1&gt;</code> 虚拟元素作为结果.</li>
+<li><code>Element.content()</code> 函数, 使用该虚拟元素定义插入 DOM 元素 <code>&lt;h1&gt;Hello, Ivan!&lt;/h1&gt;</code> .</li>
+		</ol>
+	<h2>组合组件</h2>
+	<p>组件可以在其输出中引用其他组件. 这让我们可以对任何细节级别使用相同的组件抽象. 一个按钮、一个表单、一个对话框，所有这些通常都可以表示为组件.</p>
+	<p>例如, 我们可以创建一个 <code>App</code> 组件上, 再次重复多次的渲染 <code>Welcome</code> 这个组件:</p>
+	<pre>function Welcome(props) {
+  return &lt;h1&gt;Hello, {props.name}!&lt;/h1&gt;;
+}
+
+function App() {
+  return
+    &lt;main&gt;
+       &lt;Welcome name=&quot;Ivan&quot; /&gt;
+       &lt;Welcome name=&quot;Olga&quot; /&gt;
+       &lt;Welcome name=&quot;Andrew&quot; /&gt;
+    &lt;/main&gt;;
+}
+
+$(main).merge( &lt;App /&gt; );</pre>
+	<p>样例: <u>{sdk}/samples/+reactor/doc-samples/components/2-composing.htm</u>&nbsp;</p>
+	<h2 id="extracting-components">提取组件</h2>
+	<p>不要害怕将组件拆分成更小的组件.</p>
+	<p>例如, 考虑这个 <code>Comment</code> 组件:</p>
+	<pre>function Comment(props) {
+  return
+    &lt;div.comment&gt;
+      &lt;div .userinfo&gt;
+        &lt;img .avatar src={props.author.avatarUrl} alt={props.author.name} /&gt;
+        &lt;div .userinfo-name&gt;{props.author.name}&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div .comment-text&gt;{props.text}&lt;/div&gt;
+      &lt;div .comment-date&gt;{formatDate(props.date)}&lt;/div&gt;
+    &lt;/div&gt;;
+}</pre>
+	
+	<p>样例: <u>{sdk}/samples/+reactor/doc-samples/components/3-extracting.htm</u>&nbsp;</p><p>它接受 <code>author</code> (对象), <code>text</code> (字符串), 和 <code>date</code> (日期) 做为 props, 并在聊天实现中描述一个评论.</p>
+	<p>由于所有的嵌套, 这个组件可能很难更改和维护, 而且也很难重用它的各个部分. </p>
+	<p>让我们从中提取一些组件. 首先, 我们将提取<code>Avatar</code>:</p>
+	
+	<pre>function Avatar(props) {
+  return
+    &lt;img.avatar
+      src={props.user.avatarUrl}
+      alt={props.user.name}/&gt;;
+}</pre><p>接下来，我们将提取 <code>UserInfo</code> 在 user 边上来使用 <code>Avatar</code> :</p>
+	<pre>function UserInfo(props) {
+  return
+    &lt;div.userinfo&gt;
+      &lt;Avatar user={props.user} /&gt;
+      &lt;div.userinfo-name&gt;{props.user.name}&lt;/div&gt;
+    &lt;/div&gt;;
+}</pre>
+	<p>最后 &nbsp;<code>Comment</code> 来组件化:</p>
+	<pre>function Comment(props) {
+  return
+  &lt;div.comment&gt;
+   &lt;UserInfo user={props.author} /&gt;
+   &lt;div.comment-text&gt;{props.text}&lt;/div&gt;
+   &lt;div.comment-date&gt;{formatDate(props.date)}&lt;/div&gt;
+  &lt;/div&gt;;
+}</pre>
+	<p>取组件一开始可能看起来很繁琐, 但在较大的应用程序中拥有一组可重用的组件是值得的. 一个好的经验法则是，如果您的 UI 的一部分被多次使用  (<code>Button</code>, <code>Panel</code>, <code>Avatar</code>), 或者它本身就足够复杂 (<code>App</code>, <code>FeedStory</code>, <code>Comment</code>), 那么它是一个很好的可重用组件的候选者.</p>
+	<p></p></body></html>

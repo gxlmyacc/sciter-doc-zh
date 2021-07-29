@@ -1,36 +1,36 @@
 <html>
   <head>
-    <title>CSSS!ÖĞµÄcalc()º¯Êı</title> 
+    <title>CSSS!ä¸­çš„calc()å‡½æ•°</title> 
     <meta name="generator" content="h-smile:richtext"/>
   </head>
 <body>
-  <h1>CSSS!ÖĞµÄcalc()º¯Êı</h1>
-  <p><dfn id="calcltexpressiongt">calc(&lt;±í´ïÊ½&gt;)</dfn>º¯Êı¿ÉÒÔÓÃÔÚ½ÓÊÜ³¤¶ÈÖµµÄÈÎºÎÎ»ÖÃ¡£À¨ºÅÖĞµÄ±í´ïÊ½»á¼ÆËãÎª<em>em</em>³¤¶Èµ¥Î»¡£ÔÚh-smileÖĞcalc()ÖĞµÄ±í´ïÊ½½«»á±»CSSS!ÇóÖµÒıÇæ½âÊÍ£¬Ëü¿ÉÒÔÊ¹ÓÃCSSS!ÌØĞÔµÄÒ»¸öÏŞÖÆ×Ó¼¯¡£ÔÚ±í´ïÊ½ÖĞÄã¿ÉÒÔ·ÃÎÊDOMÊôĞÔºÍÔªËØµÄ×´Ì¬£¬ÇëÊ¹ÓÃÏÂÃæµÄÓï¾ä:</p>
+  <h1>CSSS!ä¸­çš„calc()å‡½æ•°</h1>
+  <p><dfn id="calcltexpressiongt">calc(&lt;è¡¨è¾¾å¼&gt;)</dfn>å‡½æ•°å¯ä»¥ç”¨åœ¨æ¥å—é•¿åº¦å€¼çš„ä»»ä½•ä½ç½®ã€‚æ‹¬å·ä¸­çš„è¡¨è¾¾å¼ä¼šè®¡ç®—ä¸º<em>em</em>é•¿åº¦å•ä½ã€‚åœ¨h-smileä¸­calc()ä¸­çš„è¡¨è¾¾å¼å°†ä¼šè¢«CSSS!æ±‚å€¼å¼•æ“è§£é‡Šï¼Œå®ƒå¯ä»¥ä½¿ç”¨CSSS!ç‰¹æ€§çš„ä¸€ä¸ªé™åˆ¶å­é›†ã€‚åœ¨è¡¨è¾¾å¼ä¸­ä½ å¯ä»¥è®¿é—®DOMå±æ€§å’Œå…ƒç´ çš„çŠ¶æ€ï¼Œè¯·ä½¿ç”¨ä¸‹é¢çš„è¯­å¥:</p>
   <ul>
-    <li><code>self.attribute</code> - ·ÃÎÊÔªËØµÄDOMÊôĞÔ¡£</li>
-    <li><code>self:state-flag</code> - ·ÃÎÊDOMÔªËØµÄÔËĞĞÆÚ×´Ì¬±êÖ¾: hover¡¢active¡¢focusµÈ¡£</li></ul>
-  <p>ÆäÖĞ£¬<code>self</code>ÊÇµ÷ÓÃ<code>calc()</code>º¯ÊıµÄÔªËØÒıÓÃ¡£</p>
-  <h2>¿ÉÒÔÔÚcalc()º¯ÊıÖĞÊ¹ÓÃµÄDOMÔªËØµÄº¯Êı(·½·¨)</h2>
-  <p>ÏÂÃæÊÇÎª<code>calc()</code>º¯ÊıÖĞµÄCSSS!¶¨ÒåµÄ·½·¨¼¯:</p>
+    <li><code>self.attribute</code> - è®¿é—®å…ƒç´ çš„DOMå±æ€§ã€‚</li>
+    <li><code>self:state-flag</code> - è®¿é—®DOMå…ƒç´ çš„è¿è¡ŒæœŸçŠ¶æ€æ ‡å¿—: hoverã€activeã€focusç­‰ã€‚</li></ul>
+  <p>å…¶ä¸­ï¼Œ<code>self</code>æ˜¯è°ƒç”¨<code>calc()</code>å‡½æ•°çš„å…ƒç´ å¼•ç”¨ã€‚</p>
+  <h2>å¯ä»¥åœ¨calc()å‡½æ•°ä¸­ä½¿ç”¨çš„DOMå…ƒç´ çš„å‡½æ•°(æ–¹æ³•)</h2>
+  <p>ä¸‹é¢æ˜¯ä¸º<code>calc()</code>å‡½æ•°ä¸­çš„CSSS!å®šä¹‰çš„æ–¹æ³•é›†:</p>
   <ul>
-    <li><code>[element.]children()</code> - integer, ·µ»ØÔªËØµÄ×ÓÔªËØÊıÁ¿¡£</li>
-    <li><code>[element.]child(n:integer)</code> - DOMÔªËØ, ·µ»ØÔÚ<em>n</em>Î»ÖÃµÄ×ÓÔªËØ¡£<em>n</em>ÊÇÒ»¸ö·¶Î§ÔÚ<code>1..children()</code>¼äµÄÕıÊı¡£</li>
-    <li><code>[element.]next()</code> - DOMÔªËØ, ·µ»Øµ±Ç°ÔªËØµÄÏÂÒ»¸öĞÖµÜÔªËØ¡£</li>
-    <li><code>[element.]previous()</code> - DOMÔªËØ, ·µ»Øµ±Ç°ÔªËØµÄÉÏÒ»¸öĞÖµÜÔªËØ¡£</li>
-    <li><code>[element.]parent()</code> - DOMÔªËØ, ·µ»Øµ±Ç°ÔªËØµÄ¸¸ÔªËØ¡£</li>
-    <li>Ñ¡ÔñÆ÷·½·¨:</li>
+    <li><code>[element.]children()</code> - integer, è¿”å›å…ƒç´ çš„å­å…ƒç´ æ•°é‡ã€‚</li>
+    <li><code>[element.]child(n:integer)</code> - DOMå…ƒç´ , è¿”å›åœ¨<em>n</em>ä½ç½®çš„å­å…ƒç´ ã€‚<em>n</em>æ˜¯ä¸€ä¸ªèŒƒå›´åœ¨<code>1..children()</code>é—´çš„æ­£æ•°ã€‚</li>
+    <li><code>[element.]next()</code> - DOMå…ƒç´ , è¿”å›å½“å‰å…ƒç´ çš„ä¸‹ä¸€ä¸ªå…„å¼Ÿå…ƒç´ ã€‚</li>
+    <li><code>[element.]previous()</code> - DOMå…ƒç´ , è¿”å›å½“å‰å…ƒç´ çš„ä¸Šä¸€ä¸ªå…„å¼Ÿå…ƒç´ ã€‚</li>
+    <li><code>[element.]parent()</code> - DOMå…ƒç´ , è¿”å›å½“å‰å…ƒç´ çš„çˆ¶å…ƒç´ ã€‚</li>
+    <li>é€‰æ‹©å™¨æ–¹æ³•:</li>
     <ul>
-      <li><code>element.$( selector )</code> - ·µ»ØÂú×ãÑ¡ÔñµÄÔªËØ¼¯ºÏ¡£Õâ¸ö·µ»ØÖ»»á¼ìË÷elementµÄ×ÓÔªËØ¡£selectorÖĞµÄ<code>:root</code>Î±ÀàÆ¥ÅäelementÔªËØ¡£Ê¾Àı: <code>self.$(:root &gt; li):expanded = true</code>½«½ö»áÎªselfµÄÖ±½Ó<em>li</em>×ÓÔªËØÉèÖÃexpanded×´Ì¬¡£</li>
-      <li><code>element.$1( selector )</code> - Í¬ÉÏ£¬Çø±ğÊÇ½ö·µ»ØÒ»¸öÂú×ãÑ¡ÔñÆ÷µÄÔªËØ¡£</li>
-      <li><code>element.$p( selector )</code> - ·µ»ØÆ¥ÅäselectorµÄelementÔªËØµÄ¸¸ÔªËØ¼¯¡£selectorÖĞµÄ:rootÊÇÈ«¾ÖµÄDOM¸ùÔªËØ¡£</li>
-      <li><code>element.$1p( selector )</code> - ·µ»ØÆ¥ÅäselectorµÄ×î½ü¸¸ÔªËØ¡£selectorÖĞµÄ:rootÊÇÈ«¾ÖµÄDOM¸ùÔªËØ¡£</li></ul>
-    <li><code>[element.]text-width(&quot;string&quot;)</code> - ·µ»Øµ±Ç°ÑùÊ½ÏÂµÄelementÔªËØµÄstring×Ö·û´®µÄÏñËØ¿í¶È¡£</li>
-    <li><code>[element.]min-intrinsic-width()</code>, <code>[element.]max-intrinsic-width()</code> - ÔªËØµÄÄÚÔÚ¿í¶È¡£</li>
-    <li><code>[element.]min-intrinsic-height()</code>, <code>[element.]max-intrinsic-height()</code> - ÔªËØµÄÄÚÔÚ¸ß¶È¡£</li>
-    <li><code>[element.]system-scrollbar-width(),[element.]system-scrollbar-height()</code> - ÏµÍ³ÖĞ´¹Ö±/Ë®Æ½¹ö¶¯ÌõµÄ¿í¶È/¸ß¶È¡£</li>
-    <li><code>[element.]system-border-width()</code> - ÏµÍ³ĞÎ×´µÄÊäÈëÔªËØµÄ±ß¿ò¿í¶È¡£</li>
-    <li><code>[element.]system-small-icon-width(),[element.]system-small-icon-height()</code> - ËŞÖ÷ÏµÍ³Ê¹ÓÃµÄĞ¡Í¼±ê³ß´ç¡£</li>
-    <li><code>[element.]foreground-image-width(),[element.]foreground-image-height()</code> - ÎªelementÔªËØ¶¨ÒåµÄÇ°¾°Í¼Ïñ(Èç¹û´æÔÚ)µÄÎïÀí³ß´ç¡£</li>
-    <li><code>[element.]background-image-width(),[element.]background-image-height()</code> - ÎªelementÔªËØ¶¨ÒåµÄ±³¾°Í¼Ïñ(Èç¹û´æÔÚ)µÄÎïÀí³ß´ç¡£</li></ul>
+      <li><code>element.$( selector )</code> - è¿”å›æ»¡è¶³é€‰æ‹©çš„å…ƒç´ é›†åˆã€‚è¿™ä¸ªè¿”å›åªä¼šæ£€ç´¢elementçš„å­å…ƒç´ ã€‚selectorä¸­çš„<code>:root</code>ä¼ªç±»åŒ¹é…elementå…ƒç´ ã€‚ç¤ºä¾‹: <code>self.$(:root &gt; li):expanded = true</code>å°†ä»…ä¼šä¸ºselfçš„ç›´æ¥<em>li</em>å­å…ƒç´ è®¾ç½®expandedçŠ¶æ€ã€‚</li>
+      <li><code>element.$1( selector )</code> - åŒä¸Šï¼ŒåŒºåˆ«æ˜¯ä»…è¿”å›ä¸€ä¸ªæ»¡è¶³é€‰æ‹©å™¨çš„å…ƒç´ ã€‚</li>
+      <li><code>element.$p( selector )</code> - è¿”å›åŒ¹é…selectorçš„elementå…ƒç´ çš„çˆ¶å…ƒç´ é›†ã€‚selectorä¸­çš„:rootæ˜¯å…¨å±€çš„DOMæ ¹å…ƒç´ ã€‚</li>
+      <li><code>element.$1p( selector )</code> - è¿”å›åŒ¹é…selectorçš„æœ€è¿‘çˆ¶å…ƒç´ ã€‚selectorä¸­çš„:rootæ˜¯å…¨å±€çš„DOMæ ¹å…ƒç´ ã€‚</li></ul>
+    <li><code>[element.]text-width(&quot;string&quot;)</code> - è¿”å›å½“å‰æ ·å¼ä¸‹çš„elementå…ƒç´ çš„stringå­—ç¬¦ä¸²çš„åƒç´ å®½åº¦ã€‚</li>
+    <li><code>[element.]min-intrinsic-width()</code>, <code>[element.]max-intrinsic-width()</code> - å…ƒç´ çš„å†…åœ¨å®½åº¦ã€‚</li>
+    <li><code>[element.]min-intrinsic-height()</code>, <code>[element.]max-intrinsic-height()</code> - å…ƒç´ çš„å†…åœ¨é«˜åº¦ã€‚</li>
+    <li><code>[element.]system-scrollbar-width(),[element.]system-scrollbar-height()</code> - ç³»ç»Ÿä¸­å‚ç›´/æ°´å¹³æ»šåŠ¨æ¡çš„å®½åº¦/é«˜åº¦ã€‚</li>
+    <li><code>[element.]system-border-width()</code> - ç³»ç»Ÿå½¢çŠ¶çš„è¾“å…¥å…ƒç´ çš„è¾¹æ¡†å®½åº¦ã€‚</li>
+    <li><code>[element.]system-small-icon-width(),[element.]system-small-icon-height()</code> - å®¿ä¸»ç³»ç»Ÿä½¿ç”¨çš„å°å›¾æ ‡å°ºå¯¸ã€‚</li>
+    <li><code>[element.]foreground-image-width(),[element.]foreground-image-height()</code> - ä¸ºelementå…ƒç´ å®šä¹‰çš„å‰æ™¯å›¾åƒ(å¦‚æœå­˜åœ¨)çš„ç‰©ç†å°ºå¯¸ã€‚</li>
+    <li><code>[element.]background-image-width(),[element.]background-image-height()</code> - ä¸ºelementå…ƒç´ å®šä¹‰çš„èƒŒæ™¯å›¾åƒ(å¦‚æœå­˜åœ¨)çš„ç‰©ç†å°ºå¯¸ã€‚</li></ul>
 </body>
 </html>

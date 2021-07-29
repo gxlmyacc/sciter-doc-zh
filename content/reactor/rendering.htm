@@ -1,0 +1,39 @@
+﻿<html><body> <p>注意：本文档是按 <a href="https://reactjs.org/docs/rendering-elements.html">ReactJS/Rendering-Elements</a> 风格来写的&nbsp;以高亮的地方是与 ReactJS 的差异.</p>
+	<h2>渲染元素</h2>
+	<p>Reactor 的虚拟 DOM 元素是由真实 DOM 元素来定义. 在某些时候, 将使用虚拟元素作为原型来创建真实的 DOM 元素. </p>
+	
+	<pre>const velement = &lt;h1&gt;Hello, world&lt;/h1&gt;;</pre>
+	<p>与物理 DOM 元素不同, Reactor 元素是简单的 <a href="../script/Tuple.htm">tuples 元组</a>, 并且创建成本低. <a href="../script/language/ssx.htm#dom-methods-vdom">专用 Sciter 的 DOM 方法</a>&nbsp;负责更新 DOM 以匹配此类虚拟元素.</p>
+	<h2>将元素渲染到 DOM 中</h2>
+	<p>您的 HTML 文件中有一个<code>&lt;div&gt;</code> :</p>
+	
+	<pre>&lt;div id=&quot;root&quot;&gt;&lt;/div&gt;</pre>
+	<p>让我们称其为 &quot;root&quot; DOM node - 其中的所有内容都将由 Reactor 管理.</p>
+	<p>使用 Reactor 的应用程序可以将多个独立的根 DOM 节点作为单个根 DOM 节点 - 无论你需要什么. 并且您可以将 Reactor 管理的元素与通过其他方式管理的元素混合, e.g. scripting behavioral classes.</p>
+	<p>要将 Reactor 元素渲染到 root DOM node, 调用 <code>element.merge(velement)</code> 方法:</p>
+	
+	
+	<pre>const velement = &lt;div id=&quot;root&quot;&gt;&lt;h1&gt;Hello, world&lt;/h1&gt;&lt;/div&gt;;
+$(div#root).merge(velement);</pre>
+<p>上面的内容将在该<code>&lt;h1&gt;</code> 元素内显示&quot;Hello, world&quot;文本.</p>
+	<h2 id="updating-the-rendered-element">更新渲染元素</h2>
+	<p>要更新已经渲染的元素, 我们只需调用 <code>element.merge(velement)</code> 来再次更新 velement. 这个 <code>Element.merge()</code> 原生函数将通过新的 velement 定义修改现有的 DOM 元素&nbsp;定义.</p>
+	<p>考虑这个滴答时钟示例:</p>
+	<pre>function tick() {
+  const velement = 
+    &lt;div id=&quot;root&quot;&gt;
+      &lt;h1&gt;Hello, world!&lt;/h1&gt;
+      &lt;h2&gt;It is {new Date().toLocaleString(#time)}.&lt;/h2&gt;
+    &lt;/div&gt;;
+  $(div#root).merge(velement);
+  return true; // to keep timer running
+}
+
+self.timer(1s, tick);</pre>
+	<p>上面的代码将每秒调用 <code>tick()</code> 函数. 这个 tick 会更新这个元素的 &lt;div&gt;.</p>
+	<p> 使用 sciter.exe 查看样例 <u>{sdk}/samples/+reactor/doc-samples/rendering/clock.htm</u>.</p>
+	<h2>Element.merge() 只更新必要的内容</h2>
+	<p>这个 <code>Element.merge()</code> 函数将元素及其子元素与前一个元素进行比较, 并且仅应用使 DOM 达到所需状态所需的 DOM 更新.</p>
+	<p>管我们在每个刻度上创建了一个描述整个 UI 树的元素, 但只有内容已更改的文本节点会更新  <code>Element.merge()</code>.</p>
+	<p>因此 Reactor (特别是<code>merge()</code>方法) 允许在每一个给定的时刻重新定义 UI 的部分节点, 而不是随时间改变所有.</p>
+	</body></html>

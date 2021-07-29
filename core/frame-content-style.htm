@@ -13,55 +13,55 @@
       </h1>
     </div>
     <div class="storycontent">
-      <p>SciterÖĞ£¬&lt;frame&gt;ÔªËØ¿ÉÒÔ¶¨Òå<code>content-style</code>ÊôĞÔ¡£</p>
+      <p>Sciterä¸­ï¼Œ&lt;frame&gt;å…ƒç´ å¯ä»¥å®šä¹‰<code>content-style</code>å±æ€§ã€‚</p>
         <p>
-          <code>content-style</code>ÊôĞÔ¶¨ÒåsrcÊôĞÔÖĞµÄURLÖ¸¶¨µÄÎÄµµµÄ¶¥²ãÑùÊ½±í:
+          <code>content-style</code>å±æ€§å®šä¹‰srcå±æ€§ä¸­çš„URLæŒ‡å®šçš„æ–‡æ¡£çš„é¡¶å±‚æ ·å¼è¡¨:
         </p>
         <pre>&lt;frame src=&quot;some-child.htm&quot; content-style=&quot;content.css&quot; /&gt;</pre>
         <p>
-          Èç¹ûÕâ¸ösome-child.htmÎÄµµµÄÄ©Î²¶¨ÒåÁË<code>&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;content.css&quot;&gt;</code>£¬Ôòcontent.cssÎÄµµ½«»á¸½¼Óµ½some-child.htmÑùÊ½±íµÄÄ©Î²:
+          å¦‚æœè¿™ä¸ªsome-child.htmæ–‡æ¡£çš„æœ«å°¾å®šä¹‰äº†<code>&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;content.css&quot;&gt;</code>ï¼Œåˆ™content.cssæ–‡æ¡£å°†ä¼šé™„åŠ åˆ°some-child.htmæ ·å¼è¡¨çš„æœ«å°¾:
         </p>
         <pre>&lt;html&gt; 
   &lt;head&gt; 
     &lt;style&gt; 
-      ... ±¾µØÑùÊ½ ... 
+      ... æœ¬åœ°æ ·å¼ ... 
     &lt;/style&gt;
   &lt;/head&gt; 
   &lt;body&gt; 
-    ... ±¾µØÄÚÈİ ... 
+    ... æœ¬åœ°å†…å®¹ ... 
   &lt;/body&gt; 
   &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;content.css&quot; /&gt;
 &lt;/html&gt;</pre>
         <div>
         </div>
         <p>
-          ËùÒÔµ±ËŞÖ÷ÎÄµµÏë:
+          æ‰€ä»¥å½“å®¿ä¸»æ–‡æ¡£æƒ³:
         </p>
         <ol>
           <li>
-            ×Ô¶¨ÒåäÖÈ¾frameÖĞµÄ×ÓÎÄµµÊ±
+            è‡ªå®šä¹‰æ¸²æŸ“frameä¸­çš„å­æ–‡æ¡£æ—¶
           </li>
           <li>
-            Îª×ÓÎÄµµ×¢ÈëÒ»Ğ©½Å±¾ĞĞÎªÊ±
+            ä¸ºå­æ–‡æ¡£æ³¨å…¥ä¸€äº›è„šæœ¬è¡Œä¸ºæ—¶
           </li>
         </ol>
         <p>
-          Ëü¿ÉÒÔÖ¸¶¨×Ô¼ºµÄcontent.cssÎÄ¼ş£¬¶øÎŞĞèĞŞ¸ÄÄÇĞ©×ÓÎÄµµ¡£
+          å®ƒå¯ä»¥æŒ‡å®šè‡ªå·±çš„content.cssæ–‡ä»¶ï¼Œè€Œæ— éœ€ä¿®æ”¹é‚£äº›å­æ–‡æ¡£ã€‚
         </p>
         <p>
-          Sciter SDK ÄÚ½¨µÄÎÄµµä¯ÀÀÆ÷¾ÍÊÇÒ»¸öcontent-styleÊôĞÔµÄÊ¹ÓÃÊ¾Àı:
+          Sciter SDK å†…å»ºçš„æ–‡æ¡£æµè§ˆå™¨å°±æ˜¯ä¸€ä¸ªcontent-styleå±æ€§çš„ä½¿ç”¨ç¤ºä¾‹:
         </p>
         <p>
           <code>
             {sciter-sdk]/doc/main.htm
           </code>
-          ¶¨ÒåµÄÄÚÈİframeÎª:
+          å®šä¹‰çš„å†…å®¹frameä¸º:
         </p>
         <pre>&lt;frame #content src=&quot;content/preface.htm&quot; content-style=&quot;styles/content.css&quot;/&gt;</pre>
         <p>
-          Òò´Ë£¬Ã¿¸ö¼ÓÔØµ½frameÖĞµÄ×ÓÎÄµµ¶¼»áÓ¦ÓÃ
+          å› æ­¤ï¼Œæ¯ä¸ªåŠ è½½åˆ°frameä¸­çš„å­æ–‡æ¡£éƒ½ä¼šåº”ç”¨
           <code>{sciter-sdk}/doc/styles/content.css</code>
-          ÑùÊ½µ½ËüµÄÄÚÈİÇøÓò¡£
+          æ ·å¼åˆ°å®ƒçš„å†…å®¹åŒºåŸŸã€‚
         </p>
     </div>
   </body>

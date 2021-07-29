@@ -54,10 +54,14 @@ body > dl:not(.flat) > dd { border-left:1px solid #dedede; margin:0; margin-top:
 
 [highlighted]
 {
-  background-color: red;
-  color: white;
-  assigned!: self.start-timer(1000); /* red blink */
-  timer!: self.highlighted = null, return cancel;
+    prototype: HighlightIt url(autozoom.tis);
+    background-color: orange;
+    transition: background-color linear 0s;
+
+  //background-color: red;
+  //color: white;
+  //assigned!: self.start-timer(1000); /* red blink */
+  //timer!: self.highlighted = null, return cancel;
 }
 
 @import url(lib_search.css);
