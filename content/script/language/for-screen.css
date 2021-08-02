@@ -1,4 +1,4 @@
-  
+﻿  
   input#show-defintions
   {
     value-changed!: $1(body).hide-defintions = self:value ? null # true;
