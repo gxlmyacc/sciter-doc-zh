@@ -1,5 +1,7 @@
-<html>
-<head>
+﻿<html>
+
+<head>
+
 	<title>Behavior与CSS中的prototype/aspect属性</title>
 </head>
 
@@ -38,7 +40,8 @@ div.some-widget { SomeWidget url(some-widget.tis); }</pre>
 <p>考虑上面的这些情况，我为Sciter引入了特有的CSS属性——&#8216;aspect&#8217;。</p>
 <h4>The <code>aspect</code> CSS property</h4>
 <p>它的声明为 </p>
-<pre>aspect: "函数名" [ url(of-function-implementation-file) ];
+<pre>
+aspect: "函数名" [ url(of-function-implementation-file) ];
 </pre>
 <p>其中，<code>"函数名"</code>是一个&#8220;aspect&#8221;函数的全名，指为DOM元素配置/装载额外功能的函数。 其中的<code>url()</code>是定义该函数的文件名。</p>
 <p>aspect处理原则:</p>
