@@ -1,6 +1,7 @@
 <html>
 
-<head>
+<head>
+	<META http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>HTML中的插入位置</title>
 </head>
 
@@ -16,7 +17,8 @@ behavior:richtext行为时Sciter中<code>&lt;richtext&gt;</code>元素和Web浏�
 不过在Sciter2中，新的<code>behavior:richtext</code>行为使用标准的DOM模型，它的HTML内容为: element:node, text:node, comment:node。<br />
 这个变化导致我需要重新思考插入位置的概念。</p>
 <p>  考虑下面的标记代码:</p>
-<pre class="brush: html">&lt;p&gt;12&lt;b&gt;34&lt;/b&gt;&lt;i&gt;56&lt;/i&gt;&lt;/p&gt;</pre>
+<pre class="brush: html">&lt;p&gt;12&lt;b&gt;34&lt;/b&gt;&lt;i&gt;56&lt;/i&gt;&lt;/p&gt;
+</pre>
 <p>它的渲染结果如下: </p>
 <p>12<b>34</b><i>56</i></p>
 <p>问题来了: 在这个段落中有多少个插入位置?</p>
